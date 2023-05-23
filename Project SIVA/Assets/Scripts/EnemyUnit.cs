@@ -27,7 +27,7 @@ public class EnemyUnit : MonoBehaviour
 
     void LateUpdate()
     {
-        if (battleSim.state == BattleState.ENEMY_TURN)
+        if (battleSim.State == BattleState.ENEMY_TURN)
         {
             
             if (Input.GetMouseButtonDown(2))

@@ -25,7 +25,7 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (battleSim.state == BattleState.PLAYER_TURN)
+        if (battleSim.State == BattleState.PLAYER_TURN)
         {
 
 
