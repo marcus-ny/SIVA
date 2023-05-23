@@ -83,8 +83,8 @@ public class EnemyUnit : MonoBehaviour
     private void MoveAlongPath()
     {
         emitLight(enemy.activeTile, false);
-        print("Path count " + path.Count);
-        print("Enemy attempting to move to " + path[0].gridLocation.ToString());
+        // print("Path count " + path.Count);
+        // print("Enemy attempting to move to " + path[0].gridLocation.ToString());
         var step = speed * Time.deltaTime;
 
         var zIndex = path[0].transform.position.z;
