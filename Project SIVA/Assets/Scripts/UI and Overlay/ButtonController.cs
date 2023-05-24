@@ -7,17 +7,24 @@ using UnityEngine.Tilemaps;
 public class ButtonController : MonoBehaviour
 {
     public BattleSimulator battleSim;
+
     public Canvas UI;
+
     public GameObject overlayContainer;
+
     public bool truesight = false;
+
+    /*
+     * Function for switching turns between player and AI party
+     */
     public void SwitchTurn()
-    {
-        print("switching turns");
+    { 
         battleSim.switchTurns();      
     }
 
     /*
-     * Function for players to be able to see which tiles are shadow and light, possibly tied to a button
+     * Function for players to be able to see which tiles are shadow and light
+     * tied to the button "Toggle sight"
      */
     public void TrueSight()
     {
@@ -38,6 +45,10 @@ public class ButtonController : MonoBehaviour
         }
     }
 
+    /*
+     * On clicking "Move" button in the UI
+     * the units in this current turn will move
+     */
     public void Move()
     {
         battleSim.MoveUnit();

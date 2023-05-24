@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-
     private float cameraSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +17,6 @@ public class CameraController : MonoBehaviour
     {
         float xAxisValue = Input.GetAxis("Horizontal") * cameraSpeed * Time.deltaTime;
         float yAxisValue = Input.GetAxis("Vertical") * cameraSpeed * Time.deltaTime;
-
-        // transform.position = new Vector3(xAxisValue, yAxisValue, transform.position.z);
 
         transform.Translate(new Vector3(xAxisValue, yAxisValue, 0));
     }

@@ -31,11 +31,16 @@ public class MouseController : MonoBehaviour
         {
             var focusedTileHit = GetFocusedOnTile();
 
+            // If the raycast on cursor hits a valid cell
             if (focusedTileHit.HasValue)
             {
-                OverlayTile overlayTile = focusedTileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
+                OverlayTile overlayTile =
+                    focusedTileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
+
                 transform.position = overlayTile.transform.position;
-                gameObject.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder;
+
+                gameObject.GetComponent<SpriteRenderer>().sortingOrder =
+                    overlayTile.GetComponent<SpriteRenderer>().sortingOrder;
 
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -48,13 +53,11 @@ public class MouseController : MonoBehaviour
                     }
                     else
                     {
-                        // path = pathFinder.FindPath(character.activeTile, overlayTile);
                         destinationTile = overlayTile;
                     }
                 }
             }
             
-
             if (path.Count > 0)
             {
 
@@ -71,13 +74,15 @@ public class MouseController : MonoBehaviour
 
     private void MoveAlongPath()
     {
-        // print("Player path count " + path.Count);
         var step = speed * Time.deltaTime;
 
         var zIndex = path[0].transform.position.z;
 
-        character.transform.position = Vector2.MoveTowards(character.transform.position, path[0].transform.position, step);
-        character.transform.position = new Vector3(character.transform.position.x, character.transform.position.y, zIndex);
+        character.transform.position = Vector2.MoveTowards(character.transform.position,
+            path[0].transform.position, step);
+
+        character.transform.position = new Vector3(character.transform.position.x,
+            character.transform.position.y, zIndex);
 
         if(Vector2.Distance(character.transform.position, path[0].transform.position) < 0.0001f)
         {
@@ -94,20 +99,22 @@ public class MouseController : MonoBehaviour
         RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos2d, Vector2.zero);
 
         // Mouse click may hit multiple tiles, but we always want to get the top layer
-        // Get a list of tiles hit --> Pick the first one in order
+        // Get a list of tiles hit --> sort by descending Z value --> Pick the first one in order
         if(hits.Length > 0)
         {
             return hits.OrderByDescending(i => i.collider.transform.position.z).First();
         }
+
         return null;
     }
 
     private void PositionCharacterOnTile(OverlayTile tile)
     {
-        // print("Cursor is at " + tile.gridLocation.x + ", " + tile.gridLocation.y + ", " + tile.gridLocation.z);
-        // character.transform.position = new Vector3(tile.gridLocation.x, tile.gridLocation.y, tile.gridLocation.z);
-        character.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
-        character.GetComponent<SpriteRenderer>().sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
+        character.transform.position = new Vector3(tile.transform.position.x,
+            tile.transform.position.y, tile.transform.position.z);
+
+        character.GetComponent<SpriteRenderer>().sortingOrder =
+            tile.GetComponent<SpriteRenderer>().sortingOrder;
         character.activeTile = tile;
     }
 }

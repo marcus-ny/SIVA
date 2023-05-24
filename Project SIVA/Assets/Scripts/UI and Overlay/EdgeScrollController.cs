@@ -5,7 +5,9 @@ using UnityEngine;
 public class EdgeScrollController : MonoBehaviour
 {
     private float edgeSize;
+
     private float cameraSpeed;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-/*  A star pathfinding algorithm
+/*  A* pathfinding algorithm
  *  Used for player and enemy movement
  */
 public class PathFinder
@@ -34,7 +34,8 @@ public class PathFinder
 
             foreach (var neighbor in neighborTiles)
             {
-                if (neighbor.isBlocked || closedList.Contains(neighbor) || Mathf.Abs(curr.gridLocation.z - neighbor.gridLocation.z) > 1 )
+                if (neighbor.isBlocked || closedList.Contains(neighbor) ||
+                    Mathf.Abs(curr.gridLocation.z - neighbor.gridLocation.z) > 1 )
                 {
                     continue;
                 }
@@ -73,7 +74,8 @@ public class PathFinder
 
     private int GetManhattenDistance(OverlayTile start, OverlayTile neighbor)
     {
-        return Mathf.Abs(start.gridLocation.x - neighbor.gridLocation.x) + Mathf.Abs(start.gridLocation.y - neighbor.gridLocation.y);
+        return Mathf.Abs(start.gridLocation.x - neighbor.gridLocation.x)
+            + Mathf.Abs(start.gridLocation.y - neighbor.gridLocation.y);
     }
 
     

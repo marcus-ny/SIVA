@@ -11,15 +11,18 @@ public class OverlayTile : MonoBehaviour
     public int H;
     public int F { get { return G + H; } }
 
-    // Indicator
+    // Indicator for whether this tile cannot be moved through
+    // Currently have no uses, but will be used in implementing smoother and
+    // more realistic pathfinding later on
     public bool isBlocked;
 
-    // Indicator for whether a tile is LIGHT or DARK
+    // Indicator for whether a tile is LIGHT or SHADOW
     public int light_level;
 
     public OverlayTile previous;
 
     public Vector3Int gridLocation;
+
     private void Start()
     {
         int roll = Random.Range(0, 10);
@@ -28,6 +31,7 @@ public class OverlayTile : MonoBehaviour
 
         // light_level = 0;
     }
+
     // Update is called once per frame
     void Update()
     {
