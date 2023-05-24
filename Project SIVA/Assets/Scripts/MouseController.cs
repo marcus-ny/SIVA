@@ -16,6 +16,8 @@ public class MouseController : MonoBehaviour
 
     public BattleSimulator battleSim;
 
+    private OverlayTile destinationTile;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +29,6 @@ public class MouseController : MonoBehaviour
     {
         if (battleSim.State == BattleState.PLAYER_TURN)
         {
-
-
             var focusedTileHit = GetFocusedOnTile();
 
             if (focusedTileHit.HasValue)
@@ -48,8 +48,8 @@ public class MouseController : MonoBehaviour
                     }
                     else
                     {
-                        path = pathFinder.FindPath(character.activeTile, overlayTile);
-                        print("Player moves to " + overlayTile.gridLocation.ToString());
+                        // path = pathFinder.FindPath(character.activeTile, overlayTile);
+                        destinationTile = overlayTile;
                     }
                 }
             }
@@ -62,6 +62,11 @@ public class MouseController : MonoBehaviour
             }
         }
         
+    }
+
+    public void MoveTrigger()
+    {
+        path = pathFinder.FindPath(character.activeTile, destinationTile);
     }
 
     private void MoveAlongPath()

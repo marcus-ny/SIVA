@@ -29,40 +29,52 @@ public class EnemyUnit : MonoBehaviour
     {
         if (battleSim.State == BattleState.ENEMY_TURN)
         {
-            
-            if (Input.GetMouseButtonDown(2))
+            target = mc.character;
+
+            if (target == null)
             {
-                target = mc.character;
-
-                if (target == null)
-                {
-                    print("Target has no active tile");
-                    return;
-                }
-
-                
-
-                if (enemy == null)
-                {
-                    curr = MapController.Instance.GetNeighborTiles(target.activeTile)[0];
-                    enemy = Instantiate(enemyPrefab).GetComponent<EnemyInfo>();
-                    PositionEnemyOnTile(curr);
-                    emitLight(curr, true);
-                }
-
-                //transform.position = target.transform.position;
-                gameObject.GetComponent<SpriteRenderer>().sortingOrder = curr.GetComponent<SpriteRenderer>().sortingOrder;
-
-                // print("Path finding FROM " + enemy.activeTile.gridLocation.ToString() + " TO " + target.activeTile.gridLocation.ToString());
-                path = pathFinder.FindPath(enemy.activeTile, MapController.Instance.GetNeighborTiles(target.activeTile)[0]);
+                print("Target has no active tile");
+                return;
             }
 
+
+            if (enemy == null)
+            {
+                BoundsInt bounds = MapController.Instance.GetComponentInChildren<Tilemap>().cellBounds;
+                int x = int.MaxValue, y = int.MaxValue;
+
+                while (!MapController.Instance.map.ContainsKey(new Vector2Int(x, y)))
+                {
+                    x = Random.Range(bounds.min.x, bounds.max.x);
+                    y = Random.Range(bounds.min.y, bounds.max.y);
+
+                    
+                }
+                curr = MapController.Instance.map[new Vector2Int(x, y)];
+                // curr = MapController.Instance.GetNeighborTiles(target.activeTile)[0];
+                enemy = Instantiate(enemyPrefab).GetComponent<EnemyInfo>();
+                PositionEnemyOnTile(curr);
+                emitLight(curr, true);
+            }
+
+            //transform.position = target.transform.position;
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = curr.GetComponent<SpriteRenderer>().sortingOrder;
+
+            // print("Path finding FROM " + enemy.activeTile.gridLocation.ToString() + " TO " + target.activeTile.gridLocation.ToString());
+            // path = pathFinder.FindPath(enemy.activeTile, MapController.Instance.GetNeighborTiles(target.activeTile)[0]);
 
             if (path.Count > 0)
             {
                 MoveAlongPath();
             }
         }
+    }
+
+    public void MoveTrigger()
+    {
+        // Pathfind from current tile --> Player's active tile
+        path = pathFinder.FindPath(enemy.activeTile, MapController.Instance.GetNeighborTiles(target.activeTile)[0]);
+        
     }
     private void emitLight(OverlayTile curr, bool trigger)
     {
