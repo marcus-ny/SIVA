@@ -37,4 +37,10 @@ public class ButtonController : MonoBehaviour
             truesight = false;
         }
     }
+
+    public void Move()
+    {
+        battleSim.MoveUnit();
+    }
+    
 }

@@ -41,7 +41,6 @@ public class EnemyUnit : MonoBehaviour
                 }
 
                 
-
                 if (enemy == null)
                 {
                     curr = MapController.Instance.GetNeighborTiles(target.activeTile)[0];
@@ -54,15 +53,22 @@ public class EnemyUnit : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().sortingOrder = curr.GetComponent<SpriteRenderer>().sortingOrder;
 
                 // print("Path finding FROM " + enemy.activeTile.gridLocation.ToString() + " TO " + target.activeTile.gridLocation.ToString());
-                path = pathFinder.FindPath(enemy.activeTile, MapController.Instance.GetNeighborTiles(target.activeTile)[0]);
+                // path = pathFinder.FindPath(enemy.activeTile, MapController.Instance.GetNeighborTiles(target.activeTile)[0]);
             }
-
+            
 
             if (path.Count > 0)
             {
                 MoveAlongPath();
             }
         }
+    }
+
+    public void moveEnemy()
+    {
+        // Pathfind from current tile --> Player's active tile
+        path = pathFinder.FindPath(enemy.activeTile, MapController.Instance.GetNeighborTiles(target.activeTile)[0]);
+        
     }
     private void emitLight(OverlayTile curr, bool trigger)
     {

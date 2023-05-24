@@ -27,8 +27,6 @@ public class MouseController : MonoBehaviour
     {
         if (battleSim.State == BattleState.PLAYER_TURN)
         {
-
-
             var focusedTileHit = GetFocusedOnTile();
 
             if (focusedTileHit.HasValue)
