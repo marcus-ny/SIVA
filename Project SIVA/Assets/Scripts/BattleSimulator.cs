@@ -17,7 +17,7 @@ public class BattleSimulator : MonoBehaviour
      * And the code will be adjusted accordingly
      */
     public EnemyUnit enemy;
-    public CharacterInfo player;
+    public MouseController player;
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +57,10 @@ public class BattleSimulator : MonoBehaviour
         actionsPerformed += 1;
         if (State == BattleState.ENEMY_TURN)
         {
-            enemy.moveEnemy();
+            enemy.MoveTrigger();
+        } else if (State == BattleState.PLAYER_TURN)
+        {
+            player.MoveTrigger();
         }
     }
 }
