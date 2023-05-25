@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4555d2f198cad0a4c9d1ed1d42cac1ea
+guid: 12deeda00b54a6c42935b539bff30fa7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,253 +105,337 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: VampV2Back-Sheet_0
+      name: RoadTilesSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a729c3a16dec2a54e8ed6c8b3b0047ad
+      internalID: 1095135457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoadTilesSheet_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bae7a3abb4c9554f9f9bd429f94075c
+      internalID: 523614234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoadTilesSheet_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcb5fde2702cdf6408a095ac75fdc995
+      internalID: 1714899167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoadTilesSheet_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 707f99fff8017db48982fadfccf61492
+      internalID: 880159712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoadTilesSheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 226ccd231529bb14ebf5ebcf47034a00
+      internalID: 2054634345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoadTilesSheet_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 617df7a6844eb5441a2103d44dc51e1e
+      internalID: 1654288295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoadTilesSheet_6
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08d5f2a5e90b25d45a4ed96901e81cc6
+      internalID: 431458647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoadTilesSheet_7
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c608bce9855e1d45a5d0eea0454486a
+      internalID: 2045720104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoadTilesSheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08dac03c01b530f48ba9b5d2393429e5
+      internalID: -1777070245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoadTilesSheet_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecb804fad6f234847b29f683a4b37bd8
+      internalID: 2129882626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoadTilesSheet_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e26436d001d42f642923d68fa329770e
+      internalID: -179184810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoadTilesSheet_11
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8c382cf4c6368d4aaaa90d4a9bc5747
+      internalID: -229618245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoadTilesSheet_12
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 20
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c80418cde3caa984d99b18f73ffb75c5
-      internalID: -1953802360
+      spriteID: 21eb77c912a174f4f94f8c11cb49c1c3
+      internalID: 1501876652
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: VampV2Back-Sheet_1
+      name: RoadTilesSheet_13
       rect:
         serializedVersion: 2
-        x: 20
+        x: 64
         y: 0
-        width: 20
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3b5f70027784bd41b9a581c71a75019
-      internalID: -606316207
+      spriteID: 324958f3311cfce44828b647b43dfe0a
+      internalID: 1892500363
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: VampV2Back-Sheet_2
+      name: RoadTilesSheet_14
       rect:
         serializedVersion: 2
-        x: 40
+        x: 128
         y: 0
-        width: 20
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63de8687aa402464a996b2ed01b150ad
-      internalID: 196493334
+      spriteID: f256a2d74bfa41b429eb679272fcb682
+      internalID: -255421822
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: VampV2Back-Sheet_3
+      name: RoadTilesSheet_15
       rect:
         serializedVersion: 2
-        x: 60
+        x: 192
         y: 0
-        width: 20
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 363ff080230d91d4fa3946f32be073d1
-      internalID: 412635956
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: VampV2Back-Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 20
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 84b1a6a9fdec10b408b4e09aa0f54971
-      internalID: 1787574021
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: VampV2Back-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 0
-        width: 20
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d37cad55399fad5468895b68e61e85b7
-      internalID: -105394086
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: VampV2Back-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 0
-        width: 20
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a5fd9d7ed2139ea468bb6e6ee590b16a
-      internalID: 906314223
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: VampV2Back-Sheet_7
-      rect:
-        serializedVersion: 2
-        x: 140
-        y: 0
-        width: 20
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: feef579dce2c2a149870ab0261b12cfe
-      internalID: 1148536212
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: VampV2Back-Sheet_8
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 20
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9359980885ccd144810f39b5e352fc5
-      internalID: 318271226
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: VampV2Back-Sheet_9
-      rect:
-        serializedVersion: 2
-        x: 180
-        y: 0
-        width: 20
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d494db4f2ca865c4dae90e02abb098df
-      internalID: -1300785888
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: VampV2Back-Sheet_10
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 0
-        width: 20
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1f547ff1fd4468e478bde41abbe7eebf
-      internalID: -395637406
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: VampV2Back-Sheet_11
-      rect:
-        serializedVersion: 2
-        x: 220
-        y: 0
-        width: 20
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a63f294b72ff9d14ea82104c640b6d26
-      internalID: 2812453
+      spriteID: d2f2a9c203f28d04aa3dbfc3ce83f9ad
+      internalID: -631624913
       vertices: []
       indices: 
       edges: []
@@ -367,18 +451,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      VampV2Back-Sheet_0: -1953802360
-      VampV2Back-Sheet_1: -606316207
-      VampV2Back-Sheet_10: -395637406
-      VampV2Back-Sheet_11: 2812453
-      VampV2Back-Sheet_2: 196493334
-      VampV2Back-Sheet_3: 412635956
-      VampV2Back-Sheet_4: 1787574021
-      VampV2Back-Sheet_5: -105394086
-      VampV2Back-Sheet_6: 906314223
-      VampV2Back-Sheet_7: 1148536212
-      VampV2Back-Sheet_8: 318271226
-      VampV2Back-Sheet_9: -1300785888
+      RoadTilesSheet_0: 1095135457
+      RoadTilesSheet_1: 523614234
+      RoadTilesSheet_10: -179184810
+      RoadTilesSheet_11: -229618245
+      RoadTilesSheet_12: 1501876652
+      RoadTilesSheet_13: 1892500363
+      RoadTilesSheet_14: -255421822
+      RoadTilesSheet_15: -631624913
+      RoadTilesSheet_2: 1714899167
+      RoadTilesSheet_3: 880159712
+      RoadTilesSheet_4: 2054634345
+      RoadTilesSheet_5: 1654288295
+      RoadTilesSheet_6: 431458647
+      RoadTilesSheet_7: 2045720104
+      RoadTilesSheet_8: -1777070245
+      RoadTilesSheet_9: 2129882626
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

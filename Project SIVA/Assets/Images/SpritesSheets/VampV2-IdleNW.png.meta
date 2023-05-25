@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 01d25fbf2f8d21a4f86d896d8ed8e498
+guid: de13eb48ef1e4da47aae68980868e5d8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: VampV2-WalkSE_0
+      name: VampV2-IdleNW_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 28
-        height: 45
+        width: 20
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16219eba98f9a9c4eb2774e1b968741f
-      internalID: 1292044729
+      spriteID: 567643076940ebd409329d17eafeb193
+      internalID: -247998159
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: VampV2-WalkSE_1
+      name: VampV2-IdleNW_1
       rect:
         serializedVersion: 2
-        x: 28
+        x: 20
         y: 0
-        width: 28
-        height: 45
+        width: 20
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1231342a38ae4e84e905bc3b73b7583d
-      internalID: -1628105825
+      spriteID: 6bdb4224f2d43c74ebb4a3b21be1dda2
+      internalID: 16462262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: VampV2-WalkSE_2
+      name: VampV2-IdleNW_2
       rect:
         serializedVersion: 2
-        x: 56
+        x: 40
         y: 0
-        width: 28
-        height: 45
+        width: 20
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdd2e8cf9ee679a42aff9fab4efd0a8f
-      internalID: 8871496
+      spriteID: ee590bb0f22f8a64c920ba1b0c3f7525
+      internalID: -682231835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: VampV2-WalkSE_3
+      name: VampV2-IdleNW_3
       rect:
         serializedVersion: 2
-        x: 84
+        x: 60
         y: 0
-        width: 28
-        height: 45
+        width: 20
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d99b4af41e65bc44b791b437c90403a
-      internalID: 631378550
+      spriteID: 07b2b9efe829a0941bc2776f2e13c40f
+      internalID: 1480109513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: VampV2-WalkSE_4
+      name: VampV2-IdleNW_4
       rect:
         serializedVersion: 2
-        x: 112
+        x: 80
         y: 0
-        width: 28
-        height: 45
+        width: 20
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,20 +203,62 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d044130c58af664cbd00e2970b01ec5
-      internalID: 1351725666
+      spriteID: f00b973205e117e44bc04e5e2019b88d
+      internalID: -1973889691
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: VampV2-WalkSE_5
+      name: VampV2-IdleNW_5
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 20
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86d456c368216704b84bad053ca6eece
+      internalID: 1858635162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VampV2-IdleNW_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 20
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd62316a6df1581429fd59ea1ef54499
+      internalID: -1817340646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VampV2-IdleNW_7
       rect:
         serializedVersion: 2
         x: 140
         y: 0
-        width: 28
-        height: 45
+        width: 20
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,8 +266,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3232b6d47749ef6409dc53f51359a74c
-      internalID: 1952649297
+      spriteID: 89b8e51ac23610f4180632ff28b462a6
+      internalID: -1722285501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VampV2-IdleNW_8
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 20
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bfc5f4422157b0489df0486e1a7784a
+      internalID: -372402479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VampV2-IdleNW_9
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 20
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e557ec2f2c4b7d44495f87c1bd780d80
+      internalID: -1668222213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VampV2-IdleNW_10
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 20
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f19ef2b72cb95d44a2b9adbf8d62ed5
+      internalID: -1499092035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VampV2-IdleNW_11
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 0
+        width: 20
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f4cb2dd8a8258f46b55fecb088ff702
+      internalID: 1799681244
       vertices: []
       indices: 
       edges: []
@@ -241,12 +367,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      VampV2-WalkSE_0: 1292044729
-      VampV2-WalkSE_1: -1628105825
-      VampV2-WalkSE_2: 8871496
-      VampV2-WalkSE_3: 631378550
-      VampV2-WalkSE_4: 1351725666
-      VampV2-WalkSE_5: 1952649297
+      VampV2-IdleNW_0: -247998159
+      VampV2-IdleNW_1: 16462262
+      VampV2-IdleNW_10: -1499092035
+      VampV2-IdleNW_11: 1799681244
+      VampV2-IdleNW_2: -682231835
+      VampV2-IdleNW_3: 1480109513
+      VampV2-IdleNW_4: -1973889691
+      VampV2-IdleNW_5: 1858635162
+      VampV2-IdleNW_6: -1817340646
+      VampV2-IdleNW_7: -1722285501
+      VampV2-IdleNW_8: -372402479
+      VampV2-IdleNW_9: -1668222213
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
