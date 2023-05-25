@@ -6,6 +6,9 @@ using UnityEngine;
 public enum BattleState { START, PLAYER_TURN, ENEMY_TURN, END }
 public class BattleSimulator : MonoBehaviour
 {
+    private static BattleSimulator _instance;
+    public static BattleSimulator Instance { get { return _instance; } }
+
     public BattleState State; // Change to private later
 
     private int MAX_ACTIONS = 2; // Constant
@@ -22,6 +25,17 @@ public class BattleSimulator : MonoBehaviour
 
     public MouseController player;
 
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {

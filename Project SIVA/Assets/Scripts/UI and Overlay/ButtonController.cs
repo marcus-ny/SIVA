@@ -6,8 +6,6 @@ using UnityEngine.Tilemaps;
 
 public class ButtonController : MonoBehaviour
 {
-    public BattleSimulator battleSim;
-
     public Canvas UI;
 
     public GameObject overlayContainer;
@@ -19,7 +17,7 @@ public class ButtonController : MonoBehaviour
      */
     public void SwitchTurn()
     { 
-        battleSim.switchTurns();      
+        BattleSimulator.Instance.switchTurns();      
     }
 
     /*
@@ -51,12 +49,12 @@ public class ButtonController : MonoBehaviour
      */
     public void Move()
     {
-        battleSim.MoveUnit();
+        BattleSimulator.Instance.MoveUnit();
     }
 
     public void Attack()
     {
-        battleSim.DealDamage();
+        BattleSimulator.Instance.DealDamage();
     }
     
 }

@@ -14,8 +14,6 @@ public class MouseController : MonoBehaviour
 
     private PathFinder pathFinder;
 
-    public BattleSimulator battleSim;
-
     private OverlayTile destinationTile;
 
     // Start is called before the first frame update
@@ -27,7 +25,7 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (battleSim.State == BattleState.PLAYER_TURN)
+        if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN)
         {
             var focusedTileHit = GetFocusedOnTile();
 
