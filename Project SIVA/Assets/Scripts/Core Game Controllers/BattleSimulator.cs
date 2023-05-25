@@ -7,7 +7,9 @@ public enum BattleState { START, PLAYER_TURN, ENEMY_TURN, END }
 public class BattleSimulator : MonoBehaviour
 {
     public BattleState State; // Change to private later
+
     private int MAX_ACTIONS = 2; // Constant
+
     private int actionsPerformed;
 
     /*
@@ -17,6 +19,7 @@ public class BattleSimulator : MonoBehaviour
      * And the code will be adjusted accordingly
      */
     public EnemyUnit enemy;
+
     public MouseController player;
 
     // Start is called before the first frame update
@@ -49,12 +52,14 @@ public class BattleSimulator : MonoBehaviour
 
     public void MoveUnit()
     {
+        // If a party runs out of action points
         if (actionsPerformed == MAX_ACTIONS)
         {
-            print("Max actions performed, please wait for next turn");
             return;
         }
+
         actionsPerformed += 1;
+
         if (State == BattleState.ENEMY_TURN)
         {
             enemy.MoveTrigger();

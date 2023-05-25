@@ -8,7 +8,6 @@ public class DamageManager : MonoBehaviour
 
     public MouseController mouseController;
 
-    // Size is temporarily set to 5 for testing purposes; will be dynamic later
     public List<CharacterInfo> playerParty = new List<CharacterInfo>();
 
     public static DamageManager Instance { get { return _instance; } }
@@ -35,19 +34,19 @@ public class DamageManager : MonoBehaviour
         playerParty.Add(mouseController.character);
         
     }
+
     // This function is temporarily meant for enemy dealing damage to player
+    // (not implemented yet)
     public void dealDmgToPlayer(float damage, CharacterInfo target)
     {
         target.hitpoints -= damage;
     }
 
-    // This function is temporarily meant for tick damage from entering light tile
-
+    // This function for tick damage from entering light tile
     public void tickDamage()
     {
         if (playerParty[0].activeTile.light_level > 0)
-        {
-            print("Taking tick damage");
+        { 
             playerParty[0].hitpoints -= 5;
         }
         
