@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e171c4a915659bd48a3066b3588695e0
+guid: de13eb48ef1e4da47aae68980868e5d8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,127 +105,253 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LampostV2-Sheet_0
+      name: VampV2-IdleNW_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 46
-        height: 74
+        width: 20
+        height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f196127e5f19ed2409da6079c6745ecc
-      internalID: -1126685110
+      spriteID: 567643076940ebd409329d17eafeb193
+      internalID: -247998159
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LampostV2-Sheet_1
+      name: VampV2-IdleNW_1
       rect:
         serializedVersion: 2
-        x: 46
+        x: 20
         y: 0
-        width: 46
-        height: 74
+        width: 20
+        height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46a4e799702e11b45bc6d8d2b0d6d698
-      internalID: -411413039
+      spriteID: 6bdb4224f2d43c74ebb4a3b21be1dda2
+      internalID: 16462262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LampostV2-Sheet_2
+      name: VampV2-IdleNW_2
       rect:
         serializedVersion: 2
-        x: 93
+        x: 40
         y: 0
-        width: 46
-        height: 74
+        width: 20
+        height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcd6836f9cd6a414d99d93324e93cd81
-      internalID: -556533123
+      spriteID: ee590bb0f22f8a64c920ba1b0c3f7525
+      internalID: -682231835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LampostV2-Sheet_3
+      name: VampV2-IdleNW_3
       rect:
         serializedVersion: 2
-        x: 138
+        x: 60
         y: 0
-        width: 46
-        height: 74
+        width: 20
+        height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2fa9f8869f12ca44fb60fc75405b2114
-      internalID: -676468724
+      spriteID: 07b2b9efe829a0941bc2776f2e13c40f
+      internalID: 1480109513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LampostV2-Sheet_4
+      name: VampV2-IdleNW_4
       rect:
         serializedVersion: 2
-        x: 184
+        x: 80
         y: 0
-        width: 46
-        height: 74
+        width: 20
+        height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46996f65c4f730d4f91b0d763cd1ba02
-      internalID: -1962469896
+      spriteID: f00b973205e117e44bc04e5e2019b88d
+      internalID: -1973889691
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LampostV2-Sheet_5
+      name: VampV2-IdleNW_5
       rect:
         serializedVersion: 2
-        x: 230
+        x: 100
         y: 0
-        width: 46
-        height: 74
+        width: 20
+        height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecf3c903004b28748b11090d799bd53e
-      internalID: 282362905
+      spriteID: 86d456c368216704b84bad053ca6eece
+      internalID: 1858635162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VampV2-IdleNW_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 20
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd62316a6df1581429fd59ea1ef54499
+      internalID: -1817340646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VampV2-IdleNW_7
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 20
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89b8e51ac23610f4180632ff28b462a6
+      internalID: -1722285501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VampV2-IdleNW_8
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 20
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bfc5f4422157b0489df0486e1a7784a
+      internalID: -372402479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VampV2-IdleNW_9
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 20
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e557ec2f2c4b7d44495f87c1bd780d80
+      internalID: -1668222213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VampV2-IdleNW_10
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 20
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f19ef2b72cb95d44a2b9adbf8d62ed5
+      internalID: -1499092035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: VampV2-IdleNW_11
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 0
+        width: 20
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f4cb2dd8a8258f46b55fecb088ff702
+      internalID: 1799681244
       vertices: []
       indices: 
       edges: []
@@ -241,12 +367,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      LampostV2-Sheet_0: -1126685110
-      LampostV2-Sheet_1: -411413039
-      LampostV2-Sheet_2: -556533123
-      LampostV2-Sheet_3: -676468724
-      LampostV2-Sheet_4: -1962469896
-      LampostV2-Sheet_5: 282362905
+      VampV2-IdleNW_0: -247998159
+      VampV2-IdleNW_1: 16462262
+      VampV2-IdleNW_10: -1499092035
+      VampV2-IdleNW_11: 1799681244
+      VampV2-IdleNW_2: -682231835
+      VampV2-IdleNW_3: 1480109513
+      VampV2-IdleNW_4: -1973889691
+      VampV2-IdleNW_5: 1858635162
+      VampV2-IdleNW_6: -1817340646
+      VampV2-IdleNW_7: -1722285501
+      VampV2-IdleNW_8: -372402479
+      VampV2-IdleNW_9: -1668222213
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
