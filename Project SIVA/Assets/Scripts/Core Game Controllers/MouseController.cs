@@ -60,11 +60,29 @@ public class MouseController : MonoBehaviour
             
             if (path.Count > 0)
             {
-
                 MoveAlongPath();
             }
         }
         
+    }
+
+    public bool AttackTrigger()
+    {
+        bool inRange = (character.activeTile.gridLocation.x - destinationTile.gridLocation.x < 2) && (character.activeTile.gridLocation.y - destinationTile.gridLocation.y < 2);
+        if (destinationTile.enemyOnTile != null && inRange)
+        {
+            DamageManager.Instance.DealDamageToEnemy(10, destinationTile.enemyOnTile);
+            return true;
+        } else if (destinationTile.enemyOnTile == null)
+        {
+            print("No target");
+            return false;
+        } else if (!inRange)
+        {
+            print("Target out of range");
+            return false;
+        }
+        return false;
     }
 
     public void MoveTrigger()

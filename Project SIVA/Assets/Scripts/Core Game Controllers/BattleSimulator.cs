@@ -68,4 +68,17 @@ public class BattleSimulator : MonoBehaviour
             player.MoveTrigger();
         }
     }
+
+    public void DealDamage()
+    {
+        if (actionsPerformed == MAX_ACTIONS)
+        {
+            return;
+        }
+
+        if (State == BattleState.PLAYER_TURN)
+        {
+            if(player.AttackTrigger()) actionsPerformed += 1;
+        }
+    }
 }
