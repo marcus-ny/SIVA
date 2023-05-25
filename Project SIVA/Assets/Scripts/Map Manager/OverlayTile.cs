@@ -16,6 +16,8 @@ public class OverlayTile : MonoBehaviour
     // more realistic pathfinding later on
     public bool isBlocked;
 
+    public EnemyInfo enemyOnTile;
+
     // Indicator for whether a tile is LIGHT or SHADOW
     public int light_level;
 
@@ -29,6 +31,7 @@ public class OverlayTile : MonoBehaviour
 
         light_level = roll < 7 ? 0 : 5;
 
+        enemyOnTile = null;
         // light_level = 0;
     }
 

@@ -6,9 +6,11 @@ using UnityEngine.Tilemaps;
 
 public class EnemyUnit : MonoBehaviour
 {
-    public GameObject enemyPrefab;      // Prefab
+    // Prefab
+    public GameObject enemyPrefab;
 
-    public EnemyInfo enemy;             // Enemy
+    // Enemy
+    public EnemyInfo enemyInfo;
 
     public int speed;
 
@@ -47,7 +49,7 @@ public class EnemyUnit : MonoBehaviour
             }
 
             // Instantiate enemy
-            if (enemy == null)
+            if (enemyInfo == null)
             {
                 BoundsInt bounds =
                     MapController.Instance.GetComponentInChildren<Tilemap>().cellBounds;
@@ -73,9 +75,11 @@ public class EnemyUnit : MonoBehaviour
 
                 curr = MapController.Instance.map[new Vector2Int(x, y)];
                 
-                enemy = Instantiate(enemyPrefab).GetComponent<EnemyInfo>();
+                enemyInfo = Instantiate(enemyPrefab).GetComponent<EnemyInfo>();
 
                 PositionEnemyOnTile(curr);
+
+                curr.enemyOnTile = enemyInfo;
 
                 EmitLight(curr, true);
             }
@@ -97,7 +101,7 @@ public class EnemyUnit : MonoBehaviour
     public void MoveTrigger()
     {
         
-        path = pathFinder.FindPath(enemy.activeTile,
+        path = pathFinder.FindPath(enemyInfo.activeTile,
             MapController.Instance.GetNeighborTiles(target.activeTile)[0]);
         
     }
@@ -133,33 +137,38 @@ public class EnemyUnit : MonoBehaviour
 
     private void MoveAlongPath()
     {
-        EmitLight(enemy.activeTile, false);
-        
+        EmitLight(enemyInfo.activeTile, false);
+
+        enemyInfo.activeTile.enemyOnTile = null;
+
         var step = speed * Time.deltaTime;
         var zIndex = path[0].transform.position.z;
 
-        enemy.transform.position = Vector2.MoveTowards(enemy.transform.position,
+        enemyInfo.transform.position = Vector2.MoveTowards(enemyInfo.transform.position,
             path[0].transform.position, step);
 
-        enemy.transform.position = new Vector3(enemy.transform.position.x,
-            enemy.transform.position.y, zIndex);
+        enemyInfo.transform.position = new Vector3(enemyInfo.transform.position.x,
+            enemyInfo.transform.position.y, zIndex);
 
-        if (Vector2.Distance(enemy.transform.position, path[0].transform.position) < 0.0001f)
+        if (Vector2.Distance(enemyInfo.transform.position, path[0].transform.position) < 0.0001f)
         {
             PositionEnemyOnTile(path[0]);
             path.RemoveAt(0);
         }
-        EmitLight(enemy.activeTile, true);
+        EmitLight(enemyInfo.activeTile, true);
+
+        enemyInfo.activeTile.enemyOnTile = enemyInfo;
+        
     }
 
     private void PositionEnemyOnTile(OverlayTile tile)
     { 
-        enemy.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y,
+        enemyInfo.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y,
             tile.transform.position.z);
 
-        enemy.GetComponent<SpriteRenderer>().sortingOrder =
+        enemyInfo.GetComponent<SpriteRenderer>().sortingOrder =
             tile.GetComponent<SpriteRenderer>().sortingOrder;
 
-        enemy.activeTile = tile;
+        enemyInfo.activeTile = tile;
     }
 }

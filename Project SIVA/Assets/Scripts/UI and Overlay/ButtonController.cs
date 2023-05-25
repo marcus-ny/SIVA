@@ -53,5 +53,10 @@ public class ButtonController : MonoBehaviour
     {
         battleSim.MoveUnit();
     }
+
+    public void Attack()
+    {
+        battleSim.DealDamage();
+    }
     
 }
