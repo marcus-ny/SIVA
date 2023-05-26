@@ -85,7 +85,7 @@ public class EnemyUnit : MonoBehaviour
             
             gameObject.GetComponent<SpriteRenderer>().sortingOrder =
                 curr.GetComponent<SpriteRenderer>().sortingOrder;
-
+            
             if (path.Count > 0)
             {
                 MoveAlongPath();

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class DamageManager : MonoBehaviour
@@ -30,16 +31,26 @@ public class DamageManager : MonoBehaviour
         {
             return;
         }
-        
-        playerParty.Add(mouseController.character);
-        
+        if (playerParty.Count <= 0)
+        {
+            playerParty.Add(mouseController.character);
+        }
     }
+    
 
+  
     // This function is temporarily meant for enemy dealing damage to player
     // (not implemented yet)
-    public void DealDamageToEnemy(int damage, EnemyInfo target)
+    public void DealDamageToEnemy(float damage, EnemyInfo target)
     {
         target.hitpoints -= damage;
+        target.SwitchColor();
+
+    }
+
+    public void changeColor(EnemyInfo target, Color color)
+    {
+        target.GetComponent<SpriteRenderer>().color = color;
     }
 
     // This function for tick damage from entering light tile
@@ -49,6 +60,6 @@ public class DamageManager : MonoBehaviour
         { 
             playerParty[0].hitpoints -= 5;
         }
-        
+        playerParty[0].SwitchColor();
     }
 }
