@@ -392,52 +392,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 183265908}
   m_CullTransparentMesh: 1
---- !u!1 &286631245
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 286631247}
-  - component: {fileID: 286631246}
-  m_Layer: 0
-  m_Name: PlayerAnimationController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &286631246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286631245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ab668d5e2fa480fae92c2d3f1e0dcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mc: {fileID: 1071924952}
-  animator: {fileID: 2418306737578284934, guid: af827d8ad777140b58e579f223390dce, type: 3}
---- !u!4 &286631247
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286631245}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.4733944, y: 1.1954541, z: -1.4032457}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &308228018
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,7 +2464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f617ab9830d7849a40d31427c38949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 7680185591114261237, guid: af827d8ad777140b58e579f223390dce, type: 3}
+  characterPrefab: {fileID: 3699465588818610229, guid: ee52d83b94e0d452a85685432d656313, type: 3}
   character: {fileID: 0}
   speed: 3
   path: []
@@ -2936,7 +2890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ecae67163f1918488a1b41d487bb3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 3712732428144058876, guid: 046f9c8fe984a9c4b80e2534423a2c35, type: 3}
+  enemyPrefab: {fileID: 8447163622745567172, guid: 1f5bb2873ee684038a56434576f87632, type: 3}
   enemyInfo: {fileID: 0}
   speed: 2
   mc: {fileID: 1071924952}
