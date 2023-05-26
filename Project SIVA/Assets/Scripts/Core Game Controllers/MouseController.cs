@@ -5,16 +5,21 @@ using UnityEngine;
 
 public class MouseController : MonoBehaviour
 {
-
     public GameObject characterPrefab;
+
     public CharacterInfo character;
 
     public float speed;
-    private List<OverlayTile> path = new List<OverlayTile>();
+
+    public List<OverlayTile> path = new List<OverlayTile>();
 
     private PathFinder pathFinder;
 
     private OverlayTile destinationTile;
+
+    private int lastDirection;
+
+    private static readonly string[] directions = { "Player_move_NE", "Player_move_SW", "Player_move_NW", "Player_move_SE" };
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +30,7 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        
         if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN)
         {
             var focusedTileHit = GetFocusedOnTile();
@@ -48,17 +54,22 @@ public class MouseController : MonoBehaviour
                     {
                         character = Instantiate(characterPrefab).GetComponent<CharacterInfo>();
                         PositionCharacterOnTile(overlayTile);
+                        
                     }
                     else
                     {
                         destinationTile = overlayTile;
                     }
+                    
                 }
             }
             
             if (path.Count > 0)
             {
                 MoveAlongPath();
+            } else if (path.Count == 0 && character != null)
+            {
+                character.AnimatePlayer("Player_idle");
             }
         }
         
@@ -94,6 +105,25 @@ public class MouseController : MonoBehaviour
 
         var zIndex = path[0].transform.position.z;
 
+        Vector3Int prev = path[0].previous.gridLocation;
+        Vector3Int cur = path[0].gridLocation;
+
+        if (cur.x - prev.x > 0 && cur.y - prev.y == 0)
+        {
+            character.AnimatePlayer(directions[0]);
+        }
+        else if (cur.x - prev.x < 0 && cur.y - prev.y == 0)
+        {
+            character.AnimatePlayer(directions[1]);
+        }
+        else if (cur.x - prev.x == 0 && cur.y - prev.y > 0)
+        {
+            character.AnimatePlayer(directions[2]);
+        }
+        else if (cur.x - prev.x == 0 && cur.y - prev.y < 0)
+        {
+            character.AnimatePlayer(directions[3]);
+        }
         character.transform.position = Vector2.MoveTowards(character.transform.position,
             path[0].transform.position, step);
 
