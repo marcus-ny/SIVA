@@ -12,19 +12,17 @@ public class EnemyUnit : MonoBehaviour
     // Enemy
     public EnemyInfo enemyInfo;
 
-    public int speed;
+    public float speed;
 
     private PathFinder pathFinder;
 
     private List<OverlayTile> path = new List<OverlayTile>();
 
-    OverlayTile curr;
+    private OverlayTile curr;
 
-    public CharacterInfo target;
+    private CharacterInfo target;
 
     public MouseController mc;
-
-    public BattleSimulator battleSim;
 
     void Start()
     {
@@ -34,7 +32,7 @@ public class EnemyUnit : MonoBehaviour
 
     void LateUpdate()
     {
-        if (battleSim.State == BattleState.ENEMY_TURN)
+        if (BattleSimulator.Instance.State == BattleState.ENEMY_TURN)
         {
             target = mc.character;
             /*
