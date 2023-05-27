@@ -2565,7 +2565,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lampPostPrefab: {fileID: 6463620858329364493, guid: e20470c0a07af5b46aed25f36caf2ba8, type: 3}
-  lampPost: {fileID: 0}
 --- !u!4 &1214566125
 Transform:
   m_ObjectHideFlags: 0

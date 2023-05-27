@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class LampPost : Interactable
 {
+    public bool active;
     private void Start()
     {
         EmitLight(activeTile, true);
+        active = true;
     }
     public void EmitLight(OverlayTile curr, bool trigger)
     {
@@ -14,7 +16,7 @@ public class LampPost : Interactable
         // Trigger == false --> Turn off light (meant for moving and dynamic
         // lighting)
         int factor = trigger ? 1 : -1;
-
+        active = trigger ? true : false;
         List<OverlayTile> neighbors = MapController.Instance.Get3x3Grid(curr);
 
         foreach (var neighbor in neighbors)
@@ -29,6 +31,6 @@ public class LampPost : Interactable
             MapController.Instance.map[new Vector2Int(neighbor.gridLocation.x,
                 neighbor.gridLocation.y)].light_level += factor;
         }
-        curr.light_level += 1;
+        curr.light_level += factor;
     }
 }

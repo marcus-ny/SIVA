@@ -62,7 +62,13 @@ public class BattleSimulator : MonoBehaviour
             actionsPerformed = 0;
         }
     }
-
+    public void InteractItem()
+    {
+        if (State == BattleState.PLAYER_TURN)
+        {
+            if (player.InteractTrigger()) actionsPerformed += 1;
+        }
+    }
     public void MoveUnit()
     {
         // If a party runs out of action points
