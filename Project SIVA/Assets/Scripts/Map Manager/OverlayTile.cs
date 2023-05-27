@@ -27,12 +27,7 @@ public class OverlayTile : MonoBehaviour
 
     private void Start()
     {
-        int roll = Random.Range(0, 10);
-
-        light_level = roll < 7 ? 0 : 5;
-
-        enemyOnTile = null;
-        // light_level = 0;
+        light_level = 0;
     }
 
     // Update is called once per frame

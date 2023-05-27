@@ -42,7 +42,6 @@ public class BattleSimulator : MonoBehaviour
         State = BattleState.PLAYER_TURN;
         actionsPerformed = 0;
     }
-
     
     public void switchTurns()
     {
