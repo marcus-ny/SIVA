@@ -17,8 +17,6 @@ public class MouseController : MonoBehaviour
 
     private OverlayTile destinationTile;
 
-    private int lastDirection;
-
     private static readonly string[] directions = { "Player_move_NE", "Player_move_SW", "Player_move_NW", "Player_move_SE" };
 
     // Start is called before the first frame update
@@ -84,12 +82,10 @@ public class MouseController : MonoBehaviour
             return true;
         } else if (destinationTile.enemyOnTile == null)
         {
-            Debug.Log("No target");
-            return false;
+            Debug.Log("No target");       
         } else if (!inRange)
         {
             Debug.Log("Target out of range");
-            return false;
         }
         return false;
     }
@@ -99,6 +95,23 @@ public class MouseController : MonoBehaviour
         path = pathFinder.FindPath(character.activeTile, destinationTile);
     }
 
+    public bool InteractTrigger()
+    {
+        bool inRange = (character.activeTile.gridLocation.x - destinationTile.gridLocation.x < 2) && (character.activeTile.gridLocation.y - destinationTile.gridLocation.y < 2);
+        Vector2Int coordinates = new(destinationTile.gridLocation.x, destinationTile.gridLocation.y);
+        if (inRange && InteractablesManager.Instance.entityMap.ContainsKey(coordinates))
+        {
+            InteractablesManager.Instance.ReceiveInteraction(destinationTile);
+            return true;
+        } else if (!inRange)
+        {
+            Debug.Log("Interactable out of range!");
+        } else
+        {
+            Debug.Log("There is no interactable on this tile");
+        }
+        return false;
+    }
     private void MoveAlongPath()
     {
         var step = speed * Time.deltaTime;

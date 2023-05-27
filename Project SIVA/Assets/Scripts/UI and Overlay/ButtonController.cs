@@ -57,4 +57,8 @@ public class ButtonController : MonoBehaviour
         BattleSimulator.Instance.DealDamage();
     }
     
+    public void Interact()
+    {
+        BattleSimulator.Instance.InteractItem();
+    }
 }
