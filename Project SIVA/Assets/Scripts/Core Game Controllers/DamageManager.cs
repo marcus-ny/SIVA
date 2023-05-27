@@ -59,7 +59,8 @@ public class DamageManager : MonoBehaviour
         if (playerParty[0].activeTile.light_level > 0)
         { 
             playerParty[0].hitpoints -= 5;
+            playerParty[0].SwitchColor();
         }
-        playerParty[0].SwitchColor();
+        
     }
 }

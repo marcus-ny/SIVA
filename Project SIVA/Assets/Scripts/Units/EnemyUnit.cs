@@ -32,6 +32,16 @@ public class EnemyUnit : MonoBehaviour
 
     void LateUpdate()
     {
+        if (enemyInfo != null)
+        {
+            if (enemyInfo.hitpoints <= 0)
+            {
+                Destroy(enemyInfo);
+                Destroy(enemyPrefab);
+                Destroy(this.gameObject);
+                BattleSimulator.Instance.State = BattleState.END;
+            }
+        }
         if (BattleSimulator.Instance.State == BattleState.ENEMY_TURN)
         {
             target = mc.character;
@@ -60,15 +70,13 @@ public class EnemyUnit : MonoBehaviour
                  * enemy.
                  * 
                  * This is purely for prototyping and testing purposes.
-                 * Enemies on the levels will not be randomly placed.
+                 * Enemies on the levels will have predetermined spawn areas/locations.
                  */
                 while (!MapController.Instance.map.ContainsKey(new Vector2Int(x,
                     y)))
                 {
                     x = Random.Range(bounds.min.x, bounds.max.x);
                     y = Random.Range(bounds.min.y, bounds.max.y);
-
-                    
                 }
 
                 curr = MapController.Instance.map[new Vector2Int(x, y)];
@@ -77,9 +85,7 @@ public class EnemyUnit : MonoBehaviour
 
                 PositionEnemyOnTile(curr);
 
-                curr.enemyOnTile = enemyInfo;
-
-                EmitLight(curr, true);
+                curr.enemyOnTile = enemyInfo;              
             }
 
             
@@ -135,7 +141,7 @@ public class EnemyUnit : MonoBehaviour
 
     private void MoveAlongPath()
     {
-        EmitLight(enemyInfo.activeTile, false);
+        //EmitLight(enemyInfo.activeTile, false);
 
         enemyInfo.activeTile.enemyOnTile = null;
 
@@ -153,7 +159,7 @@ public class EnemyUnit : MonoBehaviour
             PositionEnemyOnTile(path[0]);
             path.RemoveAt(0);
         }
-        EmitLight(enemyInfo.activeTile, true);
+        //EmitLight(enemyInfo.activeTile, true);
 
         enemyInfo.activeTile.enemyOnTile = enemyInfo;
         

@@ -43,7 +43,6 @@ public class BattleSimulator : MonoBehaviour
         actionsPerformed = 0;
     }
 
-    
     public void switchTurns()
     {
         if(State == BattleState.PLAYER_TURN)
