@@ -32,15 +32,10 @@ public class EnemyUnit : MonoBehaviour
 
     void LateUpdate()
     {
-        if (enemyInfo != null)
+        if (enemyInfo != null && enemyInfo.hitpoints <= 0)
         {
-            if (enemyInfo.hitpoints <= 0)
-            {
-                Destroy(enemyInfo);
-                Destroy(enemyPrefab);
-                Destroy(this.gameObject);
-                BattleSimulator.Instance.State = BattleState.END;
-            }
+            Destroy(transform.GetChild(0).gameObject);
+            BattleSimulator.Instance.State = BattleState.END;
         }
         if (BattleSimulator.Instance.State == BattleState.ENEMY_TURN)
         {
@@ -81,7 +76,7 @@ public class EnemyUnit : MonoBehaviour
 
                 curr = MapController.Instance.map[new Vector2Int(x, y)];
                 
-                enemyInfo = Instantiate(enemyPrefab).GetComponent<EnemyInfo>();
+                enemyInfo = Instantiate(enemyPrefab, gameObject.transform).GetComponent<EnemyInfo>();
 
                 PositionEnemyOnTile(curr);
 
