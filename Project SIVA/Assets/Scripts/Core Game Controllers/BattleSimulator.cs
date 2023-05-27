@@ -42,13 +42,7 @@ public class BattleSimulator : MonoBehaviour
         State = BattleState.PLAYER_TURN;
         actionsPerformed = 0;
     }
-    private void Update()
-    {
-        if(State == BattleState.END)
-        {
-            Debug.Log("game ended");
-        }
-    }
+    
     public void switchTurns()
     {
         if(State == BattleState.PLAYER_TURN)
