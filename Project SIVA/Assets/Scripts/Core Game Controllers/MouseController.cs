@@ -67,7 +67,7 @@ public class MouseController : MonoBehaviour
                 MoveAlongPath();
             } else if (path.Count == 0 && character != null)
             {
-                character.AnimatePlayer("Player_idle");
+                character.AnimatePlayer("Player_still");
             }
         }
         

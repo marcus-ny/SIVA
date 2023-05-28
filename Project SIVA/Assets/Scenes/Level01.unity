@@ -2386,7 +2386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f617ab9830d7849a40d31427c38949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 3699465588818610229, guid: ee52d83b94e0d452a85685432d656313, type: 3}
+  characterPrefab: {fileID: 2730349860456931965, guid: 55381f1a70d11114aa5c3217bc2e2f16, type: 3}
   character: {fileID: 0}
   speed: 3
   path: []
