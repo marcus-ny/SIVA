@@ -11,9 +11,9 @@ public class BattleSimulator : MonoBehaviour
 
     public BattleState State; // Change to private later
 
-    private int MAX_ACTIONS = 2; // Constant
+    public readonly int MAX_ACTIONS = 2; // Constant
 
-    private int actionsPerformed;
+    public int actionsPerformed;
 
     /*
      * These variables are temporarily set to 1 each for testing purposes
@@ -46,15 +46,13 @@ public class BattleSimulator : MonoBehaviour
     public void switchTurns()
     {
         if(State == BattleState.PLAYER_TURN)
-        {
-            // print("It is now enemy's turn");
+        {           
             State = BattleState.ENEMY_TURN;
 
             // reset
             actionsPerformed = 0;
         } else if(State == BattleState.ENEMY_TURN)
-        {
-            // print("It is now player's turn");
+        {           
             State = BattleState.PLAYER_TURN;
             DamageManager.Instance.tickDamage();
 
@@ -64,9 +62,16 @@ public class BattleSimulator : MonoBehaviour
     }
     public void InteractItem()
     {
+        if (actionsPerformed == MAX_ACTIONS)
+        {
+            return;
+        }
         if (State == BattleState.PLAYER_TURN)
         {
-            if (player.InteractTrigger()) actionsPerformed += 1;
+            if (player.InteractTrigger())
+            {
+                actionsPerformed += 1;
+            }
         }
     }
     public void MoveUnit()
