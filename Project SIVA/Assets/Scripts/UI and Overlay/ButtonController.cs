@@ -52,11 +52,13 @@ public class ButtonController : MonoBehaviour
         BattleSimulator.Instance.MoveUnit();
     }
 
+    // Tied to Attack button in UI
     public void Attack()
     {
         BattleSimulator.Instance.DealDamage();
     }
     
+    // Tied to Interact button in UI
     public void Interact()
     {
         BattleSimulator.Instance.InteractItem();
