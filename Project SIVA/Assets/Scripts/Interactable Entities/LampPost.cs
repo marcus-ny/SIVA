@@ -10,6 +10,18 @@ public class LampPost : Interactable
         EmitLight(activeTile, true);
         active = true;
     }
+
+    public override void ReceiveInteraction()
+    {
+        if (active)
+        {
+            EmitLight(activeTile, false);
+        }
+        else
+        {
+            EmitLight(activeTile, true);
+        }
+    }
     public void EmitLight(OverlayTile curr, bool trigger)
     {
         // Trigger == true --> Emit light

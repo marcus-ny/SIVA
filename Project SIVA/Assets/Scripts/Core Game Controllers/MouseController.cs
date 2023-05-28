@@ -101,7 +101,7 @@ public class MouseController : MonoBehaviour
         Vector2Int coordinates = new(destinationTile.gridLocation.x, destinationTile.gridLocation.y);
         if (inRange && InteractablesManager.Instance.entityMap.ContainsKey(coordinates))
         {
-            InteractablesManager.Instance.ReceiveInteraction(destinationTile);
+            InteractablesManager.Instance.Interact(destinationTile);
             return true;
         } else if (!inRange)
         {

@@ -46,30 +46,17 @@ public class InteractablesManager : MonoBehaviour
                 OverlayTile tile = MapController.Instance.map[location];
 
                 tile.isBlocked = true;
-                Debug.Log("Type: " + entityMap[location].GetType());
+                
                 PositionOnTile(entityMap[location], tile);
             }
         }
     }
 
     
-    public void ReceiveInteraction(OverlayTile curr)
+    public void Interact(OverlayTile curr)
     {
         Vector2Int coordinates = new Vector2Int(curr.gridLocation.x, curr.gridLocation.y);
-
-        Interactable interactable = entityMap[coordinates];
-
-        if (interactable.GetType() == typeof(LampPost))
-        {
-            LampPost lamp = (LampPost) interactable;
-            if (lamp.active)
-            {
-                lamp.EmitLight(curr, false);
-            } else
-            {
-                lamp.EmitLight(curr, true);
-            }
-        }
+        entityMap[coordinates].ReceiveInteraction();
     }
     
     private void PositionOnTile(Interactable interactable, OverlayTile tile)
