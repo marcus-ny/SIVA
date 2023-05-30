@@ -11,9 +11,13 @@ public class MouseController : MonoBehaviour
 
     public float speed;
 
-    public List<OverlayTile> path = new List<OverlayTile>();
+    public List<OverlayTile> path = new();
+
+    private List<OverlayTile> reachableTiles = new();
 
     private PathFinder pathFinder;
+
+    private Rangefinder rangeFinder;
 
     private OverlayTile destinationTile;
 
@@ -23,6 +27,7 @@ public class MouseController : MonoBehaviour
     void Start()
     {
         pathFinder = new PathFinder();
+        rangeFinder = new Rangefinder();
     }
 
     // Update is called once per frame
@@ -31,6 +36,7 @@ public class MouseController : MonoBehaviour
         
         if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN)
         {
+            
             var focusedTileHit = GetFocusedOnTile();
 
             // If the raycast on cursor hits a valid cell
@@ -46,13 +52,15 @@ public class MouseController : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    overlayTile.GetComponent<OverlayTile>().ShowTile();
+                    // Selected tile was highlighted by this line of code below
+                    // overlayTile.GetComponent<OverlayTile>().ShowTile();
 
                     if (character == null)
                     {
                         character = Instantiate(characterPrefab).GetComponent<CharacterInfo>();
                         PositionCharacterOnTile(overlayTile);
-                        
+                        destinationTile = character.activeTile;
+                        GetMovementRange();  
                     }
                     else
                     {
@@ -68,9 +76,25 @@ public class MouseController : MonoBehaviour
             } else if (path.Count == 0 && character != null)
             {
                 character.AnimatePlayer("Player_still");
+                GetMovementRange();
             }
         }
         
+    }
+
+    private void GetMovementRange()
+    {
+        foreach (var tile in reachableTiles)
+        {
+            tile.HideTile();
+        }
+
+        reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);
+
+        foreach (var tile in reachableTiles)
+        {
+            tile.ShowTile();
+        }
     }
 
     public bool AttackTrigger()
@@ -90,9 +114,13 @@ public class MouseController : MonoBehaviour
         return false;
     }
 
-    public void MoveTrigger()
+    public bool MoveTrigger()
     {
-        path = pathFinder.FindPath(character.activeTile, destinationTile);
+        path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles);
+        Debug.Log("Path length is: " + path.Count);
+        Debug.Log("reachable tiles count: " + reachableTiles.Count);
+        
+        return (path.Count != 0);
     }
 
     public bool InteractTrigger()
@@ -112,6 +140,7 @@ public class MouseController : MonoBehaviour
         }
         return false;
     }
+
     private void MoveAlongPath()
     {
         var step = speed * Time.deltaTime;
@@ -147,6 +176,11 @@ public class MouseController : MonoBehaviour
         {
             PositionCharacterOnTile(path[0]);
             path.RemoveAt(0);
+        }
+
+        if (path.Count == 0)
+        {
+            GetMovementRange();
         }
     }
 

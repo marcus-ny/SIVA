@@ -30,14 +30,16 @@ public class OverlayTile : MonoBehaviour
         light_level = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    // This method removse the range highlighting, therefore is temporarily disabled
+    // Might be removed in the future.
+
+    /*void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            HideTile();
+            HideTile();           
         }
-    }
+    }*/
 
     public void ShowTile()
     {
@@ -53,5 +55,10 @@ public class OverlayTile : MonoBehaviour
     public void HideTile()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+    }
+
+    public void ShowGreenTile()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 255);
     }
 }

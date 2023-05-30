@@ -82,14 +82,15 @@ public class BattleSimulator : MonoBehaviour
             return;
         }
 
-        actionsPerformed += 1;
-
         if (State == BattleState.ENEMY_TURN)
         {
             enemy.MoveTrigger();
         } else if (State == BattleState.PLAYER_TURN)
         {
-            player.MoveTrigger();
+            if(player.MoveTrigger())
+            {
+                actionsPerformed += 1;
+            };
         }
     }
 

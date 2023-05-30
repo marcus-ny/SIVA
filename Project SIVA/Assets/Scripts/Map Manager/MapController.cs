@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class MapController : MonoBehaviour
 {
@@ -70,22 +71,34 @@ public class MapController : MonoBehaviour
 
 	}
 
-	public List<OverlayTile> GetNeighborTiles(OverlayTile curr)
+    public List<OverlayTile> GetNeighborTiles(OverlayTile curr, List<OverlayTile> validTiles)
 	{
-		var map = MapController.Instance.map;
+		Dictionary<Vector2Int, OverlayTile> searchRange = new();
 
-		List<OverlayTile> neighbors = new List<OverlayTile>();
+		if (validTiles.Count > 0)
+		{
+			foreach (var tile in validTiles)
+			{
+				searchRange.Add(new Vector2Int(tile.gridLocation.x, tile.gridLocation.y), tile);
+			}
+		} else
+		{
+			searchRange = map;
+		}
+
+		
+		List<OverlayTile> neighbors = new();
 
 		int[,] directions = { { 0, 1 }, { 1, 0 }, { -1, 0 }, { 0, -1 } };
 
 		for (int i = 0; i < 4; i++)
 		{
-			Vector2Int locationToCheck = new Vector2Int(curr.gridLocation.x + directions[i, 0],
-				curr.gridLocation.y + directions[i, 1]);
+			Vector2Int locationToCheck = new(curr.gridLocation.x + directions[i, 0],
+            curr.gridLocation.y + directions[i, 1]);
 
-			if (map.ContainsKey(locationToCheck))
+			if (searchRange.ContainsKey(locationToCheck) && Mathf.Abs(curr.gridLocation.z - searchRange[locationToCheck].gridLocation.z) <= 1)
 			{
-				neighbors.Add(map[locationToCheck]);
+				neighbors.Add(searchRange[locationToCheck]);
 			}
 		}
 		
@@ -95,12 +108,12 @@ public class MapController : MonoBehaviour
 	
 	public List<OverlayTile> Get3x3Grid(OverlayTile curr)
 	{
-		var map = MapController.Instance.map;
+		
 
 		int[,] directions = new int[9, 2] { { 0, 0 }, { 0, 1 }, { 1, 0 }, { 1, 1 }, { 0, -1 },
 			{ -1, 0 }, { 1, -1 }, { -1, 1 }, { -1, -1 }  };
 
-		List<OverlayTile> neighbors = new List<OverlayTile>();
+		List<OverlayTile> neighbors = new();
 
 		for (int i = 0; i < 9; i++)
 		{
