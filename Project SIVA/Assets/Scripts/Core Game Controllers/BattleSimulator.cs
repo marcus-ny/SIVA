@@ -11,7 +11,7 @@ public class BattleSimulator : MonoBehaviour
 
     public BattleState State; // Change to private later
 
-    public readonly int MAX_ACTIONS = 2; // Constant
+    public readonly int MAX_ACTIONS = 20; // Constant
 
     public int actionsPerformed;
 
@@ -21,7 +21,7 @@ public class BattleSimulator : MonoBehaviour
      * As the number of enemy and units under player's control grows, these variables will be changed to arrays - partyPlayer and partyEnemy
      * And the code will be adjusted accordingly
      */
-    public EnemyUnit enemy;
+    public Enemy enemy;
 
     public MouseController player;
 
@@ -82,14 +82,12 @@ public class BattleSimulator : MonoBehaviour
             return;
         }
 
-        actionsPerformed += 1;
-
-        if (State == BattleState.ENEMY_TURN)
+        if (State == BattleState.PLAYER_TURN)
         {
-            enemy.MoveTrigger();
-        } else if (State == BattleState.PLAYER_TURN)
-        {
-            player.MoveTrigger();
+            if(player.MoveTrigger())
+            {
+                actionsPerformed += 1;
+            };
         }
     }
 

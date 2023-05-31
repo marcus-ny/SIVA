@@ -9,10 +9,10 @@ using UnityEngine;
  */
 public class PathFinder
 {
-    public List<OverlayTile> FindPath(OverlayTile start, OverlayTile end)
+    public List<OverlayTile> FindPath(OverlayTile start, OverlayTile end, List<OverlayTile> validTilePool)
     {
-        List<OverlayTile> openList = new List<OverlayTile>();
-        List<OverlayTile> closedList = new List<OverlayTile>();
+        List<OverlayTile> openList = new();
+        List<OverlayTile> closedList = new();
 
         openList.Add(start);
 
@@ -30,12 +30,11 @@ public class PathFinder
             }
 
             // Get neighbor tiles
-            var neighborTiles = MapController.Instance.GetNeighborTiles(curr);
+            var neighborTiles = MapController.Instance.GetNeighborTiles(curr, validTilePool);
 
             foreach (var neighbor in neighborTiles)
             {
-                if (neighbor.isBlocked || closedList.Contains(neighbor) ||
-                    Mathf.Abs(curr.gridLocation.z - neighbor.gridLocation.z) > 1 )
+                if (neighbor.isBlocked || closedList.Contains(neighbor))
                 {
                     continue;
                 }
