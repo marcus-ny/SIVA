@@ -116,9 +116,14 @@ public class MouseController : MonoBehaviour
 
     public bool MoveTrigger()
     {
+        if (destinationTile.isBlocked)
+        {
+            Debug.Log("This tile cannot be traversed to");
+            return false;
+        }
         path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles);
-        Debug.Log("Path length is: " + path.Count);
-        Debug.Log("reachable tiles count: " + reachableTiles.Count);
+        // Debug.Log("Path length is: " + path.Count);
+        // Debug.Log("reachable tiles count: " + reachableTiles.Count);
         
         return (path.Count != 0);
     }
@@ -146,6 +151,8 @@ public class MouseController : MonoBehaviour
         var step = speed * Time.deltaTime;
 
         var zIndex = path[0].transform.position.z;
+
+        character.activeTile.isBlocked = false;
 
         // This animation code should be abstracted to somewhere else
         // Keep this file only for controlling the player and nothing else
@@ -184,6 +191,7 @@ public class MouseController : MonoBehaviour
         {
             GetMovementRange();
         }
+        // character.activeTile.isBlocked = true;
     }
 
     public RaycastHit2D? GetFocusedOnTile()
@@ -211,5 +219,6 @@ public class MouseController : MonoBehaviour
         character.GetComponent<SpriteRenderer>().sortingOrder =
             tile.GetComponent<SpriteRenderer>().sortingOrder;
         character.activeTile = tile;
+        character.activeTile.isBlocked = true;
     }
 }

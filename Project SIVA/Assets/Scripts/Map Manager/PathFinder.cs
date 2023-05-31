@@ -71,11 +71,36 @@ public class PathFinder
         return finishedList;
     }
 
-    private int GetManhattenDistance(OverlayTile start, OverlayTile neighbor)
+    public int GetManhattenDistance(OverlayTile start, OverlayTile neighbor)
     {
         return Mathf.Abs(start.gridLocation.x - neighbor.gridLocation.x)
             + Mathf.Abs(start.gridLocation.y - neighbor.gridLocation.y);
     }
 
+    public List<OverlayTile> GetClosest(OverlayTile target, List<OverlayTile> range)
+    {
+        // int lowest = int.MaxValue;
+        // careful
+        // OverlayTile nearest = null;
+
+        List<OverlayTile> nearestTiles = new();
+        foreach (OverlayTile tile in range)
+        {
+            if (tile.isBlocked)
+            {
+                continue;
+            }
+            else if (target == tile)
+            {
+                // If pathfinding breaks, check here
+                nearestTiles.Add(tile);
+                return nearestTiles;
+            }
+            nearestTiles.Add(tile);
+        }
+
+        nearestTiles.Sort((x, y) => GetManhattenDistance(target, x).CompareTo(GetManhattenDistance(target, y)));
+        return nearestTiles;
+    }
     
 }

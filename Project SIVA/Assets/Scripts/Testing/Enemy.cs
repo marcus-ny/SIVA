@@ -11,10 +11,15 @@ public abstract class Enemy : MonoBehaviour
     protected CharacterInfo player;
 
     protected PathFinder pathFinder;
+    protected Rangefinder rangeFinder;
 
     protected List<OverlayTile> path;
+    protected List<OverlayTile> range;
 
     public float hitpoints;
+
+    public int maxAP;
+    public int actionsPerformed;
 
     protected readonly static int SPEED = 3;
 
@@ -24,6 +29,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void MoveAlongPath()
     {
+        activeTile.isBlocked = false;
         EnemyManager.Instance.enemyMap.Remove(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
         activeTile.enemy = null;
 
@@ -41,8 +47,9 @@ public abstract class Enemy : MonoBehaviour
             PositionEnemyOnTile(path[0]);
             path.RemoveAt(0);
         }
-
+        
         activeTile.enemy = this;
+        activeTile.isBlocked = true;
         EnemyManager.Instance.enemyMap.Add(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y), this);
     }
 
@@ -56,6 +63,7 @@ public abstract class Enemy : MonoBehaviour
 
         activeTile = tile;
         activeTile.enemy = this;
+        activeTile.isBlocked = true;
     }
 
     // Damage Visuals
