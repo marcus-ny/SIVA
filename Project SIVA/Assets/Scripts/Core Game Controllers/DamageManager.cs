@@ -41,9 +41,9 @@ public class DamageManager : MonoBehaviour
   
     // This function is temporarily meant for enemy dealing damage to player
     // (not implemented yet)
-    public void DealDamageToEnemy(float damage, EnemyInfo target)
+    public void DealDamageToEnemy(float damage, Enemy target)
     {
-        target.hitpoints -= damage;
+        target.TakeDamage(damage);
         target.SwitchColor();
 
     }

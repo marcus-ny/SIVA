@@ -41,6 +41,9 @@ public class InteractablesManager : MonoBehaviour
         {
             foreach (Vector2Int location in entityLocations)
             {
+                // Possible workaround for abstraction:
+                // TryGetComponent() method
+
                 entityMap.Add(location, Instantiate(lampPostPrefab).GetComponent<LampPost>());
 
                 OverlayTile tile = MapController.Instance.map[location];

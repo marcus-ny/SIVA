@@ -100,11 +100,11 @@ public class MouseController : MonoBehaviour
     public bool AttackTrigger()
     {
         bool inRange = (character.activeTile.gridLocation.x - destinationTile.gridLocation.x < 2) && (character.activeTile.gridLocation.y - destinationTile.gridLocation.y < 2);
-        if (destinationTile.enemyOnTile != null && inRange)
+        if (destinationTile.enemy != null && inRange)
         {
-            DamageManager.Instance.DealDamageToEnemy(50, destinationTile.enemyOnTile);
+            DamageManager.Instance.DealDamageToEnemy(50, destinationTile.enemy);
             return true;
-        } else if (destinationTile.enemyOnTile == null)
+        } else if (destinationTile.enemy == null)
         {
             Debug.Log("No target");       
         } else if (!inRange)
@@ -147,6 +147,8 @@ public class MouseController : MonoBehaviour
 
         var zIndex = path[0].transform.position.z;
 
+        // This animation code should be abstracted to somewhere else
+        // Keep this file only for controlling the player and nothing else
         Vector3Int prev = path[0].previous.gridLocation;
         Vector3Int cur = path[0].gridLocation;
 
