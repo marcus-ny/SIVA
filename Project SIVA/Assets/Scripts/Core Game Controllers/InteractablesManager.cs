@@ -33,6 +33,9 @@ public class InteractablesManager : MonoBehaviour
     {
         entityLocations.Add(new Vector2Int(0, 0));
         entityLocations.Add(new Vector2Int(-3, -5));
+
+        entityLocations.Add(new Vector2Int(2, -4));
+        entityLocations.Add(new Vector2Int(3, -3));
     }
         
     void Update()

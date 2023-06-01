@@ -38,6 +38,7 @@ public class EnemyManager : MonoBehaviour
     {
         // Test
         enemySpawns.Add(new Vector2Int(3, -4));
+        enemySpawns.Add(new Vector2Int(-2, 0));
     }
 
     private void Update()
@@ -76,12 +77,14 @@ public class EnemyManager : MonoBehaviour
             spawnComplete = true;
         }
 
+        // Moved to battle simulator
+        /*
         if (BattleSimulator.Instance.State == BattleState.ENEMY_TURN)
         {
             foreach (KeyValuePair<Vector2Int, Enemy> kvp in enemyMap)
             {
                 kvp.Value.Action();
             }
-        }
+        }*/
     }
 }

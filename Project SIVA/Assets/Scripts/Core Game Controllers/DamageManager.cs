@@ -38,7 +38,10 @@ public class DamageManager : MonoBehaviour
     }
     
 
-  
+    public void DealDamageToPlayer(float damage)
+    {
+        playerParty[0].hitpoints -= damage;
+    }
     // This function is temporarily meant for enemy dealing damage to player
     // (not implemented yet)
     public void DealDamageToEnemy(float damage, Enemy target)

@@ -16,8 +16,8 @@ public class EnemyHealthBar : MonoBehaviour
     {
         if (GetComponentInParent<Soldier>() != null)
         {
-            Debug.Log("Bar size: " + barSize.x);
-            barSize.x = GetComponentInParent<Soldier>().hitpoints / 100;
+            
+            barSize.x = GetComponentInParent<Soldier>().hitpoints / 200;
             transform.localScale = barSize;
         }
     }

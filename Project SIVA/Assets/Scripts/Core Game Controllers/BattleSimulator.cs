@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum BattleState { START, PLAYER_TURN, ENEMY_TURN, END }
+public enum BattleState { START, PLAYER_TURN, ENEMY_TURN, TRANSITION, END }
 public class BattleSimulator : MonoBehaviour
 {
     private static BattleSimulator _instance;
@@ -11,7 +11,7 @@ public class BattleSimulator : MonoBehaviour
 
     public BattleState State; // Change to private later
 
-    public readonly int MAX_ACTIONS = 20; // Constant
+    public readonly int MAX_ACTIONS = 2; // Constant
 
     public int actionsPerformed;
 
@@ -21,8 +21,8 @@ public class BattleSimulator : MonoBehaviour
      * As the number of enemy and units under player's control grows, these variables will be changed to arrays - partyPlayer and partyEnemy
      * And the code will be adjusted accordingly
      */
-    public Enemy enemy;
 
+    List<Enemy> enemyList;
     public MouseController player;
 
     private void Awake()
@@ -35,6 +35,7 @@ public class BattleSimulator : MonoBehaviour
         {
             _instance = this;
         }
+        enemyList = new();
     }
     // Start is called before the first frame update
     void Start()
@@ -42,17 +43,43 @@ public class BattleSimulator : MonoBehaviour
         State = BattleState.PLAYER_TURN;
         actionsPerformed = 0;
     }
-    
+
+    private void Update()
+    {
+        if (enemyList.Count != EnemyManager.Instance.transform.childCount)
+        {
+            for (int i = 0; i < EnemyManager.Instance.transform.childCount; i++)
+            {
+                enemyList.Add(EnemyManager.Instance.transform.GetChild(i).GetComponent<Enemy>());
+            }
+        }
+        // Debug.Log("Enemy list: " + enemyList.Count);
+        if (State == BattleState.ENEMY_TURN)
+        {
+            foreach (KeyValuePair<Vector2Int, Enemy> kvp in EnemyManager.Instance.enemyMap)
+            {
+                kvp.Value.Action();
+            }
+
+            State = BattleState.TRANSITION;
+        }
+    }
+
     public void switchTurns()
     {
         if(State == BattleState.PLAYER_TURN)
         {           
             State = BattleState.ENEMY_TURN;
-
+            
             // reset
             actionsPerformed = 0;
-        } else if(State == BattleState.ENEMY_TURN)
-        {           
+        } else if(State == BattleState.TRANSITION)
+        {
+            foreach (Enemy enemy in enemyList)
+            {
+                // Reset AP
+                enemy.actionsPerformed = 0;
+            }
             State = BattleState.PLAYER_TURN;
             DamageManager.Instance.tickDamage();
 
