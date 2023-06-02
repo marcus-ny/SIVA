@@ -21,18 +21,24 @@ public abstract class Enemy : MonoBehaviour
     public int maxAP;
     public int actionsPerformed;
 
+    public bool state_moving;
+
     protected readonly static int SPEED = 3;
 
     public abstract void Action();
 
     public abstract void TakeDamage(float damage);
-
+    // Deprecated function for moving frame by frame (previously used in update)
+    /*
     public void MoveAlongPath()
     {
+        
         activeTile.isBlocked = false;
         EnemyManager.Instance.enemyMap.Remove(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
         activeTile.enemy = null;
-
+        
+        // Before
+        
         var step = SPEED * Time.deltaTime;
         var zIndex = path[0].transform.position.z;
 
@@ -51,8 +57,45 @@ public abstract class Enemy : MonoBehaviour
         activeTile.enemy = this;
         activeTile.isBlocked = true;
         EnemyManager.Instance.enemyMap.Add(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y), this);
-    }
+        
+    }*/
 
+    protected IEnumerator MoveAlongPath()
+    {
+        BattleSimulator.Instance.moving = true;
+        activeTile.isBlocked = false;
+        EnemyManager.Instance.enemyMap.Remove(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
+        activeTile.enemy = null;
+
+        while (path.Count > 0)
+        {
+            
+            // Before
+
+            var step = SPEED * Time.deltaTime;
+            var zIndex = path[0].transform.position.z;
+
+            transform.position = Vector2.MoveTowards(transform.position,
+                path[0].transform.position, step);
+
+            transform.position = new Vector3(transform.position.x,
+                transform.position.y, zIndex);
+
+            if (Vector2.Distance(transform.position, path[0].transform.position) < 0.0001f)
+            {
+                PositionEnemyOnTile(path[0]);
+                path.RemoveAt(0);
+            }
+
+        
+            yield return null;
+        }
+        activeTile.enemy = this;
+        activeTile.isBlocked = true;
+        EnemyManager.Instance.enemyMap.Add(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y), this);
+        BattleSimulator.Instance.moving = false;
+    
+    }
     public void PositionEnemyOnTile(OverlayTile tile)
     {
         transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y,
@@ -65,7 +108,7 @@ public abstract class Enemy : MonoBehaviour
         activeTile.enemy = this;
         activeTile.isBlocked = true;
     }
-
+    
     // Damage Visuals
     IEnumerator Delay()
     {

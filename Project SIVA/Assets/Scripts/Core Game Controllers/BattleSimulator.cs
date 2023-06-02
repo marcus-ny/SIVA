@@ -25,6 +25,8 @@ public class BattleSimulator : MonoBehaviour
     List<Enemy> enemyList;
     public MouseController player;
 
+    public bool moving;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -56,15 +58,24 @@ public class BattleSimulator : MonoBehaviour
         // Debug.Log("Enemy list: " + enemyList.Count);
         if (State == BattleState.ENEMY_TURN)
         {
-            foreach (KeyValuePair<Vector2Int, Enemy> kvp in EnemyManager.Instance.enemyMap)
-            {
-                kvp.Value.Action();
-            }
+            Coroutine EnemyCoroutine = StartCoroutine(EnemyTakeActions());                        
 
             State = BattleState.TRANSITION;
         }
+        // Debug.Log("Battlestate: " + State);
     }
-
+    IEnumerator EnemyTakeActions()
+    {
+        foreach (Enemy enemy in enemyList)
+        {
+            enemy.Action();
+            while (moving)
+            {
+                yield return null;
+            }
+        }
+    }
+    
     public void switchTurns()
     {
         if(State == BattleState.PLAYER_TURN)

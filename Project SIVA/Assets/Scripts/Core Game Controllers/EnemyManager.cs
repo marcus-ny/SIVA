@@ -43,6 +43,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
+        // Keeping count of which enemies have died
         foreach (KeyValuePair<Vector2Int, Enemy> kvp in enemyMap)
         {
             int defeated = 0;
@@ -58,6 +59,8 @@ public class EnemyManager : MonoBehaviour
                 BattleSimulator.Instance.State = BattleState.END;
             }
         }
+
+        // Enemy spawning (only carried out once)
         if (!spawnComplete && enemySpawns.Count != enemyMap.Count)
         {
             foreach (Vector2Int spawn in enemySpawns)
