@@ -30,31 +30,30 @@ public class Soldier : Enemy
         gameObject.GetComponent<SpriteRenderer>().sortingOrder =
             EnemyManager.Instance.mc.GetComponent<SpriteRenderer>().sortingOrder;
 
-        range = rangeFinder.GetReachableTiles(activeTile, 3);
-        /*
-        if (path.Count > 0)
-        {
-            state_moving = true;
-            MoveAlongPath();
-            //BattleSimulator.Instance.moving = false;
-        } else
-        {
-            state_moving = false;
-        }*/
+        range = rangeFinder.GetReachableTiles(activeTile, 3);        
     }
    
     // Delay the updating of path instead of thinking about how to sequence it
     public override void Action()
     {
-        
-        if (actionsPerformed <= maxAP)
-        {
-            SoldierAttack();
-            SoldierMove();            
-        }
+
+        StartCoroutine("TakeTurn");
         
     }
 
+    IEnumerator TakeTurn()
+    {
+        while (actionsPerformed < maxAP)
+        {
+            SoldierAttack();
+            SoldierMove();
+            while (BattleSimulator.Instance.moving)
+            {
+                yield return null;
+            }
+            
+        }
+    }
     private void SoldierAttack()
     {
         
@@ -66,6 +65,7 @@ public class Soldier : Enemy
             actionsPerformed += 2;
         }
     }
+
     private void SoldierMove()
     {
         List<OverlayTile> toFind = GetClosestTileToPlayer();

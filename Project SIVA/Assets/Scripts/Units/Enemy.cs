@@ -63,13 +63,13 @@ public abstract class Enemy : MonoBehaviour
     protected IEnumerator MoveAlongPath()
     {
         BattleSimulator.Instance.moving = true;
-        activeTile.isBlocked = false;
-        EnemyManager.Instance.enemyMap.Remove(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
-        activeTile.enemy = null;
 
         while (path.Count > 0)
         {
             
+            activeTile.isBlocked = false;
+            EnemyManager.Instance.enemyMap.Remove(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
+            activeTile.enemy = null;
             // Before
 
             var step = SPEED * Time.deltaTime;
@@ -87,14 +87,14 @@ public abstract class Enemy : MonoBehaviour
                 path.RemoveAt(0);
             }
 
-        
+            activeTile.enemy = this;
+            activeTile.isBlocked = true;
+            EnemyManager.Instance.enemyMap.Add(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y), this);
+            
             yield return null;
         }
-        activeTile.enemy = this;
-        activeTile.isBlocked = true;
-        EnemyManager.Instance.enemyMap.Add(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y), this);
         BattleSimulator.Instance.moving = false;
-    
+
     }
     public void PositionEnemyOnTile(OverlayTile tile)
     {

@@ -25,14 +25,14 @@ public class CharacterInfo : MonoBehaviour
         }
     }
 
-    IEnumerator delay()
-    {
-        yield return new WaitForSecondsRealtime(0.5f);
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
-    }
-    public void SwitchColor()
+    IEnumerator DamageVisual()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 1);
-        StartCoroutine("delay");
+        yield return new WaitForSecondsRealtime(0.3f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+    }
+    public void DisplayDamageVisual()
+    {       
+        StartCoroutine("DamageVisual");
     }
 }

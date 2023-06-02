@@ -73,6 +73,7 @@ public class BattleSimulator : MonoBehaviour
             {
                 yield return null;
             }
+            //yield return new WaitForSecondsRealtime(0.3f);
         }
     }
     
