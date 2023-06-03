@@ -18,6 +18,7 @@ public class Soldier : Enemy
         maxAP = 4;
 
         actionsPerformed = 0;
+        state_moving = false;
     }
     private void Update()
     {
@@ -29,25 +30,33 @@ public class Soldier : Enemy
         gameObject.GetComponent<SpriteRenderer>().sortingOrder =
             EnemyManager.Instance.mc.GetComponent<SpriteRenderer>().sortingOrder;
 
-        range = rangeFinder.GetReachableTiles(activeTile, 3);
-
-        if (path.Count > 0)
-        {
-            MoveAlongPath();
-        }
+        range = rangeFinder.GetReachableTiles(activeTile, 3);        
     }
+   
+    // Delay the updating of path instead of thinking about how to sequence it
     public override void Action()
     {
-        if (actionsPerformed <= maxAP)
+
+        StartCoroutine("TakeTurn");
+        
+    }
+
+    IEnumerator TakeTurn()
+    {
+        while (actionsPerformed < maxAP)
         {
             SoldierAttack();
             SoldierMove();
+            while (BattleSimulator.Instance.moving)
+            {
+                yield return null;
+            }
             
         }
     }
-
     private void SoldierAttack()
     {
+        
         bool inAttackRange = (Mathf.Abs(activeTile.gridLocation.x - player.activeTile.gridLocation.x) < 2)
             && (Mathf.Abs(activeTile.gridLocation.y - player.activeTile.gridLocation.y) < 2);
         if (inAttackRange)
@@ -56,6 +65,7 @@ public class Soldier : Enemy
             actionsPerformed += 2;
         }
     }
+
     private void SoldierMove()
     {
         List<OverlayTile> toFind = GetClosestTileToPlayer();
@@ -72,15 +82,17 @@ public class Soldier : Enemy
             {
                 break;
             }
-            
-        
+                   
             path = pathFinder.FindPath(activeTile, tile, range);
+
             if (path.Count > 0)
             {
                 actionsPerformed += 2;
+                state_moving = true;
                 break;
-            }
+            }            
         }
+        Coroutine MovingCoroutine = StartCoroutine(MoveAlongPath());        
     }
 
     public override void TakeDamage(float damage)

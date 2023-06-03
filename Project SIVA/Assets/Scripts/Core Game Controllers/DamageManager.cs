@@ -41,6 +41,7 @@ public class DamageManager : MonoBehaviour
     public void DealDamageToPlayer(float damage)
     {
         playerParty[0].hitpoints -= damage;
+        playerParty[0].DisplayDamageVisual();
     }
     // This function is temporarily meant for enemy dealing damage to player
     // (not implemented yet)
@@ -62,7 +63,7 @@ public class DamageManager : MonoBehaviour
         if (playerParty[0].activeTile.light_level > 0)
         { 
             playerParty[0].hitpoints -= 5;
-            playerParty[0].SwitchColor();
+            playerParty[0].DisplayDamageVisual();
         }
         
     }
