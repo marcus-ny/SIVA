@@ -6,11 +6,11 @@ public class MechanicIdleState : MechanicBaseState
 {
     public override void EnterState(Mechanic mechanic)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("mechanic is idle now");
     }
 
     public override void UpdateState(Mechanic mechanic)
     {
-        throw new System.NotImplementedException();
+        mechanic.actionsPerformed += 2;
     }
 }

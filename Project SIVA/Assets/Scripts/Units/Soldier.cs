@@ -94,9 +94,12 @@ public class Soldier : Enemy
             if (path.Count > 0)
             {
                 actionsPerformed += 2;
-                state_moving = true;
                 break;
             }            
+        }
+        if (path.Count == 0)
+        {
+            SwitchState(soldierRetreatState);
         }
         Coroutine MovingCoroutine = StartCoroutine(MoveAlongPath());        
     }

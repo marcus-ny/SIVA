@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
 
     public static EnemyManager Instance { get { return _instance; } }
 
-    private List<Vector2Int> enemySpawns;
+    public Dictionary<Vector2Int, GameObject> enemySpawns;
 
     public Dictionary<Vector2Int, Enemy> enemyMap;
 
@@ -18,6 +18,8 @@ public class EnemyManager : MonoBehaviour
     public MouseController mc;
 
     private bool spawnComplete = false;
+
+   
 
     private void Awake()
     {
@@ -32,13 +34,12 @@ public class EnemyManager : MonoBehaviour
 
         enemySpawns = new();
         enemyMap = new();
+        
     }
 
     private void Start()
     {
-        // Test
-        enemySpawns.Add(new Vector2Int(3, -4));
-        enemySpawns.Add(new Vector2Int(-2, 0));
+        
     }
 
     private void Update()
@@ -63,15 +64,18 @@ public class EnemyManager : MonoBehaviour
         // Enemy spawning (only carried out once)
         if (!spawnComplete && enemySpawns.Count != enemyMap.Count)
         {
-            foreach (Vector2Int spawn in enemySpawns)
+            Debug.Log(enemySpawns.Count);
+            foreach (KeyValuePair<Vector2Int, GameObject> spawn in enemySpawns)
             {
-                enemyMap.Add(spawn, Instantiate(soldier_Prefab, gameObject.transform).GetComponent<Enemy>());
+                enemyMap.Add(spawn.Key, Instantiate(spawn.Value, gameObject.transform).GetComponent<Enemy>());
 
-                OverlayTile tile = MapController.Instance.map[spawn];
+                OverlayTile tile = MapController.Instance.map[spawn.Key];
 
-                Enemy curr = enemyMap[spawn];
+                Enemy curr = enemyMap[spawn.Key];
 
                 curr.PositionEnemyOnTile(tile);
+
+                
             }
 
             // This boolean is used to make sure that enemies do not spawn again after
@@ -80,14 +84,23 @@ public class EnemyManager : MonoBehaviour
             spawnComplete = true;
         }
 
-        // Moved to battle simulator
-        /*
-        if (BattleSimulator.Instance.State == BattleState.ENEMY_TURN)
+        
+    }
+
+    // Might use a PQ for this but need a PQ that supports modifying elements and priority
+    public Enemy GetLowestHpAlly()
+    {
+        Enemy lowest = null; ;
+        foreach (KeyValuePair<Vector2Int, Enemy> enemy in enemyMap)
         {
-            foreach (KeyValuePair<Vector2Int, Enemy> kvp in enemyMap)
+            if (lowest == null) {
+                lowest = enemy.Value;
+            } else
             {
-                kvp.Value.Action();
+                lowest = enemy.Value.hitpoints < lowest.hitpoints ? enemy.Value : lowest;
             }
-        }*/
+        }
+
+        return lowest;
     }
 }

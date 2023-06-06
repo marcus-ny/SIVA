@@ -6,10 +6,12 @@ public class SoldierRetreatState : SoldierBaseState
 {
     public override void EnterState(Soldier soldier)
     {
-        throw new System.NotImplementedException();
+        // Set the weak animation here
+        Debug.Log("Soldier enters retreat state");
     }
     public override void UpdateState(Soldier soldier)
     {
-        throw new System.NotImplementedException();
+        soldier.actionsPerformed += 2;
+        Debug.Log("Soldier is in retreat state");
     }
 }
