@@ -11,7 +11,6 @@ public class SoldierRetreatState : SoldierBaseState
     }
     public override void UpdateState(Soldier soldier)
     {
-        soldier.actionsPerformed += 2;
-        Debug.Log("Soldier is in retreat state");
+        soldier.RetreatMove();
     }
 }

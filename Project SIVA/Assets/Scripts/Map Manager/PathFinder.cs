@@ -77,7 +77,11 @@ public class PathFinder
             + Mathf.Abs(start.gridLocation.y - neighbor.gridLocation.y);
     }
 
-    public List<OverlayTile> GetClosest(OverlayTile target, List<OverlayTile> range)
+    /*
+     * Given a target tile, return an array of tiles in a given range
+     * sorted by order of closest to furthest to the target
+     */
+    public List<OverlayTile> GetClosestTilesInRange(OverlayTile target, List<OverlayTile> range)
     {
         // int lowest = int.MaxValue;
         // careful
@@ -103,5 +107,6 @@ public class PathFinder
         nearestTiles.Sort((x, y) => GetManhattenDistance(target, x).CompareTo(GetManhattenDistance(target, y)));
         return nearestTiles;
     }
+
     
 }

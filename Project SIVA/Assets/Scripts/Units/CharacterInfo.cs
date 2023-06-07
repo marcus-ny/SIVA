@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class CharacterInfo : MonoBehaviour
 {
@@ -10,19 +11,14 @@ public class CharacterInfo : MonoBehaviour
 
     private Animator animator;
 
+    public Vector3Int cur, prev;
+
     
+ 
     private void Start()
     {
         hitpoints = 100;
         animator = GetComponent<Animator>();
-    }
-
-    public void AnimatePlayer(string direction)
-    {
-        if (animator != null)
-        {
-            animator.Play(direction);
-        }
     }
 
     IEnumerator DamageVisual()

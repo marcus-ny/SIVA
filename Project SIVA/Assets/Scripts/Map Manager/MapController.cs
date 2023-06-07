@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using static UnityEngine.RuleTile.TilingRuleOutput;
@@ -129,4 +130,30 @@ public class MapController : MonoBehaviour
 
 		return neighbors;
 	}
+
+	/*
+	 * Given an overlay tile, returns an array of tiles that go out of center in a + sign
+	 */
+    public List<OverlayTile> GetPlusShapedAlongCenter(OverlayTile center)
+    {
+		int[,] directions = new int[4, 2] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+
+		List<OverlayTile> plusShaped = new();
+
+		for (int mult = 1; mult <= 10; mult++)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				Vector2Int locationToCheck = new Vector2Int(center.gridLocation.x + (directions[i, 0]*mult),
+					center.gridLocation.y + (directions[i, 1]*mult));
+
+				if (map.ContainsKey(locationToCheck))
+				{
+					plusShaped.Add(map[locationToCheck]);
+				}
+			}
+		}
+
+		return plusShaped;
+    }
 }

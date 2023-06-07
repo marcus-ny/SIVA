@@ -23,6 +23,8 @@ public class MouseController : MonoBehaviour
 
     private static readonly string[] directions = { "Player_move_NE", "Player_move_SW", "Player_move_NW", "Player_move_SE" };
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,7 +77,10 @@ public class MouseController : MonoBehaviour
                 MoveAlongPath();
             } else if (path.Count == 0 && character != null)
             {
-                character.AnimatePlayer("Player_still");
+                character.cur = character.activeTile.gridLocation;
+                character.prev = character.activeTile.gridLocation;
+
+                
                 GetMovementRange();
             }
         }
@@ -102,7 +107,7 @@ public class MouseController : MonoBehaviour
         bool inRange = (character.activeTile.gridLocation.x - destinationTile.gridLocation.x < 2) && (character.activeTile.gridLocation.y - destinationTile.gridLocation.y < 2);
         if (destinationTile.enemy != null && inRange)
         {
-            DamageManager.Instance.DealDamageToEnemy(50, destinationTile.enemy);
+            DamageManager.Instance.DealDamageToEnemy(80, destinationTile.enemy);
             return true;
         } else if (destinationTile.enemy == null)
         {
@@ -122,8 +127,6 @@ public class MouseController : MonoBehaviour
             return false;
         }
         path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles);
-        // Debug.Log("Path length is: " + path.Count);
-        // Debug.Log("reachable tiles count: " + reachableTiles.Count);
         
         return (path.Count != 0);
     }
@@ -156,25 +159,9 @@ public class MouseController : MonoBehaviour
 
         // This animation code should be abstracted to somewhere else
         // Keep this file only for controlling the player and nothing else
-        Vector3Int prev = path[0].previous.gridLocation;
-        Vector3Int cur = path[0].gridLocation;
+        character.prev = path[0].previous.gridLocation;
+        character.cur = path[0].gridLocation;
 
-        if (cur.x - prev.x > 0 && cur.y - prev.y == 0)
-        {
-            character.AnimatePlayer(directions[0]);
-        }
-        else if (cur.x - prev.x < 0 && cur.y - prev.y == 0)
-        {
-            character.AnimatePlayer(directions[1]);
-        }
-        else if (cur.x - prev.x == 0 && cur.y - prev.y > 0)
-        {
-            character.AnimatePlayer(directions[2]);
-        }
-        else if (cur.x - prev.x == 0 && cur.y - prev.y < 0)
-        {
-            character.AnimatePlayer(directions[3]);
-        }
         character.transform.position = Vector2.MoveTowards(character.transform.position,
             path[0].transform.position, step);
 
