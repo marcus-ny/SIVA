@@ -93,6 +93,7 @@ public class PathFinder
             else if (target == tile)
             {
                 // If pathfinding breaks, check here
+                nearestTiles.Clear();
                 nearestTiles.Add(tile);
                 return nearestTiles;
             }

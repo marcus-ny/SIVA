@@ -6,6 +6,18 @@ using UnityEngine.Tilemaps;
 
 public class Soldier : Enemy
 {
+    private SoldierBaseState currentState;
+
+    public SoldierIdleState soldierIdleState = new();
+    public SoldierAggroState soldierAggroState = new();
+    public SoldierRetreatState soldierRetreatState = new();
+    public SoldierDeadState soldierDeadState = new();
+
+    public void SwitchState(SoldierBaseState newState)
+    {
+        currentState = newState;
+        currentState.EnterState(this);
+    }
     private void Start()
     {
         pathFinder = new PathFinder();
@@ -18,8 +30,11 @@ public class Soldier : Enemy
         maxAP = 4;
 
         actionsPerformed = 0;
-        state_moving = false;
+        currentState = soldierAggroState;
+        currentState.EnterState(this);
+
     }
+
     private void Update()
     {
         if (player == null)
@@ -30,10 +45,9 @@ public class Soldier : Enemy
         gameObject.GetComponent<SpriteRenderer>().sortingOrder =
             EnemyManager.Instance.mc.GetComponent<SpriteRenderer>().sortingOrder;
 
-        range = rangeFinder.GetReachableTiles(activeTile, 3);        
+        range = rangeFinder.GetReachableTiles(activeTile, 3);
     }
    
-    // Delay the updating of path instead of thinking about how to sequence it
     public override void Action()
     {
 
@@ -45,28 +59,20 @@ public class Soldier : Enemy
     {
         while (actionsPerformed < maxAP)
         {
-            SoldierAttack();
-            SoldierMove();
+            currentState.UpdateState(this);
             while (BattleSimulator.Instance.moving)
             {
                 yield return null;
             }
-            
         }
     }
-    private void SoldierAttack()
-    {
-        
-        bool inAttackRange = (Mathf.Abs(activeTile.gridLocation.x - player.activeTile.gridLocation.x) < 2)
-            && (Mathf.Abs(activeTile.gridLocation.y - player.activeTile.gridLocation.y) < 2);
-        if (inAttackRange)
-        {
+    public void MeleeAttack()
+    {       
             DamageManager.Instance.DealDamageToPlayer(5.0f);
-            actionsPerformed += 2;
-        }
+            actionsPerformed += 2;       
     }
 
-    private void SoldierMove()
+    public void AggroMove()
     {
         List<OverlayTile> toFind = GetClosestTileToPlayer();
         //range = rangeFinder.GetReachableTiles(activeTile, 3);
@@ -88,9 +94,12 @@ public class Soldier : Enemy
             if (path.Count > 0)
             {
                 actionsPerformed += 2;
-                state_moving = true;
                 break;
             }            
+        }
+        if (path.Count == 0)
+        {
+            SwitchState(soldierRetreatState);
         }
         Coroutine MovingCoroutine = StartCoroutine(MoveAlongPath());        
     }

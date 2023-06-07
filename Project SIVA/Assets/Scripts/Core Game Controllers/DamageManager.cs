@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+// This one imports priority queue since unity .net version does not support this intrinsically
+using Utils;
 
 public class DamageManager : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class DamageManager : MonoBehaviour
     public List<CharacterInfo> playerParty = new List<CharacterInfo>();
 
     public static DamageManager Instance { get { return _instance; } }
+
 
     private void Awake()
     {
@@ -48,6 +51,7 @@ public class DamageManager : MonoBehaviour
     public void DealDamageToEnemy(float damage, Enemy target)
     {
         target.TakeDamage(damage);
+        // EnemyManager.Instance.enemyHpStatus.Enqueue(target, target.hitpoints);
         target.SwitchColor();
 
     }

@@ -29,8 +29,9 @@ public class MapController : MonoBehaviour
 	void Start()
 	{
 		map = new Dictionary<Vector2Int, OverlayTile>();
-		var tileMap = gameObject.GetComponentInChildren<Tilemap>();     
-
+		var tileMap = gameObject.GetComponent<Tilemap>();
+		//var tileMap = gameObject.GetComponentInChildren<Tilemap>();
+		
 		BoundsInt bounds = tileMap.cellBounds;
 
 		// Loop through all tiles within bounds
