@@ -18,8 +18,16 @@ public class SoldierAggroState : SoldierBaseState
         bool inAttackRange = (Mathf.Abs(soldierLocation.x - playerLocation.x) < 2)
         && (Mathf.Abs(soldierLocation.y - playerLocation.y) < 2);
 
+        bool inAggroRange = (Mathf.Abs(soldierLocation.x - playerLocation.x) < 10)
+        && (Mathf.Abs(soldierLocation.y - playerLocation.y) < 10);
+
+        if (!inAggroRange)
+        {
+            soldier.TakePositionForRange();
+            soldier.RangeAttack();
+        }
         // If in range of melee, melee attack
-        if (inAttackRange)
+        else if (inAttackRange)
         {
             soldier.MeleeAttack();
         }

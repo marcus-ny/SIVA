@@ -103,4 +103,20 @@ public class EnemyManager : MonoBehaviour
 
         return lowest;
     }
+
+    public List<Mechanic> FindMechanicLocations()
+    {
+        List<Mechanic> mechanics = new();
+        List<OverlayTile> locations = new();
+        foreach (KeyValuePair<Vector2Int, Enemy> kvp in enemyMap)
+        {
+            if(kvp.Value.GetType() == typeof(Mechanic))
+            {
+                // Safe to typecast?
+                mechanics.Add((Mechanic)kvp.Value);
+            }
+        }
+        
+        return mechanics;
+    }
 }

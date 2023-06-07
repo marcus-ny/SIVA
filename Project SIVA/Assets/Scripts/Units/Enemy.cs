@@ -86,9 +86,13 @@ public abstract class Enemy : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5f);
         gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
     }
+
     public void SwitchColor()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 1);
         StartCoroutine("Delay");
     }
+
+    public abstract List<OverlayTile> FindNearestMechanicLocation();
+    
 }

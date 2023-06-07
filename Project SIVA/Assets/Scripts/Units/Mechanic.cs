@@ -114,8 +114,13 @@ public class Mechanic : Enemy
 	{
 		allyLowHp = EnemyManager.Instance.GetLowestHpAlly();
 
-		List<OverlayTile> result = pathFinder.GetClosest(allyLowHp.activeTile, range);
+		List<OverlayTile> result = pathFinder.GetClosestTilesInRange(allyLowHp.activeTile, range);
 
 		return result;
+	}
+
+	public override List<OverlayTile> FindNearestMechanicLocation()
+	{
+		return null;
 	}
 }
