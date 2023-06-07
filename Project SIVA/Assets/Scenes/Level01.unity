@@ -2413,8 +2413,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   State: 0
   actionsPerformed: 0
-  enemy: {fileID: 1631532687}
   player: {fileID: 1071924952}
+  moving: 0
 --- !u!4 &1231308200
 Transform:
   m_ObjectHideFlags: 0
