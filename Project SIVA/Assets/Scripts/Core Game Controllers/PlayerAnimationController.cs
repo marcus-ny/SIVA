@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
-    public MouseController mc;
+    public PlayerController playerController;
     public Animator animator;
     // Start is called before the first frame update
     void Update()
     {
-        animator = mc.characterPrefab.GetComponentInChildren<Animator>();
+        animator = playerController.character_prefab.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     public void AnimatePlayer() 
     {
-        List<OverlayTile> path = mc.path;
+        List<OverlayTile> path = playerController.character.path;
 
         Vector3Int prev = path[0].previous.gridLocation;
         Vector3Int cur = path[0].gridLocation;

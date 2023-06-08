@@ -22,7 +22,7 @@ public class EnemyUnit : MonoBehaviour
 
     private CharacterInfo target;
 
-    public MouseController mc;
+    public PlayerController playerController;
 
     void Start()
     {
@@ -39,7 +39,7 @@ public class EnemyUnit : MonoBehaviour
         }
         if (BattleSimulator.Instance.State == BattleState.ENEMY_TURN)
         {
-            target = mc.character;
+            target = playerController.character;
             /*
              * In the event that player is not instantiated, but enemy has
              * spawned in, there will be a debug message and no further

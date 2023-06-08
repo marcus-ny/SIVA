@@ -37,11 +37,11 @@ public class Generator : Enemy
     {
         if (player == null)
         {
-            player = EnemyManager.Instance.mc.character;
+            player = EnemyManager.Instance.playerController.character;
         }
 
         gameObject.GetComponent<SpriteRenderer>().sortingOrder =
-            EnemyManager.Instance.mc.GetComponent<SpriteRenderer>().sortingOrder;
+            EnemyManager.Instance.playerController.GetComponent<SpriteRenderer>().sortingOrder;
 
         range = rangeFinder.GetReachableTiles(activeTile, 4);
     }

@@ -9,7 +9,7 @@ public class DamageManager : MonoBehaviour
 {
     private static DamageManager _instance;
 
-    public MouseController mouseController;
+    public PlayerController playerController;
 
     public List<CharacterInfo> playerParty = new List<CharacterInfo>();
 
@@ -30,13 +30,13 @@ public class DamageManager : MonoBehaviour
 
     private void Update()
     {
-        if (mouseController.character == null)
+        if (playerController.character == null)
         {
             return;
         }
         if (playerParty.Count <= 0)
         {
-            playerParty.Add(mouseController.character);
+            playerParty.Add(playerController.character);
         }
     }
     

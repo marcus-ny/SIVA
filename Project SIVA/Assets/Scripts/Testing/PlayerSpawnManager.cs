@@ -1,20 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class EnemySpawnGenerator : MonoBehaviour
+public class PlayerSpawnManager : MonoBehaviour
 {
-    List<Vector2Int> spawnLocations;
+    Vector2Int spawnLocation;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        var PlayerSpawnMap = gameObject.GetComponent<Tilemap>();
 
-        var EnemySpawnMap = gameObject.GetComponent<Tilemap>();
-
-        BoundsInt bounds = EnemySpawnMap.cellBounds;
+        BoundsInt bounds = PlayerSpawnMap.cellBounds;
 
         for (int z = bounds.max.z; z >= bounds.min.z; z--)
         {
@@ -24,12 +22,12 @@ public class EnemySpawnGenerator : MonoBehaviour
                 {
                     var tileLocation = new Vector3Int(x, y, z);
                     var tileKey = new Vector2Int(x, y);
-                    
-                    if (EnemySpawnMap.HasTile(tileLocation) && !EnemyManager.Instance.enemySpawns.ContainsKey(tileKey))
+
+                    if (PlayerSpawnMap.HasTile(tileLocation))
                     {
-                        GameObject prefab = EnemySpawnMap.GetTile<EnemyTile>(tileLocation).enemy_prefab;
-                        EnemyManager.Instance.enemySpawns.Add(tileKey, prefab);
-                        
+                        PlayerController.Instance.playerSpawn = tileKey;
+                        break;
+                        // Pass this value into the player manager
                     }
                 }
             }
@@ -37,6 +35,4 @@ public class EnemySpawnGenerator : MonoBehaviour
 
         gameObject.SetActive(false);
     }
-
-     
 }

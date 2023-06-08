@@ -23,7 +23,7 @@ public class BattleSimulator : MonoBehaviour
      */
 
     List<Enemy> enemyList;
-    public MouseController player;
+    public PlayerController player;
 
     public bool moving;
 
