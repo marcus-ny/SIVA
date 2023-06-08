@@ -14,6 +14,8 @@ public class UIGameMenu : MonoBehaviour
     }
 
     private void ExitToMenu(){
+        // This fixes the issue of the need to escape pause screen to trigger animation
+        Time.timeScale = 1f;
         ScenesManager.Instance.LoadMainMenu();
     }
 }

@@ -50,7 +50,6 @@ public class ScenesManager : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
 
         // Load Scene
-        SceneManager.LoadScene(levelName
-);
+        SceneManager.LoadScene(levelName);
     }
 }
