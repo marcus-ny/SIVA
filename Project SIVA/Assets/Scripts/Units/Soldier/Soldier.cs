@@ -205,10 +205,7 @@ public class Soldier : Enemy
         Coroutine MovingCoroutine = StartCoroutine(MoveAlongPath());
     }
 
-    public override void TakeDamage(float damage)
-    {
-        hitpoints -= damage;
-    }
+    
 
     
     // Within its movable range, returns the tile closest to the player
@@ -244,7 +241,7 @@ public class Soldier : Enemy
         return result;
     }
 
-    public override List<OverlayTile> FindNearestMechanicLocation()
+    public List<OverlayTile> FindNearestMechanicLocation()
     {
         List<Mechanic> mechanicsLocations = EnemyManager.Instance.FindMechanicLocations();
         
