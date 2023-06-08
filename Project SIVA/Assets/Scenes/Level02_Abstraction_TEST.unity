@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19679b449d9246fe8e50e4c5a0698ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character_prefab: {fileID: 0}
+  character_prefab: {fileID: 7146743360214746198, guid: 198a5ddfd4978460ca9a98b2ac8f8f39, type: 3}
   playerSpawn: {x: 0, y: 0}
   character: {fileID: 0}
   path: []
@@ -4354,7 +4354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   State: 0
   actionsPerformed: 0
-  player: {fileID: 0}
+  player: {fileID: 82683372}
   moving: 0
 --- !u!4 &1231308200
 Transform:
@@ -4586,7 +4586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b37cb6f11ec9fc40a1cdc5fc2f3fa68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
+  playerController: {fileID: 82683372}
   playerParty: []
 --- !u!4 &1459314595
 Transform:
@@ -4817,7 +4817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soldier_Prefab: {fileID: 4266191669911125738, guid: d901c7dbeea2643e8a3c55b82acb8973, type: 3}
-  playerController: {fileID: 0}
+  playerController: {fileID: 82683372}
 --- !u!4 &1728211735
 Transform:
   m_ObjectHideFlags: 0

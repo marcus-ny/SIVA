@@ -123,13 +123,21 @@ public class BattleSimulator : MonoBehaviour
 
         if (State == BattleState.PLAYER_TURN)
         {
-            if(player.MoveTrigger())
-            {
-                actionsPerformed += 1;
-            };
+            StartCoroutine(WaitForPlayerMoveInput());
+            
         }
     }
-
+    IEnumerator WaitForPlayerMoveInput()
+    {
+        while (!Input.GetMouseButtonDown(0))
+        {
+            yield return null;
+        }
+        if (player.MoveTrigger())
+        {
+            actionsPerformed += 1;
+        }
+    }
     public void DealDamage()
     {
         if (actionsPerformed == MAX_ACTIONS)

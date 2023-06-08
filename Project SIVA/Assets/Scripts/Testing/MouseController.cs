@@ -39,15 +39,13 @@ public class MouseController : MonoBehaviour
                 transform.position = overlayTile.transform.position;
 
                 gameObject.GetComponent<SpriteRenderer>().sortingOrder =
-                    overlayTile.GetComponent<SpriteRenderer>().sortingOrder;
-                
+                    overlayTile.GetComponent<SpriteRenderer>().sortingOrder;               
             }
             
         }
 
     }
     
-
     public RaycastHit2D? GetFocusedOnTile()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

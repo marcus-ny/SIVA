@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
             {
 
                 overlayTile = tileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
+                
                 if (Input.GetMouseButtonDown(0))
                 {
                     if (character == null)
@@ -72,6 +73,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            /*
             if (path.Count > 0)
             {
                 MoveAlongPath();
@@ -83,42 +85,48 @@ public class PlayerController : MonoBehaviour
 
 
                 GetMovementRange();
-            }
-
-
+            }*/
         }
     }
-    private void MoveAlongPath()
+
+    private IEnumerator MoveAlongPath()
     {
-        var step = speed * Time.deltaTime;
-
-        var zIndex = path[0].transform.position.z;
-
-        character.activeTile.isBlocked = false;
-
-        // This animation code should be abstracted to somewhere else
-        // Keep this file only for controlling the player and nothing else
-        character.prev = path[0].previous.gridLocation;
-        character.cur = path[0].gridLocation;
-
-        character.transform.position = Vector2.MoveTowards(character.transform.position,
-            path[0].transform.position, step);
-
-        character.transform.position = new Vector3(character.transform.position.x,
-            character.transform.position.y, zIndex);
-
-        if (Vector2.Distance(character.transform.position, path[0].transform.position) < 0.0001f)
+        while (path.Count > 0)
         {
-            PositionCharacterOnTile(path[0]);
-            path.RemoveAt(0);
+            var step = speed * Time.deltaTime;
+
+            var zIndex = path[0].transform.position.z;
+
+            character.activeTile.isBlocked = false;
+
+            // This animation code should be abstracted to somewhere else
+            // Keep this file only for controlling the player and nothing else
+            character.prev = path[0].previous.gridLocation;
+            character.cur = path[0].gridLocation;
+
+            character.transform.position = Vector2.MoveTowards(character.transform.position,
+                path[0].transform.position, step);
+
+            character.transform.position = new Vector3(character.transform.position.x,
+                character.transform.position.y, zIndex);
+
+            if (Vector2.Distance(character.transform.position, path[0].transform.position) < 0.0001f)
+            {
+                PositionCharacterOnTile(path[0]);
+                path.RemoveAt(0);
+            }
+
+            yield return null;
         }
 
         if (path.Count == 0)
         {
+            character.prev = character.cur = character.activeTile.gridLocation;
             GetMovementRange();
         }
         // character.activeTile.isBlocked = true;
     }
+
     public bool AttackTrigger()
     {
         bool inRange = (character.activeTile.gridLocation.x - destinationTile.gridLocation.x < 2) && (character.activeTile.gridLocation.y - destinationTile.gridLocation.y < 2);
@@ -138,16 +146,25 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    public bool MoveTrigger()
+    IEnumerator WaitForMovementInput()
     {
-        if (destinationTile.isBlocked)
+        while(!Input.GetMouseButtonDown(0))
         {
-            Debug.Log("This tile cannot be traversed to");
-            return false;
+            yield return null;
         }
         path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles);
+        Coroutine movingCoroutine = StartCoroutine(MoveAlongPath());
 
-        return (path.Count != 0);
+    }
+    public bool MoveTrigger()
+    {
+        path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles);
+        if (path.Count == 0) return false;
+        Coroutine movingCoroutine = StartCoroutine(MoveAlongPath());
+        //StartCoroutine(WaitForMovementInput());
+        //Debug.Log("Is this executed early?");
+
+        return true;
     }
 
     public bool InteractTrigger()
@@ -169,6 +186,7 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
+
     private void GetMovementRange()
     {
         foreach (var tile in reachableTiles)
