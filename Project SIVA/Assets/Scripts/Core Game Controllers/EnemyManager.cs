@@ -15,7 +15,7 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject soldier_Prefab;
 
-    public MouseController mc;
+    public PlayerController playerController;
 
     private bool spawnComplete = false;
 

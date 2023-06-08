@@ -38,9 +38,5 @@ public class EnemySpawnGenerator : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-            // Update is called once per frame
-    void Update()
-    {
-        
-    }
+     
 }

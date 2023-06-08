@@ -23,7 +23,7 @@ public class BattleSimulator : MonoBehaviour
      */
 
     List<Enemy> enemyList;
-    public MouseController player;
+    public PlayerController player;
 
     public bool moving;
 
@@ -123,13 +123,21 @@ public class BattleSimulator : MonoBehaviour
 
         if (State == BattleState.PLAYER_TURN)
         {
-            if(player.MoveTrigger())
-            {
-                actionsPerformed += 1;
-            };
+            StartCoroutine(WaitForPlayerMoveInput());
+            
         }
     }
-
+    IEnumerator WaitForPlayerMoveInput()
+    {
+        while (!Input.GetMouseButtonDown(0))
+        {
+            yield return null;
+        }
+        if (player.MoveTrigger())
+        {
+            actionsPerformed += 1;
+        }
+    }
     public void DealDamage()
     {
         if (actionsPerformed == MAX_ACTIONS)

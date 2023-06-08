@@ -27,7 +27,10 @@ public abstract class Enemy : MonoBehaviour
 
     public abstract void Action();
 
-    public abstract void TakeDamage(float damage);
+    public void TakeDamage(float damage)
+    {
+        hitpoints -= damage;
+    }
     
 
     protected IEnumerator MoveAlongPath()
@@ -93,6 +96,6 @@ public abstract class Enemy : MonoBehaviour
         StartCoroutine("Delay");
     }
 
-    public abstract List<OverlayTile> FindNearestMechanicLocation();
+    //public abstract List<OverlayTile> FindNearestMechanicLocation();
     
 }
