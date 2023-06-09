@@ -16,6 +16,9 @@ public abstract class Enemy : MonoBehaviour
     protected List<OverlayTile> path;
     protected List<OverlayTile> range;
 
+    public Vector3Int cur;
+    public Vector3Int prev;
+
     public float hitpoints;
 
     public int maxAP;
@@ -23,7 +26,7 @@ public abstract class Enemy : MonoBehaviour
 
     public bool state_moving;
 
-    protected readonly static int SPEED = 3;
+    protected readonly static int SPEED = 2;
 
     public abstract void Action();
 
@@ -35,8 +38,12 @@ public abstract class Enemy : MonoBehaviour
 
     protected IEnumerator MoveAlongPath()
     {
-        BattleSimulator.Instance.moving = true;
-
+        while (state_moving)
+        {
+            yield return null;
+        }
+        state_moving = true;
+        
         while (path.Count > 0)
         {
             
@@ -47,6 +54,9 @@ public abstract class Enemy : MonoBehaviour
 
             var step = SPEED * Time.deltaTime;
             var zIndex = path[0].transform.position.z;
+
+            cur = path[0].gridLocation;
+            prev = path[0].previous.gridLocation;
 
             transform.position = Vector2.MoveTowards(transform.position,
                 path[0].transform.position, step);
@@ -63,10 +73,15 @@ public abstract class Enemy : MonoBehaviour
             activeTile.enemy = this;
             activeTile.isBlocked = true;
             EnemyManager.Instance.enemyMap.Add(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y), this);
-            
             yield return null;
+            
         }
-        BattleSimulator.Instance.moving = false;
+        
+        if (path.Count == 0)
+        {
+            prev = cur = activeTile.gridLocation;
+        }
+        state_moving = false;
 
     }
 

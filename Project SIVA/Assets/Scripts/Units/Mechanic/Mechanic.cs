@@ -11,6 +11,8 @@ public class Mechanic : Enemy
 	MechanicDeadState mechanicDeadState = new();
 
 	public Enemy allyLowHp;
+
+	MechanicAnimationController animationController;
 	public void SwitchState(MechanicBaseState newState)
 	{
 		currentState = newState;
@@ -30,7 +32,7 @@ public class Mechanic : Enemy
 		actionsPerformed = 0;
 		currentState = mechanicHealState;
 		currentState.EnterState(this);
-
+		animationController = gameObject.GetComponent<MechanicAnimationController>();
 	}
 
 	private void Update()
@@ -58,18 +60,39 @@ public class Mechanic : Enemy
 		while (actionsPerformed < maxAP)
 		{
 			currentState.UpdateState(this);
-			while (BattleSimulator.Instance.moving)
+			while (state_moving)
 			{
 				yield return null;
 			}
 		}
 	}
+	IEnumerator startHealing()
+	{
+        while (state_moving)
+        {
+            yield return null;
+        }
+        state_moving = true;
+		// lazy, fix later
+		if (allyLowHp == this)
+		{
+			// skip turn temporarily
+
+			actionsPerformed = maxAP;
+		}
+		else
+		{
+			DamageManager.Instance.DealDamageToEnemy(-10, allyLowHp);
+		}
+        animationController.status = MechanicAnimationController.Status.HEALING;
+        yield return new WaitForSeconds(0.8f);
+        animationController.status = MechanicAnimationController.Status.NIL;
+        state_moving = false;
+    }
 	public void Heal()
 	{
-		// Lazy implementation, add a heal function later
-		
-		DamageManager.Instance.DealDamageToEnemy(-10, allyLowHp);
 		actionsPerformed += 2;
+		StartCoroutine(startHealing());
 	}
 
 	public void MoveToAlly()
@@ -97,9 +120,9 @@ public class Mechanic : Enemy
 				break;
 			}
 		}
-		if (path.Count <= 0)
+		if (path.Count == 0)
 		{
-			SwitchState(mechanicIdleState);
+			actionsPerformed = maxAP;
 		}
 		Coroutine MovingCoroutine = StartCoroutine(MoveAlongPath());
 	}
