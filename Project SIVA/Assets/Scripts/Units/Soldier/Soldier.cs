@@ -213,9 +213,16 @@ public class Soldier : Enemy
         // Is it necessary for range movement
         if (path.Count == 0)
         {
+            // If medic is already next to you
             // Skip turn
-            actionsPerformed = maxAP;
-            Debug.Log("turn skipped in retreat");
+            List<OverlayTile> plusShaped = MapController.Instance.GetPlusShapedAlongCenter(player.activeTile);
+            if (plusShaped.Contains(activeTile))
+            {
+                RangeAttack();
+            } else {
+                actionsPerformed = maxAP;
+                Debug.Log("turn skipped in retreat");
+            }
         }
         Coroutine MovingCoroutine = StartCoroutine(MoveAlongPath());
     }

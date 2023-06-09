@@ -74,7 +74,16 @@ public class Mechanic : Enemy
         }
         state_moving = true;
 		// lazy, fix later
-        DamageManager.Instance.DealDamageToEnemy(-10, allyLowHp);
+		if (allyLowHp == this)
+		{
+			// skip turn temporarily
+
+			actionsPerformed = maxAP;
+		}
+		else
+		{
+			DamageManager.Instance.DealDamageToEnemy(-10, allyLowHp);
+		}
         animationController.status = MechanicAnimationController.Status.HEALING;
         yield return new WaitForSeconds(0.8f);
         animationController.status = MechanicAnimationController.Status.NIL;

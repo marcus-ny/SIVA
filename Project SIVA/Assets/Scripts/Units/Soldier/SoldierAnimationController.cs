@@ -92,6 +92,12 @@ public class SoldierAnimationController : MonoBehaviour
         else if (playerLocation.x - soldierLocation.x == 0 && playerLocation.y - soldierLocation.y < 0)
         {
             animation = melee_directions[3];
+        } else if (playerLocation.x - soldierLocation.x != 0)
+        {
+            animation = melee_directions[1];
+        } else if (playerLocation.y - soldierLocation.y != 0)
+        {
+            animation = melee_directions[0];
         }
 
         currAnimation = animation;
