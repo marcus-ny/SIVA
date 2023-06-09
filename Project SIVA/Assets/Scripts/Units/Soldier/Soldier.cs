@@ -13,6 +13,7 @@ public class Soldier : Enemy
     public SoldierRetreatState soldierRetreatState = new();
     public SoldierDeadState soldierDeadState = new();
 
+    public SoldierAnimationController animationController;
     public void SwitchState(SoldierBaseState newState)
     {
         currentState = newState;
@@ -33,6 +34,7 @@ public class Soldier : Enemy
         actionsPerformed = 0;
         currentState = soldierAggroState;
         currentState.EnterState(this);
+        animationController = gameObject.GetComponent<SoldierAnimationController>();
     }
 
     private void Update()
@@ -64,16 +66,45 @@ public class Soldier : Enemy
             }
         }
     }
+    IEnumerator StartRangeAttack()
+    {
+        while(state_moving)
+        {
+            yield return null;
+        }
+
+        state_moving = true;
+        DamageManager.Instance.DealDamageToPlayer(3.0f);
+        animationController.attackStatus = SoldierAnimationController.AttackStatus.RANGE;
+        yield return new WaitForSeconds(0.8f);
+        animationController.attackStatus = SoldierAnimationController.AttackStatus.NIL;
+        state_moving = false;
+    }
 
     public void RangeAttack()
-    {
-        DamageManager.Instance.DealDamageToPlayer(3.0f);
-        actionsPerformed += 2;
-    }
-    public void MeleeAttack()
     {       
+        actionsPerformed += 2;
+        StartCoroutine(StartRangeAttack());
+    }
+
+    IEnumerator StartMeleeAttack()
+    {
+        while(state_moving)
+        {
+            yield return null;
+        }
+        state_moving = true;
         DamageManager.Instance.DealDamageToPlayer(5.0f);
-        actionsPerformed += 2;       
+        animationController.attackStatus = SoldierAnimationController.AttackStatus.MELEE;
+        yield return new WaitForSeconds(0.8f);
+        animationController.attackStatus = SoldierAnimationController.AttackStatus.NIL;
+        state_moving = false;
+    }
+
+    public void MeleeAttack()
+    {           
+        actionsPerformed += 2;
+        StartCoroutine(StartMeleeAttack());
     }
 
     public void AggroMove()
@@ -81,13 +112,7 @@ public class Soldier : Enemy
         List<OverlayTile> toFind = GetClosestTileToPlayer();
         //range = rangeFinder.GetReachableTiles(activeTile, 3);
         foreach (OverlayTile tile in toFind)
-        {
-            // If the current tile is indeed the nearest possible, then do nothing
-            /*if (tile == activeTile)
-            {
-                return;
-            }*/
-
+        {           
             // If current tile distance to player is equal to enemy's distance to player
             // There is no point moving there and wasting AP, because you're not
             // closing the distance
@@ -130,18 +155,7 @@ public class Soldier : Enemy
         
         foreach (OverlayTile tile in toFind)
         {
-            // If the current tile is indeed the nearest possible, then do nothing
-            /*if (tile == activeTile)
-            {
-                return;
-            }*/
-
-            // Unnecessary here because you are not pathfinding to player anymore
-            /*if (pathFinder.GetManhattenDistance(activeTile, player.activeTile)
-                == pathFinder.GetManhattenDistance(tile, player.activeTile))
-            {
-                break;
-            }*/
+            
 
             path = pathFinder.FindPath(activeTile, tile, range);
 

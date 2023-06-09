@@ -69,7 +69,7 @@ public class BattleSimulator : MonoBehaviour
         foreach (Enemy enemy in enemyList)
         {
             enemy.Action();
-            while (moving)
+            while (enemy.state_moving)
             {
                 yield return null;
             }
