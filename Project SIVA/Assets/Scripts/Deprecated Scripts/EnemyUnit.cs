@@ -102,9 +102,9 @@ public class EnemyUnit : MonoBehaviour
         int i = 0;
         while (path.Count <= 0 && i < 4)
         {
-            path = pathFinder.FindPath(enemyInfo.activeTile,
-                MapController.Instance.GetNeighborTiles(target.activeTile, new List<OverlayTile>())[i],
-                new List<OverlayTile>());
+            //path = pathFinder.FindPath(enemyInfo.activeTile,
+                //MapController.Instance.GetNeighborTiles(target.activeTile, new List<OverlayTile>())[i],
+                //new List<OverlayTile>());
             i++;
         }
     }

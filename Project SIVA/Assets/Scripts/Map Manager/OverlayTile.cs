@@ -41,6 +41,7 @@ public class OverlayTile : MonoBehaviour
         }
     }*/
 
+    // Show light/dark tiles
     public void ShowTile()
     {
         if (light_level > 0)
@@ -52,11 +53,13 @@ public class OverlayTile : MonoBehaviour
         }
     }
 
+    // Return to original color without highlighting
     public void HideTile()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
     }
 
+    // Show green
     public void ShowGreenTile()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 255);

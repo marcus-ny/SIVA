@@ -40,10 +40,13 @@ public class Generator : Enemy
             player = EnemyManager.Instance.playerController.character;
         }
 
-        gameObject.GetComponent<SpriteRenderer>().sortingOrder =
-            EnemyManager.Instance.playerController.GetComponent<SpriteRenderer>().sortingOrder;
+        //gameObject.GetComponent<SpriteRenderer>().sortingOrder =
+        //EnemyManager.Instance.playerController.GetComponent<SpriteRenderer>().sortingOrder;
 
+        // This part needs to be looked at later
+        
         range = rangeFinder.GetReachableTiles(activeTile, 4);
+        
     }
 
     public override void Action()

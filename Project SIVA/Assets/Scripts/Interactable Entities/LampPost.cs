@@ -22,6 +22,7 @@ public class LampPost : Interactable
             EmitLight(activeTile, true);
         }
     }
+
     public void EmitLight(OverlayTile curr, bool trigger)
     {
         // Trigger == true --> Emit light
@@ -33,7 +34,7 @@ public class LampPost : Interactable
 
         foreach (var neighbor in neighbors)
         {
-            if (neighbor.isBlocked || !MapController.Instance.map.ContainsKey(new
+            if (!MapController.Instance.map.ContainsKey(new
                 Vector2Int(neighbor.gridLocation.x, neighbor.gridLocation.y)) ||
                 Mathf.Abs(curr.gridLocation.z - neighbor.gridLocation.z) > 1)
             {

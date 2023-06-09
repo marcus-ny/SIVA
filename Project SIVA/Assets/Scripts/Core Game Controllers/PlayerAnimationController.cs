@@ -15,7 +15,7 @@ public class PlayerAnimationController : MonoBehaviour
     // Update is called once per frame
     public void AnimatePlayer() 
     {
-        List<OverlayTile> path = playerController.character.path;
+        List<OverlayTile> path = playerController.path;
 
         Vector3Int prev = path[0].previous.gridLocation;
         Vector3Int cur = path[0].gridLocation;

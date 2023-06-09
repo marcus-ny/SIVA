@@ -64,7 +64,8 @@ public class PlayerController : MonoBehaviour
                         // Place the enemy on spawn
                         PositionCharacterOnTile(MapController.Instance.map[playerSpawn]);
                         destinationTile = character.activeTile;
-                        GetMovementRange();
+                        reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);
+                        //GetMovementRange();
                     }
                     else
                     {
@@ -122,7 +123,8 @@ public class PlayerController : MonoBehaviour
         if (path.Count == 0)
         {
             character.prev = character.cur = character.activeTile.gridLocation;
-            GetMovementRange();
+            // here
+            //GetMovementRange();
         }
         // character.activeTile.isBlocked = true;
     }
@@ -146,20 +148,39 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    /*
     IEnumerator WaitForMovementInput()
     {
         while(!Input.GetMouseButtonDown(0))
         {
+            foreach (var tile in reachableTiles)
+            {
+                tile.ShowGreenTile();
+            }
             yield return null;
         }
+        foreach (var tile in reachableTiles)
+        {
+            tile.HideTile();
+        }
+
         path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles);
         Coroutine movingCoroutine = StartCoroutine(MoveAlongPath());
 
-    }
+    }*/
+
     public bool MoveTrigger()
     {
+        foreach (var tile in reachableTiles)
+        {
+            tile.HideTile();
+        }
+
+        //reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);
         path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles);
+
         if (path.Count == 0) return false;
+
         Coroutine movingCoroutine = StartCoroutine(MoveAlongPath());
         //StartCoroutine(WaitForMovementInput());
         //Debug.Log("Is this executed early?");
@@ -187,18 +208,19 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    private void GetMovementRange()
+    public void GetMovementRange()
     {
+        /*
         foreach (var tile in reachableTiles)
         {
             tile.HideTile();
-        }
-
+        }*/
+        
         reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);
 
         foreach (var tile in reachableTiles)
         {
-            tile.ShowTile();
+            tile.ShowGreenTile();
         }
     }
 
