@@ -14,6 +14,7 @@ public class Soldier : Enemy
     public SoldierDeadState soldierDeadState = new();
 
     public SoldierAnimationController animationController;
+
     public void SwitchState(SoldierBaseState newState)
     {
         currentState = newState;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f81dc2f6bc3418696acd3bba5e718b, type: 3}
   m_Name: TempMechanicTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 9b7c5207113d6684c8b17d91f291a71c, type: 3}
+  m_Sprite: {fileID: 88712403, guid: 45ea9b790be2bc14799d859798a3cf47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -34,4 +34,4 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  enemy_prefab: {fileID: 7617724510058281897, guid: d05f09c6921ce4253b6c63bce1edfce0, type: 3}
+  enemy_prefab: {fileID: 4964449282635773387, guid: 3380fec99c5684496a937941ef3fa774, type: 3}

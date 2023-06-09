@@ -26,7 +26,7 @@ public abstract class Enemy : MonoBehaviour
 
     public bool state_moving;
 
-    protected readonly static int SPEED = 3;
+    protected readonly static int SPEED = 2;
 
     public abstract void Action();
 
@@ -38,6 +38,10 @@ public abstract class Enemy : MonoBehaviour
 
     protected IEnumerator MoveAlongPath()
     {
+        while (state_moving)
+        {
+            yield return null;
+        }
         state_moving = true;
         
         while (path.Count > 0)
