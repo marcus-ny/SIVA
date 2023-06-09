@@ -8,11 +8,13 @@ public class GeneratorActiveState : GeneratorBaseState
     {
         // Play starting up animation
         // Emit light around
+        generator.GetComponent<GeneratorAnimationController>().StartActive();
         generator.EmitLight(true);
     }
 
     public override void UpdateState(Generator generator)
     {
+        generator.GetComponent<GeneratorAnimationController>().StayActive();
         // If enemy is in light tiles nearby, zap him
         if (generator.PlayerDetectedInRange())
         {

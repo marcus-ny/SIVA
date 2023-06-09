@@ -131,7 +131,9 @@ public class BattleSimulator : MonoBehaviour
     {
         while (!Input.GetMouseButtonDown(0))
         {
+            player.GetMovementRange();
             yield return null;
+            
         }
         if (player.MoveTrigger())
         {
