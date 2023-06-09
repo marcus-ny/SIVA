@@ -418,7 +418,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3e5f1c583c3501b4584dfa92ba42c189, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6076e04a2d1a8bf4f848359be46bf42f, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -592,6 +592,14 @@ PrefabInstance:
 
 '
       objectReference: {fileID: 0}
+    - target: {fileID: 7262702300146277692, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a89c09029dfa0094584485025b4a8ebe, type: 2}
+    - target: {fileID: 7262702300146277692, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3429583883009846359, guid: a89c09029dfa0094584485025b4a8ebe, type: 2}
     - target: {fileID: 7262702300160054321, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
       propertyPath: m_Name
       value: NewGame
@@ -666,7 +674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7262702300160054478, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 33
+      value: 28.2
       objectReference: {fileID: 0}
     - target: {fileID: 7262702300160054478, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -763,6 +771,14 @@ PrefabInstance:
 
 '
       objectReference: {fileID: 0}
+    - target: {fileID: 7262702300146277692, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a89c09029dfa0094584485025b4a8ebe, type: 2}
+    - target: {fileID: 7262702300146277692, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3429583883009846359, guid: a89c09029dfa0094584485025b4a8ebe, type: 2}
     - target: {fileID: 7262702300160054321, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
       propertyPath: m_Name
       value: Exit
@@ -837,7 +853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7262702300160054478, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -87
+      value: -92.4
       objectReference: {fileID: 0}
     - target: {fileID: 7262702300160054478, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1066,6 +1082,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Load Game
       objectReference: {fileID: 0}
+    - target: {fileID: 7262702300146277692, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a89c09029dfa0094584485025b4a8ebe, type: 2}
+    - target: {fileID: 7262702300146277692, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3429583883009846359, guid: a89c09029dfa0094584485025b4a8ebe, type: 2}
     - target: {fileID: 7262702300160054321, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
       propertyPath: m_Name
       value: LoadGame
@@ -1140,7 +1164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7262702300160054478, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -11
+      value: -15.800005
       objectReference: {fileID: 0}
     - target: {fileID: 7262702300160054478, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1364,8 +1388,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Strangely Incompetent Vampire
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 481d88eefe40b5d439844a1b7f36522d, type: 2}
-  m_sharedMaterial: {fileID: 6040924931240725426, guid: 481d88eefe40b5d439844a1b7f36522d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a89c09029dfa0094584485025b4a8ebe, type: 2}
+  m_sharedMaterial: {fileID: -3429583883009846359, guid: a89c09029dfa0094584485025b4a8ebe, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
