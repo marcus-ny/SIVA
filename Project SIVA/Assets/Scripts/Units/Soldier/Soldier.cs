@@ -78,10 +78,23 @@ public class Soldier : Enemy
         DamageManager.Instance.DealDamageToPlayer(3.0f);
         animationController.attackStatus = SoldierAnimationController.AttackStatus.RANGE;
         yield return new WaitForSeconds(0.8f);
+        FriendlyFire();
         animationController.attackStatus = SoldierAnimationController.AttackStatus.NIL;
         state_moving = false;
     }
 
+    private void FriendlyFire()
+    {
+        List<OverlayTile> toCheck = pathFinder.GetTilesBetweenInStraightLine(activeTile, player.activeTile);
+
+        foreach(Enemy enemy in EnemyManager.Instance.enemyMap.Values)
+        {
+            if (toCheck.Contains(enemy.activeTile))
+            {
+                DamageManager.Instance.DealDamageToEnemy(2.0f, enemy);
+            }
+        }
+    }
     public void RangeAttack()
     {       
         actionsPerformed += 2;
