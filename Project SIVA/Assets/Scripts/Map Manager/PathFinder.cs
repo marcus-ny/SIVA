@@ -108,5 +108,30 @@ public class PathFinder
         return nearestTiles;
     }
 
+    public List<OverlayTile> GetTilesBetweenInStraightLine(OverlayTile start, OverlayTile end)
+    {
+        List<OverlayTile> result = new();
+
+        if (Mathf.Abs(end.gridLocation.x - start.gridLocation.x) > 1)
+        {
+            int i = (end.gridLocation.x > start.gridLocation.x) ? start.gridLocation.x : end.gridLocation.x;
+            int limit = (end.gridLocation.x > start.gridLocation.x) ? end.gridLocation.x : start.gridLocation.x;
+            for (; i < limit; i++)
+            {
+                result.Add(MapController.Instance.map[new Vector2Int(i, start.gridLocation.y)]);
+            }
+        } else
+        {
+            int i = (end.gridLocation.y > start.gridLocation.y) ? start.gridLocation.y : end.gridLocation.y;
+            int limit = (end.gridLocation.y > start.gridLocation.y) ? end.gridLocation.y : start.gridLocation.y;
+            for (; i < limit; i++)
+            {
+                result.Add(MapController.Instance.map[new Vector2Int(start.gridLocation.x, i)]);
+            }
+        }
+
+        return result;
+    }
+
     
 }

@@ -64,7 +64,7 @@ public class EnemyManager : MonoBehaviour
         // Enemy spawning (only carried out once)
         if (!spawnComplete && enemySpawns.Count != enemyMap.Count)
         {
-            Debug.Log(enemySpawns.Count);
+            //Debug.Log(enemySpawns.Count);
             foreach (KeyValuePair<Vector2Int, GameObject> spawn in enemySpawns)
             {
                 enemyMap.Add(spawn.Key, Instantiate(spawn.Value, gameObject.transform).GetComponent<Enemy>());

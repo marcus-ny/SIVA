@@ -120,6 +120,7 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
+
         if (path.Count == 0)
         {
             character.prev = character.cur = character.activeTile.gridLocation;

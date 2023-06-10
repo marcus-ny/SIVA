@@ -10,12 +10,15 @@ public class InteractablesManager : MonoBehaviour
     public static InteractablesManager Instance { get { return _instance; } }
 
     // Array to store location of spawned interactables
-    private List<Vector2Int> entityLocations;
+    
     
     public GameObject lampPostPrefab;
 
+    public Dictionary<Vector2Int, GameObject> entitySpawns;
     // Tile coordinates to interactable mapping
     public Dictionary<Vector2Int, Interactable> entityMap;
+
+    private bool spawnComplete;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -26,34 +29,31 @@ public class InteractablesManager : MonoBehaviour
         {
             _instance = this;
         }
-        entityLocations = new List<Vector2Int>();
+        entitySpawns = new();
         entityMap = new Dictionary<Vector2Int, Interactable>();
+        spawnComplete = false;
     }
     void Start()
     {
-        entityLocations.Add(new Vector2Int(0, 0));
-        entityLocations.Add(new Vector2Int(-3, -5));
-
-        entityLocations.Add(new Vector2Int(2, -4));
-        entityLocations.Add(new Vector2Int(3, -3));
+        
     }
         
     void Update()
     {
-        if (entityMap.Count != entityLocations.Count)
+        if (!spawnComplete && entityMap.Count != entitySpawns.Count)
         {
-            foreach (Vector2Int location in entityLocations)
+            foreach (KeyValuePair<Vector2Int, GameObject> kvp in entitySpawns)
             {
                 // Possible workaround for abstraction:
                 // TryGetComponent() method
+                
+                entityMap.Add(kvp.Key, Instantiate(kvp.Value).GetComponent<Interactable>());
 
-                entityMap.Add(location, Instantiate(lampPostPrefab).GetComponent<LampPost>());
-
-                OverlayTile tile = MapController.Instance.map[location];
+                OverlayTile tile = MapController.Instance.map[kvp.Key];
 
                 tile.isBlocked = true;
                 
-                PositionOnTile(entityMap[location], tile);
+                PositionOnTile(entityMap[kvp.Key], tile);
             }
         }
     }
@@ -64,7 +64,7 @@ public class InteractablesManager : MonoBehaviour
         Vector2Int coordinates = new Vector2Int(curr.gridLocation.x, curr.gridLocation.y);
         entityMap[coordinates].ReceiveInteraction();
     }
-    
+    // Should I move this somewhere else
     private void PositionOnTile(Interactable interactable, OverlayTile tile)
     {
         interactable.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
