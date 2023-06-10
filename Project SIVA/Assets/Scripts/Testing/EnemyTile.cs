@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public enum EnemyClasses { SOLDIER, MECHANIC, DRONE, GENERATOR }
+//public enum EnemyClasses { SOLDIER, MECHANIC, DRONE, GENERATOR }
 public class EnemyTile : Tile
 {
     public GameObject enemy_prefab;
