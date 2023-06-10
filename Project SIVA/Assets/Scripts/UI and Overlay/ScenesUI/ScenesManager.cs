@@ -16,7 +16,8 @@ public class ScenesManager : MonoBehaviour
     // All new scenes must be added into this enum
     public enum Scene{
         MainMenu,
-        Level01
+        Level01,
+        Clone_Level02_Abstraction_TEST
     }
 
     // This method loads a scene specified in the parameter by name
@@ -26,7 +27,7 @@ public class ScenesManager : MonoBehaviour
 
     // This method loads a new game meaning the level01 scene
     public void LoadNewGame(){
-        StartCoroutine(LoadLevel(Scene.Level01.ToString()));
+        StartCoroutine(LoadLevel(Scene.Clone_Level02_Abstraction_TEST.ToString()));
     }
 
     // This method loads the next scene based on the build index
@@ -37,11 +38,11 @@ public class ScenesManager : MonoBehaviour
 
     // This method loads the main menu scene 
     public void LoadMainMenu(){
-        SceneManager.LoadScene(Scene.MainMenu.ToString());
-        //StartCoroutine(LoadLevel(Scene.MainMenu.ToString()));
+        //SceneManager.LoadScene(Scene.MainMenu.ToString());
+        StartCoroutine(LoadLevel(Scene.MainMenu.ToString()));
     }
 
-    IEnumerator LoadLevel(string levelIndex){
+    IEnumerator LoadLevel(string levelName){
         // Play animation
         transition.SetTrigger("Start");
 
@@ -49,6 +50,6 @@ public class ScenesManager : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
 
         // Load Scene
-        SceneManager.LoadScene(levelIndex);
+        SceneManager.LoadScene(levelName);
     }
 }
