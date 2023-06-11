@@ -45,7 +45,7 @@ public class Soldier : Enemy
         {
             player = EnemyManager.Instance.playerController.character;
         }
-        Debug.Log("Soldier HP RATIO: " + hpRatio);
+        //Debug.Log("Soldier HP RATIO: " + hpRatio);
         if (hitpoints <= 0)
         {
             TriggerDeath();

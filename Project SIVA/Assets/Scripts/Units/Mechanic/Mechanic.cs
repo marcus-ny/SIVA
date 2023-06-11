@@ -85,7 +85,7 @@ public class Mechanic : Enemy
 		}
 		else
 		{
-			DamageManager.Instance.DealDamageToEnemy(-10, allyLowHp);
+			DamageManager.Instance.HealEnemy(10, allyLowHp);
 		}
         animationController.status = MechanicAnimationController.Status.HEALING;
         yield return new WaitForSeconds(0.8f);

@@ -52,7 +52,14 @@ public class DamageManager : MonoBehaviour
     {
         target.TakeDamage(damage);
         // EnemyManager.Instance.enemyHpStatus.Enqueue(target, target.hitpoints);
-        target.SwitchColor();
+        target.SwitchColor("Red");
+
+    }
+
+    public void HealEnemy(float healAmount, Enemy target)
+    {
+        target.TakeDamage(-1 * healAmount);
+        target.SwitchColor("Green");
 
     }
 
