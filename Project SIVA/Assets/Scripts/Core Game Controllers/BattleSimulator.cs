@@ -147,6 +147,19 @@ public class BattleSimulator : MonoBehaviour
             actionsPerformed += 1;
         }
     }
+    IEnumerator WaitForPlayerAttackInput()
+    {
+        while (!Input.GetMouseButtonDown(0))
+        {
+            // Show attack range tiles
+            player.GetMeleeRange();
+            yield return null;
+        }
+        if (player.AttackTrigger())
+        {
+            actionsPerformed += 1;
+        }
+    }
     public void DealDamage()
     {
         if (actionsPerformed == MAX_ACTIONS)
@@ -156,7 +169,7 @@ public class BattleSimulator : MonoBehaviour
 
         if (State == BattleState.PLAYER_TURN)
         {
-            if(player.AttackTrigger()) actionsPerformed += 1;
+            StartCoroutine(WaitForPlayerAttackInput());
         }
     }
 }

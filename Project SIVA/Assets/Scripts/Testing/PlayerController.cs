@@ -132,10 +132,16 @@ public class PlayerController : MonoBehaviour
 
     public bool AttackTrigger()
     {
+        List<OverlayTile> meleeRange = MapController.Instance.Get3x3Grid(character.activeTile);
+
+        foreach (OverlayTile tile in meleeRange)
+        {
+            tile.HideTile();
+        }
         bool inRange = (character.activeTile.gridLocation.x - destinationTile.gridLocation.x < 2) && (character.activeTile.gridLocation.y - destinationTile.gridLocation.y < 2);
         if (destinationTile.enemy != null && inRange)
         {
-            DamageManager.Instance.DealDamageToEnemy(50, destinationTile.enemy);
+            DamageManager.Instance.DealDamageToEnemy(80, destinationTile.enemy);
             return true;
         }
         else if (destinationTile.enemy == null)
@@ -149,7 +155,15 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    
+    public void GetMeleeRange()
+    {
+        List<OverlayTile> meleeRange = MapController.Instance.Get3x3Grid(character.activeTile);
+
+        foreach (OverlayTile tile in meleeRange)
+        {
+            tile.ShowGreenTile();
+        }
+    }
 
     public bool MoveTrigger()
     {

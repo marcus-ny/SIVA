@@ -11,12 +11,20 @@ public class SoldierRetreatState : SoldierBaseState
     }
     public override void UpdateState(Soldier soldier)
     {
-        soldier.RetreatMove();
-
-        if (soldier.hitpoints >= 50)
+        if (EnemyManager.Instance.FindMechanicLocations().Count > 0)
+        {
+            soldier.RetreatMove();
+            if (soldier.hitpoints >= 50)
+            {
+                soldier.SwitchState(soldier.soldierAggroState);
+            }
+        } else
         {
             soldier.SwitchState(soldier.soldierAggroState);
         }
+
+
+        
         
     }
 }

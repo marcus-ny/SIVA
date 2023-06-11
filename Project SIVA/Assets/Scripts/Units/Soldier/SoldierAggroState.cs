@@ -6,7 +6,7 @@ public class SoldierAggroState : SoldierBaseState
 {
     public override void EnterState(Soldier soldier)
     {
-        
+        Debug.Log("Soldier enters aggro state");
     }
     public override void UpdateState(Soldier soldier)
     {
