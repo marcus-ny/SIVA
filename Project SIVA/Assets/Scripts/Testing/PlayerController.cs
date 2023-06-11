@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     public List<OverlayTile> path;
     public List<OverlayTile> reachableTiles;
+
     PathFinder pathFinder;
     Rangefinder rangeFinder;
 
@@ -72,21 +73,7 @@ public class PlayerController : MonoBehaviour
                         destinationTile = overlayTile;
                     }
                 }
-            }
-
-            /*
-            if (path.Count > 0)
-            {
-                MoveAlongPath();
-            }
-            else if (path.Count == 0 && character != null)
-            {
-                character.cur = character.activeTile.gridLocation;
-                character.prev = character.activeTile.gridLocation;
-
-
-                GetMovementRange();
-            }*/
+            }        
         }
     }
 
@@ -135,7 +122,7 @@ public class PlayerController : MonoBehaviour
         bool inRange = (character.activeTile.gridLocation.x - destinationTile.gridLocation.x < 2) && (character.activeTile.gridLocation.y - destinationTile.gridLocation.y < 2);
         if (destinationTile.enemy != null && inRange)
         {
-            DamageManager.Instance.DealDamageToEnemy(80, destinationTile.enemy);
+            DamageManager.Instance.DealDamageToEnemy(50, destinationTile.enemy);
             return true;
         }
         else if (destinationTile.enemy == null)
@@ -149,26 +136,7 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    /*
-    IEnumerator WaitForMovementInput()
-    {
-        while(!Input.GetMouseButtonDown(0))
-        {
-            foreach (var tile in reachableTiles)
-            {
-                tile.ShowGreenTile();
-            }
-            yield return null;
-        }
-        foreach (var tile in reachableTiles)
-        {
-            tile.HideTile();
-        }
-
-        path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles);
-        Coroutine movingCoroutine = StartCoroutine(MoveAlongPath());
-
-    }*/
+    
 
     public bool MoveTrigger()
     {

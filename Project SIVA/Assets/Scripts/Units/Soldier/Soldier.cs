@@ -27,13 +27,14 @@ public class Soldier : Enemy
         path = new();
         rangeFinder = new Rangefinder();
         range = new();
-        hitpoints = 100;
+        
 
         // There should be a more intelligent way to set this variable
         maxAP = 4;
+        maxHp = 100;
 
         actionsPerformed = 0;
-        currentState = soldierAggroState;
+        currentState = soldierIdleState;
         currentState.EnterState(this);
         animationController = gameObject.GetComponent<SoldierAnimationController>();
     }
@@ -45,9 +46,10 @@ public class Soldier : Enemy
             player = EnemyManager.Instance.playerController.character;
         }
 
-        //gameObject.GetComponent<SpriteRenderer>().sortingOrder =
-            //EnemyManager.Instance.playerController.GetComponent<SpriteRenderer>().sortingOrder;
-
+        if (hitpoints <= 0)
+        {
+            TriggerDeath();
+        }
         range = rangeFinder.GetReachableTiles(activeTile, 3);
     }
    
@@ -286,4 +288,6 @@ public class Soldier : Enemy
 
         return result;
     }
+
+    
 }

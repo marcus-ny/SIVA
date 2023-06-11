@@ -42,7 +42,7 @@ public class BattleSimulator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        State = BattleState.START;
+        State = BattleState.PLAYER_TURN;
         actionsPerformed = 0;
     }
 

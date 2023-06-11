@@ -12,5 +12,11 @@ public class SoldierRetreatState : SoldierBaseState
     public override void UpdateState(Soldier soldier)
     {
         soldier.RetreatMove();
+
+        if (soldier.hitpoints >= 50)
+        {
+            soldier.SwitchState(soldier.soldierAggroState);
+        }
+        
     }
 }

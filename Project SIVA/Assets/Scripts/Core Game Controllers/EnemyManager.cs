@@ -45,6 +45,8 @@ public class EnemyManager : MonoBehaviour
     private void Update()
     {
         // Keeping count of which enemies have died
+        
+        /*
         foreach (KeyValuePair<Vector2Int, Enemy> kvp in enemyMap)
         {
             int defeated = 0;
@@ -59,7 +61,7 @@ public class EnemyManager : MonoBehaviour
             {
                 BattleSimulator.Instance.State = BattleState.END;
             }
-        }
+        }*/
 
         // Enemy spawning (only carried out once)
         if (!spawnComplete && enemySpawns.Count != enemyMap.Count)
@@ -84,7 +86,12 @@ public class EnemyManager : MonoBehaviour
             spawnComplete = true;
         }
 
-        
+        if (enemyMap.Count == 0)
+        {
+            BattleSimulator.Instance.State = BattleState.END;
+        }
+
+
     }
 
     // Might use a PQ for this but need a PQ that supports modifying elements and priority

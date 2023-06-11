@@ -19,7 +19,9 @@ public abstract class Enemy : MonoBehaviour
     public Vector3Int cur;
     public Vector3Int prev;
 
+    public float maxHp;
     public float hitpoints;
+    public float hpRatio { get { return hitpoints / maxHp; } }
 
     public int maxAP;
     public int actionsPerformed;
@@ -112,5 +114,13 @@ public abstract class Enemy : MonoBehaviour
     }
 
     //public abstract List<OverlayTile> FindNearestMechanicLocation();
+
+    public void TriggerDeath()
+    {
+        EnemyManager.Instance.enemyMap.Remove(new
+            Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
+        Destroy(gameObject);
+        //Debug.Log(EnemyManager.Instance.enemyMap.Count);
+    }
     
 }

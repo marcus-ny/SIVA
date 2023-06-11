@@ -6,9 +6,9 @@ public class Mechanic : Enemy
 {
 	MechanicBaseState currentState;
 
-	MechanicIdleState mechanicIdleState = new();
-	MechanicHealState mechanicHealState = new();
-	MechanicDeadState mechanicDeadState = new();
+	public MechanicIdleState mechanicIdleState = new();
+	public MechanicHealState mechanicHealState = new();
+	public MechanicDeadState mechanicDeadState = new();
 
 	public Enemy allyLowHp;
 
@@ -24,13 +24,14 @@ public class Mechanic : Enemy
 		path = new();
 		rangeFinder = new Rangefinder();
 		range = new();
-		hitpoints = 100;
+		
 
 		// There should be a more intelligent way to set this variable
 		maxAP = 4;
+		maxHp = 75;
 
 		actionsPerformed = 0;
-		currentState = mechanicHealState;
+		currentState = mechanicIdleState;
 		currentState.EnterState(this);
 		animationController = gameObject.GetComponent<MechanicAnimationController>();
 	}
@@ -42,8 +43,10 @@ public class Mechanic : Enemy
 			player = EnemyManager.Instance.playerController.character;
 		}
 
-		//gameObject.GetComponent<SpriteRenderer>().sortingOrder =
-			//EnemyManager.Instance.playerController.GetComponent<SpriteRenderer>().sortingOrder;
+		if (hitpoints <= 0)
+		{
+			TriggerDeath();
+		}
 
 		range = rangeFinder.GetReachableTiles(activeTile, 3);
 	}
