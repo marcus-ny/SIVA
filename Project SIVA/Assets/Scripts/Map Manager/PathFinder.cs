@@ -9,7 +9,7 @@ using UnityEngine;
  */
 public class PathFinder
 {
-    public List<OverlayTile> FindPath(OverlayTile start, OverlayTile end, List<OverlayTile> validTilePool)
+    public List<OverlayTile> FindPath(OverlayTile start, OverlayTile end, List<OverlayTile> validTilePool, int jumpHeight)
     {
         List<OverlayTile> openList = new();
         List<OverlayTile> closedList = new();
@@ -30,7 +30,7 @@ public class PathFinder
             }
 
             // Get neighbor tiles
-            var neighborTiles = MapController.Instance.GetNeighborTiles(curr, validTilePool);
+            var neighborTiles = MapController.Instance.GetNeighborTiles(curr, validTilePool, jumpHeight);
 
             foreach (var neighbor in neighborTiles)
             {

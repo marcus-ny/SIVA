@@ -14,10 +14,10 @@ public class EnemyHealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetComponentInParent<Soldier>() != null)
+        if (GetComponentInParent<Enemy>() != null)
         {
             
-            barSize.x = GetComponentInParent<Soldier>().hitpoints / 200;
+            barSize.x = GetComponentInParent<Enemy>().hpRatio / 2;
             transform.localScale = barSize;
         }
     }

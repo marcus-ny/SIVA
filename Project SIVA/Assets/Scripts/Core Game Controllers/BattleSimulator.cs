@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum BattleState { START, PLAYER_TURN, ENEMY_TURN, TRANSITION, END }
+public enum BattleState { START, PLAYER_TURN, ENEMY_TURN, TRANSITION, PLAYER_WIN, ENEMY_WIN }
 public class BattleSimulator : MonoBehaviour
 {
     private static BattleSimulator _instance;
@@ -42,7 +42,7 @@ public class BattleSimulator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        State = BattleState.START;
+        State = BattleState.PLAYER_TURN;
         actionsPerformed = 0;
     }
 
@@ -147,6 +147,19 @@ public class BattleSimulator : MonoBehaviour
             actionsPerformed += 1;
         }
     }
+    IEnumerator WaitForPlayerAttackInput()
+    {
+        while (!Input.GetMouseButtonDown(0))
+        {
+            // Show attack range tiles
+            player.GetMeleeRange();
+            yield return null;
+        }
+        if (player.AttackTrigger())
+        {
+            actionsPerformed += 1;
+        }
+    }
     public void DealDamage()
     {
         if (actionsPerformed == MAX_ACTIONS)
@@ -156,7 +169,7 @@ public class BattleSimulator : MonoBehaviour
 
         if (State == BattleState.PLAYER_TURN)
         {
-            if(player.AttackTrigger()) actionsPerformed += 1;
+            StartCoroutine(WaitForPlayerAttackInput());
         }
     }
 }

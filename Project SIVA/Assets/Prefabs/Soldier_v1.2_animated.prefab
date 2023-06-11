@@ -105,10 +105,12 @@ MonoBehaviour:
   player: {fileID: 0}
   cur: {x: 0, y: 0, z: 0}
   prev: {x: 0, y: 0, z: 0}
+  maxHp: 0
   hitpoints: 0
   maxAP: 0
   actionsPerformed: 0
   state_moving: 0
+  animationController: {fileID: 0}
 --- !u!95 &2986955544692372705
 Animator:
   serializedVersion: 5
@@ -142,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869b01701eb39469991fa9c1b51a3d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackStatus: 0
 --- !u!1 &6776386749711425424
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,8 +171,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6776386749711425424}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.010783103, y: 0.47230282, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.04985492, z: 1}
+  m_LocalPosition: {x: 0.010783103, y: 0.4558, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.04, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5840508067374876138}

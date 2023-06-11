@@ -22,10 +22,11 @@ public class Generator : Enemy
         path = new();
         rangeFinder = new Rangefinder();
         range = new();
-        hitpoints = 100;
+        
 
         // There should be a more intelligent way to set this variable
         maxAP = 4;
+        maxHp = 75;
 
         actionsPerformed = 0;
         currentState = generatorHiddenState;
@@ -40,12 +41,14 @@ public class Generator : Enemy
             player = EnemyManager.Instance.playerController.character;
         }
 
-        //gameObject.GetComponent<SpriteRenderer>().sortingOrder =
-        //EnemyManager.Instance.playerController.GetComponent<SpriteRenderer>().sortingOrder;
+        if (hitpoints <= 0)
+        {
+            TriggerDeath();
+        }
 
         // This part needs to be looked at later
         
-        range = rangeFinder.GetReachableTiles(activeTile, 4);
+        range = rangeFinder.GetReachableTiles(activeTile, 4, 1);
         
     }
 

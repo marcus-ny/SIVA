@@ -19,7 +19,9 @@ public abstract class Enemy : MonoBehaviour
     public Vector3Int cur;
     public Vector3Int prev;
 
+    public float maxHp;
     public float hitpoints;
+    public float hpRatio { get { return (hitpoints / maxHp); } }
 
     public int maxAP;
     public int actionsPerformed;
@@ -85,7 +87,7 @@ public abstract class Enemy : MonoBehaviour
 
     }
 
-    public void PositionEnemyOnTile(OverlayTile tile)
+    public virtual void PositionEnemyOnTile(OverlayTile tile)
     {
         transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y,
             tile.transform.position.z);
@@ -105,12 +107,27 @@ public abstract class Enemy : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
     }
 
-    public void SwitchColor()
+    public void SwitchColor(string _color)
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 1);
-        StartCoroutine("Delay");
+        if (_color == "Red")
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 1);
+            StartCoroutine("Delay");
+        } else if (_color == "Green")
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 1);
+            StartCoroutine("Delay");
+        }
     }
 
     //public abstract List<OverlayTile> FindNearestMechanicLocation();
+
+    public void TriggerDeath()
+    {
+        EnemyManager.Instance.enemyMap.Remove(new
+            Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
+        Destroy(gameObject);
+        //Debug.Log(EnemyManager.Instance.enemyMap.Count);
+    }
     
 }

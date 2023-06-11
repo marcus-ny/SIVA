@@ -34,4 +34,4 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  enemy_prefab: {fileID: 4964449282635773387, guid: 3380fec99c5684496a937941ef3fa774, type: 3}
+  enemy_prefab: {fileID: 5295349268931446118, guid: 1dcd9b52ea27644c5be65468912ddad9, type: 3}

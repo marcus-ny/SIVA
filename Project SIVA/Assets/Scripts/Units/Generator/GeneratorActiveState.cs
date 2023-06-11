@@ -10,6 +10,9 @@ public class GeneratorActiveState : GeneratorBaseState
         // Emit light around
         generator.GetComponent<GeneratorAnimationController>().StartActive();
         generator.EmitLight(true);
+
+        GameObject hpBar = generator.GetComponent<Transform>().GetChild(0).gameObject;
+        hpBar.SetActive(true);
     }
 
     public override void UpdateState(Generator generator)

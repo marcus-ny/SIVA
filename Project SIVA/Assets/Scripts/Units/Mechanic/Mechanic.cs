@@ -6,9 +6,9 @@ public class Mechanic : Enemy
 {
 	MechanicBaseState currentState;
 
-	MechanicIdleState mechanicIdleState = new();
-	MechanicHealState mechanicHealState = new();
-	MechanicDeadState mechanicDeadState = new();
+	public MechanicIdleState mechanicIdleState = new();
+	public MechanicHealState mechanicHealState = new();
+	public MechanicDeadState mechanicDeadState = new();
 
 	public Enemy allyLowHp;
 
@@ -24,13 +24,14 @@ public class Mechanic : Enemy
 		path = new();
 		rangeFinder = new Rangefinder();
 		range = new();
-		hitpoints = 100;
+		
 
 		// There should be a more intelligent way to set this variable
 		maxAP = 4;
+		maxHp = 75;
 
 		actionsPerformed = 0;
-		currentState = mechanicHealState;
+		currentState = mechanicIdleState;
 		currentState.EnterState(this);
 		animationController = gameObject.GetComponent<MechanicAnimationController>();
 	}
@@ -42,10 +43,12 @@ public class Mechanic : Enemy
 			player = EnemyManager.Instance.playerController.character;
 		}
 
-		//gameObject.GetComponent<SpriteRenderer>().sortingOrder =
-			//EnemyManager.Instance.playerController.GetComponent<SpriteRenderer>().sortingOrder;
+		if (hitpoints <= 0)
+		{
+			TriggerDeath();
+		}
 
-		range = rangeFinder.GetReachableTiles(activeTile, 3);
+		range = rangeFinder.GetReachableTiles(activeTile, 3, 1);
 	}
 
 	public override void Action()
@@ -82,7 +85,7 @@ public class Mechanic : Enemy
 		}
 		else
 		{
-			DamageManager.Instance.DealDamageToEnemy(-10, allyLowHp);
+			DamageManager.Instance.HealEnemy(10, allyLowHp);
 		}
         animationController.status = MechanicAnimationController.Status.HEALING;
         yield return new WaitForSeconds(0.8f);
@@ -112,7 +115,7 @@ public class Mechanic : Enemy
 				break;
 			}
 
-			path = pathFinder.FindPath(activeTile, tile, range);
+			path = pathFinder.FindPath(activeTile, tile, range, 1);
 
 			if (path.Count > 0)
 			{

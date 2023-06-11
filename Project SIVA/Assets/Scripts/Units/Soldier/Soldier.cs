@@ -27,13 +27,14 @@ public class Soldier : Enemy
         path = new();
         rangeFinder = new Rangefinder();
         range = new();
-        hitpoints = 100;
+        
 
         // There should be a more intelligent way to set this variable
         maxAP = 4;
+        maxHp = 100;
 
         actionsPerformed = 0;
-        currentState = soldierAggroState;
+        currentState = soldierIdleState;
         currentState.EnterState(this);
         animationController = gameObject.GetComponent<SoldierAnimationController>();
     }
@@ -44,11 +45,12 @@ public class Soldier : Enemy
         {
             player = EnemyManager.Instance.playerController.character;
         }
-
-        //gameObject.GetComponent<SpriteRenderer>().sortingOrder =
-            //EnemyManager.Instance.playerController.GetComponent<SpriteRenderer>().sortingOrder;
-
-        range = rangeFinder.GetReachableTiles(activeTile, 3);
+        //Debug.Log("Soldier HP RATIO: " + hpRatio);
+        if (hitpoints <= 0)
+        {
+            TriggerDeath();
+        }
+        range = rangeFinder.GetReachableTiles(activeTile, 3, 1);
     }
    
     public override void Action()
@@ -137,7 +139,7 @@ public class Soldier : Enemy
                 break;
             }
                    
-            path = pathFinder.FindPath(activeTile, tile, range);
+            path = pathFinder.FindPath(activeTile, tile, range, 1);
 
             if (path.Count > 0)
             {
@@ -171,7 +173,7 @@ public class Soldier : Enemy
         {
             
 
-            path = pathFinder.FindPath(activeTile, tile, range);
+            path = pathFinder.FindPath(activeTile, tile, range, 1);
 
             if (path.Count > 0)
             {
@@ -193,7 +195,6 @@ public class Soldier : Enemy
     {
 
         List<OverlayTile> toFind = FindNearestMechanicLocation();              
-        // Find the nearest tile among all the plus shaped tiles
         
         
         
@@ -213,7 +214,7 @@ public class Soldier : Enemy
                 break;
             }
 
-            path = pathFinder.FindPath(activeTile, tile, range);
+            path = pathFinder.FindPath(activeTile, tile, range, 1);
 
             if (path.Count > 0)
             {
@@ -286,4 +287,6 @@ public class Soldier : Enemy
 
         return result;
     }
+
+    
 }

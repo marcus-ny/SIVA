@@ -44,22 +44,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        // Keeping count of which enemies have died
-        foreach (KeyValuePair<Vector2Int, Enemy> kvp in enemyMap)
-        {
-            int defeated = 0;
-            if(kvp.Value != null && kvp.Value.hitpoints <= 0)
-            {
-                Destroy(transform.GetChild(0).gameObject);
-                defeated++;
-                kvp.Value.activeTile.enemy = null;
-            }
-
-            if (defeated == enemyMap.Count)
-            {
-                BattleSimulator.Instance.State = BattleState.END;
-            }
-        }
+        
 
         // Enemy spawning (only carried out once)
         if (!spawnComplete && enemySpawns.Count != enemyMap.Count)
@@ -73,9 +58,7 @@ public class EnemyManager : MonoBehaviour
 
                 Enemy curr = enemyMap[spawn.Key];
 
-                curr.PositionEnemyOnTile(tile);
-
-                
+                curr.PositionEnemyOnTile(tile);               
             }
 
             // This boolean is used to make sure that enemies do not spawn again after
@@ -84,10 +67,16 @@ public class EnemyManager : MonoBehaviour
             spawnComplete = true;
         }
 
-        
+        if (enemyMap.Count == 0)
+        {
+            BattleSimulator.Instance.State = BattleState.PLAYER_WIN;
+        }
+
+
     }
 
     // Might use a PQ for this but need a PQ that supports modifying elements and priority
+    // Returns the ally with the lowest hp ratio
     public Enemy GetLowestHpAlly()
     {
         Enemy lowest = null; ;
@@ -97,7 +86,7 @@ public class EnemyManager : MonoBehaviour
                 lowest = enemy.Value;
             } else
             {
-                lowest = enemy.Value.hitpoints < lowest.hitpoints ? enemy.Value : lowest;
+                lowest = enemy.Value.hpRatio < lowest.hpRatio ? enemy.Value : lowest;
             }
         }
 

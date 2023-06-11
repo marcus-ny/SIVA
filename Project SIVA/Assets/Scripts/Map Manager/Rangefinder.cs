@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class Rangefinder
 {
-   public List<OverlayTile> GetReachableTiles(OverlayTile cur, int range)
+   public List<OverlayTile> GetReachableTiles(OverlayTile cur, int range, int jumpHeight)
     {
         int steps = 0;
 
@@ -23,7 +23,7 @@ public class Rangefinder
 
             foreach (var tile in previous)
             {
-                neighbors.AddRange(MapController.Instance.GetNeighborTiles(tile, new List<OverlayTile>()));
+                neighbors.AddRange(MapController.Instance.GetNeighborTiles(tile, new List<OverlayTile>(), jumpHeight));
             }
 
             reachableTiles.AddRange(neighbors);

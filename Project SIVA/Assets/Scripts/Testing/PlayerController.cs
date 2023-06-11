@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     public List<OverlayTile> path;
     public List<OverlayTile> reachableTiles;
+
     PathFinder pathFinder;
     Rangefinder rangeFinder;
 
@@ -48,6 +49,18 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (character != null && character.hitpoints <= 0)
+        {
+            BattleSimulator.Instance.State = BattleState.ENEMY_WIN;
+        }
+        if (character == null)
+        {
+            character = Instantiate(character_prefab).GetComponent<CharacterInfo>();
+            // Place the enemy on spawn
+            PositionCharacterOnTile(MapController.Instance.map[playerSpawn]);
+            destinationTile = character.activeTile;
+            reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3, 1);
+        }
         if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN) {
             var tileHit = MouseController.Instance.GetFocusedOnTile();
             OverlayTile overlayTile;
@@ -58,6 +71,7 @@ public class PlayerController : MonoBehaviour
                 
                 if (Input.GetMouseButtonDown(0))
                 {
+                    /*
                     if (character == null)
                     {
                         character = Instantiate(character_prefab).GetComponent<CharacterInfo>();
@@ -68,25 +82,11 @@ public class PlayerController : MonoBehaviour
                         //GetMovementRange();
                     }
                     else
-                    {
+                    {*/
                         destinationTile = overlayTile;
-                    }
+                    
                 }
-            }
-
-            /*
-            if (path.Count > 0)
-            {
-                MoveAlongPath();
-            }
-            else if (path.Count == 0 && character != null)
-            {
-                character.cur = character.activeTile.gridLocation;
-                character.prev = character.activeTile.gridLocation;
-
-
-                GetMovementRange();
-            }*/
+            }        
         }
     }
 
@@ -132,6 +132,12 @@ public class PlayerController : MonoBehaviour
 
     public bool AttackTrigger()
     {
+        List<OverlayTile> meleeRange = MapController.Instance.Get3x3Grid(character.activeTile);
+
+        foreach (OverlayTile tile in meleeRange)
+        {
+            tile.HideTile();
+        }
         bool inRange = (character.activeTile.gridLocation.x - destinationTile.gridLocation.x < 2) && (character.activeTile.gridLocation.y - destinationTile.gridLocation.y < 2);
         if (destinationTile.enemy != null && inRange)
         {
@@ -149,26 +155,15 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    /*
-    IEnumerator WaitForMovementInput()
+    public void GetMeleeRange()
     {
-        while(!Input.GetMouseButtonDown(0))
-        {
-            foreach (var tile in reachableTiles)
-            {
-                tile.ShowGreenTile();
-            }
-            yield return null;
-        }
-        foreach (var tile in reachableTiles)
-        {
-            tile.HideTile();
-        }
+        List<OverlayTile> meleeRange = MapController.Instance.Get3x3Grid(character.activeTile);
 
-        path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles);
-        Coroutine movingCoroutine = StartCoroutine(MoveAlongPath());
-
-    }*/
+        foreach (OverlayTile tile in meleeRange)
+        {
+            tile.ShowGreenTile();
+        }
+    }
 
     public bool MoveTrigger()
     {
@@ -178,7 +173,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);
-        path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles);
+        path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles, 1);
 
         if (path.Count == 0) return false;
 
@@ -217,7 +212,7 @@ public class PlayerController : MonoBehaviour
             tile.HideTile();
         }*/
         
-        reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);
+        reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3, 1);
 
         foreach (var tile in reachableTiles)
         {

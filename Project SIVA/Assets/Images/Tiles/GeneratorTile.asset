@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f81dc2f6bc3418696acd3bba5e718b, type: 3}
   m_Name: GeneratorTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -1936825844, guid: 02ae086c52caedc4d8f2099cfe31ef55, type: 3}
+  m_Sprite: {fileID: 1151610478, guid: ffa551cf08d01a645a62dea0dc1b1309, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

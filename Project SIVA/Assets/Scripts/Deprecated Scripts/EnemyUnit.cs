@@ -35,7 +35,7 @@ public class EnemyUnit : MonoBehaviour
         if (enemyInfo != null && enemyInfo.hitpoints <= 0)
         {
             Destroy(transform.GetChild(0).gameObject);
-            BattleSimulator.Instance.State = BattleState.END;
+            //BattleSimulator.Instance.State = BattleState.END;
         }
         if (BattleSimulator.Instance.State == BattleState.ENEMY_TURN)
         {
