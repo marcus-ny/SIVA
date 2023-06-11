@@ -45,7 +45,7 @@ public class Soldier : Enemy
         {
             player = EnemyManager.Instance.playerController.character;
         }
-
+        Debug.Log("Soldier HP RATIO: " + hpRatio);
         if (hitpoints <= 0)
         {
             TriggerDeath();
@@ -195,7 +195,6 @@ public class Soldier : Enemy
     {
 
         List<OverlayTile> toFind = FindNearestMechanicLocation();              
-        // Find the nearest tile among all the plus shaped tiles
         
         
         

@@ -42,7 +42,7 @@ public class Drone : Enemy
         {
             player = EnemyManager.Instance.playerController.character;
         }
-
+        Debug.Log("Drone HP RATIO: " + hpRatio);
         if (hitpoints <= 0)
         {
             TriggerDeath();

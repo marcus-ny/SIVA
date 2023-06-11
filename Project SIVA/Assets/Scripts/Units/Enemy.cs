@@ -21,7 +21,7 @@ public abstract class Enemy : MonoBehaviour
 
     public float maxHp;
     public float hitpoints;
-    public float hpRatio { get { return hitpoints / maxHp; } }
+    public float hpRatio { get { return (hitpoints / maxHp); } }
 
     public int maxAP;
     public int actionsPerformed;
