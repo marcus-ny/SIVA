@@ -48,7 +48,7 @@ public class Mechanic : Enemy
 			TriggerDeath();
 		}
 
-		range = rangeFinder.GetReachableTiles(activeTile, 3);
+		range = rangeFinder.GetReachableTiles(activeTile, 3, 1);
 	}
 
 	public override void Action()
@@ -115,7 +115,7 @@ public class Mechanic : Enemy
 				break;
 			}
 
-			path = pathFinder.FindPath(activeTile, tile, range);
+			path = pathFinder.FindPath(activeTile, tile, range, 1);
 
 			if (path.Count > 0)
 			{

@@ -44,24 +44,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        // Keeping count of which enemies have died
         
-        /*
-        foreach (KeyValuePair<Vector2Int, Enemy> kvp in enemyMap)
-        {
-            int defeated = 0;
-            if(kvp.Value != null && kvp.Value.hitpoints <= 0)
-            {
-                Destroy(transform.GetChild(0).gameObject);
-                defeated++;
-                kvp.Value.activeTile.enemy = null;
-            }
-
-            if (defeated == enemyMap.Count)
-            {
-                BattleSimulator.Instance.State = BattleState.END;
-            }
-        }*/
 
         // Enemy spawning (only carried out once)
         if (!spawnComplete && enemySpawns.Count != enemyMap.Count)
@@ -75,9 +58,7 @@ public class EnemyManager : MonoBehaviour
 
                 Enemy curr = enemyMap[spawn.Key];
 
-                curr.PositionEnemyOnTile(tile);
-
-                
+                curr.PositionEnemyOnTile(tile);               
             }
 
             // This boolean is used to make sure that enemies do not spawn again after

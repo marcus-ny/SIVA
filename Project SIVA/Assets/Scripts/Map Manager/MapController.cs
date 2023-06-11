@@ -73,7 +73,7 @@ public class MapController : MonoBehaviour
 
 	}
 
-    public List<OverlayTile> GetNeighborTiles(OverlayTile curr, List<OverlayTile> validTiles)
+    public List<OverlayTile> GetNeighborTiles(OverlayTile curr, List<OverlayTile> validTiles, int jumpHeight)
 	{
 		
 		
@@ -100,7 +100,7 @@ public class MapController : MonoBehaviour
 			Vector2Int locationToCheck = new(curr.gridLocation.x + directions[i, 0],
             curr.gridLocation.y + directions[i, 1]);
 
-			if (searchRange.ContainsKey(locationToCheck) && Mathf.Abs(curr.gridLocation.z - searchRange[locationToCheck].gridLocation.z) <= 1)
+			if (searchRange.ContainsKey(locationToCheck) && Mathf.Abs(curr.gridLocation.z - searchRange[locationToCheck].gridLocation.z) <= jumpHeight)
 			{
 				neighbors.Add(searchRange[locationToCheck]);
 			}

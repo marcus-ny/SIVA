@@ -50,7 +50,7 @@ public class Soldier : Enemy
         {
             TriggerDeath();
         }
-        range = rangeFinder.GetReachableTiles(activeTile, 3);
+        range = rangeFinder.GetReachableTiles(activeTile, 3, 1);
     }
    
     public override void Action()
@@ -139,7 +139,7 @@ public class Soldier : Enemy
                 break;
             }
                    
-            path = pathFinder.FindPath(activeTile, tile, range);
+            path = pathFinder.FindPath(activeTile, tile, range, 1);
 
             if (path.Count > 0)
             {
@@ -173,7 +173,7 @@ public class Soldier : Enemy
         {
             
 
-            path = pathFinder.FindPath(activeTile, tile, range);
+            path = pathFinder.FindPath(activeTile, tile, range, 1);
 
             if (path.Count > 0)
             {
@@ -215,7 +215,7 @@ public class Soldier : Enemy
                 break;
             }
 
-            path = pathFinder.FindPath(activeTile, tile, range);
+            path = pathFinder.FindPath(activeTile, tile, range, 1);
 
             if (path.Count > 0)
             {

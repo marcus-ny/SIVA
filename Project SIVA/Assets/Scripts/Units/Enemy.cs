@@ -87,7 +87,7 @@ public abstract class Enemy : MonoBehaviour
 
     }
 
-    public void PositionEnemyOnTile(OverlayTile tile)
+    public virtual void PositionEnemyOnTile(OverlayTile tile)
     {
         transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y,
             tile.transform.position.z);

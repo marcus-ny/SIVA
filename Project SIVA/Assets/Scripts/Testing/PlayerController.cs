@@ -53,6 +53,14 @@ public class PlayerController : MonoBehaviour
         {
             BattleSimulator.Instance.State = BattleState.ENEMY_WIN;
         }
+        if (character == null)
+        {
+            character = Instantiate(character_prefab).GetComponent<CharacterInfo>();
+            // Place the enemy on spawn
+            PositionCharacterOnTile(MapController.Instance.map[playerSpawn]);
+            destinationTile = character.activeTile;
+            reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3, 1);
+        }
         if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN) {
             var tileHit = MouseController.Instance.GetFocusedOnTile();
             OverlayTile overlayTile;
@@ -63,6 +71,7 @@ public class PlayerController : MonoBehaviour
                 
                 if (Input.GetMouseButtonDown(0))
                 {
+                    /*
                     if (character == null)
                     {
                         character = Instantiate(character_prefab).GetComponent<CharacterInfo>();
@@ -73,9 +82,9 @@ public class PlayerController : MonoBehaviour
                         //GetMovementRange();
                     }
                     else
-                    {
+                    {*/
                         destinationTile = overlayTile;
-                    }
+                    
                 }
             }        
         }
@@ -150,7 +159,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);
-        path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles);
+        path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles, 1);
 
         if (path.Count == 0) return false;
 
@@ -189,7 +198,7 @@ public class PlayerController : MonoBehaviour
             tile.HideTile();
         }*/
         
-        reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);
+        reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3, 1);
 
         foreach (var tile in reachableTiles)
         {

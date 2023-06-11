@@ -48,7 +48,7 @@ public class Generator : Enemy
 
         // This part needs to be looked at later
         
-        range = rangeFinder.GetReachableTiles(activeTile, 4);
+        range = rangeFinder.GetReachableTiles(activeTile, 4, 1);
         
     }
 
