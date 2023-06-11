@@ -49,6 +49,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (character != null && character.hitpoints <= 0)
+        {
+            BattleSimulator.Instance.State = BattleState.ENEMY_WIN;
+        }
         if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN) {
             var tileHit = MouseController.Instance.GetFocusedOnTile();
             OverlayTile overlayTile;

@@ -88,13 +88,14 @@ public class EnemyManager : MonoBehaviour
 
         if (enemyMap.Count == 0)
         {
-            BattleSimulator.Instance.State = BattleState.END;
+            BattleSimulator.Instance.State = BattleState.PLAYER_WIN;
         }
 
 
     }
 
     // Might use a PQ for this but need a PQ that supports modifying elements and priority
+    // Returns the ally with the lowest hp ratio
     public Enemy GetLowestHpAlly()
     {
         Enemy lowest = null; ;
@@ -104,7 +105,7 @@ public class EnemyManager : MonoBehaviour
                 lowest = enemy.Value;
             } else
             {
-                lowest = enemy.Value.hitpoints < lowest.hitpoints ? enemy.Value : lowest;
+                lowest = enemy.Value.hpRatio < lowest.hpRatio ? enemy.Value : lowest;
             }
         }
 
