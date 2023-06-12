@@ -10,36 +10,49 @@ public class UIActionBoxManager : MonoBehaviour
     [SerializeField] Button attackButton;
     [SerializeField] Button returnButton;
     public float transitionTime = 1f;
+    private bool isInAnimation = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        actionBox.SetActive(true);
         attackBox.SetActive(false);
-        attackButton.onClick.AddListener(AttackPhase);
-        returnButton.onClick.AddListener(ActionPhase);
     }
 
-    private void ActionPhase()
+    public void ActionPhase()
     {
+        if (isInAnimation == true)
+        {
+            return;
+        }
         StartCoroutine(ActionPhaseAnimation());
     }
 
-    private void AttackPhase()
+    public void AttackPhase()
     {
+        if (isInAnimation == true)
+        {
+            return;
+        }
         StartCoroutine(AttackPhaseAnimation());
     }
 
     IEnumerator AttackPhaseAnimation()
     {
+        isInAnimation = true;
         attackBox.SetActive(true);
         yield return new WaitForSeconds(transitionTime);
         actionBox.SetActive(false);
+        isInAnimation = false;
     }
 
     IEnumerator ActionPhaseAnimation()
     {
+        isInAnimation = true;
         actionBox.SetActive(true);
-        yield return new WaitForSeconds(transitionTime);
         attackBox.SetActive(false);
+        yield return new WaitForSeconds(transitionTime);
+        //attackBox.SetActive(false);
+        isInAnimation = false;
     }
 }

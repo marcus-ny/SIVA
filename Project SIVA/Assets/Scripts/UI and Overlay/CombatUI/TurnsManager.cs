@@ -8,17 +8,25 @@ public class TurnsManager : MonoBehaviour
     [SerializeField] Button skipCutsceneButton;
     [SerializeField] GameObject CutsceneUI;
     [SerializeField] GameObject BattleUI;
+    [SerializeField] GameObject ActionsUI;
     [SerializeField] GameObject BattleTurnsUI;
+    //TOBECHANGED
+    [SerializeField] LevelAudioManager AudioManager;
     public float bigBannerAnimationTime = 1f;
     public float turnAnimationTime = 1f;
+
+    
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        // Add listener to skip cutscene button
         skipCutsceneButton.onClick.AddListener(EndCutscene);
 
         // Make the correct UI is active
         BattleUI.SetActive(false);
+        ActionsUI.SetActive(false);
         BattleTurnsUI.SetActive(false);
         CutsceneUI.SetActive(true);
 
@@ -27,6 +35,7 @@ public class TurnsManager : MonoBehaviour
         BattleTurnsUI.transform.Find("EnemyTurn").gameObject.SetActive(false);
         BattleTurnsUI.transform.Find("PlayerWin").gameObject.SetActive(false);
         BattleTurnsUI.transform.Find("PlayerLose").gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -48,6 +57,9 @@ public class TurnsManager : MonoBehaviour
     {
         //Finish the cutscene
 
+        //Game BGM on
+        AudioManager.StartGame();
+
         //Disable CutsceneUI and enable BattleUI
         CutsceneUI.SetActive(false);
 
@@ -58,6 +70,28 @@ public class TurnsManager : MonoBehaviour
         BattleSimulator.Instance.StartGame();
     }
 
+    // Banner Switching Animation Methods
+    public void PlayerWin()
+    {
+        StartCoroutine(PlayerWinAnimation());
+        AudioManager.PlayerWin();
+    }
+    public void PlayerLose()
+    {
+        StartCoroutine(PlayerLoseAnimation());
+        AudioManager.PlayerLose();
+    }
+    public void PlayerTurn()
+    {
+        StartCoroutine(PlayerTurnAnimation());
+        AudioManager.ChangeTurn();
+    }
+    public void EnemyTurn()
+    {
+        StartCoroutine(EnemyTurnAnimation());
+        AudioManager.ChangeTurn();
+    }
+
     IEnumerator BattleStartAnimation()
     {
         // Play animation
@@ -65,6 +99,7 @@ public class TurnsManager : MonoBehaviour
         BattleTurnsUI.transform.Find("BattleStart").gameObject.SetActive(true);
         yield return new WaitForSeconds(bigBannerAnimationTime);
         BattleUI.SetActive(true);
+        ActionsUI.SetActive(true);
     }
 
     IEnumerator PlayerTurnAnimation()
@@ -91,23 +126,5 @@ public class TurnsManager : MonoBehaviour
     {
         BattleTurnsUI.transform.Find("PlayerLose").gameObject.SetActive(true);
         yield return new WaitForSeconds(bigBannerAnimationTime);
-    }
-
-    // For Testing Purposes
-    public void PlayerWin()
-    {
-        StartCoroutine(PlayerWinAnimation());
-    }
-    public void PlayerLose()
-    {
-        StartCoroutine(PlayerLoseAnimation());
-    }
-    public void PlayerTurn()
-    {
-        StartCoroutine(PlayerTurnAnimation());
-    }
-    public void EnemyTurn()
-    {
-        StartCoroutine(EnemyTurnAnimation());
     }
 }
