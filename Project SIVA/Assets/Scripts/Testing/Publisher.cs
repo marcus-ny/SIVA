@@ -16,11 +16,11 @@ public abstract class Publisher : MonoBehaviour
         _observers.Remove(observer);
     }
 
-    protected void NotifyObservers()
+    protected void NotifyObservers(GameEvents gameEvent)
     {
         _observers.ForEach(_observer =>
        {
-           _observer.OnNotify();
+           _observer.OnNotify(gameEvent);
        });
     }
 }

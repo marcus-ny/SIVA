@@ -21,8 +21,11 @@ public class UIHealthBar : MonoBehaviour, IObserver
         _healthSlider.value = health;
     }
 
-    public void OnNotify()
+    public void OnNotify(GameEvents gameEvent)
     {
-        SetHealth(PlayerController.Instance.character.hitpoints);
+        if (gameEvent == GameEvents.PlayerHealthAltered)
+        {
+            SetHealth(PlayerController.Instance.character.hitpoints);
+        }
     }
 }

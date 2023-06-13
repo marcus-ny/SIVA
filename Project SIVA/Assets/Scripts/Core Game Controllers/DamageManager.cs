@@ -44,7 +44,7 @@ public class DamageManager : Publisher
     public void DealDamageToPlayer(float damage)
     {
         
-        NotifyObservers();
+        NotifyObservers(GameEvents.PlayerHealthAltered);
         playerParty[0].hitpoints -= damage;
         playerParty[0].DisplayDamageVisual();
     }
