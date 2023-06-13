@@ -5,7 +5,7 @@ using UnityEngine;
 // This one imports priority queue since unity .net version does not support this intrinsically
 using Utils;
 
-public class DamageManager : MonoBehaviour
+public class DamageManager : Publisher
 {
     private static DamageManager _instance;
 
@@ -43,6 +43,8 @@ public class DamageManager : MonoBehaviour
 
     public void DealDamageToPlayer(float damage)
     {
+        
+        NotifyObservers(GameEvents.PlayerHealthAltered);
         playerParty[0].hitpoints -= damage;
         playerParty[0].DisplayDamageVisual();
     }
