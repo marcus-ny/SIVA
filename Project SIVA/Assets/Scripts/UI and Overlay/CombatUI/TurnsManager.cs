@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TurnsManager : MonoBehaviour
+public class TurnsManager : MonoBehaviour, IObserver
 {
     [SerializeField] Button skipCutsceneButton;
     [SerializeField] GameObject CutsceneUI;
@@ -15,12 +15,12 @@ public class TurnsManager : MonoBehaviour
     public float bigBannerAnimationTime = 1f;
     public float turnAnimationTime = 1f;
 
-    
-    
-
     // Start is called before the first frame update
     void Start()
     {
+        // Make this and observer of the game events
+        BattleSimulator.Instance.AddObserver(this);
+
         // Add listener to skip cutscene button
         skipCutsceneButton.onClick.AddListener(EndCutscene);
 
@@ -38,19 +38,26 @@ public class TurnsManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnNotify(GameEvents gameEvent)
     {
-        /*
-        if (BattleSimulator.Instance.State == BattleState.PlayerTurn)
+        if (gameEvent == GameEvents.PlayerTurn)
         {
-            StartCoroutine(PlayerTurnAnimation());
+            Debug.Log("OnNotifiedPlayerTurnReceived");
+            PlayerTurn();
         }
-        else if (BattleSimulator.Instance.State == BattleState.EnemyTurn)
+        if (gameEvent == GameEvents.EnemyTurn)
         {
-            StartCoroutine(EnemyTurnAnimation());
+            Debug.Log("OnNotifiedEnemyTurnReceived");
+            EnemyTurn();
         }
-        */
+        if (gameEvent == GameEvents.PlayerWin)
+        {
+            PlayerWin();
+        }
+        if (gameEvent == GameEvents.PlayerLose)
+        {
+            PlayerLose();
+        }
     }
 
     private void EndCutscene()

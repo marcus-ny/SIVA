@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 public enum BattleState { START, PLAYER_TURN, ENEMY_TURN, TRANSITION, PLAYER_WIN, ENEMY_WIN }
-public class BattleSimulator : MonoBehaviour
+public class BattleSimulator : Publisher
 {
     private static BattleSimulator _instance;
     public static BattleSimulator Instance { get { return _instance; } }
@@ -50,6 +50,8 @@ public class BattleSimulator : MonoBehaviour
     {
         if (State == BattleState.START) {
             State = BattleState.PLAYER_TURN;
+            NotifyObservers(GameEvents.PlayerTurn);
+            Debug.Log("NotifyObserversStartPlayerTurn");
         }
     }
 
@@ -93,8 +95,11 @@ public class BattleSimulator : MonoBehaviour
     {
         if(State == BattleState.PLAYER_TURN)
         {           
+            // Change to EnemyTurn and notify observers
             State = BattleState.ENEMY_TURN;
-            
+            NotifyObservers(GameEvents.EnemyTurn);
+            Debug.Log("NotifyObserversEnemyTurn");
+
             // reset
             actionsPerformed = 0;
         } else if(State == BattleState.TRANSITION)
@@ -104,7 +109,12 @@ public class BattleSimulator : MonoBehaviour
                 // Reset AP
                 enemy.actionsPerformed = 0;
             }
+            // Change to PlayerTurn and notify observers
             State = BattleState.PLAYER_TURN;
+            NotifyObservers(GameEvents.PlayerTurn);
+            Debug.Log("NotifyObserversPlayerTurn");
+
+            // Check for tickDamage
             DamageManager.Instance.tickDamage();
 
             // reset
@@ -176,5 +186,17 @@ public class BattleSimulator : MonoBehaviour
         {
             StartCoroutine(WaitForPlayerAttackInput());
         }
+    }
+
+    public void EnemyWin()
+    {
+        State = BattleState.ENEMY_WIN;
+        NotifyObservers(GameEvents.PlayerLose);
+    }
+
+    public void EnemyLose()
+    {
+        State = BattleState.PLAYER_WIN;
+        NotifyObservers(GameEvents.PlayerWin);
     }
 }
