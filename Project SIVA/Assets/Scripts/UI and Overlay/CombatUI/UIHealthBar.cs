@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIHealthBar : MonoBehaviour, IObserver
 {
-    Slider _healthSlider;
+    [SerializeField] Slider _healthSlider;
+    [SerializeField] TextMeshProUGUI HPCounter;
 
     private void Start(){
-        _healthSlider = GetComponent<Slider>();
         DamageManager.Instance.AddObserver(this);
     }
 
@@ -26,6 +27,7 @@ public class UIHealthBar : MonoBehaviour, IObserver
         if (gameEvent == GameEvents.PlayerHealthAltered)
         {
             SetHealth(PlayerController.Instance.character.hitpoints);
+            HPCounter.text = (PlayerController.Instance.character.hitpoints).ToString() + "/" + (_healthSlider.maxValue).ToString();
         }
     }
 }
