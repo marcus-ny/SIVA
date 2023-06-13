@@ -17,7 +17,8 @@ public class ScenesManager : MonoBehaviour
     public enum Scene{
         MainMenu,
         Level01,
-        Clone_Level02_Abstraction_TEST
+        Clone_Level02_Abstraction_TEST,
+        Demo_Sprint1
     }
 
     // This method loads a scene specified in the parameter by name
@@ -27,14 +28,16 @@ public class ScenesManager : MonoBehaviour
 
     // This method loads a new game meaning the level01 scene
     public void LoadNewGame(){
-        StartCoroutine(LoadLevel(Scene.Clone_Level02_Abstraction_TEST.ToString()));
+        StartCoroutine(LoadLevel(Scene.Demo_Sprint1.ToString()));
     }
 
+    /*
     // This method loads the next scene based on the build index
     public void LoadNextScene(){
         //!!LoadLevel method does not take in int
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    */
 
     // This method loads the main menu scene 
     public void LoadMainMenu(){

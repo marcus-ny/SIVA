@@ -54,7 +54,7 @@ public class PlayerController : Publisher
     {
         if (character != null && character.hitpoints <= 0)
         {
-            BattleSimulator.Instance.State = BattleState.ENEMY_WIN;
+            BattleSimulator.Instance.EnemyWin();
         }
         if (character == null)
         {

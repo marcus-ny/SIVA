@@ -3,6 +3,8 @@ public enum GameEvents
     PlayerHealthAltered,
     EnemyTakeDamage,
     EnemyHeal,
-    EnemyDefeated,
-    PlayerDefeated
+    PlayerWin,
+    PlayerLose,
+    PlayerTurn,
+    EnemyTurn
 }

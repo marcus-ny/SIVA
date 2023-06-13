@@ -69,7 +69,7 @@ public class EnemyManager : MonoBehaviour
 
         if (enemyMap.Count == 0)
         {
-            BattleSimulator.Instance.State = BattleState.PLAYER_WIN;
+            BattleSimulator.Instance.EnemyLose();
         }
 
 
