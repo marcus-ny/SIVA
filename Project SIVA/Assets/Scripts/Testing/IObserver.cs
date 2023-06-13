@@ -1,0 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public interface IObserver
+{
+    public void OnNotify();
+}
+
+
+/*
+ * Stack that stores all the information that comes in (attacks, damage)
+ * AddEvent() { Stack.add(event) or Stack.add("Message") ; UpdateStack()}
+ * UpdateStack() { for (int i = 0; i < 4; i++) { gameObject.transform.GetChild(3-i).ChangeText("new message")
+ */

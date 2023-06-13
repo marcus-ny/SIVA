@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Publisher
 {
     private static PlayerController _instance;
 
@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour
         rangeFinder = new();
         path = new();
         reachableTiles = new();
+
+        // Observer pattern testing
+
     }
 
     private void Awake()

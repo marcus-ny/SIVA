@@ -75,7 +75,7 @@ public class Soldier : Enemy
         {
             yield return null;
         }
-
+        
         state_moving = true;
         DamageManager.Instance.DealDamageToPlayer(3.0f);
         animationController.attackStatus = SoldierAnimationController.AttackStatus.RANGE;

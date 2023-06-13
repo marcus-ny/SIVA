@@ -71,6 +71,9 @@ public class BattleSimulator : MonoBehaviour
         }
         // Debug.Log("Battlestate: " + State);
     }
+    /*
+     * All enemy actions sequentially executed
+     */
     IEnumerator EnemyTakeActions()
     {
         foreach (Enemy enemy in enemyList)
