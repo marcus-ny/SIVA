@@ -126,6 +126,7 @@ public abstract class Enemy : MonoBehaviour
     {
         EnemyManager.Instance.enemyMap.Remove(new
             Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
+        BattleSimulator.Instance.enemyList.Remove(this);
         Destroy(gameObject);
         //Debug.Log(EnemyManager.Instance.enemyMap.Count);
     }

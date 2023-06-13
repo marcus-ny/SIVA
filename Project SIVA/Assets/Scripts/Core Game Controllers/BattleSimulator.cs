@@ -22,7 +22,7 @@ public class BattleSimulator : MonoBehaviour
      * And the code will be adjusted accordingly
      */
 
-    List<Enemy> enemyList;
+    public List<Enemy> enemyList;
     public PlayerController player;
 
     public bool moving;
@@ -59,6 +59,7 @@ public class BattleSimulator : MonoBehaviour
         {
             for (int i = 0; i < EnemyManager.Instance.transform.childCount; i++)
             {
+                //enemyList.Clear();
                 enemyList.Add(EnemyManager.Instance.transform.GetChild(i).GetComponent<Enemy>());
             }
         }
@@ -76,6 +77,7 @@ public class BattleSimulator : MonoBehaviour
      */
     IEnumerator EnemyTakeActions()
     {
+        //foreach (KeyValuePair<Vector2Int, Enemy> enemy in EnemyManager.Instance.enemyMap)
         foreach (Enemy enemy in enemyList)
         {
             enemy.Action();
