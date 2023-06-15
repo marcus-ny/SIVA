@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : Publisher
@@ -74,8 +73,21 @@ public class PlayerController : Publisher
                 overlayTile = tileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
                 
                 if (Input.GetMouseButtonDown(0))
-                {                    
-                    destinationTile = overlayTile;                    
+                {
+                    /*
+                    if (character == null)
+                    {
+                        character = Instantiate(character_prefab).GetComponent<CharacterInfo>();
+                        // Place the enemy on spawn
+                        PositionCharacterOnTile(MapController.Instance.map[playerSpawn]);
+                        destinationTile = character.activeTile;
+                        reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);
+                        //GetMovementRange();
+                    }
+                    else
+                    {*/
+                        destinationTile = overlayTile;
+                    
                 }
             }        
         }
@@ -121,7 +133,7 @@ public class PlayerController : Publisher
         // character.activeTile.isBlocked = true;
     }
 
-    public bool MeleeTrigger()
+    public bool AttackTrigger()
     {
         List<OverlayTile> meleeRange = MapController.Instance.Get3x3Grid(character.activeTile);
 
@@ -151,51 +163,6 @@ public class PlayerController : Publisher
         List<OverlayTile> meleeRange = MapController.Instance.Get3x3Grid(character.activeTile);
 
         foreach (OverlayTile tile in meleeRange)
-        {
-            tile.ShowGreenTile();
-        }
-    }
-
-    public bool AoeAttackTrigger()
-    {
-        List<OverlayTile> aoeRange = new();
-        if (MouseController.Instance.GetFocusedOnTile().HasValue)
-        {
-            aoeRange = MapController.Instance.GetAoeAttackTiles(MouseController.Instance.mouseOverTile, character.activeTile, 5);
-
-        }
-        Debug.Log("Blocks: " + aoeRange.Count);
-        foreach (OverlayTile tile in aoeRange)
-        {
-            Vector2Int coordinates = new Vector2Int(tile.gridLocation.x, tile.gridLocation.y);
-            
-            if (EnemyManager.Instance.enemyMap.ContainsKey(coordinates))
-            {
-                Enemy target = EnemyManager.Instance.enemyMap[coordinates];
-
-                DamageManager.Instance.DealDamageToEnemy(50, target);
-
-                
-            }
-        }
-
-        return true;
-    }
-
-    public void ShowAoeTiles()
-    {
-        List<OverlayTile> aoeRange = new();
-        foreach (OverlayTile tile in MapController.Instance.GetAllAoeTiles(character.activeTile, 5))
-        {
-            tile.HideTile();
-        }
-        if (MouseController.Instance.GetFocusedOnTile().HasValue)
-        {
-            aoeRange = MapController.Instance.GetAoeAttackTiles(MouseController.Instance.mouseOverTile, character.activeTile, 5);
-
-        }
-
-        foreach (OverlayTile tile in aoeRange)
         {
             tile.ShowGreenTile();
         }
