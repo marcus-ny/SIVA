@@ -6,5 +6,6 @@ public enum GameEvents
     PlayerWin,
     PlayerLose,
     PlayerTurn,
-    EnemyTurn
+    EnemyTurn,
+    BattleStart
 }
