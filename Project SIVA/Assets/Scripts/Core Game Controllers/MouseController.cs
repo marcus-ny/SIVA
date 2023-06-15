@@ -7,7 +7,9 @@ public class MouseController : MonoBehaviour
 {
     private static MouseController _instance;
 
-    public static MouseController Instance { get { return _instance; } }    
+    public static MouseController Instance { get { return _instance; } }
+
+    public OverlayTile mouseOverTile;
 
     private void Awake()
     {
@@ -23,7 +25,7 @@ public class MouseController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
 
         if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN)
@@ -35,6 +37,8 @@ public class MouseController : MonoBehaviour
             {
                 OverlayTile overlayTile =
                     focusedTileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
+
+                mouseOverTile = overlayTile;
 
                 transform.position = overlayTile.transform.position;
 

@@ -163,7 +163,7 @@ public class Soldier : Enemy
         //range = rangeFinder.GetReachableTiles(activeTile, 3);
 
         // If soldier is already in plus shaped tiles
-        if (MapController.Instance.GetPlusShapedAlongCenter(player.activeTile).Contains(activeTile))
+        if (MapController.Instance.GetPlusShapedAlongCenter(player.activeTile, 10).Contains(activeTile))
         {
             return;
         }
@@ -229,7 +229,7 @@ public class Soldier : Enemy
         {
             // If medic is already next to you
             // Skip turn
-            List<OverlayTile> plusShaped = MapController.Instance.GetPlusShapedAlongCenter(player.activeTile);
+            List<OverlayTile> plusShaped = MapController.Instance.GetPlusShapedAlongCenter(player.activeTile, 10);
             if (plusShaped.Contains(activeTile))
             {
                 RangeAttack();
@@ -268,7 +268,7 @@ public class Soldier : Enemy
 
         // Returns a list of all tiles in plus shape around the player
         List<OverlayTile> plusShaped =
-            MapController.Instance.GetPlusShapedAlongCenter(player.activeTile);
+            MapController.Instance.GetPlusShapedAlongCenter(player.activeTile, 10);
         // Find the tile closest to the enemy among plusShaped
         List<OverlayTile> nearestTiles = pathFinder.GetClosestTilesInRange(activeTile, plusShaped);
         // We can be sure that nearest tiles always exist
