@@ -156,7 +156,33 @@ public class PlayerController : Publisher
         }
     }
 
-    public void AoeAttackTrigger()
+    public bool AoeAttackTrigger()
+    {
+        List<OverlayTile> aoeRange = new();
+        if (MouseController.Instance.GetFocusedOnTile().HasValue)
+        {
+            aoeRange = MapController.Instance.GetAoeAttackTiles(MouseController.Instance.mouseOverTile, character.activeTile, 5);
+
+        }
+        Debug.Log("Blocks: " + aoeRange.Count);
+        foreach (OverlayTile tile in aoeRange)
+        {
+            Vector2Int coordinates = new Vector2Int(tile.gridLocation.x, tile.gridLocation.y);
+            
+            if (EnemyManager.Instance.enemyMap.ContainsKey(coordinates))
+            {
+                Enemy target = EnemyManager.Instance.enemyMap[coordinates];
+
+                DamageManager.Instance.DealDamageToEnemy(50, target);
+
+                
+            }
+        }
+
+        return true;
+    }
+
+    public void ShowAoeTiles()
     {
         List<OverlayTile> aoeRange = new();
         foreach (OverlayTile tile in MapController.Instance.GetAllAoeTiles(character.activeTile, 5))

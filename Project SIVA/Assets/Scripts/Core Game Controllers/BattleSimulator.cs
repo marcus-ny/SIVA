@@ -181,8 +181,12 @@ public class BattleSimulator : Publisher
     {
         while (!Input.GetMouseButtonDown(0))
         {
-            player.AoeAttackTrigger();
+            player.ShowAoeTiles();
             yield return null;
+        }
+        if (player.AoeAttackTrigger())
+        {
+            actionsPerformed += 1;
         }
     }
     public void DealDamage()
