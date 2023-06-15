@@ -167,24 +167,10 @@ public class BattleSimulator : Publisher
         while (!Input.GetMouseButtonDown(0))
         {
             // Show attack range tiles
-            
             player.GetMeleeRange();
             yield return null;
         }
-        if (player.MeleeTrigger())
-        {
-            actionsPerformed += 1;
-        }
-    }
-
-    IEnumerator WaitForAoeInput()
-    {
-        while (!Input.GetMouseButtonDown(0))
-        {
-            player.ShowAoeTiles();
-            yield return null;
-        }
-        if (player.AoeAttackTrigger())
+        if (player.AttackTrigger())
         {
             actionsPerformed += 1;
         }
@@ -198,8 +184,7 @@ public class BattleSimulator : Publisher
 
         if (State == BattleState.PLAYER_TURN)
         {
-            StartCoroutine(WaitForAoeInput());
-            //StartCoroutine(WaitForPlayerAttackInput());
+            StartCoroutine(WaitForPlayerAttackInput());
         }
     }
 
