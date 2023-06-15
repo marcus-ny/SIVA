@@ -122,7 +122,7 @@ public abstract class Enemy : MonoBehaviour
 
     //public abstract List<OverlayTile> FindNearestMechanicLocation();
 
-    public void TriggerDeath()
+    public virtual void TriggerDeath()
     {
         EnemyManager.Instance.enemyMap.Remove(new
             Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));

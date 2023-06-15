@@ -145,4 +145,14 @@ public class Drone : Enemy
         //Debug.Log("Is blocked? : " + result.isBlocked);
         return result;
     }
+
+    public override void TriggerDeath()
+    {
+        // turns off generator light
+        EmitLight(false);
+        EnemyManager.Instance.enemyMap.Remove(new
+            Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
+        BattleSimulator.Instance.enemyList.Remove(this);
+        Destroy(gameObject);
+    }
 }
