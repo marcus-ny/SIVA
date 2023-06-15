@@ -158,4 +158,93 @@ public class MapController : MonoBehaviour
 
 		return plusShaped;
     }
+
+	public List<OverlayTile> GetAoeAttackTiles(OverlayTile cursor, OverlayTile reference, int reach)
+	{
+		int[,] directions = new int[4, 2] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+
+		List<OverlayTile> result = new();
+
+		int xDiff = cursor.gridLocation.x - reference.gridLocation.x;
+		int yDiff = cursor.gridLocation.y - reference.gridLocation.y;
+
+		int dir;
+
+		if (yDiff == 0)
+		{
+			dir = xDiff > 0 ? 1 : 3;
+			// think along NW -> SE
+			for (int mult = 1; mult <= reach; mult++)
+			{
+				Vector2Int locationToCheck = new Vector2Int(reference.gridLocation.x + (directions[dir, 0] * mult),
+					reference.gridLocation.y + (directions[dir, 1] * mult));
+
+				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
+
+				locationToCheck.y += 1;
+				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
+
+				locationToCheck.y -= 2;
+				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
+
+			}
+		}
+		else if (xDiff == 0)
+		{
+			dir = yDiff > 0 ? 0 : 2;
+			// think along NE -> SW
+			for (int mult = 1; mult <= reach; mult++)
+			{
+				Vector2Int locationToCheck = new Vector2Int(reference.gridLocation.x + (directions[dir, 0] * mult),
+					reference.gridLocation.y + (directions[dir, 1] * mult));
+
+				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
+
+				locationToCheck.x += 1;
+				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
+
+				locationToCheck.x -= 2;
+				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
+
+			}
+		}
+
+		return result;
+	}
+
+	public List<OverlayTile> GetAllAoeTiles(OverlayTile reference, int reach)
+	{
+		int[,] directions = new int[4, 2] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+
+		List<OverlayTile> result = new();
+
+		for (int mult = 1; mult <= reach; mult++)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				Vector2Int locationToCheck = new Vector2Int(reference.gridLocation.x + (directions[i, 0] * mult),
+					reference.gridLocation.y + (directions[i, 1] * mult));
+
+				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
+
+				locationToCheck.y += 1;
+				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
+
+				locationToCheck.y -= 2;
+				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
+
+				locationToCheck = new Vector2Int(reference.gridLocation.x + (directions[i, 0] * mult),
+					reference.gridLocation.y + (directions[i, 1] * mult));
+
+				locationToCheck.x += 1;
+				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
+
+				locationToCheck.x -= 2;
+				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
+			}
+		}
+
+		return result;
+	}
+
 }
