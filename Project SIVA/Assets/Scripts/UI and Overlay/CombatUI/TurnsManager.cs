@@ -3,39 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TurnsManager : MonoBehaviour, IObserver
+public class TurnsManager : Publisher, IObserver
 {
     [SerializeField] Button skipCutsceneButton;
-    [SerializeField] GameObject CutsceneUI;
-    [SerializeField] GameObject BattleUI;
-    [SerializeField] GameObject ActionsUI;
-    [SerializeField] GameObject BattleTurnsUI;
+    [SerializeField] GameObject UIFolder;
     //TOBECHANGED
-    [SerializeField] LevelAudioManager AudioManager;
+    //[SerializeField] LevelAudioManager AudioManager;
     public float bigBannerAnimationTime = 1f;
     public float turnAnimationTime = 1f;
+
+    GameObject CutsceneUI;
+    GameObject BannerUI;
+    GameObject ActionsUI;
+    GameObject StatsUI;
+    GameObject LogBox;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Get necessary objects
+        CutsceneUI = UIFolder.transform.Find("CutsceneUI").gameObject;
+        BannerUI= UIFolder.transform.Find("BannerUI").gameObject;
+        ActionsUI = UIFolder.transform.Find("ActionsUI").gameObject;
+        StatsUI = UIFolder.transform.Find("StatsUI").gameObject;
+        LogBox = UIFolder.transform.Find("LogBox").gameObject;
+
+        // Configure UI
+        CutsceneUI.SetActive(true);
+        BannerUI.SetActive(false);
+        ActionsUI.SetActive(false);
+        StatsUI.SetActive(false);
+        LogBox.SetActive(false);
+
+        // Makesure banner is all off
+        BannerUI.transform.Find("BattleStart").gameObject.SetActive(false);
+        BannerUI.transform.Find("PlayerTurn").gameObject.SetActive(false);
+        BannerUI.transform.Find("EnemyTurn").gameObject.SetActive(false);
+        BannerUI.transform.Find("PlayerWin").gameObject.SetActive(false);
+        BannerUI.transform.Find("PlayerLose").gameObject.SetActive(false);
+
         // Make this and observer of the game events
         BattleSimulator.Instance.AddObserver(this);
 
         // Add listener to skip cutscene button
-        skipCutsceneButton.onClick.AddListener(EndCutscene);
-
-        // Make the correct UI is active
-        BattleUI.SetActive(false);
-        ActionsUI.SetActive(false);
-        BattleTurnsUI.SetActive(false);
-        CutsceneUI.SetActive(true);
-
-        BattleTurnsUI.transform.Find("BattleStart").gameObject.SetActive(false);
-        BattleTurnsUI.transform.Find("PlayerTurn").gameObject.SetActive(false);
-        BattleTurnsUI.transform.Find("EnemyTurn").gameObject.SetActive(false);
-        BattleTurnsUI.transform.Find("PlayerWin").gameObject.SetActive(false);
-        BattleTurnsUI.transform.Find("PlayerLose").gameObject.SetActive(false);
-
+        //skipCutsceneButton.onClick.AddListener(EndCutscene);
     }
 
     public void OnNotify(GameEvents gameEvent)
@@ -60,78 +71,76 @@ public class TurnsManager : MonoBehaviour, IObserver
         }
     }
 
-    private void EndCutscene()
+    public void EndCutscene()
     {
-        //Finish the cutscene
-
-        //Game BGM on
-        AudioManager.StartGame();
+        // Notify BattleStart
+        NotifyObservers(GameEvents.BattleStart);
 
         //Disable CutsceneUI and enable BattleUI
         CutsceneUI.SetActive(false);
 
         //Start animation for BattleStart
         StartCoroutine(BattleStartAnimation());
-
-        //Change BattleSimulator to PlayerTurn
-        BattleSimulator.Instance.StartGame();
     }
 
     // Banner Switching Animation Methods
     public void PlayerWin()
     {
         StartCoroutine(PlayerWinAnimation());
-        AudioManager.PlayerWin();
     }
     public void PlayerLose()
     {
         StartCoroutine(PlayerLoseAnimation());
-        AudioManager.PlayerLose();
     }
     public void PlayerTurn()
     {
         StartCoroutine(PlayerTurnAnimation());
-        AudioManager.ChangeTurn();
     }
     public void EnemyTurn()
     {
         StartCoroutine(EnemyTurnAnimation());
-        AudioManager.ChangeTurn();
     }
 
     IEnumerator BattleStartAnimation()
     {
         // Play animation
-        BattleTurnsUI.SetActive(true);
-        BattleTurnsUI.transform.Find("BattleStart").gameObject.SetActive(true);
+        BannerUI.SetActive(true);
+        BannerUI.transform.Find("BattleStart").gameObject.SetActive(true);
         yield return new WaitForSeconds(bigBannerAnimationTime);
-        BattleUI.SetActive(true);
+        StatsUI.SetActive(true);
         ActionsUI.SetActive(true);
+        LogBox.SetActive(true);
+
+        // Change BattleSimulator to PlayerTurn
+        BattleSimulator.Instance.StartGame();
+
+        // Notify Observers
+        NotifyObservers(GameEvents.BattleStart);
     }
 
     IEnumerator PlayerTurnAnimation()
     {
-        BattleTurnsUI.transform.Find("PlayerTurn").gameObject.SetActive(true);
+        BannerUI.transform.Find("PlayerTurn").gameObject.SetActive(true);
         yield return new WaitForSeconds(turnAnimationTime);
-        BattleTurnsUI.transform.Find("PlayerTurn").gameObject.SetActive(false);
+        BannerUI.transform.Find("PlayerTurn").gameObject.SetActive(false);
     }
 
     IEnumerator EnemyTurnAnimation()
     {
-        BattleTurnsUI.transform.Find("EnemyTurn").gameObject.SetActive(true);
+        BannerUI.transform.Find("EnemyTurn").gameObject.SetActive(true);
         yield return new WaitForSeconds(turnAnimationTime);
-        BattleTurnsUI.transform.Find("EnemyTurn").gameObject.SetActive(false);
+        BannerUI.transform.Find("EnemyTurn").gameObject.SetActive(false);
     }
     
     IEnumerator PlayerWinAnimation()
     {
-        BattleTurnsUI.transform.Find("PlayerWin").gameObject.SetActive(true);
+        BannerUI.transform.Find("PlayerWin").gameObject.SetActive(true);
         yield return new WaitForSeconds(bigBannerAnimationTime);
     }
 
     IEnumerator PlayerLoseAnimation()
     {
-        BattleTurnsUI.transform.Find("PlayerLose").gameObject.SetActive(true);
+        BannerUI.transform.Find("PlayerLose").gameObject.SetActive(true);
         yield return new WaitForSeconds(bigBannerAnimationTime);
     }
 }

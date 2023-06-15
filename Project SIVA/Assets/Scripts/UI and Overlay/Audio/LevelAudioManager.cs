@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelAudioManager : MonoBehaviour
+public class LevelAudioManager : MonoBehaviour, IObserver
 {
     [SerializeField] GameObject BackgroundAudioSource;
     [SerializeField] GameObject SoundFX;
     [SerializeField] Animator lobbyBGMAnimation;
+    [SerializeField] Publisher TurnsManager;
     public float battleBGMTransitionTime = 1f;
     public float changeTurnTransitionTime = 1f;
 
@@ -24,15 +25,33 @@ public class LevelAudioManager : MonoBehaviour
         SoundFX.transform.Find("PlayerWin").gameObject.SetActive(false);
         SoundFX.transform.Find("PlayerLose").gameObject.SetActive(false);
 
+        // Add this as an observer
+        TurnsManager.AddObserver(this);
+        BattleSimulator.Instance.AddObserver(this);
+        
         // Get animator in child
         //GameObject lobbyBGM = BackgroundAudioSource.transform.Find("LobbyBGM").gameObject;
         //Animator lobbyBGMAnimation = lobbyBGM.GetComponentInChilden<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnNotify(GameEvents gameEvent)
     {
-        
+        if (gameEvent == GameEvents.BattleStart)
+        {
+            StartGame();
+        }
+        if (gameEvent == GameEvents.PlayerWin)
+        {
+            PlayerWin();
+        }
+        if (gameEvent == GameEvents.PlayerLose)
+        {
+            PlayerLose();
+        }
+        if ((gameEvent == GameEvents.PlayerTurn) || (gameEvent == GameEvents.EnemyTurn))
+        {
+            ChangeTurn();
+        }
     }
 
     public void StartGame()
