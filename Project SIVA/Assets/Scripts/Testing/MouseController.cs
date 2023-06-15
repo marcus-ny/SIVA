@@ -7,8 +7,9 @@ public class MouseController : MonoBehaviour
 {
     private static MouseController _instance;
 
-    public static MouseController Instance { get { return _instance; } }    
+    public static MouseController Instance { get { return _instance; } }
 
+    public OverlayTile mouseOverTile;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -35,7 +36,7 @@ public class MouseController : MonoBehaviour
             {
                 OverlayTile overlayTile =
                     focusedTileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
-
+                mouseOverTile = overlayTile;
                 transform.position = overlayTile.transform.position;
 
                 gameObject.GetComponent<SpriteRenderer>().sortingOrder =
