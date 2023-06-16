@@ -8808,6 +8808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f617ab9830d7849a40d31427c38949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseOverTile: {fileID: 0}
 --- !u!212 &1071924953
 SpriteRenderer:
   m_ObjectHideFlags: 0
