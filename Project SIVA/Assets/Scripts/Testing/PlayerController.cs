@@ -199,7 +199,7 @@ public class PlayerController : Publisher
         List<OverlayTile> aoeRange = new();
         foreach (OverlayTile tile in MapController.Instance.GetAllAoeTiles(character.activeTile, 5))
         {
-            tile.HideTile();
+            tile.ShowTile();
         }
         if (MouseController.Instance.GetFocusedOnTile().HasValue)
         {
@@ -216,7 +216,7 @@ public class PlayerController : Publisher
     {
         foreach (var tile in reachableTiles)
         {
-            tile.HideTile();
+            tile.ShowTile();
         }
 
         //reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);

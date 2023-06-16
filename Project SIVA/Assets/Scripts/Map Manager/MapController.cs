@@ -73,6 +73,14 @@ public class MapController : MonoBehaviour
 
 	}
 
+    private void Update()
+    {
+        foreach (OverlayTile tile in map.Values)
+        {
+			tile.ShowTile();
+        }
+    }
+
     public List<OverlayTile> GetNeighborTiles(OverlayTile curr, List<OverlayTile> validTiles, int jumpHeight)
 	{
 		
