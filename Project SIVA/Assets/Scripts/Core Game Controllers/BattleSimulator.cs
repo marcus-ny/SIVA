@@ -129,6 +129,18 @@ public class BattleSimulator : Publisher
             actionsPerformed = 0;
         }
     }
+
+    IEnumerator WaitForInteractInput()
+    {
+        while (!Input.GetMouseButtonDown(0))
+        {
+            yield return null;
+        }
+        if (player.InteractTrigger())
+        {
+            actionsPerformed += 1;
+        }
+    }
     public void InteractItem()
     {
         if (actionsPerformed == MAX_ACTIONS)
@@ -137,10 +149,7 @@ public class BattleSimulator : Publisher
         }
         if (State == BattleState.PLAYER_TURN)
         {
-            if (player.InteractTrigger())
-            {
-                actionsPerformed += 1;
-            }
+            StartCoroutine(WaitForInteractInput());
         }
     }
     public void MoveUnit()
