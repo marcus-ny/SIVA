@@ -242,7 +242,10 @@ public class Soldier : Enemy
     }
 
     
-
+    public override string ToString()
+    {
+        return "Soldier";
+    }
     
     // Within its movable range, returns the tile closest to the player
     public List<OverlayTile> GetClosestTileToPlayer()

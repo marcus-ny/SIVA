@@ -176,7 +176,12 @@ public class PlayerController : Publisher
             aoeRange = MapController.Instance.GetAoeAttackTiles(MouseController.Instance.mouseOverTile, character.activeTile, 5);
 
         }
-        Debug.Log("Blocks: " + aoeRange.Count);
+        if (MouseController.Instance.mouseOverTile = character.activeTile)
+        {
+            Debug.Log("AOE not succesful");
+            return false;
+        }
+        // Debug.Log("Blocks: " + aoeRange.Count);
         foreach (OverlayTile tile in aoeRange)
         {
             Vector2Int coordinates = new Vector2Int(tile.gridLocation.x, tile.gridLocation.y);

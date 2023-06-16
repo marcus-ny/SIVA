@@ -65,7 +65,10 @@ public class Drone : Enemy
             }
         }
     }
-
+    public override string ToString()
+    {
+        return "Drone";
+    }
     public void EmitLight(bool trigger)
     {
         

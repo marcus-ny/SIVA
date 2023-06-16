@@ -15,7 +15,8 @@ public class DamageManager : Publisher
 
     public static DamageManager Instance { get { return _instance; } }
 
-
+    public Enemy recentTarget;
+    public float recentDamage;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -55,11 +56,15 @@ public class DamageManager : Publisher
         target.TakeDamage(damage);
         // EnemyManager.Instance.enemyHpStatus.Enqueue(target, target.hitpoints);
         target.SwitchColor("Red");
-
+        recentTarget = target;
+        recentDamage = damage;
+        NotifyObservers(GameEvents.EnemyHealthAltered);
     }
 
     public void HealEnemy(float healAmount, Enemy target)
     {
+        recentTarget = target;
+        recentDamage = -1 * healAmount;
         target.TakeDamage(-1 * healAmount);
         target.SwitchColor("Green");
 
