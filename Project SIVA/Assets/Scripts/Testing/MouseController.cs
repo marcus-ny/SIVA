@@ -41,6 +41,10 @@ public class MouseController : MonoBehaviour
 
                 gameObject.GetComponent<SpriteRenderer>().sortingOrder =
                     overlayTile.GetComponent<SpriteRenderer>().sortingOrder;               
+            } else
+            {
+                transform.position = PlayerController.Instance.character.transform.position;
+                mouseOverTile = PlayerController.Instance.character.activeTile;
             }
             
         }

@@ -51,7 +51,10 @@ public class Generator : Enemy
         range = rangeFinder.GetReachableTiles(activeTile, 4, 1);
         
     }
-
+    public override string ToString()
+    {
+        return "Generator";
+    }
     public override void Action()
     {
         StartCoroutine("TakeTurn");

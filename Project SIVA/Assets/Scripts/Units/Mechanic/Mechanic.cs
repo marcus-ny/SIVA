@@ -57,7 +57,10 @@ public class Mechanic : Enemy
 		StartCoroutine("TakeTurn");
 
 	}
-
+	public override string ToString()
+	{
+		return "Mechanic";
+	}
 	IEnumerator TakeTurn()
 	{
 		while (actionsPerformed < maxAP)
