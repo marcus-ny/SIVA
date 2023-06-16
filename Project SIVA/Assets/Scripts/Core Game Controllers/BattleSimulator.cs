@@ -11,7 +11,7 @@ public class BattleSimulator : Publisher
 
     public BattleState State; // Change to private later
 
-    public readonly int MAX_ACTIONS = 2; // Constant
+    public readonly int MAX_ACTIONS = 5; // Constant
 
     public int actionsPerformed;
 

@@ -113,14 +113,21 @@ public class PlayerController : Publisher
 
             character.transform.position = new Vector3(character.transform.position.x,
                 character.transform.position.y, zIndex);
-
+            
             if (Vector2.Distance(character.transform.position, path[0].transform.position) < 0.0001f)
             {
                 PositionCharacterOnTile(path[0]);
+                if (path.Count > 0 && path[0].light_level > 0 && path[0].previous.light_level == 0)
+                {
+                    path.RemoveAt(0);
+                    yield return new WaitForSecondsRealtime(3);
+                    StartCoroutine(MoveInLight());
+                    break;
+                }
                 path.RemoveAt(0);
             }
-
-            yield return null;
+            
+            yield return null;           
         }
 
 
@@ -131,6 +138,48 @@ public class PlayerController : Publisher
             //GetMovementRange();
         }
         // character.activeTile.isBlocked = true;
+    }
+
+    private IEnumerator MoveInLight()
+    {
+        
+        while (path.Count > 0)
+        {
+            var step = speed * Time.deltaTime;
+
+            var zIndex = path[0].transform.position.z;
+
+            character.activeTile.isBlocked = false;
+
+            character.prev = path[0].previous.gridLocation;
+            character.cur = path[0].gridLocation;
+
+            character.transform.position = Vector2.MoveTowards(character.transform.position,
+                path[0].transform.position, step);
+
+            character.transform.position = new Vector3(character.transform.position.x,
+                character.transform.position.y, zIndex);
+           
+            if (Vector2.Distance(character.transform.position, path[0].transform.position) < 0.0001f)
+            {
+                PositionCharacterOnTile(path[0]);
+                if (path.Count > 0 && path[0].light_level == 0 && path[0].previous.light_level > 0)
+                {
+                    path.RemoveAt(0);
+                    yield return new WaitForSecondsRealtime(3);
+                    StartCoroutine(MoveAlongPath());
+                    break;
+                }
+                path.RemoveAt(0);
+            }
+
+            yield return null;
+        }
+
+        if (path.Count == 0)
+        {
+            character.prev = character.cur = character.activeTile.gridLocation;
+        }
     }
 
     public bool MeleeTrigger()
@@ -230,7 +279,14 @@ public class PlayerController : Publisher
 
         if (path.Count == 0) return false;
 
-        Coroutine movingCoroutine = StartCoroutine(MoveAlongPath());
+        if (character.activeTile.light_level > 0)
+        { 
+            StartCoroutine(MoveInLight());
+        }
+        else
+        {
+            StartCoroutine(MoveAlongPath());
+        }
         //StartCoroutine(WaitForMovementInput());
         //Debug.Log("Is this executed early?");
 
