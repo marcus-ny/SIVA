@@ -220,7 +220,8 @@ public class PlayerController : Publisher
         }
 
         //reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);
-        path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles, 1);
+        //path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles, 1);
+        path = pathFinder.FindPath(character.activeTile, MouseController.Instance.mouseOverTile, reachableTiles, 1);
 
         if (path.Count == 0) return false;
 
