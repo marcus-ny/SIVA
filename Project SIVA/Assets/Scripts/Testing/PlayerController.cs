@@ -24,6 +24,8 @@ public class PlayerController : Publisher
 
     private OverlayTile destinationTile;
 
+    private PlayerAnimator animationController;
+
     private readonly int speed = 3;
 
     private void Start()
@@ -33,7 +35,7 @@ public class PlayerController : Publisher
         path = new();
         reachableTiles = new();
 
-        // Observer pattern testing
+        
 
     }
 
@@ -63,34 +65,22 @@ public class PlayerController : Publisher
             PositionCharacterOnTile(MapController.Instance.map[playerSpawn]);
             destinationTile = character.activeTile;
             reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3, 1);
+            animationController = character.GetComponent<PlayerAnimator>();
         }
         if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN) {
             var tileHit = MouseController.Instance.GetFocusedOnTile();
             OverlayTile overlayTile;
             if (tileHit.HasValue)
             {
-
                 overlayTile = tileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
                 
                 if (Input.GetMouseButtonDown(0))
-                {
-                    /*
-                    if (character == null)
-                    {
-                        character = Instantiate(character_prefab).GetComponent<CharacterInfo>();
-                        // Place the enemy on spawn
-                        PositionCharacterOnTile(MapController.Instance.map[playerSpawn]);
-                        destinationTile = character.activeTile;
-                        reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);
-                        //GetMovementRange();
-                    }
-                    else
-                    {*/
-                        destinationTile = overlayTile;
-                    
+                {                   
+                    destinationTile = overlayTile;                   
                 }
             }        
         }
+        //Debug.Log("character on: " + character.activeTile.gridLocation);
     }
 
     private IEnumerator MoveAlongPath()
@@ -120,7 +110,9 @@ public class PlayerController : Publisher
                 if (path.Count > 0 && path[0].light_level > 0 && path[0].previous.light_level == 0)
                 {
                     path.RemoveAt(0);
-                    yield return new WaitForSecondsRealtime(3);
+                    animationController.status = PlayerAnimator.Status.WEAKENING;
+                    yield return new WaitForSecondsRealtime(1.5f);
+                    animationController.status = PlayerAnimator.Status.NIL;
                     StartCoroutine(MoveInLight());
                     break;
                 }
@@ -166,7 +158,9 @@ public class PlayerController : Publisher
                 if (path.Count > 0 && path[0].light_level == 0 && path[0].previous.light_level > 0)
                 {
                     path.RemoveAt(0);
-                    yield return new WaitForSecondsRealtime(3);
+                    animationController.status = PlayerAnimator.Status.STRONGER;
+                    yield return new WaitForSecondsRealtime(1.5f);
+                    animationController.status = PlayerAnimator.Status.NIL;
                     StartCoroutine(MoveAlongPath());
                     break;
                 }
@@ -225,7 +219,7 @@ public class PlayerController : Publisher
             aoeRange = MapController.Instance.GetAoeAttackTiles(MouseController.Instance.mouseOverTile, character.activeTile, 5);
 
         }
-        if (MouseController.Instance.mouseOverTile = character.activeTile)
+        if (!MouseController.Instance.GetFocusedOnTile().HasValue)
         {
             Debug.Log("AOE not succesful");
             return false;

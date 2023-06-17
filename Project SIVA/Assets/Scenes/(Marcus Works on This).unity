@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19679b449d9246fe8e50e4c5a0698ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character_prefab: {fileID: 7146743360214746198, guid: 198a5ddfd4978460ca9a98b2ac8f8f39, type: 3}
+  character_prefab: {fileID: 5411322905402630955, guid: 17881e0dbbabb4748a8f0b41305aa72f, type: 3}
   playerSpawn: {x: 0, y: 0}
   character: {fileID: 0}
   path: []
@@ -1520,7 +1520,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_HandleRect: {fileID: 2083862695}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5361,7 +5361,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 446715366}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999976
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8808,6 +8808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f617ab9830d7849a40d31427c38949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseOverTile: {fileID: 0}
 --- !u!212 &1071924953
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10911,6 +10912,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 82683372}
   playerParty: []
+  recentTarget: {fileID: 0}
+  recentDamage: 0
 --- !u!4 &1459314595
 Transform:
   m_ObjectHideFlags: 0
