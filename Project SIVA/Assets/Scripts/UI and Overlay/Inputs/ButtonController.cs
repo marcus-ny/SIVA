@@ -53,9 +53,14 @@ public class ButtonController : MonoBehaviour
     }
 
     // Tied to Attack button in UI
-    public void Attack()
+    public void Melee()
     {
-        BattleSimulator.Instance.DealDamage();
+        BattleSimulator.Instance.DealMeleeDamage();
+    }
+
+    public void AOE()
+    {
+        BattleSimulator.Instance.DealAOEDamage();
     }
     
     // Tied to Interact button in UI

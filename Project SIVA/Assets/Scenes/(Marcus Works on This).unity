@@ -1521,7 +1521,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_HandleRect: {fileID: 2083862695}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -10251,7 +10251,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7383070510135922794, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_text
-      value: -Locked-
+      value: AOE
       objectReference: {fileID: 0}
     - target: {fileID: 7383070510135922794, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_fontStyle
@@ -10264,7 +10264,7 @@ PrefabInstance:
     - target: {fileID: 7383070510582958106, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ad685cdc8d438c642bbb2e827cb507f9, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7383070510582958108, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -10272,6 +10272,14 @@ PrefabInstance:
     - target: {fileID: 7383070511045975599, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7383070511434358314, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 872106628}
+    - target: {fileID: 7383070511434358314, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AOE
       objectReference: {fileID: 0}
     - target: {fileID: 7383070511434358317, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_Pivot.x
@@ -14798,7 +14806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7383070511434358314, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Attack
+      value: Melee
       objectReference: {fileID: 0}
     - target: {fileID: 7383070511434358314, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
