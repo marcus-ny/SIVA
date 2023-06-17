@@ -53,6 +53,10 @@ public class DamageManager : Publisher
     // (not implemented yet)
     public void DealDamageToEnemy(float damage, Enemy target)
     {
+        if (PlayerController.Instance.character.activeTile.light_level > 0)
+        {
+            damage /= 2;
+        }
         target.TakeDamage(damage);
         // EnemyManager.Instance.enemyHpStatus.Enqueue(target, target.hitpoints);
         target.SwitchColor("Red");

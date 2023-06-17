@@ -464,11 +464,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19679b449d9246fe8e50e4c5a0698ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character_prefab: {fileID: 7146743360214746198, guid: 198a5ddfd4978460ca9a98b2ac8f8f39, type: 3}
+  character_prefab: {fileID: 5411322905402630955, guid: 17881e0dbbabb4748a8f0b41305aa72f, type: 3}
   playerSpawn: {x: 0, y: 0}
   character: {fileID: 0}
   path: []
   reachableTiles: []
+  destinationTile: {fileID: 0}
 --- !u!4 &82683373
 Transform:
   m_ObjectHideFlags: 0
@@ -8808,6 +8809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f617ab9830d7849a40d31427c38949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseOverTile: {fileID: 0}
 --- !u!212 &1071924953
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10249,7 +10251,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7383070510135922794, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_text
-      value: -Locked-
+      value: AOE
       objectReference: {fileID: 0}
     - target: {fileID: 7383070510135922794, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_fontStyle
@@ -10262,7 +10264,7 @@ PrefabInstance:
     - target: {fileID: 7383070510582958106, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ad685cdc8d438c642bbb2e827cb507f9, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7383070510582958108, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -10270,6 +10272,14 @@ PrefabInstance:
     - target: {fileID: 7383070511045975599, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7383070511434358314, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 872106628}
+    - target: {fileID: 7383070511434358314, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AOE
       objectReference: {fileID: 0}
     - target: {fileID: 7383070511434358317, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_Pivot.x
@@ -10911,6 +10921,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 82683372}
   playerParty: []
+  recentTarget: {fileID: 0}
+  recentDamage: 0
 --- !u!4 &1459314595
 Transform:
   m_ObjectHideFlags: 0
@@ -14794,7 +14806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7383070511434358314, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Attack
+      value: Melee
       objectReference: {fileID: 0}
     - target: {fileID: 7383070511434358314, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

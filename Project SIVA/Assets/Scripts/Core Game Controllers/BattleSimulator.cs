@@ -178,7 +178,7 @@ public class BattleSimulator : Publisher
             actionsPerformed += 1;
         }
     }
-    IEnumerator WaitForPlayerAttackInput()
+    IEnumerator WaitForMeleeInput()
     {
         while (!Input.GetMouseButtonDown(0))
         {
@@ -201,10 +201,10 @@ public class BattleSimulator : Publisher
         }
         if (player.AoeAttackTrigger())
         {
-            actionsPerformed += 1;
+            actionsPerformed += 2;
         }
     }
-    public void DealDamage()
+    public void DealMeleeDamage()
     {
         if (actionsPerformed == MAX_ACTIONS)
         {
@@ -214,6 +214,19 @@ public class BattleSimulator : Publisher
         if (State == BattleState.PLAYER_TURN)
         {
             Debug.Log("Deal damage button clicked");
+            StartCoroutine(WaitForMeleeInput());
+        }
+    }
+    public void DealAOEDamage()
+    {
+        if (actionsPerformed == MAX_ACTIONS)
+        {
+            return;
+        }
+
+        if (State == BattleState.PLAYER_TURN)
+        {
+           // Debug.Log("Deal damage button clicked");
             StartCoroutine(WaitForAoeInput());
         }
     }

@@ -22,7 +22,9 @@ public class PlayerController : Publisher
     PathFinder pathFinder;
     Rangefinder rangeFinder;
 
-    private OverlayTile destinationTile;
+    public OverlayTile destinationTile;
+
+    private PlayerAnimator animationController;
 
     private readonly int speed = 3;
 
@@ -33,7 +35,7 @@ public class PlayerController : Publisher
         path = new();
         reachableTiles = new();
 
-        // Observer pattern testing
+        
 
     }
 
@@ -63,34 +65,22 @@ public class PlayerController : Publisher
             PositionCharacterOnTile(MapController.Instance.map[playerSpawn]);
             destinationTile = character.activeTile;
             reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3, 1);
+            animationController = character.GetComponent<PlayerAnimator>();
         }
         if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN) {
             var tileHit = MouseController.Instance.GetFocusedOnTile();
             OverlayTile overlayTile;
             if (tileHit.HasValue)
             {
-
                 overlayTile = tileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
                 
                 if (Input.GetMouseButtonDown(0))
-                {
-                    /*
-                    if (character == null)
-                    {
-                        character = Instantiate(character_prefab).GetComponent<CharacterInfo>();
-                        // Place the enemy on spawn
-                        PositionCharacterOnTile(MapController.Instance.map[playerSpawn]);
-                        destinationTile = character.activeTile;
-                        reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);
-                        //GetMovementRange();
-                    }
-                    else
-                    {*/
-                        destinationTile = overlayTile;
-                    
+                {                   
+                    destinationTile = overlayTile;                   
                 }
             }        
         }
+        //Debug.Log("character on: " + character.activeTile.gridLocation);
     }
 
     private IEnumerator MoveAlongPath()
@@ -120,7 +110,9 @@ public class PlayerController : Publisher
                 if (path.Count > 0 && path[0].light_level > 0 && path[0].previous.light_level == 0)
                 {
                     path.RemoveAt(0);
-                    yield return new WaitForSecondsRealtime(3);
+                    animationController.status = PlayerAnimator.Status.WEAKENING;
+                    yield return new WaitForSecondsRealtime(1.5f);
+                    animationController.status = PlayerAnimator.Status.NIL;
                     StartCoroutine(MoveInLight());
                     break;
                 }
@@ -166,7 +158,9 @@ public class PlayerController : Publisher
                 if (path.Count > 0 && path[0].light_level == 0 && path[0].previous.light_level > 0)
                 {
                     path.RemoveAt(0);
-                    yield return new WaitForSecondsRealtime(3);
+                    animationController.status = PlayerAnimator.Status.STRONGER;
+                    yield return new WaitForSecondsRealtime(1.5f);
+                    animationController.status = PlayerAnimator.Status.NIL;
                     StartCoroutine(MoveAlongPath());
                     break;
                 }
@@ -181,7 +175,13 @@ public class PlayerController : Publisher
             character.prev = character.cur = character.activeTile.gridLocation;
         }
     }
-
+    IEnumerator SuccessfulMelee()
+    {
+        animationController.status = PlayerAnimator.Status.MELEEING;
+        yield return new WaitForSecondsRealtime(1f);
+        DamageManager.Instance.DealDamageToEnemy(80, destinationTile.enemy);
+        animationController.status = PlayerAnimator.Status.NIL;
+    }
     public bool MeleeTrigger()
     {
         List<OverlayTile> meleeRange = MapController.Instance.Get3x3Grid(character.activeTile);
@@ -193,7 +193,7 @@ public class PlayerController : Publisher
         bool inRange = (character.activeTile.gridLocation.x - destinationTile.gridLocation.x < 2) && (character.activeTile.gridLocation.y - destinationTile.gridLocation.y < 2);
         if (destinationTile.enemy != null && inRange)
         {
-            DamageManager.Instance.DealDamageToEnemy(80, destinationTile.enemy);
+            StartCoroutine(SuccessfulMelee());
             return true;
         }
         else if (destinationTile.enemy == null)
@@ -225,7 +225,7 @@ public class PlayerController : Publisher
             aoeRange = MapController.Instance.GetAoeAttackTiles(MouseController.Instance.mouseOverTile, character.activeTile, 5);
 
         }
-        if (MouseController.Instance.mouseOverTile = character.activeTile)
+        if (!MouseController.Instance.GetFocusedOnTile().HasValue)
         {
             Debug.Log("AOE not succesful");
             return false;

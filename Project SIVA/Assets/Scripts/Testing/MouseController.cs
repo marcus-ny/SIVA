@@ -24,9 +24,9 @@ public class MouseController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
-
+        
         if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN)
         {
             var focusedTileHit = GetFocusedOnTile();
@@ -46,7 +46,7 @@ public class MouseController : MonoBehaviour
                 transform.position = PlayerController.Instance.character.transform.position;
                 mouseOverTile = PlayerController.Instance.character.activeTile;
             }
-            
+            //Debug.Log("mouse on: " + mouseOverTile.gridLocation);
         }
 
     }
