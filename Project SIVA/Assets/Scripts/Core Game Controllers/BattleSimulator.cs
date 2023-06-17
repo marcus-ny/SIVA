@@ -178,7 +178,7 @@ public class BattleSimulator : Publisher
             actionsPerformed += 1;
         }
     }
-    IEnumerator WaitForPlayerAttackInput()
+    IEnumerator WaitForMeleeInput()
     {
         while (!Input.GetMouseButtonDown(0))
         {
@@ -214,7 +214,7 @@ public class BattleSimulator : Publisher
         if (State == BattleState.PLAYER_TURN)
         {
             Debug.Log("Deal damage button clicked");
-            StartCoroutine(WaitForAoeInput());
+            StartCoroutine(WaitForMeleeInput());
         }
     }
 

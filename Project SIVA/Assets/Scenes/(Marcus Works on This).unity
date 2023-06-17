@@ -469,6 +469,7 @@ MonoBehaviour:
   character: {fileID: 0}
   path: []
   reachableTiles: []
+  destinationTile: {fileID: 0}
 --- !u!4 &82683373
 Transform:
   m_ObjectHideFlags: 0
@@ -5361,7 +5362,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 446715366}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999976
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

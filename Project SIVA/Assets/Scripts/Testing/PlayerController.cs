@@ -22,7 +22,7 @@ public class PlayerController : Publisher
     PathFinder pathFinder;
     Rangefinder rangeFinder;
 
-    private OverlayTile destinationTile;
+    public OverlayTile destinationTile;
 
     private PlayerAnimator animationController;
 
@@ -175,7 +175,13 @@ public class PlayerController : Publisher
             character.prev = character.cur = character.activeTile.gridLocation;
         }
     }
-
+    IEnumerator SuccessfulMelee()
+    {
+        animationController.status = PlayerAnimator.Status.MELEEING;
+        yield return new WaitForSecondsRealtime(1f);
+        DamageManager.Instance.DealDamageToEnemy(80, destinationTile.enemy);
+        animationController.status = PlayerAnimator.Status.NIL;
+    }
     public bool MeleeTrigger()
     {
         List<OverlayTile> meleeRange = MapController.Instance.Get3x3Grid(character.activeTile);
@@ -187,7 +193,7 @@ public class PlayerController : Publisher
         bool inRange = (character.activeTile.gridLocation.x - destinationTile.gridLocation.x < 2) && (character.activeTile.gridLocation.y - destinationTile.gridLocation.y < 2);
         if (destinationTile.enemy != null && inRange)
         {
-            DamageManager.Instance.DealDamageToEnemy(80, destinationTile.enemy);
+            StartCoroutine(SuccessfulMelee());
             return true;
         }
         else if (destinationTile.enemy == null)
