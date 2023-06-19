@@ -120,7 +120,7 @@ public class EnemyUnit : MonoBehaviour
         // Trigger == true --> Emit light
         // Trigger == false --> Turn off light (meant for moving and dynamic
         // lighting)
-        int factor = trigger ? 1 : -1;
+        
 
         List<OverlayTile> neighbors = MapController.Instance.Get3x3Grid(curr);
 
@@ -134,7 +134,7 @@ public class EnemyUnit : MonoBehaviour
             }
 
             MapController.Instance.map[new Vector2Int(neighbor.gridLocation.x,
-                neighbor.gridLocation.y)].light_level += factor;
+                neighbor.gridLocation.y)].AlterLightLevel(trigger);
         }
     }
 

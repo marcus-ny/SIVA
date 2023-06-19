@@ -72,11 +72,11 @@ public class Drone : Enemy
     public void EmitLight(bool trigger)
     {
         
-        int factor = trigger ? 1 : -1;
+        
         List<OverlayTile> lighting = MapController.Instance.Get3x3Grid(activeTile);
         foreach (OverlayTile tile in lighting)
         {
-            tile.light_level += factor;
+            tile.AlterLightLevel(trigger);
         }
     }
     IEnumerator DroneMovement()

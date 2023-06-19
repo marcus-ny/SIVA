@@ -69,10 +69,10 @@ public class Generator : Enemy
     // Trigger = true for ON, false for OFF
     public void EmitLight(bool trigger)
     {
-        int factor = trigger ? 1 : -1;
+        
         foreach (OverlayTile tile in range)
         {
-            tile.light_level += factor;
+            tile.AlterLightLevel(trigger);
         }
     }
 

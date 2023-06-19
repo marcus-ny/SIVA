@@ -42,8 +42,8 @@ public class LampPost : Interactable
             }
 
             MapController.Instance.map[new Vector2Int(neighbor.gridLocation.x,
-                neighbor.gridLocation.y)].light_level += factor;
+                neighbor.gridLocation.y)].AlterLightLevel(trigger);
         }
-        curr.light_level += factor;
+        curr.AlterLightLevel(trigger);
     }
 }

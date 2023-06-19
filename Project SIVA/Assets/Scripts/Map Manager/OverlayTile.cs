@@ -30,16 +30,22 @@ public class OverlayTile : MonoBehaviour
         light_level = 0;
     }
 
-    // This method removse the range highlighting, therefore is temporarily disabled
-    // Might be removed in the future.
-
-    /*void Update()
+    public void AlterLightLevel(bool trigger)
     {
-        if (Input.GetMouseButtonDown(0))
+        int previousLight = light_level;
+        int increment = trigger ? 1 : -1;
+        light_level += increment;
+        if (PlayerController.Instance.character.activeTile == this)
         {
-            HideTile();           
+            if (light_level == 0 && previousLight > 0)
+            {
+                PlayerController.Instance.TransitionLTS();
+            } else if (light_level > 0 && previousLight == 0)
+            {
+                PlayerController.Instance.TransitionSTL();
+            }
         }
-    }*/
+    }
 
     // Show light/dark tiles
     public void ShowTile()
