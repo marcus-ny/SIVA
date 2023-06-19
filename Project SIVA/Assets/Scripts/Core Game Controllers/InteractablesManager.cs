@@ -57,7 +57,13 @@ public class InteractablesManager : MonoBehaviour
             }
         }
     }
-
+    public void HighlightAll()
+    {
+        foreach (Interactable interactable in entityMap.Values)
+        {
+            interactable.Highlight();
+        }
+    }
     
     public void Interact(OverlayTile curr)
     {

@@ -72,7 +72,8 @@ public class PlayerController : Publisher
                 
                 if (Input.GetMouseButtonDown(0))
                 {                   
-                    destinationTile = overlayTile;                   
+                    destinationTile = overlayTile;
+                    
                 }
             }        
         }
@@ -179,6 +180,7 @@ public class PlayerController : Publisher
         DamageManager.Instance.DealDamageToEnemy(80, destinationTile.enemy);
         animationController.status = PlayerAnimator.Status.NIL;
     }
+
     public bool MeleeTrigger()
     {
         List<OverlayTile> meleeRange = MapController.Instance.Get3x3Grid(character.activeTile);
@@ -291,8 +293,9 @@ public class PlayerController : Publisher
 
     public bool InteractTrigger()
     {
-        bool inRange = (character.activeTile.gridLocation.x - destinationTile.gridLocation.x < 2) && (character.activeTile.gridLocation.y - destinationTile.gridLocation.y < 2);
+        bool inRange = (Mathf.Abs(character.activeTile.gridLocation.x - destinationTile.gridLocation.x) < 2) && (Mathf.Abs(character.activeTile.gridLocation.y - destinationTile.gridLocation.y) < 2);
         Vector2Int coordinates = new(destinationTile.gridLocation.x, destinationTile.gridLocation.y);
+        
         if (inRange && InteractablesManager.Instance.entityMap.ContainsKey(coordinates))
         {
             InteractablesManager.Instance.Interact(destinationTile);

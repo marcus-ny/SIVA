@@ -74,6 +74,7 @@ public class BattleSimulator : Publisher
         }
         // Debug.Log("Battlestate: " + State);
     }
+
     /*
      * All enemy actions sequentially executed
      */
@@ -132,6 +133,7 @@ public class BattleSimulator : Publisher
 
     IEnumerator WaitForInteractInput()
     {
+        InteractablesManager.Instance.HighlightAll();
         while (!Input.GetMouseButtonDown(0))
         {
             yield return null;
