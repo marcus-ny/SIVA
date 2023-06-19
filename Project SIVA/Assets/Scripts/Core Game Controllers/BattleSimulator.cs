@@ -133,7 +133,7 @@ public class BattleSimulator : Publisher
 
     IEnumerator WaitForInteractInput()
     {
-        InteractablesManager.Instance.HighlightAll();
+        
         while (!Input.GetMouseButtonDown(0))
         {
             yield return null;

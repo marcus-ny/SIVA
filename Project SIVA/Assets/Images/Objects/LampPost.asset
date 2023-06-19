@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LampPost
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -1126685110, guid: e171c4a915659bd48a3066b3588695e0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
   m_Transform:
     e00: 1
     e01: 0
