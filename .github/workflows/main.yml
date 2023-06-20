@@ -10,7 +10,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         
-      # Almost working
+      # Tested before MS2
       - name: Run tests
         uses: game-ci/unity-test-runner@v2
         env:
