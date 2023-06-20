@@ -133,8 +133,5 @@ public class PlayerAnimator : MonoBehaviour
         currAnimation = "Player_shadow_to_light";
     }
 
-    void AttackAnimation()
-    {
-
-    }
+    
 }

@@ -34,9 +34,6 @@ public class PlayerController : Publisher
         rangeFinder = new();
         path = new();
         reachableTiles = new();
-
-        
-
     }
 
     private void Awake()
@@ -48,8 +45,7 @@ public class PlayerController : Publisher
         else
         {
             _instance = this;
-        }
-        
+        }       
     }
 
     private void Update()
@@ -76,7 +72,8 @@ public class PlayerController : Publisher
                 
                 if (Input.GetMouseButtonDown(0))
                 {                   
-                    destinationTile = overlayTile;                   
+                    destinationTile = overlayTile;
+                    
                 }
             }        
         }
@@ -175,6 +172,7 @@ public class PlayerController : Publisher
             character.prev = character.cur = character.activeTile.gridLocation;
         }
     }
+
     IEnumerator SuccessfulMelee()
     {
         animationController.status = PlayerAnimator.Status.MELEEING;
@@ -182,6 +180,7 @@ public class PlayerController : Publisher
         DamageManager.Instance.DealDamageToEnemy(80, destinationTile.enemy);
         animationController.status = PlayerAnimator.Status.NIL;
     }
+
     public bool MeleeTrigger()
     {
         List<OverlayTile> meleeRange = MapController.Instance.Get3x3Grid(character.activeTile);
@@ -230,7 +229,7 @@ public class PlayerController : Publisher
             Debug.Log("AOE not succesful");
             return false;
         }
-        // Debug.Log("Blocks: " + aoeRange.Count);
+        
         foreach (OverlayTile tile in aoeRange)
         {
             Vector2Int coordinates = new Vector2Int(tile.gridLocation.x, tile.gridLocation.y);
@@ -240,8 +239,6 @@ public class PlayerController : Publisher
                 Enemy target = EnemyManager.Instance.enemyMap[coordinates];
 
                 DamageManager.Instance.DealDamageToEnemy(50, target);
-
-
             }
         }
 
@@ -266,6 +263,7 @@ public class PlayerController : Publisher
             tile.ShowGreenTile();
         }
     }
+
     public bool MoveTrigger()
     {
         foreach (var tile in reachableTiles)
@@ -295,8 +293,9 @@ public class PlayerController : Publisher
 
     public bool InteractTrigger()
     {
-        bool inRange = (character.activeTile.gridLocation.x - destinationTile.gridLocation.x < 2) && (character.activeTile.gridLocation.y - destinationTile.gridLocation.y < 2);
+        bool inRange = (Mathf.Abs(character.activeTile.gridLocation.x - destinationTile.gridLocation.x) < 2) && (Mathf.Abs(character.activeTile.gridLocation.y - destinationTile.gridLocation.y) < 2);
         Vector2Int coordinates = new(destinationTile.gridLocation.x, destinationTile.gridLocation.y);
+        
         if (inRange && InteractablesManager.Instance.entityMap.ContainsKey(coordinates))
         {
             InteractablesManager.Instance.Interact(destinationTile);
@@ -314,13 +313,7 @@ public class PlayerController : Publisher
     }
 
     public void GetMovementRange()
-    {
-        /*
-        foreach (var tile in reachableTiles)
-        {
-            tile.HideTile();
-        }*/
-        
+    {        
         reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3, 1);
 
         foreach (var tile in reachableTiles)
@@ -329,6 +322,29 @@ public class PlayerController : Publisher
         }
     }
 
+    public void TransitionLTS()
+    {
+        StartCoroutine(TransitionLTSAnim());
+    }
+
+    public void TransitionSTL()
+    {
+        StartCoroutine(TransitionSTLAnim());
+    }
+
+    IEnumerator TransitionLTSAnim()
+    {
+        animationController.status = PlayerAnimator.Status.STRONGER;
+        yield return new WaitForSecondsRealtime(1.5f);
+        animationController.status = PlayerAnimator.Status.NIL;
+    }
+
+    IEnumerator TransitionSTLAnim()
+    {
+        animationController.status = PlayerAnimator.Status.WEAKENING;
+        yield return new WaitForSecondsRealtime(1.5f);
+        animationController.status = PlayerAnimator.Status.NIL;
+    }
     private void PositionCharacterOnTile(OverlayTile tile)
     {
         character.transform.position = new Vector3(tile.transform.position.x,

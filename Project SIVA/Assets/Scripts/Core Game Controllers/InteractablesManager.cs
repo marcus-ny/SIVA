@@ -57,7 +57,7 @@ public class InteractablesManager : MonoBehaviour
             }
         }
     }
-
+    
     
     public void Interact(OverlayTile curr)
     {

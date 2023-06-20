@@ -99,3 +99,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeTile: {fileID: 0}
   prefab: {fileID: 0}
+  active: 0
