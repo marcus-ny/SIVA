@@ -3,8 +3,25 @@ name: Tests
 on: [push]
 
 jobs:
-  test1:
-    name: Standardized Test
+  UnitTest:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      # Tested before MS2
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          projectPath: Project SIVA
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          
+  BuildTest:
+    name: Build Test
+    needs: UnitTest
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
