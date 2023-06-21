@@ -12,12 +12,6 @@ jobs:
         with:
           lfs: true
           
-      - name: Restore LFS cache
-        uses: actions/cache@v2
-        id: lfs-cache
-        with:
-          path: .git/lfs
-          key: ${{ runner.os }}-lfs-${{ hashFiles('.lfs-assets-id') }}
 
       - name: Git LFS Pull
         run: |
@@ -26,12 +20,13 @@ jobs:
           git reset --hard
 
       # Cache
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: Library
-          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          key: Library-SIVA
           restore-keys: |
             Library-
+            Library-SIVA
           
       - name: Run tests
         uses: game-ci/unity-test-runner@v2.1.1
