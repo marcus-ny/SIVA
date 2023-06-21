@@ -17,8 +17,7 @@ public class ScenesManager : MonoBehaviour
     public enum Scene{
         MainMenu,
         Level01,
-        Clone_Level02_Abstraction_TEST,
-        Demo_Sprint1
+        MS2PlayerDemo
     }
 
     // This method loads a scene specified in the parameter by name
@@ -28,7 +27,7 @@ public class ScenesManager : MonoBehaviour
 
     // This method loads a new game meaning the level01 scene
     public void LoadNewGame(){
-        StartCoroutine(LoadLevel(Scene.Demo_Sprint1.ToString()));
+        StartCoroutine(LoadLevel(Scene.MS2PlayerDemo.ToString()));
     }
 
     /*

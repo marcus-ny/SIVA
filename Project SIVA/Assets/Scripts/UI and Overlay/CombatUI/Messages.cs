@@ -12,8 +12,11 @@ public class Message
 
     public enum MessageType
     {
-        PlayerTurn,
-        EnemyTurn,
-        SystemNotify
+        Damage,
+        LightDamage,
+        Healing,
+        RedNotify,
+        GreenNotify,
+        SystemError
     }
 }

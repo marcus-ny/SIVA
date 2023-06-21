@@ -197,10 +197,12 @@ public class PlayerController : Publisher
         }
         else if (destinationTile.enemy == null)
         {
+            NotifyObservers(GameEvents.NoTarget);
             Debug.Log("No target");
         }
         else if (!inRange)
         {
+            NotifyObservers(GameEvents.TargetOFR);
             Debug.Log("Target out of range");
         }
         return false;
@@ -236,6 +238,7 @@ public class PlayerController : Publisher
         }
         if (!MouseController.Instance.GetFocusedOnTile().HasValue)
         {
+            NotifyObservers(GameEvents.AOEunsuccessful); ;
             Debug.Log("AOE not succesful");
             return false;
         }
@@ -313,10 +316,12 @@ public class PlayerController : Publisher
         }
         else if (!inRange)
         {
+            NotifyObservers(GameEvents.InteractableOFR);
             Debug.Log("Interactable out of range!");
         }
         else
         {
+            NotifyObservers(GameEvents.NoInteractable);
             Debug.Log("There is no interactable on this tile");
         }
         return false;

@@ -24,8 +24,9 @@ public class UIHealthBar : MonoBehaviour, IObserver
 
     public void OnNotify(GameEvents gameEvent)
     {
-        if (gameEvent == GameEvents.PlayerHealthAltered)
+        if ((gameEvent == GameEvents.PlayerHealthAltered) || (gameEvent == GameEvents.LightDamage))
         {
+            
             SetHealth(PlayerController.Instance.character.hitpoints);
             HPCounter.text = (PlayerController.Instance.character.hitpoints).ToString() + "/" + (_healthSlider.maxValue).ToString();
         }
