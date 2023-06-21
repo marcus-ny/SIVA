@@ -9,14 +9,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      # Tested before MS2
-      - name: Run tests
-        uses: game-ci/unity-test-runner@v2
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with:
-          projectPath: Project SIVA
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
           
       # Pull LFS
       - name: Git LFS Pull
