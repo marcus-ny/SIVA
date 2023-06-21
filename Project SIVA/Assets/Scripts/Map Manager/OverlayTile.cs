@@ -70,4 +70,9 @@ public class OverlayTile : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 255);
     }
+
+    public void ShowBlueTile()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 200, 255);
+    }
 }

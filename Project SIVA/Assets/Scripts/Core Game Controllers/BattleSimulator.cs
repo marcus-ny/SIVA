@@ -11,7 +11,7 @@ public class BattleSimulator : Publisher
 
     public BattleState State; // Change to private later
 
-    public readonly int MAX_ACTIONS = 5; // Constant
+    public readonly int MAX_ACTIONS = 4; // Constant
 
     public int actionsPerformed;
 
@@ -80,6 +80,7 @@ public class BattleSimulator : Publisher
      */
     IEnumerator EnemyTakeActions()
     {
+        yield return new WaitForSecondsRealtime(1.5f);
         //foreach (KeyValuePair<Vector2Int, Enemy> enemy in EnemyManager.Instance.enemyMap)
         foreach (Enemy enemy in enemyList)
         {
@@ -133,15 +134,18 @@ public class BattleSimulator : Publisher
 
     IEnumerator WaitForInteractInput()
     {
-        
+        InteractablesManager.Instance.HightlightAll(true);
         while (!Input.GetMouseButtonDown(0))
         {
+            player.GetInteractRange();
             yield return null;
         }
         if (player.InteractTrigger())
         {
+            
             actionsPerformed += 1;
         }
+        InteractablesManager.Instance.HightlightAll(false);
     }
     public void InteractItem()
     {

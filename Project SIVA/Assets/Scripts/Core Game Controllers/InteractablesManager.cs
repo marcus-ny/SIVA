@@ -33,9 +33,13 @@ public class InteractablesManager : MonoBehaviour
         entityMap = new Dictionary<Vector2Int, Interactable>();
         spawnComplete = false;
     }
-    void Start()
+
+    public void HightlightAll(bool trigger)
     {
-        
+        foreach (Interactable interactable in entityMap.Values)
+        {
+            interactable.Highlight(trigger);
+        }
     }
         
     void Update()

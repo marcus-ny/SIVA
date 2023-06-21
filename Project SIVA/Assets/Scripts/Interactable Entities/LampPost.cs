@@ -5,12 +5,19 @@ using UnityEngine;
 public class LampPost : Interactable
 {
     public bool active;
+    private LampPostAnimationController animationController;
+
     private void Start()
     {
         EmitLight(activeTile, true);
         active = true;
+        animationController = gameObject.GetComponent<LampPostAnimationController>();
     }
 
+    public override void Highlight(bool trigger)
+    {
+        animationController.Highlight(trigger);
+    }
     public override void ReceiveInteraction()
     {
         if (active)
