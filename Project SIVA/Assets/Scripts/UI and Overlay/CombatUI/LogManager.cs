@@ -27,12 +27,12 @@ public class LogManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             //SendMessageToLog("Space key pressed", Message.MessageType.PlayerTurn);
-            SendMessageToLog("Space key pressed");
+            SendMessageToLog("Space key pressed", Message.MessageType.PlayerTurn);
         }
     }
 
-    //public void SendMessageToLog(string text, Message.MessageType messageType)
-    public void SendMessageToLog(string text)
+    public void SendMessageToLog(string text, Message.MessageType messageType)
+    //public void SendMessageToLog(string text)
     {
         if(messageList.Count >= maxMessages)
         {
@@ -49,14 +49,14 @@ public class LogManager : MonoBehaviour
         newMessage.textObject = newText.GetComponent<TextMeshProUGUI>();
 
         newMessage.textObject.text = newMessage.text;
-        //newMessage.textObject.color = MessageTypeColor(messageType);
+        newMessage.textObject.color = MessageTypeColor(messageType);
 
         messageList.Add(newMessage);
     }
 
     Color MessageTypeColor(Message.MessageType messageType)
     {
-        Color color = Color.black;
+        Color color = playerTurnMessage;
 
         switch (messageType)
         {
