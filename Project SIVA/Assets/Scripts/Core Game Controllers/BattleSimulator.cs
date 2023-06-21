@@ -126,8 +126,6 @@ public class BattleSimulator : Publisher
 
             // Check for tickDamage
             DamageManager.Instance.tickDamage();
-
-            // reset
             actionsPerformed = 0;
         }
     }
