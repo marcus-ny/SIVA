@@ -3682,8 +3682,8 @@ MonoBehaviour:
   maxMessages: 25
   chatPanel: {fileID: 1844964970}
   textObject: {fileID: 5698887857068955449, guid: ec483315c06dfb44d80307815ce4be0e, type: 3}
-  playerTurnMessage: {r: 0.34536484, g: 1, b: 0.023584902, a: 0}
-  enemyTurnMessage: {r: 0, g: 0, b: 0, a: 0}
+  playerTurnMessage: {r: 0.34536484, g: 1, b: 0.023584902, a: 1}
+  enemyTurnMessage: {r: 1, g: 0, b: 0, a: 1}
   messageList: []
 --- !u!1 &627714946
 GameObject:
@@ -9427,7 +9427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4643509906284652681, guid: 8c203d21dbe76294caa09f40400b50c1, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4643509906284652681, guid: 8c203d21dbe76294caa09f40400b50c1, type: 3}
       propertyPath: m_AnchorMax.x
@@ -12567,7 +12567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6887496758259507960, guid: 19b2d542ee085f449b712d6302b64c8e, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6887496758259507960, guid: 19b2d542ee085f449b712d6302b64c8e, type: 3}
       propertyPath: m_AnchorMax.x
