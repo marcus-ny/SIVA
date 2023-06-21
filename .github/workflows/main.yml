@@ -19,6 +19,15 @@ jobs:
           git add .
           git reset --hard
           
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: Project SIVA/Library
+          key: Library-SIVA-StandaloneWindows64
+          restore-keys: |
+            Library-SIVA-
+            Library-
+          
       - name: Run tests
         uses: game-ci/unity-test-runner@v2.1.1
         env:
