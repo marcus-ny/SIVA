@@ -17,6 +17,8 @@ public class DamageManager : Publisher
 
     public Enemy recentTarget;
     public float recentDamage;
+    public float lightDamage = 5.0f;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -44,10 +46,10 @@ public class DamageManager : Publisher
 
     public void DealDamageToPlayer(float damage)
     {
-        
-        NotifyObservers(GameEvents.PlayerHealthAltered);
+        recentDamage = damage;
         playerParty[0].hitpoints -= damage;
         playerParty[0].DisplayDamageVisual();
+        NotifyObservers(GameEvents.PlayerHealthAltered);
     }
     // This function is temporarily meant for enemy dealing damage to player
     // (not implemented yet)
@@ -65,12 +67,22 @@ public class DamageManager : Publisher
         NotifyObservers(GameEvents.EnemyHealthAltered);
     }
 
+    public void FriendlyFireToEnemy(float damage, Enemy target)
+    {
+        target.TakeDamage(damage);
+        target.SwitchColor("Red");
+        recentTarget = target;
+        recentDamage = damage;
+        NotifyObservers(GameEvents.EnemyFriendlyFire);
+    }
+
     public void HealEnemy(float healAmount, Enemy target)
     {
         recentTarget = target;
-        recentDamage = -1 * healAmount;
-        target.TakeDamage(-1 * healAmount);
+        recentDamage = healAmount;
+        target.TakeDamage(healAmount);
         target.SwitchColor("Green");
+        NotifyObservers(GameEvents.EnemyHealed);
 
     }
 
@@ -84,8 +96,9 @@ public class DamageManager : Publisher
     {
         if (playerParty[0].activeTile.light_level > 0)
         { 
-            playerParty[0].hitpoints -= 5;
+            playerParty[0].hitpoints -= lightDamage;
             playerParty[0].DisplayDamageVisual();
+            NotifyObservers(GameEvents.LightDamage);
         }
         
     }

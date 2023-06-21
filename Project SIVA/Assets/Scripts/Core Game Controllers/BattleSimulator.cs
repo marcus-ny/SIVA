@@ -15,6 +15,8 @@ public class BattleSimulator : Publisher
 
     public int actionsPerformed;
 
+    public Enemy currentEnemy;
+
     /*
      * These variables are temporarily set to 1 each for testing purposes
      * They are also set to public so that we can assign the test prefabs
@@ -84,6 +86,7 @@ public class BattleSimulator : Publisher
         //foreach (KeyValuePair<Vector2Int, Enemy> enemy in EnemyManager.Instance.enemyMap)
         foreach (Enemy enemy in enemyList)
         {
+            currentEnemy = enemy;
             enemy.Action();
             while (enemy.state_moving)
             {

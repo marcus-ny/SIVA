@@ -93,7 +93,7 @@ public class Soldier : Enemy
         {
             if (toCheck.Contains(enemy.activeTile))
             {
-                DamageManager.Instance.DealDamageToEnemy(2.0f, enemy);
+                DamageManager.Instance.FriendlyFireToEnemy(2.0f, enemy);
             }
         }
     }
