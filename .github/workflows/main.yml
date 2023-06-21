@@ -3,25 +3,13 @@ name: Tests
 on: [push]
 
 jobs:
-  UnitTest:
-    name: Unit Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        
-      # Tested before MS2
-      
-          
-  BuildTest:
+  Test:
     name: Build Test
-    needs: UnitTest
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
           lfs: true
           
       # Pull LFS
