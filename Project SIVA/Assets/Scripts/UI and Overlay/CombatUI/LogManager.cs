@@ -10,7 +10,7 @@ public class LogManager : MonoBehaviour
 
     public GameObject chatPanel, textObject;
 
-    public Color playerTurnMessage, enemyTurnMessage;
+    public Color playerTurnMessage, enemyTurnMessage, neutralMessage;
 
     [SerializeField] 
     List<Message> messageList = new List<Message>();
@@ -18,7 +18,8 @@ public class LogManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SendMessageToLog("Battle Start!", Message.MessageType.SystemNotify);
+        SendMessageToLog("Player's Turn", Message.MessageType.SystemNotify);
     }
 
     // Update is called once per frame
@@ -56,7 +57,7 @@ public class LogManager : MonoBehaviour
 
     Color MessageTypeColor(Message.MessageType messageType)
     {
-        Color color = playerTurnMessage;
+        Color color = neutralMessage;
 
         switch (messageType)
         {
@@ -65,6 +66,9 @@ public class LogManager : MonoBehaviour
                 break;
             case Message.MessageType.EnemyTurn:
                 color = enemyTurnMessage;
+                break;
+            case Message.MessageType.SystemNotify:
+                color = neutralMessage;
                 break;
         }
         
@@ -82,6 +86,7 @@ public class Message
     public enum MessageType
     {
         PlayerTurn,
-        EnemyTurn
+        EnemyTurn,
+        SystemNotify
     }
 }

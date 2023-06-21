@@ -1523,7 +1523,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2083862695}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3682,8 +3682,9 @@ MonoBehaviour:
   maxMessages: 25
   chatPanel: {fileID: 1844964970}
   textObject: {fileID: 5698887857068955449, guid: ec483315c06dfb44d80307815ce4be0e, type: 3}
-  playerTurnMessage: {r: 0.34536484, g: 1, b: 0.023584902, a: 1}
-  enemyTurnMessage: {r: 1, g: 0, b: 0, a: 1}
+  playerTurnMessage: {r: 0.12941177, g: 0.48235297, b: 0.003921569, a: 1}
+  enemyTurnMessage: {r: 0.7254902, g: 0, b: 0, a: 1}
+  neutralMessage: {r: 0, g: 0, b: 0, a: 1}
   messageList: []
 --- !u!1 &627714946
 GameObject:
@@ -9427,7 +9428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4643509906284652681, guid: 8c203d21dbe76294caa09f40400b50c1, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4643509906284652681, guid: 8c203d21dbe76294caa09f40400b50c1, type: 3}
       propertyPath: m_AnchorMax.x
@@ -12567,7 +12568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6887496758259507960, guid: 19b2d542ee085f449b712d6302b64c8e, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6887496758259507960, guid: 19b2d542ee085f449b712d6302b64c8e, type: 3}
       propertyPath: m_AnchorMax.x
