@@ -177,7 +177,7 @@ public class PlayerController : Publisher
     {
         animationController.status = PlayerAnimator.Status.MELEEING;
         yield return new WaitForSecondsRealtime(1f);
-        DamageManager.Instance.DealDamageToEnemy(80, destinationTile.enemy);
+        DamageManager.Instance.DealDamageToEnemy(30, destinationTile.enemy);
         animationController.status = PlayerAnimator.Status.NIL;
     }
 
@@ -213,6 +213,16 @@ public class PlayerController : Publisher
         foreach (OverlayTile tile in meleeRange)
         {
             tile.ShowGreenTile();
+        }
+    }
+
+    public void GetInteractRange()
+    {
+        List<OverlayTile> meleeRange = MapController.Instance.Get3x3Grid(character.activeTile);
+
+        foreach (OverlayTile tile in meleeRange)
+        {
+            tile.ShowBlueTile();
         }
     }
 

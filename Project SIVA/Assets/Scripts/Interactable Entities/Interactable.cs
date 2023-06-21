@@ -8,5 +8,5 @@ public abstract class Interactable: MonoBehaviour
 
     public abstract void ReceiveInteraction();
 
-    
+    public abstract void Highlight(bool trigger);
 }
