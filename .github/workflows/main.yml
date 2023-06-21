@@ -46,7 +46,7 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64
           projectPath: ProjectSIVA
-          allowDirtyBuild: true
+          #allowDirtyBuild: true
 
       # Output
       - uses: actions/upload-artifact@v2
