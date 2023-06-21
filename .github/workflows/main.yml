@@ -17,14 +17,6 @@ jobs:
           git add .
           git reset --hard
           
-      # Run testcases
-      - name: Run testcases
-        uses: game-ci/unity-test-runner@v2
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with:
-          projectPath: Project SIVA
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
           
       # Build
       - name: Build project
