@@ -4,12 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class LogManager : MonoBehaviour
+public class LogManager : MonoBehaviour, IObserver
 {
     public int maxMessages = 25;
-
     public GameObject chatPanel, textObject;
-
     public Color playerTurnMessage, enemyTurnMessage, neutralMessage;
 
     [SerializeField] 
@@ -18,8 +16,8 @@ public class LogManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SendMessageToLog("Battle Start!", Message.MessageType.SystemNotify);
-        SendMessageToLog("Player's Turn", Message.MessageType.SystemNotify);
+        SendMessageToLog("<<Battle Start!>>", Message.MessageType.SystemNotify);
+        SendMessageToLog("<<Player's Turn>>", Message.MessageType.SystemNotify);
     }
 
     // Update is called once per frame
@@ -27,13 +25,11 @@ public class LogManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            //SendMessageToLog("Space key pressed", Message.MessageType.PlayerTurn);
-            SendMessageToLog("Space key pressed", Message.MessageType.PlayerTurn);
+            SendMessageToLog("[Testing] Space key pressed", Message.MessageType.PlayerTurn);
         }
     }
 
     public void SendMessageToLog(string text, Message.MessageType messageType)
-    //public void SendMessageToLog(string text)
     {
         if(messageList.Count >= maxMessages)
         {
@@ -74,19 +70,22 @@ public class LogManager : MonoBehaviour
         
         return color;
     }
-}
 
-[System.Serializable] 
-public class Message
-{
-    public string text;
-    public TextMeshProUGUI textObject;
-    public MessageType messageType;
-
-    public enum MessageType
+    public void OnNotify(GameEvents gameEvent)
     {
-        PlayerTurn,
-        EnemyTurn,
-        SystemNotify
-    }
+        switch (gameEvent)
+        {
+            // Check for turns
+            case gameEvent == GameEvents.PlayerTurn:
+                SendMessageToLog("<<Player's Turn>>", Message.MessageType.SystemNotify);
+                break;
+            case gameEvent == GameEvents.EnemyTurn:
+                SendMessageToLog("<<Enemy's Turn>>", Message.MessageType.SystemNotify);
+                break;
+            // Check for damage done to player during enemy turn
+            case gameEvent == GameEvents.PlayerHealthAltered:
+                private recentDamage = DamageManager.Instance.recentDamage; 
+                SendMessageToLog("[Donovan] received " + recentDamage + " damage!", Message.MessageType.EnemyTurn);
+                break;
+        }
 }
