@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   test1:
-    name: checkstyle
+    name: Standardized Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
