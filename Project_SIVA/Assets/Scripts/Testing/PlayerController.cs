@@ -54,6 +54,7 @@ public class PlayerController : Publisher
         {
             BattleSimulator.Instance.EnemyWin();
         }
+
         if (character == null)
         {
             character = Instantiate(character_prefab).GetComponent<CharacterInfo>();
@@ -63,6 +64,7 @@ public class PlayerController : Publisher
             reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3, 1);
             animationController = character.GetComponent<PlayerAnimator>();
         }
+
         if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN) {
             var tileHit = MouseController.Instance.GetFocusedOnTile();
             OverlayTile overlayTile;
@@ -189,7 +191,7 @@ public class PlayerController : Publisher
         {
             tile.HideTile();
         }
-        bool inRange = (character.activeTile.gridLocation.x - destinationTile.gridLocation.x < 2) && (character.activeTile.gridLocation.y - destinationTile.gridLocation.y < 2);
+        bool inRange = (Mathf.Abs(character.activeTile.gridLocation.x - destinationTile.gridLocation.x) < 2) && (Mathf.Abs(character.activeTile.gridLocation.y - destinationTile.gridLocation.y) < 2);
         if (destinationTile.enemy != null && inRange)
         {
             StartCoroutine(SuccessfulMelee());
@@ -236,7 +238,7 @@ public class PlayerController : Publisher
             aoeRange = MapController.Instance.GetAoeAttackTiles(MouseController.Instance.mouseOverTile, character.activeTile, 5);
 
         }
-        if (!MouseController.Instance.GetFocusedOnTile().HasValue)
+        if (!MouseController.Instance.GetFocusedOnTile().HasValue || !aoeRange.Contains(MouseController.Instance.mouseOverTile))
         {
             NotifyObservers(GameEvents.AOEunsuccessful); ;
             Debug.Log("AOE not succesful");
@@ -360,6 +362,7 @@ public class PlayerController : Publisher
         yield return new WaitForSecondsRealtime(1.5f);
         animationController.status = PlayerAnimator.Status.NIL;
     }
+
     private void PositionCharacterOnTile(OverlayTile tile)
     {
         character.transform.position = new Vector3(tile.transform.position.x,

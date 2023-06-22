@@ -228,7 +228,7 @@ public class BattleSimulator : Publisher
     }
     public void DealAOEDamage()
     {
-        if (actionsPerformed == MAX_ACTIONS)
+        if (actionsPerformed > MAX_ACTIONS - 2)
         {
             return;
         }

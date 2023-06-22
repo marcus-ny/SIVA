@@ -46,9 +46,17 @@ public class DamageManager : Publisher
 
     public void DealDamageToPlayer(float damage)
     {
+        if (playerController.character.activeTile.light_level > 0)
+        {
+            damage = damage * 1.5f;
+        }
+
         recentDamage = damage;
+
         playerParty[0].hitpoints -= damage;
+
         playerParty[0].DisplayDamageVisual();
+
         NotifyObservers(GameEvents.PlayerHealthAltered);
     }
     // This function is temporarily meant for enemy dealing damage to player

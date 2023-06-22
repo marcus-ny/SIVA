@@ -91,7 +91,7 @@ public class Soldier : Enemy
 
         foreach(Enemy enemy in EnemyManager.Instance.enemyMap.Values)
         {
-            if (toCheck.Contains(enemy.activeTile))
+            if (toCheck.Contains(enemy.activeTile) && enemy != this)
             {
                 DamageManager.Instance.FriendlyFireToEnemy(2.0f, enemy);
             }
