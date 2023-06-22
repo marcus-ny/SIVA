@@ -1,10 +1,10 @@
 name: Tests
 
-on: [pull_request]
+on: [push, pull_request]
 
 jobs:
   Test:
-    name: Build Test
+    name: Unit Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -28,20 +28,11 @@ jobs:
             Library-
             Library-SIVA
           
-      # Build
-      - name: Build project
-        uses: game-ci/unity-builder@v2.2.0
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v2.1.1
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: StandaloneWindows64
           projectPath: Project_SIVA
-          #allowDirtyBuild: true
-
-      # Output
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Build
-          path: build
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          

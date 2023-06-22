@@ -70,9 +70,7 @@ public class Drone : Enemy
         return "Drone";
     }
     public void EmitLight(bool trigger)
-    {
-        
-        
+    {        
         List<OverlayTile> lighting = MapController.Instance.Get3x3Grid(activeTile);
         foreach (OverlayTile tile in lighting)
         {
@@ -81,16 +79,19 @@ public class Drone : Enemy
     }
     IEnumerator DroneMovement()
     {
-        
+        bool startedMoving = false;
         while (state_moving)
         {
             yield return null;
+            startedMoving = true;
         }
-        EmitLight(true);
+        if (startedMoving)
+            EmitLight(true);
     }
+
     public void Search()
     {
-        EmitLight(false);
+        
         List<OverlayTile> toFind = GetClosestTileToPlayer();
         //range = rangeFinder.GetReachableTiles(activeTile, 3);
         foreach (OverlayTile tile in toFind)
@@ -109,16 +110,20 @@ public class Drone : Enemy
 
             if (path.Count > 0)
             {
+                EmitLight(false);
                 actionsPerformed += 2;
                 break;
             }
         }
+        // If the drone is closest to the player as possible, no need to move
         if (path.Count == 0)
         {
             // Skip turn
             actionsPerformed = maxAP;
         }
+
         Coroutine MovingCoroutine = StartCoroutine(MoveAlongPath());
+
         StartCoroutine(DroneMovement());
     }
 
@@ -154,7 +159,7 @@ public class Drone : Enemy
         // turns off generator light
         EmitLight(false);
         EnemyManager.Instance.enemyMap.Remove(new
-            Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
+        Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
         BattleSimulator.Instance.enemyList.Remove(this);
         Destroy(gameObject);
     }
