@@ -88,7 +88,7 @@ public class DamageManager : Publisher
     {
         recentTarget = target;
         recentDamage = healAmount;
-        target.TakeDamage(healAmount);
+        target.TakeDamage(-1 * healAmount);
         target.SwitchColor("Green");
         NotifyObservers(GameEvents.EnemyHealed);
 
