@@ -17,7 +17,7 @@ jobs:
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
         
       - name: Restore LFS cache
-        uses: actions/cache/save@v3
+        uses: actions/cache/restore@v3
         id: lfs-cache-restore
         with:
           path: .git/lfs
