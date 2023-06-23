@@ -9,8 +9,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          lfs: true
+        #with:
+          #lfs: true
           
 
       - name: Create LFS file list
