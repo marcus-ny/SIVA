@@ -13,8 +13,6 @@ public class EnemyManager : MonoBehaviour
 
     public Dictionary<Vector2Int, Enemy> enemyMap;
 
-   
-
     public PlayerController playerController;
 
     private bool spawnComplete = false;

@@ -6,7 +6,6 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     public OverlayTile activeTile;
-    public GameObject enemyPrefab;
 
     public CharacterInfo player;
 
@@ -36,7 +35,6 @@ public abstract class Enemy : MonoBehaviour
     {
         hitpoints -= damage;
     }
-    
 
     protected IEnumerator MoveAlongPath()
     {
@@ -100,28 +98,6 @@ public abstract class Enemy : MonoBehaviour
         activeTile.isBlocked = true;
     }
     
-    // Damage Visuals
-    IEnumerator Delay()
-    {
-        yield return new WaitForSecondsRealtime(0.5f);
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
-    }
-
-    public void SwitchColor(string _color)
-    {
-        if (_color == "Red")
-        {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 1);
-            StartCoroutine("Delay");
-        } else if (_color == "Green")
-        {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 1);
-            StartCoroutine("Delay");
-        }
-    }
-
-    //public abstract List<OverlayTile> FindNearestMechanicLocation();
-
     public virtual void TriggerDeath()
     {
         EnemyManager.Instance.enemyMap.Remove(new
@@ -130,5 +106,25 @@ public abstract class Enemy : MonoBehaviour
         Destroy(gameObject);
         //Debug.Log(EnemyManager.Instance.enemyMap.Count);
     }
-    
+
+    public void SwitchColor(string _color)
+    {
+        if (_color == "Red")
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 1);
+            StartCoroutine("Delay");
+        }
+        else if (_color == "Green")
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 255, 0, 1);
+            StartCoroutine("Delay");
+        }
+    }
+    // Damage Visuals
+    IEnumerator Delay()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+    }
+
 }

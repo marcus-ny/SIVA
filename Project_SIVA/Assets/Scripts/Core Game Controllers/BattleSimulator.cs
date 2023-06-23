@@ -82,7 +82,7 @@ public class BattleSimulator : Publisher
     IEnumerator EnemyTakeActions()
     {
         yield return new WaitForSecondsRealtime(1.5f);
-        //foreach (KeyValuePair<Vector2Int, Enemy> enemy in EnemyManager.Instance.enemyMap)
+        
         foreach (Enemy enemy in enemyList)
         {
             currentEnemy = enemy;
