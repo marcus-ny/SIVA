@@ -3,7 +3,7 @@ using System.Collections.Generic;
 //using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+//using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class MapController : MonoBehaviour
 {
