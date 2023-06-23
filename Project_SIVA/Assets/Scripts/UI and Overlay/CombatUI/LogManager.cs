@@ -122,7 +122,7 @@ public class LogManager : MonoBehaviour, IObserver
         if (gameEvent == GameEvents.PlayerHealthAltered)
         {
             float recentDamage = DamageManager.Instance.recentDamage;
-            Enemy currentEnemy = BattleSimulator.Instance.currentEnemy;
+            Enemy currentEnemy = BattleSimulator.Instance.GetCurrentEnemy();
 
             switch (currentEnemy.ToString())
             {
@@ -147,14 +147,14 @@ public class LogManager : MonoBehaviour, IObserver
         {
             Enemy recentTarget = DamageManager.Instance.recentTarget;
             float recentDamage = DamageManager.Instance.recentDamage;
-            Enemy currentEnemy = BattleSimulator.Instance.currentEnemy;
+            Enemy currentEnemy = BattleSimulator.Instance.GetCurrentEnemy();
             SendMessageToLog("[" + recentTarget.ToString() + "] is friendly fired by [" + currentEnemy.ToString() + "]; -" + recentDamage + "HP", Message.MessageType.Damage);
         }
         if (gameEvent == GameEvents.EnemyHealed)
         {
             Enemy recentTarget = DamageManager.Instance.recentTarget;
             float recentDamage = DamageManager.Instance.recentDamage;
-            Enemy currentEnemy = BattleSimulator.Instance.currentEnemy;
+            Enemy currentEnemy = BattleSimulator.Instance.GetCurrentEnemy();
             SendMessageToLog("[" + recentTarget.ToString() + "] is healed by [" + currentEnemy.ToString() + "]; +" + recentDamage + "HP", Message.MessageType.Healing);
         }
         if (gameEvent == GameEvents.LightDamage)

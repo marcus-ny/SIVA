@@ -13,7 +13,7 @@ public class EnemyManager : MonoBehaviour
 
     public Dictionary<Vector2Int, Enemy> enemyMap;
 
-    public GameObject soldier_Prefab;
+   
 
     public PlayerController playerController;
 

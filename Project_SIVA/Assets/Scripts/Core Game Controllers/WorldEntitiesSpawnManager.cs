@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class InteractableSpawnManager : MonoBehaviour
+public class WorldEntitiesSpawnManager : MonoBehaviour
 {
     List<Vector2Int> spawnLocations;
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class InteractableSpawnManager : MonoBehaviour
                     if (InteractableSpawnMap.HasTile(tileLocation) && !EnemyManager.Instance.enemySpawns.ContainsKey(tileKey))
                     {
                         GameObject prefab = InteractableSpawnMap.GetTile<InteractableTile>(tileLocation).interactable_prefab;
-                        InteractablesManager.Instance.entitySpawns.Add(tileKey, prefab);
+                        WorldEntitiesManager.Instance.entitySpawns.Add(tileKey, prefab);
 
                     }
                 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LampPost : Interactable
+public class LampPost : WorldEntity, IInteractable
 {
     public bool active;
     private LampPostAnimationController animationController;
@@ -18,7 +18,7 @@ public class LampPost : Interactable
     {
         animationController.Highlight(trigger);
     }
-    public override void ReceiveInteraction()
+    public void ReceiveInteraction()
     {
         if (active)
         {
