@@ -17,19 +17,12 @@ jobs:
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
         
       - name: Restore LFS cache
-        uses: actions/cache/restore@v3
-        id: lfs-cache-restore
+        uses: actions/cache@v3
+        id: lfs-cache
         with:
           path: .git/lfs
           key: ${{ runner.os }}-lfs-${{ hashFiles('.lfs-assets-id') }}
           
-      - name: Save LFS cache
-        uses: actions/cache/save@v3
-        id: lfs-cache-save
-        with:
-          path: .git/lfs
-          key: ${{ steps.lfs-cache-restore.outputs.cache-primary-key}}
-
       - name: Git LFS Pull
         run: |
           git lfs pull
@@ -39,7 +32,7 @@ jobs:
       # Cache
       - uses: actions/cache@v3
         with:
-          path: Library
+          path: Project_SIVA/Library
           key: Library-SIVA
           restore-keys: |
             Library-
