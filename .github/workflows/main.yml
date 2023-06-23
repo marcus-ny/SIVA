@@ -28,7 +28,7 @@ jobs:
         id: lfs-cache-save
         with:
           path: .git/lfs
-          key: ${{ runner.os }}-lfs-${{ hashFiles('.lfs-assets-id') }}
+          key: ${{ steps.lfs-cache-restore.outputs.cache-primary-key}}
 
       - name: Git LFS Pull
         run: |
