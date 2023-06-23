@@ -311,9 +311,9 @@ public class PlayerController : Publisher
         bool inRange = (Mathf.Abs(character.activeTile.gridLocation.x - destinationTile.gridLocation.x) < 2) && (Mathf.Abs(character.activeTile.gridLocation.y - destinationTile.gridLocation.y) < 2);
         Vector2Int coordinates = new(destinationTile.gridLocation.x, destinationTile.gridLocation.y);
         
-        if (inRange && InteractablesManager.Instance.entityMap.ContainsKey(coordinates))
+        if (inRange && WorldEntitiesManager.Instance.entityMap.ContainsKey(coordinates))
         {
-            InteractablesManager.Instance.Interact(destinationTile);
+            WorldEntitiesManager.Instance.Interact(destinationTile);
             return true;
         }
         else if (!inRange)

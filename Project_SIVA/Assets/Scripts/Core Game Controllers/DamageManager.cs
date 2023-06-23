@@ -67,14 +67,13 @@ public class DamageManager : Publisher
         {
             damage /= 2;
         }
-        target.TakeDamage(damage);
-        // EnemyManager.Instance.enemyHpStatus.Enqueue(target, target.hitpoints);
-        target.SwitchColor("Red");
         recentTarget = target;
         recentDamage = damage;
-        NotifyObservers(GameEvents.EnemyHealthAltered);
+        target.SwitchColor("Red");
+        target.TakeDamage(damage);
+        NotifyObservers(GameEvents.EnemyHealthAltered);       
     }
-
+    
     public void FriendlyFireToEnemy(float damage, Enemy target)
     {
         target.TakeDamage(damage);

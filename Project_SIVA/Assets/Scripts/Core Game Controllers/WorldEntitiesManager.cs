@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class InteractablesManager : MonoBehaviour
+public class WorldEntitiesManager : MonoBehaviour
 {
-    private static InteractablesManager _instance;
+    private static WorldEntitiesManager _instance;
 
-    public static InteractablesManager Instance { get { return _instance; } }
+    public static WorldEntitiesManager Instance { get { return _instance; } }
 
     // Array to store location of spawned interactables
-    
-    
     public GameObject lampPostPrefab;
 
     public Dictionary<Vector2Int, GameObject> entitySpawns;
     // Tile coordinates to interactable mapping
-    public Dictionary<Vector2Int, Interactable> entityMap;
+    public Dictionary<Vector2Int, WorldEntity> entityMap;
 
     private bool spawnComplete;
     private void Awake()
@@ -30,13 +28,13 @@ public class InteractablesManager : MonoBehaviour
             _instance = this;
         }
         entitySpawns = new();
-        entityMap = new Dictionary<Vector2Int, Interactable>();
+        entityMap = new Dictionary<Vector2Int, WorldEntity>();
         spawnComplete = false;
     }
 
     public void HightlightAll(bool trigger)
     {
-        foreach (Interactable interactable in entityMap.Values)
+        foreach (WorldEntity interactable in entityMap.Values)
         {
             interactable.Highlight(trigger);
         }
@@ -51,7 +49,7 @@ public class InteractablesManager : MonoBehaviour
                 // Possible workaround for abstraction:
                 // TryGetComponent() method
                 
-                entityMap.Add(kvp.Key, Instantiate(kvp.Value).GetComponent<Interactable>());
+                entityMap.Add(kvp.Key, Instantiate(kvp.Value).GetComponent<WorldEntity>());
 
                 OverlayTile tile = MapController.Instance.map[kvp.Key];
 
@@ -65,11 +63,17 @@ public class InteractablesManager : MonoBehaviour
     
     public void Interact(OverlayTile curr)
     {
+        
         Vector2Int coordinates = new Vector2Int(curr.gridLocation.x, curr.gridLocation.y);
-        entityMap[coordinates].ReceiveInteraction();
+        if (entityMap[coordinates] is IInteractable)
+        {
+            IInteractable interactable = (IInteractable) entityMap[coordinates];
+            interactable.ReceiveInteraction();
+        }
+        
     }
     // Should I move this somewhere else
-    private void PositionOnTile(Interactable interactable, OverlayTile tile)
+    private void PositionOnTile(WorldEntity interactable, OverlayTile tile)
     {
         interactable.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
         interactable.GetComponent<SpriteRenderer>().sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;

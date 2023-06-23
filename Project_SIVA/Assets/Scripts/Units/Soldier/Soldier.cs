@@ -12,6 +12,7 @@ public class Soldier : Enemy
     public SoldierAggroState soldierAggroState = new();
     public SoldierRetreatState soldierRetreatState = new();
     public SoldierDeadState soldierDeadState = new();
+    public SoldierRangeState soldierRangeState = new();
 
     public SoldierAnimationController animationController;
 

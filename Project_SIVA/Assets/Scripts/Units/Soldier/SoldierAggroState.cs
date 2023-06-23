@@ -10,7 +10,7 @@ public class SoldierAggroState : SoldierBaseState
     }
     public override void UpdateState(Soldier soldier)
     {
-        
+
         // Otherwise, carry out an aggressive sequence of actions
         Vector3Int soldierLocation = soldier.activeTile.gridLocation;
         Vector3Int playerLocation = soldier.player.activeTile.gridLocation;
@@ -18,16 +18,8 @@ public class SoldierAggroState : SoldierBaseState
         bool inAttackRange = (Mathf.Abs(soldierLocation.x - playerLocation.x) < 2)
         && (Mathf.Abs(soldierLocation.y - playerLocation.y) < 2);
 
-        bool inAggroRange = (Mathf.Abs(soldierLocation.x - playerLocation.x) < 4)
-        && (Mathf.Abs(soldierLocation.y - playerLocation.y) < 4);
-
-        if (!inAggroRange)
-        {
-            soldier.TakePositionForRange();
-            soldier.RangeAttack();
-        }
         // If in range of melee, melee attack
-        else if (inAttackRange)
+        if (inAttackRange)
         {
             //soldier.animationController.MeleeAnimation();
             soldier.MeleeAttack();

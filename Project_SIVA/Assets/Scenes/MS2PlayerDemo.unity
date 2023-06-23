@@ -1522,8 +1522,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 215651510}
   m_HandleRect: {fileID: 2083862695}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5409,7 +5409,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 446715366}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9709,10 +9709,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1214566123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eee5f6a45c40e19408abc049c6a1d3bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 05cdfdd9e6beaf143a54d78e151bd21e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lampPostPrefab: {fileID: 6463620858329364493, guid: e20470c0a07af5b46aed25f36caf2ba8, type: 3}
+  lampPostPrefab: {fileID: 0}
 --- !u!4 &1214566125
 Transform:
   m_ObjectHideFlags: 0

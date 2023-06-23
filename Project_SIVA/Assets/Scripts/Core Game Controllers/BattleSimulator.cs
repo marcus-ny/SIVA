@@ -15,19 +15,18 @@ public class BattleSimulator : Publisher
 
     public int actionsPerformed;
 
-    public Enemy currentEnemy;
-
-    /*
-     * These variables are temporarily set to 1 each for testing purposes
-     * They are also set to public so that we can assign the test prefabs
-     * As the number of enemy and units under player's control grows, these variables will be changed to arrays - partyPlayer and partyEnemy
-     * And the code will be adjusted accordingly
-     */
+    private Enemy currentEnemy;
 
     public List<Enemy> enemyList;
+
     public PlayerController player;
 
     public bool moving;
+
+    public Enemy GetCurrentEnemy()
+    {
+        return currentEnemy;
+    }
 
     private void Awake()
     {
@@ -83,7 +82,7 @@ public class BattleSimulator : Publisher
     IEnumerator EnemyTakeActions()
     {
         yield return new WaitForSecondsRealtime(1.5f);
-        //foreach (KeyValuePair<Vector2Int, Enemy> enemy in EnemyManager.Instance.enemyMap)
+        
         foreach (Enemy enemy in enemyList)
         {
             currentEnemy = enemy;
@@ -137,7 +136,7 @@ public class BattleSimulator : Publisher
 
     IEnumerator WaitForInteractInput()
     {
-        InteractablesManager.Instance.HightlightAll(true);
+        WorldEntitiesManager.Instance.HightlightAll(true);
         while (!Input.GetMouseButtonDown(0))
         {
             player.GetInteractRange();
@@ -148,7 +147,7 @@ public class BattleSimulator : Publisher
             
             actionsPerformed += 1;
         }
-        InteractablesManager.Instance.HightlightAll(false);
+        WorldEntitiesManager.Instance.HightlightAll(false);
     }
     public void InteractItem()
     {

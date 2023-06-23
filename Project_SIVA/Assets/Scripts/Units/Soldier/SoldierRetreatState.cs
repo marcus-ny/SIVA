@@ -20,7 +20,19 @@ public class SoldierRetreatState : SoldierBaseState
             }
         } else
         {
-            soldier.SwitchState(soldier.soldierAggroState);
+            Vector3Int soldierLocation = soldier.activeTile.gridLocation;
+            Vector3Int playerLocation = soldier.player.activeTile.gridLocation;
+            bool inAggroRange = (Mathf.Abs(soldierLocation.x - playerLocation.x) < 4)
+        && (Mathf.Abs(soldierLocation.y - playerLocation.y) < 4);
+
+            if (inAggroRange)
+            {
+                soldier.SwitchState(soldier.soldierAggroState);
+            }
+            else
+            {
+                soldier.SwitchState(soldier.soldierRangeState);
+            }
         }
 
 
