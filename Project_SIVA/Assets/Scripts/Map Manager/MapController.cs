@@ -3,7 +3,7 @@ using System.Collections.Generic;
 //using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+//using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class MapController : MonoBehaviour
 {
@@ -80,7 +80,7 @@ public class MapController : MonoBehaviour
 			tile.ShowTile();
         }
     }
-
+	/*
     public List<OverlayTile> GetNeighborTiles(OverlayTile curr, List<OverlayTile> validTiles, int jumpHeight)
 	{
 		
@@ -115,7 +115,7 @@ public class MapController : MonoBehaviour
 		}
 		
 		return neighbors;
-	}
+	}*/
 
 	
 	public List<OverlayTile> Get3x3Grid(OverlayTile curr)

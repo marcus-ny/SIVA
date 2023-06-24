@@ -9,6 +9,7 @@ public class Rangefinder
 {
    public List<OverlayTile> GetReachableTiles(OverlayTile cur, int range, int jumpHeight)
     {
+        PathFinder pathFinder = new();
         int steps = 0;
 
         List<OverlayTile> reachableTiles = new List<OverlayTile>();
@@ -23,7 +24,7 @@ public class Rangefinder
 
             foreach (var tile in previous)
             {
-                neighbors.AddRange(MapController.Instance.GetNeighborTiles(tile, new List<OverlayTile>(), jumpHeight));
+                neighbors.AddRange(pathFinder.GetNeighborTiles(tile, new List<OverlayTile>(), jumpHeight));
             }
 
             reachableTiles.AddRange(neighbors);

@@ -12,7 +12,7 @@ public class EditModeTest1
     {
         // Use the Assert class to test conditions
         int x = 5;
-
+        
         Assert.AreEqual(x, 5);
     }
 
