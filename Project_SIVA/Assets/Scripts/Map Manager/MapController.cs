@@ -80,7 +80,7 @@ public class MapController : MonoBehaviour
 			tile.ShowTile();
         }
     }
-
+	/*
     public List<OverlayTile> GetNeighborTiles(OverlayTile curr, List<OverlayTile> validTiles, int jumpHeight)
 	{
 		
@@ -115,7 +115,7 @@ public class MapController : MonoBehaviour
 		}
 		
 		return neighbors;
-	}
+	}*/
 
 	
 	public List<OverlayTile> Get3x3Grid(OverlayTile curr)

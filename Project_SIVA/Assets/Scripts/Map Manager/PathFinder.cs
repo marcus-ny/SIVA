@@ -30,7 +30,8 @@ public class PathFinder
             }
 
             // Get neighbor tiles
-            var neighborTiles = MapController.Instance.GetNeighborTiles(curr, validTilePool, jumpHeight);
+            //var neighborTiles = MapController.Instance.GetNeighborTiles(curr, validTilePool, jumpHeight);
+            var neighborTiles = GetNeighborTiles(curr, validTilePool, jumpHeight);
 
             foreach (var neighbor in neighborTiles)
             {
@@ -133,5 +134,40 @@ public class PathFinder
         return result;
     }
 
-    
+    public List<OverlayTile> GetNeighborTiles(OverlayTile curr, List<OverlayTile> validTiles, int jumpHeight)
+    {
+
+
+        Dictionary<Vector2Int, OverlayTile> searchRange = new();
+
+        if (validTiles.Count > 0)
+        {
+            foreach (var tile in validTiles)
+            {
+                searchRange.Add(new Vector2Int(tile.gridLocation.x, tile.gridLocation.y), tile);
+            }
+        }
+        else
+        {
+            searchRange = MapController.Instance.map;
+        }
+
+
+        List<OverlayTile> neighbors = new();
+
+        int[,] directions = { { 0, 1 }, { 1, 0 }, { -1, 0 }, { 0, -1 } };
+
+        for (int i = 0; i < 4; i++)
+        {
+            Vector2Int locationToCheck = new(curr.gridLocation.x + directions[i, 0],
+            curr.gridLocation.y + directions[i, 1]);
+
+            if (searchRange.ContainsKey(locationToCheck) && Mathf.Abs(curr.gridLocation.z - searchRange[locationToCheck].gridLocation.z) <= jumpHeight)
+            {
+                neighbors.Add(searchRange[locationToCheck]);
+            }
+        }
+
+        return neighbors;
+    }
 }
