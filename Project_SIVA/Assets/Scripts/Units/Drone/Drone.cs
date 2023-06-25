@@ -161,6 +161,8 @@ public class Drone : Enemy
         EnemyManager.Instance.enemyMap.Remove(new
         Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
         BattleSimulator.Instance.enemyList.Remove(this);
+        activeTile.isBlocked = false;
         Destroy(gameObject);
+        
     }
 }
