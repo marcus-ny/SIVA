@@ -15,9 +15,33 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float xAxisValue = Input.GetAxis("Horizontal") * cameraSpeed * Time.deltaTime;
-        float yAxisValue = Input.GetAxis("Vertical") * cameraSpeed * Time.deltaTime;
+        float xAxisValue = 0;
+        float yAxisValue = 0;
 
-        transform.Translate(new Vector3(xAxisValue, yAxisValue, 0));
+        if (Input.GetKey(KeyCode.A) && transform.position.x > -5f)
+        {
+            float moveAmt = cameraSpeed * Time.deltaTime;
+            transform.Translate(new Vector3(-moveAmt, 0, 0));
+        }
+
+        if (Input.GetKey(KeyCode.D) && transform.position.x < 5f)
+        {
+            float moveAmt = cameraSpeed * Time.deltaTime;
+            transform.Translate(new Vector3(moveAmt, 0, 0));
+        }
+
+        if (Input.GetKey(KeyCode.W) && transform.position.y < 2.5f)
+        {
+            float moveAmt = cameraSpeed * Time.deltaTime;
+            transform.Translate(new Vector3(0, moveAmt, 0));
+        }
+
+        if (Input.GetKey(KeyCode.S) && transform.position.y > -2.5f)
+        {
+            float moveAmt = cameraSpeed * Time.deltaTime;
+            transform.Translate(new Vector3(0, -moveAmt, 0));
+        }
+
+        //transform.Translate(new Vector3(xAxisValue, yAxisValue, 0));
     }
 }
