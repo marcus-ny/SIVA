@@ -1521,7 +1521,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_HandleRect: {fileID: 2083862695}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3154,6 +3154,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3251,6 +3252,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa988f73347444ffeaa6e5ea68e3cdef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110bb2280b533416e8ae8142aeae7b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 519420031}
 --- !u!1 &553039082
 GameObject:
   m_ObjectHideFlags: 0
@@ -3651,9 +3665,10 @@ MonoBehaviour:
   maxMessages: 25
   chatPanel: {fileID: 1844964970}
   textObject: {fileID: 5698887857068955449, guid: ec483315c06dfb44d80307815ce4be0e, type: 3}
-  playerTurnMessage: {r: 0.34536484, g: 1, b: 0.023584902, a: 0}
-  enemyTurnMessage: {r: 0, g: 0, b: 0, a: 0}
-  messageList: []
+  redColor: {r: 0, g: 0, b: 0, a: 0}
+  greenColor: {r: 0, g: 0, b: 0, a: 0}
+  blackColor: {r: 0, g: 0, b: 0, a: 0}
+  yellowColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &627714946
 GameObject:
   m_ObjectHideFlags: 0
@@ -5362,7 +5377,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 446715366}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999976
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9645,7 +9660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1214566125}
-  - component: {fileID: 1214566124}
+  - component: {fileID: 1214566126}
   m_Layer: 0
   m_Name: InteractableManager
   m_TagString: Untagged
@@ -9653,19 +9668,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1214566124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1214566123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eee5f6a45c40e19408abc049c6a1d3bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lampPostPrefab: {fileID: 6463620858329364493, guid: e20470c0a07af5b46aed25f36caf2ba8, type: 3}
 --- !u!4 &1214566125
 Transform:
   m_ObjectHideFlags: 0
@@ -9681,6 +9683,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1214566126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214566123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05cdfdd9e6beaf143a54d78e151bd21e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lampPostPrefab: {fileID: 0}
 --- !u!1 &1229881050
 GameObject:
   m_ObjectHideFlags: 0
@@ -10927,6 +10942,7 @@ MonoBehaviour:
   playerParty: []
   recentTarget: {fileID: 0}
   recentDamage: 0
+  lightDamage: 5
 --- !u!4 &1459314595
 Transform:
   m_ObjectHideFlags: 0
@@ -12661,7 +12677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8baaad6f76094478b52d3881bf07f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soldier_Prefab: {fileID: 4266191669911125738, guid: d901c7dbeea2643e8a3c55b82acb8973, type: 3}
   playerController: {fileID: 82683372}
 --- !u!4 &1728211735
 Transform:

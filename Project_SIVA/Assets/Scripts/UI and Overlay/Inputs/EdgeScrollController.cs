@@ -17,26 +17,28 @@ public class EdgeScrollController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
-        if (Input.mousePosition.x > Screen.width - edgeSize)
+    {
+        
+        //Debug.Log(Screen.width);
+        if (Input.mousePosition.x > Screen.width - edgeSize && !(transform.position.x > 5) )
         {
             float moveAmt = cameraSpeed * Time.deltaTime;
             transform.Translate(new Vector3(moveAmt, 0, 0));
         }
 
-        if (Input.mousePosition.x < edgeSize)
+        if (Input.mousePosition.x < edgeSize && !(transform.position.x < -5) )
         {
             float moveAmt = cameraSpeed * Time.deltaTime;
             transform.Translate(new Vector3(-moveAmt, 0, 0));
         }
 
-        if (Input.mousePosition.y > Screen.height - edgeSize)
+        if (Input.mousePosition.y > Screen.height - edgeSize && !(transform.position.y > 2.5))
         {
             float moveAmt = cameraSpeed * Time.deltaTime;
             transform.Translate(new Vector3(0, moveAmt, 0));
         }
 
-        if (Input.mousePosition.y < edgeSize)
+        if (Input.mousePosition.y < edgeSize && !(transform.position.y < -2.5) )
         {
             float moveAmt = cameraSpeed * Time.deltaTime;
             transform.Translate(new Vector3(0, -moveAmt, 0));

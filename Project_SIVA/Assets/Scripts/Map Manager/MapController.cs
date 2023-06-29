@@ -34,7 +34,7 @@ public class MapController : MonoBehaviour
 		//var tileMap = gameObject.GetComponentInChildren<Tilemap>();
 		
 		BoundsInt bounds = tileMap.cellBounds;
-
+		Debug.Log("X: " + bounds.min.x + " , " + bounds.max.x + " Y: " + bounds.min.y + " , " + bounds.max.y);
 		// Loop through all tiles within bounds
 		for (int z = bounds.max.z; z >= bounds.min.z; z--)
 		{
