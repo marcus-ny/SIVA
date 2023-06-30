@@ -10,6 +10,7 @@ public class MouseController : MonoBehaviour
     public static MouseController Instance { get { return _instance; } }
 
     public OverlayTile mouseOverTile;
+    
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -20,7 +21,7 @@ public class MouseController : MonoBehaviour
         {
             _instance = this;
         }
-
+        
     }
 
     // Update is called once per frame
@@ -39,6 +40,7 @@ public class MouseController : MonoBehaviour
                 mouseOverTile = overlayTile;
                 transform.position = overlayTile.transform.position;
 
+               
                 gameObject.GetComponent<SpriteRenderer>().sortingOrder =
                     overlayTile.GetComponent<SpriteRenderer>().sortingOrder;               
             } else

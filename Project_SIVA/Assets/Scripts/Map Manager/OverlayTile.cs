@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using static PathArrowGenerator;
 
 public class OverlayTile : MonoBehaviour
 {
@@ -24,10 +24,15 @@ public class OverlayTile : MonoBehaviour
     public OverlayTile previous;
 
     public Vector3Int gridLocation;
+    public Vector2Int gridLocation2d { get { return new Vector2Int(gridLocation.x, gridLocation.y);  } }
+
+    public List<Sprite> pathDirs;
+
 
     private void Start()
     {
         light_level = 0;
+        SetPathDir(ArrowDir.None);
     }
 
     public void AlterLightLevel(bool trigger)
@@ -63,6 +68,7 @@ public class OverlayTile : MonoBehaviour
     public void HideTile()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+        
     }
 
     // Show green
@@ -74,5 +80,20 @@ public class OverlayTile : MonoBehaviour
     public void ShowBlueTile()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 200, 255);
+    }
+
+    public void SetPathDir(ArrowDir d)
+    {
+        var arrow = GetComponentsInChildren<SpriteRenderer>()[1];
+        
+        if (d == ArrowDir.None)
+        {
+            arrow.color = new Color(1, 1, 1, 0);
+        } else
+        {
+            arrow.color = new Color(1, 1, 1, 1);
+            arrow.sprite = pathDirs[(int)d];
+            arrow.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
+        }
     }
 }

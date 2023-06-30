@@ -1522,7 +1522,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 215651510}
   m_HandleRect: {fileID: 2083862695}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -9978,7 +9978,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   State: 0
   actionsPerformed: 0
-  currentEnemy: {fileID: 0}
   enemyList: []
   player: {fileID: 82683372}
   moving: 0
@@ -12742,7 +12741,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8baaad6f76094478b52d3881bf07f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soldier_Prefab: {fileID: 4266191669911125738, guid: d901c7dbeea2643e8a3c55b82acb8973, type: 3}
   playerController: {fileID: 82683372}
 --- !u!4 &1728211735
 Transform:

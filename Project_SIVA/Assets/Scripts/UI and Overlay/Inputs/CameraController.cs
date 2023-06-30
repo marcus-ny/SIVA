@@ -15,8 +15,6 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float xAxisValue = 0;
-        float yAxisValue = 0;
 
         if (Input.GetKey(KeyCode.A) && transform.position.x > -5f)
         {

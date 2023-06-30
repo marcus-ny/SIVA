@@ -25,8 +25,10 @@ public class PlayerController : Publisher
     public OverlayTile destinationTile;
 
     private PlayerAnimator animationController;
+    public PathArrowGenerator pathArrowGenerator;
 
     private readonly int speed = 3;
+    private readonly int reach = 3;
 
     private void Start()
     {
@@ -34,6 +36,7 @@ public class PlayerController : Publisher
         rangeFinder = new();
         path = new();
         reachableTiles = new();
+        pathArrowGenerator = new();
     }
 
     private void Awake()
@@ -61,7 +64,7 @@ public class PlayerController : Publisher
             // Place the enemy on spawn
             PositionCharacterOnTile(MapController.Instance.map[playerSpawn]);
             destinationTile = character.activeTile;
-            reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3, 1);
+            reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, reach, 1);
             animationController = character.GetComponent<PlayerAnimator>();
         }
 
@@ -70,6 +73,7 @@ public class PlayerController : Publisher
             OverlayTile overlayTile;
             if (tileHit.HasValue)
             {
+                
                 overlayTile = tileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
                 
                 if (Input.GetMouseButtonDown(0))
@@ -331,11 +335,28 @@ public class PlayerController : Publisher
 
     public void GetMovementRange()
     {        
-        reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3, 1);
+        reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, reach, 1);
 
         foreach (var tile in reachableTiles)
         {
             tile.ShowGreenTile();
+        }
+        List<OverlayTile> tempPath = pathFinder.FindPath(character.activeTile, MouseController.Instance.mouseOverTile, reachableTiles, 1);
+
+
+        foreach (var item in reachableTiles)
+        {
+            item.SetPathDir(PathArrowGenerator.ArrowDir.None);
+        }
+
+        for (int i = 0; i < tempPath.Count; i++)
+        {
+            var prevTile = i > 0 ? tempPath[i - 1] : PlayerController.Instance.character.activeTile;
+            var nextTile = i < tempPath.Count - 1 ? tempPath[i + 1] : null;
+
+            var arrowDir = pathArrowGenerator.Translate(prevTile, tempPath[i], nextTile);
+            tempPath[i].SetPathDir(arrowDir);
+
         }
     }
 
