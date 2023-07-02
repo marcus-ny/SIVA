@@ -62,6 +62,7 @@ public class OverlayTile : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
         }
+        SetPathDir(ArrowDir.None);
     }
 
     // Return to original color without highlighting

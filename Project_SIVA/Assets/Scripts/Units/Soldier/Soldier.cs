@@ -63,11 +63,12 @@ public class Soldier : Enemy
     {
         while (actionsPerformed < maxAP)
         {
-            currentState.UpdateState(this);
-            while (BattleSimulator.Instance.moving)
+            while (state_moving)
             {
                 yield return null;
             }
+            currentState.UpdateState(this);
+            
         }
     }
     IEnumerator StartRangeAttack()
