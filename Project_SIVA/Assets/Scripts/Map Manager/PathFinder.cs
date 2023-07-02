@@ -119,7 +119,10 @@ public class PathFinder
             int limit = (end.gridLocation.x > start.gridLocation.x) ? end.gridLocation.x : start.gridLocation.x;
             for (; i < limit; i++)
             {
-                result.Add(MapController.Instance.map[new Vector2Int(i, start.gridLocation.y)]);
+                if (MapController.Instance.map.ContainsKey(new Vector2Int(i, start.gridLocation.y)))
+                {
+                    result.Add(MapController.Instance.map[new Vector2Int(i, start.gridLocation.y)]);
+                }
             }
         } else
         {
@@ -127,7 +130,10 @@ public class PathFinder
             int limit = (end.gridLocation.y > start.gridLocation.y) ? end.gridLocation.y : start.gridLocation.y;
             for (; i < limit; i++)
             {
-                result.Add(MapController.Instance.map[new Vector2Int(start.gridLocation.x, i)]);
+                if (MapController.Instance.map.ContainsKey(new Vector2Int(i, start.gridLocation.y)))
+                {
+                    result.Add(MapController.Instance.map[new Vector2Int(start.gridLocation.x, i)]);
+                }
             }
         }
 

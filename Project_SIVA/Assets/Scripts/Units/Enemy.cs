@@ -81,6 +81,7 @@ public abstract class Enemy : MonoBehaviour
         {
             prev = cur = activeTile.gridLocation;
         }
+        
         state_moving = false;
 
     }

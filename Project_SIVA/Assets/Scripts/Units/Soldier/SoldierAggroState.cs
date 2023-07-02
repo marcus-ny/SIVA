@@ -22,11 +22,13 @@ public class SoldierAggroState : SoldierBaseState
         if (inAttackRange)
         {
             //soldier.animationController.MeleeAnimation();
+            Debug.Log("Melee Attack: Soldier");
             soldier.MeleeAttack();
         }
         // Otherwise aggro-move towards the player
         else
         {
+            Debug.Log("Melee move: Soldier");
             soldier.AggroMove();
         }
 
