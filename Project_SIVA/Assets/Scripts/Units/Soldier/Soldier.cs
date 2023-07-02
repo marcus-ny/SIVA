@@ -273,8 +273,10 @@ public class Soldier : Enemy
         // Returns a list of all tiles in plus shape around the player
         List<OverlayTile> plusShaped =
             MapController.Instance.GetPlusShapedAlongCenter(player.activeTile);
+
         // Find the tile closest to the enemy among plusShaped
         List<OverlayTile> nearestTiles = pathFinder.GetClosestTilesInRange(activeTile, plusShaped);
+
         // We can be sure that nearest tiles always exist
         List<OverlayTile> result = pathFinder.GetClosestTilesInRange(nearestTiles[0], range);
 
