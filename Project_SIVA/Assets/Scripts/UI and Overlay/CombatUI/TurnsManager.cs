@@ -11,6 +11,9 @@ public class TurnsManager : Publisher, IObserver
     //[SerializeField] LevelAudioManager AudioManager;
     public float bigBannerAnimationTime = 1f;
     public float turnAnimationTime = 1f;
+    public float endCutsceneTransitionTime = 0.5f;
+
+    public Animator EndCutsceneTransition;
 
     GameObject CutsceneUI;
     GameObject BannerUI;
@@ -73,11 +76,11 @@ public class TurnsManager : Publisher, IObserver
 
     public void EndCutscene()
     {
+        //Disable CutsceneUI and enable BattleUI
+        StartCoroutine(EndCutsceneAnimation());
+
         // Notify BattleStart
         NotifyObservers(GameEvents.BattleStart);
-
-        //Disable CutsceneUI and enable BattleUI
-        CutsceneUI.SetActive(false);
 
         //Start animation for BattleStart
         StartCoroutine(BattleStartAnimation());
@@ -142,5 +145,15 @@ public class TurnsManager : Publisher, IObserver
     {
         BannerUI.transform.Find("PlayerLose").gameObject.SetActive(true);
         yield return new WaitForSeconds(bigBannerAnimationTime);
+    }
+
+    IEnumerator EndCutsceneAnimation()
+    {
+        EndCutsceneTransition.SetTrigger("Trigger");
+
+        yield return new WaitForSeconds(endCutsceneTransitionTime);
+
+        //Disable CutsceneUI and enable BattleUI
+        CutsceneUI.SetActive(false);
     }
 }
