@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -640116179
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1968562605, guid: e9289cf6090ec224ebfd66680c8dbb29, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -122,7 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTile: {fileID: 0}
-  enemyPrefab: {fileID: 0}
   player: {fileID: 0}
   cur: {x: 0, y: 0, z: 0}
   prev: {x: 0, y: 0, z: 0}
