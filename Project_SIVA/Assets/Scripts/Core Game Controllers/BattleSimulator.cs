@@ -23,6 +23,8 @@ public class BattleSimulator : Publisher
 
     public bool moving;
 
+    public CutsceneRunner cutsceneRunner;
+
     public Enemy GetCurrentEnemy()
     {
         return currentEnemy;
@@ -45,6 +47,12 @@ public class BattleSimulator : Publisher
     {
         State = BattleState.START;
         actionsPerformed = 0;
+        if (cutsceneRunner != null)
+        {
+            Debug.Log("Triggering cutscene");
+            cutsceneRunner.RunCutscene();
+        }
+
     }
 
     public void StartGame()
@@ -52,7 +60,6 @@ public class BattleSimulator : Publisher
         if (State == BattleState.START) {
             State = BattleState.PLAYER_TURN;
             NotifyObservers(GameEvents.PlayerTurn);
-            Debug.Log("NotifyObserversStartPlayerTurn");
         }
     }
 

@@ -15,7 +15,7 @@ public class EnemyManager : MonoBehaviour
 
     public PlayerController playerController;
 
-    private bool spawnComplete = false;
+    public bool spawnComplete = false;
 
    
 

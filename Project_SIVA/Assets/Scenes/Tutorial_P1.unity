@@ -486,6 +486,50 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &65387002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 65387004}
+  - component: {fileID: 65387003}
+  m_Layer: 0
+  m_Name: t1cutscene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &65387003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65387002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67fb3587d9e246468dfe80955ff834a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &65387004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65387002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 548.2105, y: 194.14198, z: -11.916385}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &73591807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1956,7 +2000,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 215651510}
   m_HandleRect: {fileID: 2083862695}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -9112,6 +9156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overlayTilePrefab: {fileID: 7515369160582487518, guid: 3526659845b68804caef3f2d167e0bcc, type: 3}
   overlayContainer: {fileID: 1050674556}
+  generationComplete: 0
 --- !u!224 &1048134144 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7262702300160054478, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
@@ -10416,7 +10461,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0.25, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
@@ -10432,6 +10477,16 @@ Tilemap:
   m_GameObject: {fileID: 1229881050}
   m_Enabled: 1
   m_Tiles:
+  - first: {x: 5, y: 0, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 0, y: 6, z: 0}
     second:
       serializedVersion: 2
@@ -10448,8 +10503,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: fc2431dc1c0594ec6935f5e32c73fdde, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: d9021df4ebe4e4239baf56900e58743d, type: 2}
   m_TileSpriteArray:
@@ -10457,12 +10512,12 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 0df4764309b07422b917eb4bd46b9559, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 88712403, guid: 45ea9b790be2bc14799d859798a3cf47, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 1
+  - m_RefCount: 2
     m_Data:
       e00: 1
       e01: 0
@@ -10481,7 +10536,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 1
+  - m_RefCount: 2
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -10553,6 +10608,7 @@ MonoBehaviour:
   enemyList: []
   player: {fileID: 82683372}
   moving: 0
+  cutsceneRunner: {fileID: 65387003}
 --- !u!4 &1231308200
 Transform:
   m_ObjectHideFlags: 0
@@ -13634,6 +13690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 82683372}
+  spawnComplete: 0
 --- !u!4 &1728211735
 Transform:
   m_ObjectHideFlags: 0
@@ -14220,7 +14277,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.03125, y: 1.09375, z: 0}
+  m_ChunkCullingBounds: {x: 0.03125, y: 0.6953125, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3

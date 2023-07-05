@@ -15,6 +15,8 @@ public class MapController : MonoBehaviour
 
 	public GameObject overlayContainer;
 
+	public bool generationComplete = false;
+
 	public Dictionary<Vector2Int, OverlayTile> map;
 	private void Awake()
 	{
@@ -34,7 +36,7 @@ public class MapController : MonoBehaviour
 		//var tileMap = gameObject.GetComponentInChildren<Tilemap>();
 		
 		BoundsInt bounds = tileMap.cellBounds;
-		Debug.Log("X: " + bounds.min.x + " , " + bounds.max.x + " Y: " + bounds.min.y + " , " + bounds.max.y);
+		// Debug.Log("X: " + bounds.min.x + " , " + bounds.max.x + " Y: " + bounds.min.y + " , " + bounds.max.y);
 		// Loop through all tiles within bounds
 		for (int z = bounds.max.z; z >= bounds.min.z; z--)
 		{
@@ -70,6 +72,8 @@ public class MapController : MonoBehaviour
 				}
 			}
 		}
+
+		generationComplete = true;
 
 	}
 
