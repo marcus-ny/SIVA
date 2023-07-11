@@ -12,6 +12,7 @@ public class DialogueAudioManager : MonoBehaviour
 
     public static DialogueAudioManager Instance { get { return _instance; } }
 
+    [Header ("sugondeeez")]
     private AudioSource source;
     
     private void Awake()

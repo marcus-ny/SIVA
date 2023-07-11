@@ -18,19 +18,24 @@ public class PopUpManager : MonoBehaviour, IObserver
 
     public void OnNotify(GameEvents gameEvent)
     {
-        if (gameEvent == GameEvents.EnemyHealthAltered)
+        if ((gameEvent == GameEvents.EnemyHealthAltered) /*|| (gameEvent == GameEvents.PlayerHealthAltered)*/)
         {
             //Enemy recentTarget = DamageManager.Instance.recentTarget;
             float recentDamage = DamageManager.Instance.recentDamage;
             //PopUpAppear("-" + recentDamage.ToString(), PopUp.PopUpType.Damage, recentTarget);
             //XXPopUpAppear("-" + recentDamage.ToString(), PopUp.PopUpType.Damage);
-            PopUpAppear("-" + recentDamage.ToString());
+            PopUpAppear("-" + recentDamage.ToString(), redColor);
+        }
+        if (gameEvent == GameEvents.EnemyHealed)
+        {
+            float recentDamage = DamageManager.Instance.recentDamage;
+            PopUpAppear("+" + recentDamage.ToString(), greenColor);
         }
     }
 
     //private void PopUpAppear(string text, PopUp.PopUpType popUpType, Enemy recentTarget)
     //XXprivate void PopUpAppear(string text, PopUp.PopUpType popUpType)
-    private void PopUpAppear(string text)
+    private void PopUpAppear(string text, Color tempColor)
     {
         Enemy recentTarget = DamageManager.Instance.recentTarget;
         if(text == null) 
@@ -48,7 +53,7 @@ public class PopUpManager : MonoBehaviour, IObserver
 
         newPopUp.text = text;
         newPopUp.textObject.text = text;
-        newPopUp.textObject.color = redColor;
+        newPopUp.textObject.color = tempColor;
         //newPopUp.textObject.color = PopUpColor(popUpType);
 
         /*

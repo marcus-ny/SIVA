@@ -1956,7 +1956,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 215651510}
   m_HandleRect: {fileID: 2083862695}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6200,8 +6200,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_HandleRect: {fileID: 446715366}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.9999999
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9582,6 +9582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overlayTilePrefab: {fileID: 7515369160582487518, guid: 3526659845b68804caef3f2d167e0bcc, type: 3}
   overlayContainer: {fileID: 1050674556}
+  generationComplete: 0
 --- !u!224 &1048134144 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7262702300160054478, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
@@ -11063,6 +11064,7 @@ MonoBehaviour:
   enemyList: []
   player: {fileID: 82683372}
   moving: 0
+  cutsceneRunner: {fileID: 0}
 --- !u!4 &1231308200
 Transform:
   m_ObjectHideFlags: 0
@@ -12250,6 +12252,7 @@ GameObject:
   - component: {fileID: 1469941270}
   - component: {fileID: 1469941271}
   - component: {fileID: 1469941272}
+  - component: {fileID: 1469941274}
   - component: {fileID: 1469941273}
   m_Layer: 0
   m_Name: AudioManager
@@ -12399,6 +12402,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1469941274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469941269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 499a6845a2532224ba28f04075227775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageSound: {fileID: 8300000, guid: 3023c935eba6c73498fa61f8c37d5b82, type: 3}
+  lightSound: {fileID: 8300000, guid: 11ac988002b6ec4469862eabfef48a56, type: 3}
+  healSound: {fileID: 8300000, guid: 88dadbee3c73bf64fb557d8d4d270d22, type: 3}
 --- !u!1001 &1493119053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14144,6 +14162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 82683372}
+  spawnComplete: 0
 --- !u!4 &1728211735
 Transform:
   m_ObjectHideFlags: 0
