@@ -10,10 +10,12 @@ public class Spotlight_SW : WorldEntity, IInteractable
     {
         EmitDirectionalLight(activeTile, true);
     }
-    public void ReceiveInteraction()
+    public bool ReceiveInteraction()
     {
         if (active) EmitDirectionalLight(activeTile, false);
         else EmitDirectionalLight(activeTile, true);
+
+        return true;
     }
 
     public void EmitDirectionalLight(OverlayTile cur, bool trigger)

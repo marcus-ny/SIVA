@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TutorialCutsceneRunner : CutsceneRunner
+public class TutorialCutscenePt1Runner : CutsceneRunner
 {
     // Start is called before the first frame update
     void Start()

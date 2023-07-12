@@ -18,7 +18,7 @@ public class LampPost : WorldEntity, IInteractable
     {
         animationController.Highlight(trigger);
     }
-    public void ReceiveInteraction()
+    public bool ReceiveInteraction()
     {
         if (active)
         {
@@ -28,6 +28,8 @@ public class LampPost : WorldEntity, IInteractable
         {
             EmitLight(activeTile, true);
         }
+
+        return true;
     }
 
     public void EmitLight(OverlayTile curr, bool trigger)

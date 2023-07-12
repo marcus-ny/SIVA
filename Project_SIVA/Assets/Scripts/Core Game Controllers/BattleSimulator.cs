@@ -25,6 +25,8 @@ public class BattleSimulator : Publisher
 
     public CutsceneRunner cutsceneRunner;
 
+    public bool levelComplete;
+
     public Enemy GetCurrentEnemy()
     {
         return currentEnemy;
@@ -41,6 +43,7 @@ public class BattleSimulator : Publisher
             _instance = this;
         }
         enemyList = new();
+        levelComplete = false;
     }
     // Start is called before the first frame update
     void Start()
@@ -256,5 +259,6 @@ public class BattleSimulator : Publisher
         NotifyObservers(GameEvents.PlayerWin);
         State = BattleState.PLAYER_TURN;
         actionsPerformed = 0;
+        levelComplete = true;
     }
 }

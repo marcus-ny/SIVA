@@ -4,20 +4,35 @@ using UnityEngine;
 
 public class Door : WorldEntity, IInteractable, ITeleportable
 {
-    
+    private DoorAnimator doorAnimator;
+
+    private void Start()
+    {
+        doorAnimator = GetComponent<DoorAnimator>();
+    }
     public override void Highlight(bool trigger)
     {
-        // highlight lmao
+        
     }
 
-    public void ReceiveInteraction()
+    public bool ReceiveInteraction()
     {
-        Teleport();
+        if (BattleSimulator.Instance.levelComplete)
+        {
+            Teleport();
+            return true;
+        }
+        return false;
     }
-
     public void Teleport()
     {
-        // Temporary
+        StartCoroutine(TeleportCoroutine());
+    }
+    IEnumerator TeleportCoroutine()
+    {
+        doorAnimator.OpenDoor();
+        yield return new WaitForSecondsRealtime(1);
         ScenesManager.Instance.LoadNextScene();
+        
     }
 }
