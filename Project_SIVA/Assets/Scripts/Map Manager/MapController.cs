@@ -15,6 +15,8 @@ public class MapController : MonoBehaviour
 
 	public GameObject overlayContainer;
 
+	public bool generationComplete = false;
+
 	public Dictionary<Vector2Int, OverlayTile> map;
 	private void Awake()
 	{
@@ -34,7 +36,7 @@ public class MapController : MonoBehaviour
 		//var tileMap = gameObject.GetComponentInChildren<Tilemap>();
 		
 		BoundsInt bounds = tileMap.cellBounds;
-		Debug.Log("X: " + bounds.min.x + " , " + bounds.max.x + " Y: " + bounds.min.y + " , " + bounds.max.y);
+		// Debug.Log("X: " + bounds.min.x + " , " + bounds.max.x + " Y: " + bounds.min.y + " , " + bounds.max.y);
 		// Loop through all tiles within bounds
 		for (int z = bounds.max.z; z >= bounds.min.z; z--)
 		{
@@ -70,6 +72,8 @@ public class MapController : MonoBehaviour
 				}
 			}
 		}
+
+		generationComplete = true;
 
 	}
 
@@ -250,6 +254,21 @@ public class MapController : MonoBehaviour
 				locationToCheck.x -= 2;
 				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
 			}
+		}
+
+		return result;
+	}
+
+	public List<OverlayTile> GetUniDirectional(OverlayTile reference, int dir, int range)
+    {
+		int[,] directions = new int[4, 2] { { 1, 0 }, { -1, 0 }, { 0, 1 },  { 0, -1 }  };
+		List<OverlayTile> result = new();
+		for (int mult = 1; mult <= range; mult++)
+        {
+			Vector2Int locationToCheck = new Vector2Int(reference.gridLocation.x + (directions[dir, 0] * mult),
+					reference.gridLocation.y + (directions[dir, 1] * mult));
+
+			if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
 		}
 
 		return result;

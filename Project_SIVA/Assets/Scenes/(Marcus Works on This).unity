@@ -9389,6 +9389,8 @@ MonoBehaviour:
   UIFolder: {fileID: 2069089159}
   bigBannerAnimationTime: 2.5
   turnAnimationTime: 1.5
+  endCutsceneTransitionTime: 0.5
+  EndCutsceneTransition: {fileID: 0}
 --- !u!224 &1149545538 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7383070511434358317, guid: 7167b88a9dede0c4d90098dc9eda10ae, type: 3}

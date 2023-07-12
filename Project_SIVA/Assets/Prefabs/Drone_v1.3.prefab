@@ -122,8 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTile: {fileID: 0}
-  enemyPrefab: {fileID: 0}
   player: {fileID: 0}
+  path: []
+  range: []
   cur: {x: 0, y: 0, z: 0}
   prev: {x: 0, y: 0, z: 0}
   maxHp: 0

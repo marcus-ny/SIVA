@@ -23,6 +23,10 @@ public class BattleSimulator : Publisher
 
     public bool moving;
 
+    public CutsceneRunner cutsceneRunner;
+
+    public bool levelComplete;
+
     public Enemy GetCurrentEnemy()
     {
         return currentEnemy;
@@ -39,12 +43,19 @@ public class BattleSimulator : Publisher
             _instance = this;
         }
         enemyList = new();
+        levelComplete = false;
     }
     // Start is called before the first frame update
     void Start()
     {
         State = BattleState.START;
         actionsPerformed = 0;
+        if (cutsceneRunner != null)
+        {
+            Debug.Log("Triggering cutscene");
+            cutsceneRunner.RunCutscene();
+        }
+
     }
 
     public void StartGame()
@@ -52,7 +63,6 @@ public class BattleSimulator : Publisher
         if (State == BattleState.START) {
             State = BattleState.PLAYER_TURN;
             NotifyObservers(GameEvents.PlayerTurn);
-            Debug.Log("NotifyObserversStartPlayerTurn");
         }
     }
 
@@ -62,7 +72,6 @@ public class BattleSimulator : Publisher
         {
             for (int i = 0; i < EnemyManager.Instance.transform.childCount; i++)
             {
-                //enemyList.Clear();
                 enemyList.Add(EnemyManager.Instance.transform.GetChild(i).GetComponent<Enemy>());
             }
         }
@@ -71,9 +80,8 @@ public class BattleSimulator : Publisher
         {
             Coroutine EnemyCoroutine = StartCoroutine(EnemyTakeActions());
             State = BattleState.TRANSITION;
-            
         }
-        // Debug.Log("Battlestate: " + State);
+        
     }
 
     /*
@@ -249,5 +257,8 @@ public class BattleSimulator : Publisher
     {
         State = BattleState.PLAYER_WIN;
         NotifyObservers(GameEvents.PlayerWin);
+        State = BattleState.PLAYER_TURN;
+        actionsPerformed = 0;
+        levelComplete = true;
     }
 }
