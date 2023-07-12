@@ -317,8 +317,8 @@ public class PlayerController : Publisher
         
         if (inRange && WorldEntitiesManager.Instance.entityMap.ContainsKey(coordinates))
         {
-            WorldEntitiesManager.Instance.Interact(destinationTile);
-            return true;
+            if (WorldEntitiesManager.Instance.Interact(destinationTile)) return true;
+            else return false;
         }
         else if (!inRange)
         {

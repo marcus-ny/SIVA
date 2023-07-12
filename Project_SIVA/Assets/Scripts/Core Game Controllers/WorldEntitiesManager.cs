@@ -61,16 +61,21 @@ public class WorldEntitiesManager : MonoBehaviour
     }
     
     
-    public void Interact(OverlayTile curr)
+    public bool Interact(OverlayTile curr)
     {
         
         Vector2Int coordinates = new Vector2Int(curr.gridLocation.x, curr.gridLocation.y);
         if (entityMap[coordinates] is IInteractable)
         {
             IInteractable interactable = (IInteractable) entityMap[coordinates];
-            interactable.ReceiveInteraction();
+            if (interactable.ReceiveInteraction())
+            {
+                return true;
+            }
+            
         }
-        
+        return false;
+
     }
     // Should I move this somewhere else
     private void PositionOnTile(WorldEntity interactable, OverlayTile tile)
