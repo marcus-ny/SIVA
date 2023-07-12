@@ -100,9 +100,13 @@ public class Soldier : Enemy
         }
     }
     public void RangeAttack()
-    {       
-        actionsPerformed += 2;
-        StartCoroutine(StartRangeAttack());
+    {
+        if (MapController.Instance.GetPlusShapedAlongCenter(player.activeTile).Contains(activeTile))
+        {
+            actionsPerformed += 2;
+            StartCoroutine(StartRangeAttack());
+        }
+        
     }
 
     IEnumerator StartMeleeAttack()

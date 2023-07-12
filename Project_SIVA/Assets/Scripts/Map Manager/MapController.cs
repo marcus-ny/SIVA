@@ -259,4 +259,19 @@ public class MapController : MonoBehaviour
 		return result;
 	}
 
+	public List<OverlayTile> GetUniDirectional(OverlayTile reference, int dir, int range)
+    {
+		int[,] directions = new int[4, 2] { { 1, 0 }, { -1, 0 }, { 0, 1 },  { 0, -1 }  };
+		List<OverlayTile> result = new();
+		for (int mult = 1; mult <= range; mult++)
+        {
+			Vector2Int locationToCheck = new Vector2Int(reference.gridLocation.x + (directions[dir, 0] * mult),
+					reference.gridLocation.y + (directions[dir, 1] * mult));
+
+			if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
+		}
+
+		return result;
+	}
+
 }

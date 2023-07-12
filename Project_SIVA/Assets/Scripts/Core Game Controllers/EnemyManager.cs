@@ -42,12 +42,10 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        
-
         // Enemy spawning (only carried out once)
         if (!spawnComplete && enemySpawns.Count != enemyMap.Count)
         {
-            //Debug.Log(enemySpawns.Count);
+            
             foreach (KeyValuePair<Vector2Int, GameObject> spawn in enemySpawns)
             {
                 enemyMap.Add(spawn.Key, Instantiate(spawn.Value, gameObject.transform).GetComponent<Enemy>());
@@ -59,9 +57,6 @@ public class EnemyManager : MonoBehaviour
                 curr.PositionEnemyOnTile(tile);               
             }
 
-            // This boolean is used to make sure that enemies do not spawn again after
-            // getting killed. I could empty the array but altering array elements in
-            // runtime is not ideal.
             spawnComplete = true;
         }
 
