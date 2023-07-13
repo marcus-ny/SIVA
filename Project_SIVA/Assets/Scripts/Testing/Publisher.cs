@@ -18,6 +18,7 @@ public abstract class Publisher : MonoBehaviour
 
     protected void NotifyObservers(GameEvents gameEvent)
     {
+        
         _observers.ForEach(_observer =>
        {
            _observer.OnNotify(gameEvent);

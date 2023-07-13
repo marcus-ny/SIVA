@@ -49,6 +49,8 @@ public class BattleSimulator : Publisher
     void Start()
     {
         State = BattleState.START;
+        NotifyObservers(GameEvents.GameStart);
+        
         actionsPerformed = 0;
         if (cutsceneRunner != null)
         {
@@ -256,7 +258,7 @@ public class BattleSimulator : Publisher
     public void EnemyLose()
     {
         State = BattleState.PLAYER_WIN;
-        NotifyObservers(GameEvents.PlayerWin);
+        if (levelComplete == false) NotifyObservers(GameEvents.PlayerWin);
         State = BattleState.PLAYER_TURN;
         actionsPerformed = 0;
         levelComplete = true;

@@ -9,6 +9,7 @@ public enum GameEvents
     PlayerLose,
     PlayerTurn,
     EnemyTurn,
+    GameStart,
     BattleStart,
     AOEunsuccessful,
     InteractableOFR,

@@ -74,6 +74,15 @@ public class TurnsManager : Publisher, IObserver
         }
     }
 
+    public void StartCutscene()
+    {
+        Debug.Log("Cutscene begins, all other UI disabled");
+        CutsceneUI.SetActive(true);
+        BannerUI.SetActive(false);
+        ActionsUI.SetActive(false);
+        StatsUI.SetActive(false);
+        LogBox.SetActive(false);
+    }
     public void EndCutscene()
     {
         //Disable CutsceneUI and enable BattleUI
