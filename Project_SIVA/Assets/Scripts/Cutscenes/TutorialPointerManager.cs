@@ -19,6 +19,7 @@ public class TutorialPointerManager : MonoBehaviour, IObserver
         completed = false;
         BattleSimulator.Instance.AddObserver(this);
         PlayerController.Instance.AddObserver(this);
+        WorldEntitiesManager.Instance.AddObserver(this);
         turnsManager.AddObserver(this);
         
     }
@@ -39,7 +40,7 @@ public class TutorialPointerManager : MonoBehaviour, IObserver
     IEnumerator ShowTipsIntro(bool trigger)
     {
         // Should we add new events here to time this better?
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(1);
         ShowTips(trigger);
     }
 

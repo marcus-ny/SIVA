@@ -19,6 +19,7 @@ public enum GameEvents
 
     // For Tutorial
     SuccessfulMove,
+    NearTrigger,
     SuccessfulAttack,
     SuccessfulInteract,
     SuccessfulMoveToDark,

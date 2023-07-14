@@ -90,7 +90,7 @@ public class TurnsManager : Publisher, IObserver
 
         // Notify BattleStart
         NotifyObservers(GameEvents.BattleStart);
-        NotifyObservers(GameEvents.DialogueEnd);
+        
         //Start animation for BattleStart
         StartCoroutine(BattleStartAnimation());
     }
@@ -164,5 +164,6 @@ public class TurnsManager : Publisher, IObserver
 
         //Disable CutsceneUI and enable BattleUI
         CutsceneUI.SetActive(false);
+        NotifyObservers(GameEvents.DialogueEnd);
     }
 }

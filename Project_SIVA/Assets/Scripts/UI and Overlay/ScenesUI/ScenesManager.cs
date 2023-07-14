@@ -17,6 +17,7 @@ public class ScenesManager : MonoBehaviour
     // All new scenes must be added into this enum
     public enum GameScene{
         MainMenu,
+        Tutorial_P0,
         Tutorial_P1, 
         Tutorial_P2,
         Tutorial_P3,
