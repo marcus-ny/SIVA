@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class WorldEntitiesManager : MonoBehaviour
+public class WorldEntitiesManager : Publisher
 {
     private static WorldEntitiesManager _instance;
 
@@ -49,13 +49,32 @@ public class WorldEntitiesManager : MonoBehaviour
                 // Possible workaround for abstraction:
                 // TryGetComponent() method
                 
-                entityMap.Add(kvp.Key, Instantiate(kvp.Value).GetComponent<WorldEntity>());
+                entityMap.Add(kvp.Key, Instantiate(kvp.Value, transform).GetComponent<WorldEntity>());
 
                 OverlayTile tile = MapController.Instance.map[kvp.Key];
 
                 tile.isBlocked = true;
                 
                 PositionOnTile(entityMap[kvp.Key], tile);
+            }
+
+            spawnComplete = true;
+        }
+        
+        if (spawnComplete)
+        {
+            foreach (WorldEntity entity in entityMap.Values) 
+            {
+                if (entity.GetType() == typeof(InvisibleTrigger))
+                {
+                    
+                    InvisibleTrigger child = (InvisibleTrigger)entity;
+                    if (child.detected)
+                    {
+                        
+                        NotifyObservers(GameEvents.NearTrigger);
+                    }
+                }
             }
         }
     }

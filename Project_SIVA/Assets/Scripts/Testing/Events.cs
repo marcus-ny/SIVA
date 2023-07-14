@@ -9,10 +9,19 @@ public enum GameEvents
     PlayerLose,
     PlayerTurn,
     EnemyTurn,
+    GameStart,
     BattleStart,
     AOEunsuccessful,
     InteractableOFR,
     NoInteractable,
     NoTarget,
-    TargetOFR
+    TargetOFR,
+
+    // For Tutorial
+    SuccessfulMove,
+    NearTrigger,
+    SuccessfulAttack,
+    SuccessfulInteract,
+    SuccessfulMoveToDark,
+    DialogueEnd,
 }

@@ -45,6 +45,11 @@ namespace DialogueSystem
 
         private void Start()
         {
+            
+        }
+
+        public void playDialogue()
+        {
             lineAppear = WriteText(input, textHolder, textColor, delay, sound);
             StartCoroutine(lineAppear);
         }

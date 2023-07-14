@@ -74,6 +74,15 @@ public class TurnsManager : Publisher, IObserver
         }
     }
 
+    public void StartCutscene()
+    {
+        Debug.Log("Cutscene begins, all other UI disabled");
+        CutsceneUI.SetActive(true);
+        BannerUI.SetActive(false);
+        ActionsUI.SetActive(false);
+        StatsUI.SetActive(false);
+        LogBox.SetActive(false);
+    }
     public void EndCutscene()
     {
         //Disable CutsceneUI and enable BattleUI
@@ -81,7 +90,7 @@ public class TurnsManager : Publisher, IObserver
 
         // Notify BattleStart
         NotifyObservers(GameEvents.BattleStart);
-
+        
         //Start animation for BattleStart
         StartCoroutine(BattleStartAnimation());
     }
@@ -155,5 +164,6 @@ public class TurnsManager : Publisher, IObserver
 
         //Disable CutsceneUI and enable BattleUI
         CutsceneUI.SetActive(false);
+        NotifyObservers(GameEvents.DialogueEnd);
     }
 }

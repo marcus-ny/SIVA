@@ -306,7 +306,7 @@ public class PlayerController : Publisher
         }
         //StartCoroutine(WaitForMovementInput());
         //Debug.Log("Is this executed early?");
-
+        NotifyObservers(GameEvents.SuccessfulMove);
         return true;
     }
 

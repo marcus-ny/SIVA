@@ -9,6 +9,7 @@ public class MapController : MonoBehaviour
 {
 	private static MapController _instance;
 
+	public bool isCutscene;
 	public static MapController Instance { get { return _instance; } }
 
 	public OverlayTile overlayTilePrefab;
@@ -79,10 +80,13 @@ public class MapController : MonoBehaviour
 
     private void Update()
     {
-        foreach (OverlayTile tile in map.Values)
-        {
-			tile.ShowTile();
-        }
+		if (!isCutscene)
+		{
+			foreach (OverlayTile tile in map.Values)
+			{
+				tile.ShowTile();
+			}
+		}
     }
 	/*
     public List<OverlayTile> GetNeighborTiles(OverlayTile curr, List<OverlayTile> validTiles, int jumpHeight)
