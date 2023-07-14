@@ -15,5 +15,12 @@ public enum GameEvents
     InteractableOFR,
     NoInteractable,
     NoTarget,
-    TargetOFR
+    TargetOFR,
+
+    // For Tutorial
+    SuccessfulMove,
+    SuccessfulAttack,
+    SuccessfulInteract,
+    SuccessfulMoveToDark,
+    DialogueEnd,
 }

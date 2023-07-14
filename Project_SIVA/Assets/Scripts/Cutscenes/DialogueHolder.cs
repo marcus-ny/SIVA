@@ -28,11 +28,7 @@ namespace DialogueSystem
             BattleSimulator.Instance.AddObserver(this);
         }
 
-        private IEnumerator cleanDialogues()
-        {
-            Deactivate();
-            yield return null;
-        }
+        
         private IEnumerator dialogueSequence()
         {
             

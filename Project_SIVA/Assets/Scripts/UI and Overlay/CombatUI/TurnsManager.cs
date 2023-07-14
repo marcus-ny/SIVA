@@ -90,7 +90,7 @@ public class TurnsManager : Publisher, IObserver
 
         // Notify BattleStart
         NotifyObservers(GameEvents.BattleStart);
-
+        NotifyObservers(GameEvents.DialogueEnd);
         //Start animation for BattleStart
         StartCoroutine(BattleStartAnimation());
     }
