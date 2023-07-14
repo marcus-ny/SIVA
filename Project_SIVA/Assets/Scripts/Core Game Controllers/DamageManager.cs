@@ -43,7 +43,19 @@ public class DamageManager : Publisher
         }
     }
     
-
+    public void HealPlayer(float healAmt)
+    {
+        if (PlayerController.Instance.character.hitpoints + healAmt >= 100)
+        {
+            PlayerController.Instance.character.hitpoints = 100;
+        }
+        else
+        {
+            PlayerController.Instance.character.hitpoints += healAmt;
+        }
+        NotifyObservers(GameEvents.PlayerHealthAltered);
+        // Add heal animation here
+    }
     public void DealDamageToPlayer(float damage)
     {
         if (playerController.character.activeTile.light_level > 0)
