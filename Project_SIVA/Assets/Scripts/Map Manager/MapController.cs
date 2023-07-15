@@ -152,13 +152,13 @@ public class MapController : MonoBehaviour
 	/*
 	 * Given an overlay tile, returns an array of tiles that go out of center in a + sign
 	 */
-    public List<OverlayTile> GetPlusShapedAlongCenter(OverlayTile center)
+    public List<OverlayTile> GetPlusShapedAlongCenter(OverlayTile center, int reach)
     {
 		int[,] directions = new int[4, 2] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
 
 		List<OverlayTile> plusShaped = new();
 
-		for (int mult = 1; mult <= 10; mult++)
+		for (int mult = 1; mult <= reach; mult++)
 		{
 			for (int i = 0; i < 4; i++)
 			{
