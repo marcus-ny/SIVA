@@ -9,6 +9,10 @@ public class TutorialPointerManager : MonoBehaviour, IObserver
     [SerializeField] TurnsManager turnsManager;
     bool completed;
 
+    [SerializeField] GenerationDelay genDelay;
+    [SerializeField] int delayTimeInSeconds;
+
+    public enum GenerationDelay { Instantaneous, Delayed }
     private void Awake()
     {
         ShowTips(false);
@@ -29,7 +33,9 @@ public class TutorialPointerManager : MonoBehaviour, IObserver
         
         if (gameEvent == triggerEvent)
         {
-            StartCoroutine(ShowTipsIntro(true));
+            if (genDelay == GenerationDelay.Instantaneous) ShowTips(true);
+            else if (genDelay == GenerationDelay.Delayed) StartCoroutine(ShowTipsIntro(true));
+
         } else if (gameEvent == completionEvent)
         {
             ShowTips(false);
@@ -40,7 +46,7 @@ public class TutorialPointerManager : MonoBehaviour, IObserver
     IEnumerator ShowTipsIntro(bool trigger)
     {
         // Should we add new events here to time this better?
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(delayTimeInSeconds);
         ShowTips(trigger);
     }
 
