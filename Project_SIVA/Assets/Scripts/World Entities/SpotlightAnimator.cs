@@ -12,10 +12,27 @@ public class SpotlightAnimator : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+
+    }
+
+    // Update is called once per frame
+    public void AnimateSpin(Spotlight_SW.Directions cur)
+    {
+        if (cur == Spotlight_SW.Directions.NE)
+        {
+            animator.Play("Spotlight_Idle_NE");
+        }else if (cur == Spotlight_SW.Directions.NW)
+        {
+            animator.Play("Spotlight_Idle_NW");
+        }else if (cur == Spotlight_SW.Directions.SE)
+        {
+            animator.Play("Spotlight_Idle_SE");
+        }else if (cur == Spotlight_SW.Directions.SW)
+        {
+            animator.Play("Spotlight_Idle_SW");
+        }
     }
 
 }

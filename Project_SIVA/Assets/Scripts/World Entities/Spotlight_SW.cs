@@ -7,28 +7,35 @@ public class Spotlight_SW : WorldEntity, IInteractable
     private bool active;
     public enum Directions { NE = 0, SE = 1, SW = 2, NW = 3 }
     private Directions currDir;
+    private SpotlightAnimator animator;
 
     public void Awake()
     {
-        
+        animator = GetComponent<SpotlightAnimator>();
     }
     public void Start()
     {
-        EmitDirectionalLight(activeTile, true, (int)currDir);         
+        EmitDirectionalLight(activeTile, true, (int)currDir);      
+        
     }
     public bool ReceiveInteraction()
     {
-        if (active) EmitDirectionalLight(activeTile, false, 1);
-        else EmitDirectionalLight(activeTile, true, 1);
+        if (active) EmitDirectionalLight(activeTile, false, (int)currDir);
+        else
+        {
+            EmitDirectionalLight(activeTile, true, (int)currDir);
+            CheckDir();
+        }
 
         return true;
     }
 
     public void Update()
     {
-        
+        if (active) { 
             CheckDir();
-        
+            }
+            
     }
 
     private void EmitDirectionalLight(OverlayTile cur, bool trigger, int dir)
@@ -41,9 +48,9 @@ public class Spotlight_SW : WorldEntity, IInteractable
         Debug.Log("Tile count: " + litUpTiles.Count + " lighting status changing to : " + trigger);
         foreach (OverlayTile tile in litUpTiles)
         {
-            
             tile.AlterLightLevel(trigger);
         }
+        animator.AnimateSpin((Directions)dir);
     }
 
     private void CheckDir()
@@ -55,7 +62,7 @@ public class Spotlight_SW : WorldEntity, IInteractable
         int xDiff = (playerPosition.x - curPosition.x);
         int yDiff = (playerPosition.y - curPosition.y);
 
-        if (Mathf.Abs(xDiff) > Mathf.Abs(yDiff))
+        if (Mathf.Abs(xDiff) >= Mathf.Abs(yDiff))
         {
             
             // Emit light along X Axis
