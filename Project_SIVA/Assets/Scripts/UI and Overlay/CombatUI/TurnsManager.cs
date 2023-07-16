@@ -148,6 +148,7 @@ public class TurnsManager : Publisher, IObserver
     {
         BannerUI.transform.Find("PlayerWin").gameObject.SetActive(true);
         yield return new WaitForSeconds(bigBannerAnimationTime);
+        BannerUI.transform.Find("PlayerWin").gameObject.SetActive(false);
     }
 
     IEnumerator PlayerLoseAnimation()
