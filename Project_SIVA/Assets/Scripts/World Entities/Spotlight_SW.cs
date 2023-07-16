@@ -8,11 +8,16 @@ public class Spotlight_SW : WorldEntity, IInteractable
     public enum Directions { NE = 0, SE = 1, SW = 2, NW = 3 }
     private Directions currDir;
 
+    public void Awake()
+    {
+        
+    }
     public void Start()
     {
         //EmitDirectionalLight(activeTile, true, 1);
-        CheckDir();
+        //CheckDir();
         Debug.Log("Starting direction: " + currDir);
+        EmitDirectionalLight(activeTile, true, (int)currDir);
          
     }
     public bool ReceiveInteraction()
@@ -37,7 +42,7 @@ public class Spotlight_SW : WorldEntity, IInteractable
 
         List<OverlayTile> litUpTiles = MapController.Instance.GetUniDirectional(activeTile, dir, 3);
         Debug.Log("Emitted light: " + trigger + " in direction " + (Directions)dir);
-        Debug.Log("Tile count: " + litUpTiles.Count);
+        Debug.Log("Tile count: " + litUpTiles.Count + " lighting status changing to : " + trigger);
         foreach (OverlayTile tile in litUpTiles)
         {
             
