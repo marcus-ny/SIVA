@@ -14,11 +14,7 @@ public class Spotlight_SW : WorldEntity, IInteractable
     }
     public void Start()
     {
-        //EmitDirectionalLight(activeTile, true, 1);
-        //CheckDir();
-        Debug.Log("Starting direction: " + currDir);
-        EmitDirectionalLight(activeTile, true, (int)currDir);
-         
+        EmitDirectionalLight(activeTile, true, (int)currDir);         
     }
     public bool ReceiveInteraction()
     {
@@ -83,7 +79,6 @@ public class Spotlight_SW : WorldEntity, IInteractable
                 }
                 else if (deltaDir == -1 || deltaDir == 3)
                 {
-                    Debug.Log("Is this carried out?");
                     RotateCounterClockwise();
                 }
             } else // -X
@@ -110,17 +105,12 @@ public class Spotlight_SW : WorldEntity, IInteractable
         {
             
             if (yDiff > 0)
-            {
-                
-                
+            {               
                 Directions newDir = Directions.NW;
                 int deltaDir = newDir - currDir;
 
                 if (Mathf.Abs(deltaDir) == 2)
                 {
-                    Debug.Log("why is this path taken");
-                    Debug.Log("currdir" + currDir);
-                    Debug.Log("new dir: " + newDir);
                     RotateClockwise();
                     RotateClockwise();
                 }
@@ -141,7 +131,6 @@ public class Spotlight_SW : WorldEntity, IInteractable
                 
                 if (Mathf.Abs(deltaDir) == 2)
                 {
-                    Debug.Log("directional change 180 degrees from " + currDir + " to " + newDir);
                     RotateClockwise();
                     RotateClockwise();
                 }
@@ -164,7 +153,6 @@ public class Spotlight_SW : WorldEntity, IInteractable
         Directions prevDir = currDir;
         Directions newDir = (Directions) ((int)(currDir + 1)%4);
         currDir = newDir;
-        Debug.Log("Rotated Clockwise to from " + prevDir + " to " + newDir);
         EmitDirectionalLight(activeTile, false, (int)prevDir);
         EmitDirectionalLight(activeTile, true, (int)newDir);
     }
@@ -178,7 +166,6 @@ public class Spotlight_SW : WorldEntity, IInteractable
         while ((int)absoluteDiffDir < 0) absoluteDiffDir += 4;
         Directions newDir = (Directions)(absoluteDiffDir);
         currDir = newDir;
-        Debug.Log("Rotated CounterClockwise from " + prevDir + " to " + newDir);
         EmitDirectionalLight(activeTile, false, (int)prevDir);
         EmitDirectionalLight(activeTile, true, (int)newDir);
     }
