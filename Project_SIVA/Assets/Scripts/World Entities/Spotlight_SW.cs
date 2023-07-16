@@ -44,8 +44,7 @@ public class Spotlight_SW : WorldEntity, IInteractable
         active = trigger ? true : false;
 
         List<OverlayTile> litUpTiles = MapController.Instance.GetUniDirectional(activeTile, dir, 3);
-        Debug.Log("Emitted light: " + trigger + " in direction " + (Directions)dir);
-        Debug.Log("Tile count: " + litUpTiles.Count + " lighting status changing to : " + trigger);
+        
         foreach (OverlayTile tile in litUpTiles)
         {
             tile.AlterLightLevel(trigger);
