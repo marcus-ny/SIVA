@@ -265,7 +265,8 @@ public class MapController : MonoBehaviour
 
 	public List<OverlayTile> GetUniDirectional(OverlayTile reference, int dir, int range)
     {
-		int[,] directions = new int[4, 2] { { 1, 0 }, { -1, 0 }, { 0, 1 },  { 0, -1 }  };
+		int[,] directions = new int[4, 2] { { 1, 0 }, { 0, -1 }, { -1, 0 }, { 0, 1 }  };
+		Debug.Log("Direction being added is " + dir);
 		List<OverlayTile> result = new();
 		for (int mult = 1; mult <= range; mult++)
         {
