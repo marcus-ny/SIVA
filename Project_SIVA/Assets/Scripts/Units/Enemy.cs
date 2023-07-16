@@ -31,7 +31,7 @@ public abstract class Enemy : MonoBehaviour
 
     public abstract void Action();
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         hitpoints -= damage;
     }
