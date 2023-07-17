@@ -15,7 +15,8 @@ public class Spotlight_SW : WorldEntity, IInteractable
     }
     public void Start()
     {
-        EmitDirectionalLight(activeTile, true, (int)currDir);      
+        EmitDirectionalLight(activeTile, true, (int)currDir);
+        CheckDir();
         
     }
     public bool ReceiveInteraction()
@@ -32,16 +33,24 @@ public class Spotlight_SW : WorldEntity, IInteractable
 
     public void Update()
     {
-        if (active) { 
-            CheckDir();
+        // Temporary fix, but can be improved later
+        
+        animator.AnimateSpin(currDir);
+
+        if (BattleSimulator.Instance.State != BattleState.PLAYER_TURN)
+        {
+            if (active)
+            {
+                CheckDir();
             }
+        }
             
     }
 
     private void EmitDirectionalLight(OverlayTile cur, bool trigger, int dir)
     {
         int factor = trigger ? 1 : -1;
-        active = trigger ? true : false;
+        active = trigger;
 
         List<OverlayTile> litUpTiles = MapController.Instance.GetUniDirectional(activeTile, dir, 3);
         
