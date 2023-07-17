@@ -7,10 +7,12 @@ public class TutorialPointerManager : MonoBehaviour, IObserver
     [SerializeField] GameEvents triggerEvent;
     [SerializeField] GameEvents completionEvent;
     [SerializeField] TurnsManager turnsManager;
-    bool completed;
+    public bool completed;
+    
 
     [SerializeField] GenerationDelay genDelay;
     [SerializeField] int delayTimeInSeconds;
+    [SerializeField] UIActionBoxManager actionBoxManager;
 
     public enum GenerationDelay { Instantaneous, Delayed }
     private void Awake()
@@ -25,8 +27,11 @@ public class TutorialPointerManager : MonoBehaviour, IObserver
         PlayerController.Instance.AddObserver(this);
         WorldEntitiesManager.Instance.AddObserver(this);
         turnsManager.AddObserver(this);
+        actionBoxManager.AddObserver(this);
         
     }
+
+    
     public void OnNotify(GameEvents gameEvent)
     {
         if (completed) return;

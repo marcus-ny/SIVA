@@ -9,6 +9,7 @@ public class Door : WorldEntity, IInteractable, ITeleportable
     private void Start()
     {
         doorAnimator = GetComponent<DoorAnimator>();
+        activeTile.isBlocked = false;
     }
     public override void Highlight(bool trigger)
     {

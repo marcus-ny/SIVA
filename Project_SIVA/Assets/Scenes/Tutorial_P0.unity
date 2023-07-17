@@ -496,6 +496,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 65387004}
+  - component: {fileID: 65387005}
   m_Layer: 0
   m_Name: t1cutscene
   m_TagString: Untagged
@@ -518,6 +519,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &65387005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65387002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67fb3587d9e246468dfe80955ff834a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnsManager: {fileID: 1145407522}
 --- !u!1 &73591807
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,7 +2171,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2083862695}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6875,8 +6889,10 @@ MonoBehaviour:
   triggerEvent: 20
   completionEvent: 16
   turnsManager: {fileID: 1145407522}
+  completed: 0
   genDelay: 0
   delayTimeInSeconds: 0
+  actionBoxManager: {fileID: 0}
 --- !u!1 &1008538953
 GameObject:
   m_ObjectHideFlags: 0
@@ -14492,7 +14508,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -83.72779}
+  m_AnchoredPosition: {x: 0, y: -83.7278}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1844964972
