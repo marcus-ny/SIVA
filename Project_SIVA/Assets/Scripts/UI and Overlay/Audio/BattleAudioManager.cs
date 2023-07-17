@@ -8,6 +8,7 @@ public class BattleAudioManager : MonoBehaviour, IObserver
     [SerializeField] public AudioClip damageSound;
     [SerializeField] private AudioClip lightSound;
     [SerializeField] private AudioClip healSound;
+    [SerializeField] private AudioClip error;
     //private float delay = 1.0f;
 
     // Start is called before the first frame update
@@ -15,6 +16,7 @@ public class BattleAudioManager : MonoBehaviour, IObserver
     {
         DamageManager.Instance.AddObserver(this);
         BattleSimulator.Instance.AddObserver(this);
+        PlayerController.Instance.AddObserver(this);
 
         source = GetComponent<AudioSource>();
     }
@@ -30,17 +32,16 @@ public class BattleAudioManager : MonoBehaviour, IObserver
         {
             // Play light sound
             PlaySound(lightSound);
-
-            // Add delay
-
-
-            // Play damage sound
-            //PlaySound(damageSound);
         }
         if (gameEvent == GameEvents.EnemyHealed)
         {
             // Play heal sound
             PlaySound(healSound);
+        }
+        // Error Related
+        if ((gameEvent == GameEvents.AOEunsuccessful) || (gameEvent == GameEvents.InteractableOFR) || (gameEvent == GameEvents.NoInteractable) || (gameEvent == GameEvents.TargetOFR) || (gameEvent == GameEvents.NoTarget))
+        {
+            PlaySound(error);
         }
     }
 
