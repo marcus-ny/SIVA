@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MechBoss : Enemy
+public class MechBoss : Enemy, IObserver
 {
     List<OverlayTile> previousLightSpot;
     private bool disabled;
@@ -44,7 +44,7 @@ public class MechBoss : Enemy
             OverlayTile tempRef = MapController.Instance.map[new Vector2Int(activeTile.gridLocation.x - 1, activeTile.gridLocation.y)];
             List<OverlayTile> meleeTiles = MapController.Instance.GetAoeAttackTiles(tempRef, activeTile, 4);
 
-            if (meleeTiles.Contains(player.activeTile))
+            if (meleeTiles.Contains(PlayerController.Instance.character.activeTile))
             {
                 MeleeAttack();
             } else
@@ -90,7 +90,7 @@ public class MechBoss : Enemy
         OverlayTile playerTile = PlayerController.Instance.character.activeTile;
 
         List<OverlayTile> lightSpots = MapController.Instance.GetPlusShapedAlongCenter(playerTile, 1);
-
+        lightSpots.Add(playerTile);
         previousLightSpot = lightSpots;
 
         foreach (OverlayTile tile in lightSpots)
@@ -137,4 +137,8 @@ public class MechBoss : Enemy
         state_moving = false;
     }
 
+    public void OnNotify(GameEvents gameEvent)
+    {
+        disabled = true;
+    }
 }

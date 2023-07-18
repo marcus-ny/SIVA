@@ -16,7 +16,8 @@ public enum GameEvents
     NoInteractable,
     NoTarget,
     TargetOFR,
-
+    
+    BossPowerDisabled,
     // For Tutorial
     SuccessfulMove,
     NearTrigger,

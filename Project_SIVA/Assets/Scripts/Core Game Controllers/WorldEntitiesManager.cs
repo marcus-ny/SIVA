@@ -34,7 +34,7 @@ public class WorldEntitiesManager : Publisher
 
     public void HightlightAll(bool trigger)
     {
-        foreach (WorldEntity interactable in entityMap.Values)
+        foreach (IInteractable interactable in entityMap.Values)
         {
             interactable.Highlight(trigger);
         }

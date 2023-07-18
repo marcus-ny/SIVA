@@ -5,10 +5,7 @@ using UnityEngine;
 public class InvisibleTrigger : WorldEntity
 {
     public bool detected;
-    public override void Highlight(bool trigger)
-    {
-        //throw new System.NotImplementedException();
-    }
+    
 
     // Start is called before the first frame update
     void Start()

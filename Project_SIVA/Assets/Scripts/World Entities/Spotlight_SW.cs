@@ -185,8 +185,8 @@ public class Spotlight_SW : WorldEntity, IInteractable
         EmitDirectionalLight(activeTile, true, (int)newDir);
     }
 
-    public override void Highlight(bool trigger)
+    public void Highlight(bool trigger)
     {
-        
+       
     }
 }

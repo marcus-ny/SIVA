@@ -13,8 +13,5 @@ public class LabTube : WorldEntity
         }
     }
 
-    public override void Highlight(bool trigger)
-    {
-        
-    }
+    
 }

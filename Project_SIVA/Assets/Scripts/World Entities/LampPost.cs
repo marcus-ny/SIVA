@@ -14,7 +14,7 @@ public class LampPost : WorldEntity, IInteractable
         animationController = gameObject.GetComponent<LampPostAnimationController>();
     }
 
-    public override void Highlight(bool trigger)
+    public void Highlight(bool trigger)
     {
         animationController.Highlight(trigger);
     }
