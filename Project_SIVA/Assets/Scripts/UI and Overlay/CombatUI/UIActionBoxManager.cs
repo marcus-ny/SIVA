@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIActionBoxManager : MonoBehaviour
+public class UIActionBoxManager : Publisher
 {
     [SerializeField] GameObject actionBox;
     [SerializeField] GameObject attackBox;
@@ -34,6 +34,7 @@ public class UIActionBoxManager : MonoBehaviour
         {
             return;
         }
+        NotifyObservers(GameEvents.AttackButtonPressed);
         StartCoroutine(AttackPhaseAnimation());
     }
 

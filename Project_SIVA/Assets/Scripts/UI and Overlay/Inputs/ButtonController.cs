@@ -8,7 +8,7 @@ public class ButtonController : MonoBehaviour
 {
     public Canvas UI;
 
-    public GameObject overlayContainer;
+    
 
     public bool truesight = false;
 
@@ -24,24 +24,8 @@ public class ButtonController : MonoBehaviour
      * Function for players to be able to see which tiles are shadow and light
      * tied to the button "Toggle sight"
      */
-    public void TrueSight()
-    {
-        if (!truesight)
-        {
-            foreach (Transform item in overlayContainer.transform)
-            {
-                item.GetComponent<OverlayTile>().ShowTile();
-            }
-            truesight = true;
-        } else
-        {
-            foreach (Transform item in overlayContainer.transform)
-            {
-                item.GetComponent<OverlayTile>().HideTile();
-            }
-            truesight = false;
-        }
-    }
+    
+    
 
     /*
      * On clicking "Move" button in the UI

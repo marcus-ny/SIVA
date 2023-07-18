@@ -7,7 +7,7 @@ public class SpotlightAnimator : MonoBehaviour
     Animator animator;
     string currAnim;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
     }

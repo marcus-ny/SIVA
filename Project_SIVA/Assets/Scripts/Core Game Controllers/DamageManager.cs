@@ -75,13 +75,14 @@ public class DamageManager : Publisher
     // (not implemented yet)
     public void DealDamageToEnemy(float damage, Enemy target)
     {
+        target.SwitchColor("Red");
         if (PlayerController.Instance.character.activeTile.light_level > 0)
         {
             damage /= 2;
         }
         recentTarget = target;
         recentDamage = damage;
-        target.SwitchColor("Red");
+        
         target.TakeDamage(damage);
         NotifyObservers(GameEvents.EnemyHealthAltered);       
     }

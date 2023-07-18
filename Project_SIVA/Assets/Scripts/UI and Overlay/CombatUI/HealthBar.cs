@@ -14,7 +14,7 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<SpriteRenderer>().sortingOrder = PlayerController.Instance.character.GetComponent<SpriteRenderer>().sortingOrder;
+        //GetComponent<SpriteRenderer>().sortingOrder = PlayerController.Instance.character.GetComponent<SpriteRenderer>().sortingOrder;
         barSize.x = GetComponentInParent<CharacterInfo>().hitpoints/200;
         transform.localScale = barSize;
     }

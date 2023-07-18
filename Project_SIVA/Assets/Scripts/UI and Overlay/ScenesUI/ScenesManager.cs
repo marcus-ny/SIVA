@@ -18,6 +18,7 @@ public class ScenesManager : MonoBehaviour
     public enum GameScene{
         MainMenu,
         Tutorial_P0,
+        Tutorial_Transition_0,
         Tutorial_P1, 
         Tutorial_P2,
         Tutorial_P3,

@@ -199,6 +199,7 @@ public class PlayerController : Publisher
         if (destinationTile.enemy != null && inRange)
         {
             StartCoroutine(SuccessfulMelee());
+            NotifyObservers(GameEvents.SuccessfulAttack);
             return true;
         }
         else if (destinationTile.enemy == null)
@@ -317,16 +318,31 @@ public class PlayerController : Publisher
         
         if (inRange && WorldEntitiesManager.Instance.entityMap.ContainsKey(coordinates))
         {
-            if (WorldEntitiesManager.Instance.Interact(destinationTile)) return true;
-            else return false;
+            if (WorldEntitiesManager.Instance.Interact(destinationTile))
+            {
+                NotifyObservers(GameEvents.SuccessfulInteract);
+                return true;
+            }
+            
+            
+        }
+        else if (WorldEntitiesManager.Instance.entityMap.ContainsKey(PlayerController.Instance.character.activeTile.gridLocation2d))
+        {
+            if (WorldEntitiesManager.Instance.Interact(PlayerController.Instance.character.activeTile))
+            {
+                NotifyObservers(GameEvents.SuccessfulInteract);
+                return true;
+            }
         }
         else if (!inRange)
         {
+            Debug.Log(destinationTile.gridLocation2d);
             NotifyObservers(GameEvents.InteractableOFR);
             Debug.Log("Interactable out of range!");
-        }
+        } 
         else
         {
+            
             NotifyObservers(GameEvents.NoInteractable);
             Debug.Log("There is no interactable on this tile");
         }
