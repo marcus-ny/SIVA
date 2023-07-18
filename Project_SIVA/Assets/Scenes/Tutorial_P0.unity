@@ -315,7 +315,7 @@ MonoBehaviour:
   textColor: {r: 0, g: 0, b: 0, a: 1}
   delay: 0.05
   sound: {fileID: 8300000, guid: cf841da7c530b5a48ad346f105b78fd3, type: 3}
-  characterSprite: {fileID: 21300000, guid: a9037ee6ccaa75c448a057779b0f2170, type: 3}
+  characterSprite: {fileID: 21300000, guid: cda45e970bfec7a46b1bbfc1ca5e8c5e, type: 3}
   imageHolder: {fileID: 1210312778}
 --- !u!114 &50180982
 MonoBehaviour:
@@ -590,7 +590,7 @@ MonoBehaviour:
   textColor: {r: 0, g: 0, b: 0, a: 1}
   delay: 0.05
   sound: {fileID: 8300000, guid: cf841da7c530b5a48ad346f105b78fd3, type: 3}
-  characterSprite: {fileID: 21300000, guid: c48de960a3505ae4ab2150249ad95e28, type: 3}
+  characterSprite: {fileID: 21300000, guid: cda45e970bfec7a46b1bbfc1ca5e8c5e, type: 3}
   imageHolder: {fileID: 109393202}
 --- !u!114 &73591810
 MonoBehaviour:
@@ -2085,7 +2085,7 @@ MonoBehaviour:
   textColor: {r: 0, g: 0, b: 0, a: 1}
   delay: 0.08
   sound: {fileID: 8300000, guid: a5d8b33b534937d4f907457f4c62bda8, type: 3}
-  characterSprite: {fileID: 21300000, guid: a9037ee6ccaa75c448a057779b0f2170, type: 3}
+  characterSprite: {fileID: 21300000, guid: 2e3ad44c71a1e0d4f9db2a5978873b79, type: 3}
   imageHolder: {fileID: 2087132603}
 --- !u!1 &215651505
 GameObject:
@@ -2170,8 +2170,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 215651510}
   m_HandleRect: {fileID: 2083862695}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5025,7 +5025,7 @@ MonoBehaviour:
   textColor: {r: 0, g: 0, b: 0, a: 1}
   delay: 0.08
   sound: {fileID: 8300000, guid: a5d8b33b534937d4f907457f4c62bda8, type: 3}
-  characterSprite: {fileID: 21300000, guid: fcf57321dc5a5c54797af15f129d4b1d, type: 3}
+  characterSprite: {fileID: 21300000, guid: 2e3ad44c71a1e0d4f9db2a5978873b79, type: 3}
   imageHolder: {fileID: 1796250070}
 --- !u!114 &645770830
 MonoBehaviour:
@@ -6608,8 +6608,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_HandleRect: {fileID: 446715366}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -14463,7 +14463,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -83.7278}
+  m_AnchoredPosition: {x: 0, y: -83.72779}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1844964972
@@ -16484,7 +16484,7 @@ MonoBehaviour:
   textColor: {r: 0, g: 0, b: 0, a: 1}
   delay: 0.05
   sound: {fileID: 8300000, guid: cf841da7c530b5a48ad346f105b78fd3, type: 3}
-  characterSprite: {fileID: 21300000, guid: c48de960a3505ae4ab2150249ad95e28, type: 3}
+  characterSprite: {fileID: 21300000, guid: cda45e970bfec7a46b1bbfc1ca5e8c5e, type: 3}
   imageHolder: {fileID: 1672371108}
 --- !u!114 &2108697678
 MonoBehaviour:
