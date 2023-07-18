@@ -263,4 +263,9 @@ public class BattleSimulator : Publisher
         actionsPerformed = 0;
         levelComplete = true;
     }
+
+    public void DisableBoss()
+    {
+        NotifyObservers(GameEvents.BossPowerDisabled);
+    }
 }

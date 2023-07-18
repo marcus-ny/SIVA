@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : WorldEntity, IInteractable, ITeleportable
+public class Door : WorldEntity, ITeleportable
 {
     private DoorAnimator doorAnimator;
 
@@ -11,20 +11,16 @@ public class Door : WorldEntity, IInteractable, ITeleportable
         doorAnimator = GetComponent<DoorAnimator>();
         activeTile.isBlocked = false;
     }
-    public override void Highlight(bool trigger)
-    {
-        
-    }
+    
 
-    public bool ReceiveInteraction()
+    private void Update()
     {
-        if (BattleSimulator.Instance.levelComplete)
+        if (PlayerController.Instance.character.activeTile == activeTile && BattleSimulator.Instance.levelComplete)
         {
             Teleport();
-            return true;
-        }
-        return false;
+        } 
     }
+    
     public void Teleport()
     {
         StartCoroutine(TeleportCoroutine());

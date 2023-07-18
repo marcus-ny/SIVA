@@ -12,8 +12,8 @@ public abstract class Enemy : MonoBehaviour
     protected PathFinder pathFinder;
     protected Rangefinder rangeFinder;
 
-    public List<OverlayTile> path;
-    public List<OverlayTile> range;
+    protected List<OverlayTile> path;
+    protected List<OverlayTile> range;
 
     public Vector3Int cur;
     public Vector3Int prev;

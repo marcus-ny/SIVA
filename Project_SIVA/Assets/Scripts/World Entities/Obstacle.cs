@@ -10,8 +10,5 @@ public class Obstacle : WorldEntity
         
     }
 
-    public override void Highlight(bool trigger)
-    {
-        //
-    }
+    
 }

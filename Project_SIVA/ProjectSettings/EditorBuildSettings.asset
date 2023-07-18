@@ -9,21 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: eed77058acdddca4ca8a7b168ad769d2
   - enabled: 1
-    path: Assets/Scenes/Tutorial_P0.unity
+    path: Assets/Scenes/Chapter_1_The_Escape/Tutorial_P0.unity
     guid: 37914489ecd8b0646b6322f24045c5a6
   - enabled: 1
-    path: Assets/Scenes/Tutorial_Transition_0.unity
+    path: Assets/Scenes/Chapter_1_The_Escape/Tutorial_Transition_0.unity
     guid: 265986b0e141e684680d16901385d6ed
   - enabled: 1
-    path: Assets/Scenes/Tutorial_P1.unity
+    path: Assets/Scenes/Chapter_1_The_Escape/Tutorial_P1.unity
     guid: 90078be5e02da4733a4f0454f1e7c49f
   - enabled: 1
-    path: Assets/Scenes/Tutorial_P2.unity
+    path: Assets/Scenes/Chapter_1_The_Escape/Tutorial_P2.unity
     guid: e0ae44926efc42640a10d398713c543c
   - enabled: 1
-    path: Assets/Scenes/Tutorial_P3.unity
+    path: Assets/Scenes/Chapter_1_The_Escape/Tutorial_P3.unity
     guid: 3b9b02d6dac33e747a3daca570aded79
   - enabled: 1
-    path: Assets/Scenes/Tutorial_P4.unity
+    path: Assets/Scenes/Chapter_1_The_Escape/Tutorial_P4.unity
     guid: eca0ad47bbd4a084eb55ab55b5449290
   m_configObjects: {}
