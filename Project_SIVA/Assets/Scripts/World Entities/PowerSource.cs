@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PowerSource : WorldEntity, IInteractable
 {
+    private bool used;
+
+    private void Start()
+    {
+        used = false;
+    }
     public void Highlight(bool trigger)
     {
         // Add highlighting later
@@ -11,7 +17,11 @@ public class PowerSource : WorldEntity, IInteractable
 
     public bool ReceiveInteraction()
     {
-        BattleSimulator.Instance.DisableBoss();
-        return true;
+        if (used) return false;
+        else
+        {
+            BattleSimulator.Instance.DisableBoss();
+            return true;
+        }
     }
 }

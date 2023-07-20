@@ -42,6 +42,11 @@ public class ButtonController : MonoBehaviour
         BattleSimulator.Instance.DealMeleeDamage();
     }
 
+    public void Fireball()
+    {
+        BattleSimulator.Instance.CastFireball();
+    }
+
     public void AOE()
     {
         BattleSimulator.Instance.DealAOEDamage();
