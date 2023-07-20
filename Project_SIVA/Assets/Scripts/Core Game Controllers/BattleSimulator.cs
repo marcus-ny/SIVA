@@ -249,6 +249,32 @@ public class BattleSimulator : Publisher
         }
     }
 
+    public void CastFireball()
+    {
+        if (actionsPerformed > MAX_ACTIONS - 1)
+        {
+            return;
+        }
+
+        if (State == BattleState.PLAYER_TURN)
+        {
+            // Debug.Log("Deal damage button clicked");
+            StartCoroutine(WaitForFireballCast());
+        }
+    }
+
+    IEnumerator WaitForFireballCast()
+    {
+        while (!Input.GetMouseButtonDown(0))
+        {
+            player.GetMovementRange();
+            yield return null;
+        }
+        if (player.CastFireballTrigger())
+        {
+            actionsPerformed += 1;
+        }
+    }
     public void EnemyWin()
     {
         State = BattleState.ENEMY_WIN;

@@ -24,12 +24,15 @@ public class PlayerController : Publisher
 
     public OverlayTile destinationTile;
 
+    [SerializeField] Firebolt firebolt;
+
     private PlayerAnimator animationController;
     public PathArrowGenerator pathArrowGenerator;
 
     private readonly int speed = 3;
     private readonly int reach = 3;
 
+    public Enemy mostrecentEnemy;
     private void Start()
     {
         pathFinder = new();
@@ -48,7 +51,7 @@ public class PlayerController : Publisher
         else
         {
             _instance = this;
-        }       
+        }
     }
 
     private void Update()
@@ -73,15 +76,15 @@ public class PlayerController : Publisher
             OverlayTile overlayTile;
             if (tileHit.HasValue)
             {
-                
+
                 overlayTile = tileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
-                
+
                 if (Input.GetMouseButtonDown(0))
-                {                   
+                {
                     destinationTile = overlayTile;
-                    
+
                 }
-            }        
+            }
         }
         //Debug.Log("character on: " + character.activeTile.gridLocation);
     }
@@ -106,7 +109,7 @@ public class PlayerController : Publisher
 
             character.transform.position = new Vector3(character.transform.position.x,
                 character.transform.position.y, zIndex);
-            
+
             if (Vector2.Distance(character.transform.position, path[0].transform.position) < 0.0001f)
             {
                 PositionCharacterOnTile(path[0]);
@@ -121,8 +124,8 @@ public class PlayerController : Publisher
                 }
                 path.RemoveAt(0);
             }
-            
-            yield return null;           
+
+            yield return null;
         }
 
 
@@ -137,7 +140,7 @@ public class PlayerController : Publisher
 
     private IEnumerator MoveInLight()
     {
-        
+
         while (path.Count > 0)
         {
             var step = speed * Time.deltaTime;
@@ -154,7 +157,7 @@ public class PlayerController : Publisher
 
             character.transform.position = new Vector3(character.transform.position.x,
                 character.transform.position.y, zIndex);
-           
+
             if (Vector2.Distance(character.transform.position, path[0].transform.position) < 0.0001f)
             {
                 PositionCharacterOnTile(path[0]);
@@ -249,7 +252,7 @@ public class PlayerController : Publisher
             Debug.Log("AOE not succesful");
             return false;
         }
-        
+
         foreach (OverlayTile tile in aoeRange)
         {
             Vector2Int coordinates = new Vector2Int(tile.gridLocation.x, tile.gridLocation.y);
@@ -298,7 +301,7 @@ public class PlayerController : Publisher
         if (path.Count == 0) return false;
 
         if (character.activeTile.light_level > 0)
-        { 
+        {
             StartCoroutine(MoveInLight());
         }
         else
@@ -315,7 +318,7 @@ public class PlayerController : Publisher
     {
         bool inRange = (Mathf.Abs(character.activeTile.gridLocation.x - destinationTile.gridLocation.x) < 2) && (Mathf.Abs(character.activeTile.gridLocation.y - destinationTile.gridLocation.y) < 2);
         Vector2Int coordinates = new(destinationTile.gridLocation.x, destinationTile.gridLocation.y);
-        
+
         if (inRange && WorldEntitiesManager.Instance.entityMap.ContainsKey(coordinates))
         {
             if (WorldEntitiesManager.Instance.Interact(destinationTile))
@@ -323,8 +326,8 @@ public class PlayerController : Publisher
                 NotifyObservers(GameEvents.SuccessfulInteract);
                 return true;
             }
-            
-            
+
+
         }
         else if (WorldEntitiesManager.Instance.entityMap.ContainsKey(PlayerController.Instance.character.activeTile.gridLocation2d))
         {
@@ -339,10 +342,10 @@ public class PlayerController : Publisher
             Debug.Log(destinationTile.gridLocation2d);
             NotifyObservers(GameEvents.InteractableOFR);
             Debug.Log("Interactable out of range!");
-        } 
+        }
         else
         {
-            
+
             NotifyObservers(GameEvents.NoInteractable);
             Debug.Log("There is no interactable on this tile");
         }
@@ -350,7 +353,7 @@ public class PlayerController : Publisher
     }
 
     public void GetMovementRange()
-    {        
+    {
         reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, reach, 1);
 
         foreach (var tile in reachableTiles)
@@ -376,6 +379,20 @@ public class PlayerController : Publisher
         }
     }
 
+    public bool CastFireballTrigger()
+    {
+        if (destinationTile.enemy != null)
+        {
+            mostrecentEnemy = destinationTile.enemy;
+            //NotifyObservers(GameEvents.EnemyHealthAltered);
+            Instantiate(firebolt);
+            firebolt.transform.position = character.transform.position;
+            DamageManager.Instance.DealDamageToEnemy(30, destinationTile.enemy);
+        }
+        return true;
+    }
+
+    
     public void TransitionLTS()
     {
         StartCoroutine(TransitionLTSAnim());

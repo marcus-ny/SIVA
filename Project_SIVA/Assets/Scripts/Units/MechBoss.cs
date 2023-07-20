@@ -139,6 +139,10 @@ public class MechBoss : Enemy, IObserver
 
     public void OnNotify(GameEvents gameEvent)
     {
-        disabled = true;
+        if (gameEvent == GameEvents.BossPowerDisabled)
+        {
+            disabled = true;
+        }
     }
+
 }
