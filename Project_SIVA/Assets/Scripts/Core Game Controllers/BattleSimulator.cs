@@ -320,6 +320,8 @@ public class BattleSimulator : Publisher, IObserver
 
     public void DisableBoss()
     {
+        Debug.Log("Boss power tripped");
+
         NotifyObservers(GameEvents.BossPowerDisabled);
     }
 }
