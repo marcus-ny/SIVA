@@ -16,7 +16,8 @@ public class ButtonController : MonoBehaviour
      * Function for switching turns between player and AI party
      */
     public void SwitchTurn()
-    { 
+    {
+        
         BattleSimulator.Instance.switchTurns();      
     }
 

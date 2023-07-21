@@ -852,6 +852,8 @@ MonoBehaviour:
   path: []
   reachableTiles: []
   destinationTile: {fileID: 0}
+  firebolt: {fileID: 0}
+  mostrecentEnemy: {fileID: 0}
 --- !u!4 &82683373
 Transform:
   m_ObjectHideFlags: 0
@@ -2170,8 +2172,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 215651510}
   m_HandleRect: {fileID: 2083862695}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6509,7 +6511,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI: {fileID: 0}
-  overlayContainer: {fileID: 1050674556}
   truesight: 0
 --- !u!4 &872106629
 Transform:
@@ -6608,8 +6609,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_HandleRect: {fileID: 446715366}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.99999994
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12509,6 +12510,7 @@ MonoBehaviour:
   attackBox: {fileID: 584684861}
   attackButton: {fileID: 2090365825}
   returnButton: {fileID: 349489985}
+  endTurnButton: {fileID: 1851388969}
   transitionTime: 0
 --- !u!1 &1532108149
 GameObject:
@@ -14511,6 +14513,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7262702300160054478, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
   m_PrefabInstance: {fileID: 922760696}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1851388969 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7262702300160054479, guid: be2ba7e5bf4918c4db6b3955765a5afc, type: 3}
+  m_PrefabInstance: {fileID: 922760696}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1873774920
 GameObject:
   m_ObjectHideFlags: 0

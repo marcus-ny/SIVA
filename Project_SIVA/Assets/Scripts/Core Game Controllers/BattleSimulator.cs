@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 public enum BattleState { START, PLAYER_TURN, ENEMY_TURN, TRANSITION, PLAYER_WIN, ENEMY_WIN }
-public class BattleSimulator : Publisher
+public class BattleSimulator : Publisher, IObserver
 {
     private static BattleSimulator _instance;
     public static BattleSimulator Instance { get { return _instance; } }
@@ -49,6 +49,7 @@ public class BattleSimulator : Publisher
     void Start()
     {
         State = BattleState.START;
+        EnemyManager.Instance.AddObserver(this);
         NotifyObservers(GameEvents.GameStart);
         
         actionsPerformed = 0;
@@ -60,10 +61,26 @@ public class BattleSimulator : Publisher
 
     }
 
+    public void OnNotify(GameEvents gameEvent)
+    {
+        if (gameEvent == GameEvents.PlayerWin)
+        {
+            Debug.Log("Player has won the game");
+            StartGame();
+            EnemyLose();
+        }
+    }
     public void StartGame()
     {
+        Debug.Log("Battle state is " + State);
+        Debug.Log("Level completed: " + levelComplete);
         if (State == BattleState.START) {
             State = BattleState.PLAYER_TURN;
+            NotifyObservers(GameEvents.PlayerTurn);
+            Debug.Log("Player turn begin. Event published");
+        } else if (State == BattleState.PLAYER_TURN && levelComplete)
+        {
+            Debug.Log("This part is called");
             NotifyObservers(GameEvents.PlayerTurn);
         }
     }
@@ -110,6 +127,7 @@ public class BattleSimulator : Publisher
     
     public void switchTurns()
     {
+        
         if(State == BattleState.PLAYER_TURN)
         {           
             // Change to EnemyTurn and notify observers
@@ -193,7 +211,7 @@ public class BattleSimulator : Publisher
         }
         if (player.MoveTrigger())
         {
-            actionsPerformed += 1;
+            if (!levelComplete) actionsPerformed += 1;
         }
     }
     IEnumerator WaitForMeleeInput()
@@ -219,7 +237,7 @@ public class BattleSimulator : Publisher
         }
         if (player.AoeAttackTrigger())
         {
-            actionsPerformed += 2;
+            if (!levelComplete) actionsPerformed += 2;
         }
     }
     public void DealMeleeDamage()
@@ -283,11 +301,21 @@ public class BattleSimulator : Publisher
 
     public void EnemyLose()
     {
-        State = BattleState.PLAYER_WIN;
-        if (levelComplete == false) NotifyObservers(GameEvents.PlayerWin);
-        State = BattleState.PLAYER_TURN;
-        actionsPerformed = 0;
-        levelComplete = true;
+        
+        {
+            State = BattleState.PLAYER_WIN;
+            if (levelComplete == false)
+            {
+                levelComplete = true;
+                Debug.Log("Notifying observers that player has won");
+                NotifyObservers(GameEvents.PlayerWin);
+            }
+                //if (levelComplete == false) NotifyObservers(GameEvents.)
+
+            State = BattleState.PLAYER_TURN;
+
+            actionsPerformed = 0;
+        }
     }
 
     public void DisableBoss()
