@@ -7,6 +7,7 @@ public class TurnsManager : Publisher, IObserver
 {
     [SerializeField] Button skipCutsceneButton;
     [SerializeField] GameObject UIFolder;
+    
     //TOBECHANGED
     //[SerializeField] LevelAudioManager AudioManager;
     public float bigBannerAnimationTime = 1f;
@@ -54,23 +55,26 @@ public class TurnsManager : Publisher, IObserver
 
     public void OnNotify(GameEvents gameEvent)
     {
-        if (gameEvent == GameEvents.PlayerTurn)
+        if (!BattleSimulator.Instance.levelComplete)
         {
-            Debug.Log("OnNotifiedPlayerTurnReceived");
-            PlayerTurn();
-        }
-        if (gameEvent == GameEvents.EnemyTurn)
-        {
-            Debug.Log("OnNotifiedEnemyTurnReceived");
-            EnemyTurn();
-        }
-        if (gameEvent == GameEvents.PlayerWin)
-        {
-            PlayerWin();
-        }
-        if (gameEvent == GameEvents.PlayerLose)
-        {
-            PlayerLose();
+            if (gameEvent == GameEvents.PlayerTurn)
+            {
+                Debug.Log("OnNotifiedPlayerTurnReceived");
+                PlayerTurn();
+            }
+            if (gameEvent == GameEvents.EnemyTurn)
+            {
+                Debug.Log("OnNotifiedEnemyTurnReceived");
+                EnemyTurn();
+            }
+            if (gameEvent == GameEvents.PlayerWin)
+            {
+                PlayerWin();
+            }
+            if (gameEvent == GameEvents.PlayerLose)
+            {
+                PlayerLose();
+            }
         }
     }
 
@@ -115,14 +119,18 @@ public class TurnsManager : Publisher, IObserver
 
     IEnumerator BattleStartAnimation()
     {
-        // Play animation
-        BannerUI.SetActive(true);
-        BannerUI.transform.Find("BattleStart").gameObject.SetActive(true);
-        yield return new WaitForSeconds(bigBannerAnimationTime);
-        StatsUI.SetActive(true);
-        ActionsUI.SetActive(true);
-        LogBox.SetActive(true);
-
+        if (!BattleSimulator.Instance.levelComplete)
+        {
+            // Play animation
+            BannerUI.SetActive(true);
+            BannerUI.transform.Find("BattleStart").gameObject.SetActive(true);
+        }
+            yield return new WaitForSeconds(bigBannerAnimationTime);
+            
+            StatsUI.SetActive(true);
+            ActionsUI.SetActive(true);
+            LogBox.SetActive(true);
+            
         // Change BattleSimulator to PlayerTurn
         BattleSimulator.Instance.StartGame();
 

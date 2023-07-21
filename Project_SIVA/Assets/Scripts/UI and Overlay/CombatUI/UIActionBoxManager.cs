@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIActionBoxManager : Publisher
+public class UIActionBoxManager : Publisher, IObserver
 {
     [SerializeField] GameObject actionBox;
     [SerializeField] GameObject attackBox;
     [SerializeField] Button attackButton;
     [SerializeField] Button returnButton;
+    [SerializeField] Button endTurnButton;
+
     public float transitionTime = 1f;
     private bool isInAnimation = false;
 
@@ -17,6 +19,8 @@ public class UIActionBoxManager : Publisher
     {
         actionBox.SetActive(true);
         attackBox.SetActive(false);
+        BattleSimulator.Instance.AddObserver(this);
+        //endTurnButton.interactable = false;
     }
 
     public void ActionPhase()
@@ -55,5 +59,25 @@ public class UIActionBoxManager : Publisher
         yield return new WaitForSeconds(transitionTime);
         //attackBox.SetActive(false);
         isInAnimation = false;
+    }
+
+    public void OnNotify(GameEvents gameEvent)
+    {
+        if (gameEvent == GameEvents.PlayerWin)
+        {
+            Debug.Log("Player has won. Disabling end turn button");
+            endTurnButton.GetComponent<Button>().interactable = false;
+            return;
+        }
+        else if (gameEvent == GameEvents.PlayerTurn && !BattleSimulator.Instance.levelComplete)
+        {
+            Debug.Log("Setting button to active");
+            endTurnButton.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            Debug.Log("No event of interest. Disabling end turn button");
+            endTurnButton.GetComponent<Button>().interactable = false;
+        }
     }
 }

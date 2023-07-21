@@ -102,8 +102,9 @@ public abstract class Enemy : MonoBehaviour
     public virtual void TriggerDeath()
     {
         Debug.Log("Enemy has died");
-        EnemyManager.Instance.enemyMap.Remove(new
-            Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
+        EnemyManager.Instance.KillEnemy(activeTile);
+        //EnemyManager.Instance.enemyMap.Remove(new
+            //Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
         BattleSimulator.Instance.enemyList.Remove(this);
         activeTile.isBlocked = false;
         Destroy(gameObject);

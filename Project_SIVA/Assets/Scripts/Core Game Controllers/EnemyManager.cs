@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : Publisher
 {
     private static EnemyManager _instance;
 
@@ -56,14 +56,21 @@ public class EnemyManager : MonoBehaviour
 
                 curr.PositionEnemyOnTile(tile);               
             }
-
+            Debug.Log("Enemy map count is : " + enemyMap.Count);
+            
             spawnComplete = true;
+            
+        } else if (!spawnComplete && enemySpawns.Count == 0)
+        {
+            spawnComplete = true;
+            NotifyObservers(GameEvents.PlayerWin);
+            
         }
-
+        /*
         if (enemyMap.Count == 0)
         {
             BattleSimulator.Instance.EnemyLose();
-        }
+        }*/
 
 
     }
@@ -84,6 +91,16 @@ public class EnemyManager : MonoBehaviour
         }
 
         return lowest;
+    }
+
+    public void KillEnemy(OverlayTile tile)
+    {
+        enemyMap.Remove(new
+            Vector2Int(tile.gridLocation.x, tile.gridLocation.y));
+        if (enemyMap.Count == 0)
+        {
+            NotifyObservers(GameEvents.PlayerWin);
+        }
     }
 
     public List<Mechanic> FindMechanicLocations()
