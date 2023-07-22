@@ -66,17 +66,16 @@ public class UIActionBoxManager : Publisher, IObserver
         if (gameEvent == GameEvents.PlayerWin)
         {
             Debug.Log("Player has won. Disabling end turn button");
-            endTurnButton.GetComponent<Button>().interactable = false;
-            return;
+            endTurnButton.GetComponent<Button>().interactable = false;        
         }
         else if (gameEvent == GameEvents.PlayerTurn && !BattleSimulator.Instance.levelComplete)
         {
             Debug.Log("Setting button to active");
             endTurnButton.GetComponent<Button>().interactable = true;
         }
-        else
+        else if (gameEvent == GameEvents.EnemyTurn)
         {
-            Debug.Log("No event of interest. Disabling end turn button");
+            Debug.Log("Enemy turn starts. Button disabled");
             endTurnButton.GetComponent<Button>().interactable = false;
         }
     }

@@ -5,53 +5,23 @@ using UnityEngine;
 public class MechBoss : Enemy, IObserver
 {
     List<OverlayTile> previousLightSpot;
-    private bool disabled;
-    private int turnsSinceDisabled;
+    public bool disabled;
+    public int turnsSinceDisabled;
+    private MechAnimator mechAnimator;
     private void Start()
     {
         maxAP = 4;
-        maxHp = 350;
+        hitpoints = maxHp = 350;
         previousLightSpot = new();
         actionsPerformed = 0;
         disabled = false;
         turnsSinceDisabled = 0;
+        mechAnimator = GetComponent<MechAnimator>();
+        BattleSimulator.Instance.AddObserver(this);
     }
     public override void Action()
     {
-        if (disabled && turnsSinceDisabled < 2) {
-            // Shoulder lights disabled
-            foreach (OverlayTile tile in previousLightSpot)
-            {
-                tile.AlterLightLevel(false);
-            }
-            previousLightSpot.Clear();
-            turnsSinceDisabled += 1;
-            // Skip turn
-            actionsPerformed = maxAP;
-        } else if (disabled && turnsSinceDisabled >= 2)
-        {
-            disabled = false;
-            turnsSinceDisabled = 0;
-            // Watch out for dangerous recursive call here
-            Action();
-        } else
-        {
-            // All turn actions go here
-            // No need for state machine since this is not a universal enemy
-
-            TracePlayer();
-            // Valid Melee Range
-            OverlayTile tempRef = MapController.Instance.map[new Vector2Int(activeTile.gridLocation.x - 1, activeTile.gridLocation.y)];
-            List<OverlayTile> meleeTiles = MapController.Instance.GetAoeAttackTiles(tempRef, activeTile, 4);
-
-            if (meleeTiles.Contains(PlayerController.Instance.character.activeTile))
-            {
-                MeleeAttack();
-            } else
-            {
-                RangedAttack();
-            }
-        }
+        StartCoroutine(TakeTurn());
         
     }
 
@@ -74,7 +44,45 @@ public class MechBoss : Enemy, IObserver
             {
                 yield return null;
             }
+            if (disabled && turnsSinceDisabled < 2)
+            {
+                // Shoulder lights disabled
+                foreach (OverlayTile tile in previousLightSpot)
+                {
+                    tile.AlterLightLevel(false);
+                }
+                previousLightSpot.Clear();
+                turnsSinceDisabled += 1;
+                // Skip turn
+                actionsPerformed = maxAP;
+            }
+            else if (disabled && turnsSinceDisabled >= 2)
+            {
+                disabled = false;
+                turnsSinceDisabled = 0;
+                mechAnimator.currStatus = MechAnimator.AnimationStatus.Powered;
+                // Watch out for dangerous recursive call here
+                StartCoroutine(TakeTurn());
+            }
+            else
+            {
+                // All turn actions go here
+                // No need for state machine since this is not a universal enemy
 
+                //TracePlayer();
+                // Valid Melee Range
+                OverlayTile tempRef = MapController.Instance.map[new Vector2Int(activeTile.gridLocation.x - 1, activeTile.gridLocation.y)];
+                List<OverlayTile> meleeTiles = MapController.Instance.GetAoeAttackTiles(tempRef, activeTile, 4);
+
+                if (meleeTiles.Contains(PlayerController.Instance.character.activeTile))
+                {
+                    MeleeAttack();
+                }
+                else
+                {
+                    RangedAttack();
+                }
+            }
 
         }
     }
@@ -103,6 +111,7 @@ public class MechBoss : Enemy, IObserver
     private void MeleeAttack()
     {
         actionsPerformed += 4;
+        
         StartCoroutine(PerformMeleeAttack());
     }
 
@@ -112,10 +121,12 @@ public class MechBoss : Enemy, IObserver
         {
             yield return null;
         }
+        mechAnimator.currStatus = MechAnimator.AnimationStatus.Attack;
         state_moving = true;
         DamageManager.Instance.DealDamageToPlayer(10.0f);
         yield return new WaitForSecondsRealtime(1);
         state_moving = false;
+        mechAnimator.currStatus = MechAnimator.AnimationStatus.Powered;
     }
 
     // Global (can attack anywhere on map, but lower damage than melee)
@@ -142,6 +153,7 @@ public class MechBoss : Enemy, IObserver
         if (gameEvent == GameEvents.BossPowerDisabled)
         {
             disabled = true;
+            mechAnimator.currStatus = MechAnimator.AnimationStatus.Disabled;
         }
     }
 

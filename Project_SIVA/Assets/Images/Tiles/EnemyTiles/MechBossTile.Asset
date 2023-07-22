@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f81dc2f6bc3418696acd3bba5e718b, type: 3}
   m_Name: MechBossTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 95594311c99cb3f4b903b603164c8813, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a85eb3ed1cc025442a2d09a9a2d782e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -34,4 +34,4 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  enemy_prefab: {fileID: 3383489930907390826, guid: b464eee9d8a3c2d468a1842449636b03, type: 3}
+  enemy_prefab: {fileID: 1619403009954815317, guid: 7f1b4bcf3b100a147b08c7a3be5da290, type: 3}

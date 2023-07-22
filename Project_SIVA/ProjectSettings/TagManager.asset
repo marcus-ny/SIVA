@@ -44,11 +44,11 @@ TagManager:
   - name: Interactables
     uniqueID: 2417809097
     locked: 0
-  - name: Player
-    uniqueID: 2675030841
-    locked: 0
   - name: Enemies
     uniqueID: 3654851117
+    locked: 0
+  - name: Player
+    uniqueID: 2675030841
     locked: 0
   - name: New Layer 4
     uniqueID: 4286012119

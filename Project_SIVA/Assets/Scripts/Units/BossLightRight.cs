@@ -20,7 +20,8 @@ public class BossLightRight : Enemy, IObserver
         active = true;
         curPos = 0;
         onReturnTrip = false;
-        maxHp = 999;
+        
+        hitpoints = maxHp = 999;
         maxAP = 10;
         EmitDirectionalLight(activeTile, true, 2);
     }
@@ -126,7 +127,7 @@ public class BossLightRight : Enemy, IObserver
     {
         int factor = trigger ? 1 : -1;
 
-        List<OverlayTile> litUpTiles = MapController.Instance.GetUniDirectional(activeTile, dir, 3);
+        List<OverlayTile> litUpTiles = MapController.Instance.GetUniDirectional(activeTile, dir, 5);
 
         foreach (OverlayTile tile in litUpTiles)
         {

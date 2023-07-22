@@ -21,6 +21,7 @@ public class PowerSource : WorldEntity, IInteractable
         else
         {
             BattleSimulator.Instance.DisableBoss();
+            used = true;
             return true;
         }
     }
