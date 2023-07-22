@@ -109,9 +109,14 @@ public class BattleSimulator : Publisher, IObserver
     IEnumerator EnemyTakeActions()
     {
         yield return new WaitForSecondsRealtime(1.5f);
-        
+        Enemy bossEnemy = enemyList[0];
         foreach (Enemy enemy in enemyList)
         {
+            if (enemy.GetType() == typeof(VampireBoss))
+            {
+                bossEnemy = enemy;
+                continue;
+            }
             currentEnemy = enemy;
             enemy.Action();
             while (enemy.state_moving)
@@ -121,6 +126,12 @@ public class BattleSimulator : Publisher, IObserver
             yield return new WaitForSecondsRealtime(1.0f);
 
         }
+        if (bossEnemy.GetType() == typeof(VampireBoss))
+        {
+            bossEnemy.Action();
+            yield return new WaitForSecondsRealtime(1.0f);
+        }
+
         switchTurns();
 
     }

@@ -279,4 +279,23 @@ public class MapController : MonoBehaviour
 		return result;
 	}
 
+	public OverlayTile GetNearestShadowTile(OverlayTile cur)
+    {
+		OverlayTile nearest = null;
+		PathFinder pathFinder = new();
+		foreach (OverlayTile tile in map.Values)
+        {
+			if (tile.light_level > 0) continue;
+
+			if (nearest == null)
+            {
+				nearest = tile;
+            }
+			else if (pathFinder.GetManhattenDistance(cur, tile) < pathFinder.GetManhattenDistance(cur, nearest))
+            {
+				nearest = tile;
+            }
+        }
+		return nearest;
+    }
 }
