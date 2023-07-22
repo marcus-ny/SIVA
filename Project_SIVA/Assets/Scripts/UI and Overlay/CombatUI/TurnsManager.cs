@@ -67,6 +67,10 @@ public class TurnsManager : Publisher, IObserver
                 Debug.Log("OnNotifiedEnemyTurnReceived");
                 EnemyTurn();
             }
+            
+        }
+        else
+        {
             if (gameEvent == GameEvents.PlayerWin)
             {
                 PlayerWin();

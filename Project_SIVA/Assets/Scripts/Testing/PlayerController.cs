@@ -30,7 +30,7 @@ public class PlayerController : Publisher
     public PathArrowGenerator pathArrowGenerator;
 
     private readonly int speed = 3;
-    private readonly int reach = 3;
+    private readonly int reach = 4;
 
     public Enemy mostrecentEnemy;
     private void Start()

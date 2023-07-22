@@ -4,15 +4,5 @@ using UnityEngine;
 
 public abstract class CutsceneRunner : MonoBehaviour
 {
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-
-    }
-
     public abstract void RunCutscene();
 }

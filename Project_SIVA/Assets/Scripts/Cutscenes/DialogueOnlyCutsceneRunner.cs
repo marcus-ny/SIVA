@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TutorialCutscenePt1Runner : CutsceneRunner, IObserver
+public class DialogueOnlyCutsceneRunner : CutsceneRunner, IObserver
 {
     [SerializeField] TurnsManager turnsManager;
     // Start is called before the first frame update
@@ -16,9 +16,6 @@ public class TutorialCutscenePt1Runner : CutsceneRunner, IObserver
         }
         
     }
-
-    
-
     public override void RunCutscene()
     {
 
@@ -36,8 +33,6 @@ public class TutorialCutscenePt1Runner : CutsceneRunner, IObserver
         if (gameEvent == GameEvents.DialogueEnd)
         {
             ScenesManager.Instance.LoadNextScene();
-            // Add a black screen delay for 3 seconds here
-            // Play glass breaking sound and emergency bell sounds
         }
     }
 }
