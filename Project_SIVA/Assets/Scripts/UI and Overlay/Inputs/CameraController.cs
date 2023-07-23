@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<Camera>().orthographicSize = 2.5f;
         cameraSpeed = 5f;
         initialX = transform.position.x;
         initialY = transform.position.y;

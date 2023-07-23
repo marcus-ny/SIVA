@@ -129,6 +129,7 @@ public class BattleSimulator : Publisher, IObserver
         if (bossEnemy.GetType() == typeof(VampireBoss))
         {
             bossEnemy.Action();
+            currentEnemy = bossEnemy;
             yield return new WaitForSecondsRealtime(1.0f);
         }
 
@@ -213,6 +214,7 @@ public class BattleSimulator : Publisher, IObserver
             
         }
     }
+
     IEnumerator WaitForPlayerMoveInput()
     {
         while (!Input.GetMouseButtonDown(0))
@@ -233,7 +235,7 @@ public class BattleSimulator : Publisher, IObserver
             player.GetMeleeRange();
             yield return null;
         }
-        if (player.MeleeTrigger())
+        if (!player.moving && player.MeleeTrigger())
         {
             actionsPerformed += 1;
         }
@@ -246,7 +248,7 @@ public class BattleSimulator : Publisher, IObserver
             player.ShowAoeTiles();
             yield return null;
         }
-        if (player.AoeAttackTrigger())
+        if (!player.moving && player.AoeAttackTrigger())
         {
             if (!levelComplete) actionsPerformed += 2;
         }
@@ -296,7 +298,7 @@ public class BattleSimulator : Publisher, IObserver
     {
         while (!Input.GetMouseButtonDown(0))
         {
-            player.GetMovementRange();
+            player.ShowFireboltCastTile();
             yield return null;
         }
         if (player.CastFireballTrigger())

@@ -29,8 +29,10 @@ public class PlayerController : Publisher
     private PlayerAnimator animationController;
     public PathArrowGenerator pathArrowGenerator;
 
+    public bool moving;
+
     private readonly int speed = 3;
-    private readonly int reach = 3;
+    private readonly int reach = 4;
 
     public Enemy mostrecentEnemy;
     private void Start()
@@ -91,6 +93,7 @@ public class PlayerController : Publisher
 
     private IEnumerator MoveAlongPath()
     {
+        moving = true;
         while (path.Count > 0)
         {
             var step = speed * Time.deltaTime;
@@ -135,12 +138,13 @@ public class PlayerController : Publisher
             // here
             //GetMovementRange();
         }
+        moving = false;
         // character.activeTile.isBlocked = true;
     }
 
     private IEnumerator MoveInLight()
     {
-
+        moving = true;
         while (path.Count > 0)
         {
             var step = speed * Time.deltaTime;
@@ -180,14 +184,19 @@ public class PlayerController : Publisher
         {
             character.prev = character.cur = character.activeTile.gridLocation;
         }
+        moving = false;
     }
 
     IEnumerator SuccessfulMelee()
     {
+        moving = true;
         animationController.status = PlayerAnimator.Status.MELEEING;
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.3f);
         DamageManager.Instance.DealDamageToEnemy(30, destinationTile.enemy);
+        yield return new WaitForSecondsRealtime(0.7f);
+        
         animationController.status = PlayerAnimator.Status.NIL;
+        moving = false;
     }
 
     public bool MeleeTrigger()
@@ -379,17 +388,32 @@ public class PlayerController : Publisher
         }
     }
 
+
+    public void ShowFireboltCastTile()
+    {
+        List<OverlayTile> fireboltCastRange = rangeFinder.GetReachableTiles(character.activeTile, 6, 1);
+        foreach (OverlayTile tile in fireboltCastRange)
+        {
+            tile.ShowGreenTile();
+        }
+    }
     public bool CastFireballTrigger()
     {
-        if (destinationTile.enemy != null)
+        List<OverlayTile> fireboltCastRange = rangeFinder.GetReachableTiles(character.activeTile, 6, 1);
+        if (fireboltCastRange.Contains(MouseController.Instance.mouseOverTile) && MouseController.Instance.mouseOverTile.enemy != null)
         {
             mostrecentEnemy = destinationTile.enemy;
             //NotifyObservers(GameEvents.EnemyHealthAltered);
             Instantiate(firebolt);
             firebolt.transform.position = character.transform.position;
             DamageManager.Instance.DealDamageToEnemy(30, destinationTile.enemy);
+            return true;
+        } else
+        {
+            Debug.Log("Firebolt cannot reach this far");
+            return false;
         }
-        return true;
+        
     }
 
     

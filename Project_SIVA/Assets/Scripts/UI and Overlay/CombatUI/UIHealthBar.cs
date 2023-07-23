@@ -24,7 +24,7 @@ public class UIHealthBar : MonoBehaviour, IObserver
 
     public void OnNotify(GameEvents gameEvent)
     {
-        if ((gameEvent == GameEvents.PlayerHealthAltered) || (gameEvent == GameEvents.LightDamage))
+        if ((gameEvent == GameEvents.PlayerHealthAltered) || (gameEvent == GameEvents.LightDamage) || (gameEvent == GameEvents.PlayerLifesteal))
         {
             
             SetHealth(PlayerController.Instance.character.hitpoints);

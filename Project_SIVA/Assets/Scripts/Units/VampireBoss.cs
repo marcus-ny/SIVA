@@ -5,6 +5,7 @@ using UnityEngine;
 public class VampireBoss : Enemy
 {
     private bool weakened;
+    private VampireBossAnimator animator;
     public override void Action()
     {
         StartCoroutine(TakeTurn());
@@ -17,7 +18,9 @@ public class VampireBoss : Enemy
             {
                 yield return null;
             }
-            if (weakened) EscapeLight();
+            if (weakened) {
+                EscapeLight();
+            }
             else if (DetectLowAllies())
             {
                 Debug.Log("Boss detects an ally that is close to death");
@@ -27,6 +30,7 @@ public class VampireBoss : Enemy
             else
             {
                 Teleport();
+                MeleeAttack();
             }
             actionsPerformed = maxAP;
 
@@ -40,7 +44,7 @@ public class VampireBoss : Enemy
         rangeFinder = new Rangefinder();
         range = new();
         weakened = false;
-
+        animator = GetComponent<VampireBossAnimator>();
         // There should be a more intelligent way to set this variable
         maxAP = 4;
         hitpoints = maxHp = 300;
@@ -71,7 +75,7 @@ public class VampireBoss : Enemy
     {
         if (weakened)
         {
-            hitpoints -= damage;
+            hitpoints -= damage * 2;
         }
         else
         {
@@ -81,13 +85,45 @@ public class VampireBoss : Enemy
 
     IEnumerator StartMeleeAttack()
     {
+        int atkspeed = 3;
         while (state_moving)
         {
             yield return null;
         }
         state_moving = true;
+        animator.currState = VampireBossAnimator.AnimationState.MeleeIn;
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        animator.currState = VampireBossAnimator.AnimationState.MeleeInProgress;
+        // Moving is here
+        Vector2 initialPos = transform.position;
+        while (Vector2.Distance(transform.position, player.activeTile.transform.position) > 0.001f)
+        {
+            var step = atkspeed * Time.deltaTime;
+            var zIndex = player.activeTile.transform.position.z;
+            transform.position = Vector2.MoveTowards(transform.position,
+                player.activeTile.transform.position, step);
+            transform.position = new Vector3(transform.position.x,
+               transform.position.y, zIndex);
+            yield return null;
+        }
+
+        while (Vector2.Distance(transform.position, initialPos) > 0.001f)
+        {
+            var step = atkspeed * Time.deltaTime;
+            var zIndex = player.activeTile.transform.position.z;
+            transform.position = Vector2.MoveTowards(transform.position,
+                initialPos, step);
+            transform.position = new Vector3(transform.position.x,
+               transform.position.y, zIndex);
+            yield return null;
+        }
+        animator.currState = VampireBossAnimator.AnimationState.MeleeOut;
+        //yield return new WaitForSecondsRealtime(0.5f);
+
+        // --------------
         DamageManager.Instance.DealDamageToPlayer(5.0f);
-        yield return new WaitForSeconds(0.8f);
+        //yield return new WaitForSeconds(0.8f);
         state_moving = false;
     }
     public void MeleeAttack()
@@ -104,7 +140,10 @@ public class VampireBoss : Enemy
         {
             yield return null;
         }
+
         state_moving = true;
+
+        animator.currState = VampireBossAnimator.AnimationState.TeleportIn;
 
         activeTile.isBlocked = false;
         EnemyManager.Instance.enemyMap.Remove(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
@@ -113,9 +152,9 @@ public class VampireBoss : Enemy
 
         var step = SPEED * Time.deltaTime;
         var zIndex = transform.position.z;
-
+        yield return new WaitForSecondsRealtime(1);
         PositionEnemyOnTile(destinationTile);
-            
+        animator.currState = VampireBossAnimator.AnimationState.TeleportOut;
         activeTile.enemy = this;
         activeTile.isBlocked = true;
         EnemyManager.Instance.enemyMap.Add(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y), this);
@@ -186,7 +225,48 @@ public class VampireBoss : Enemy
             {
                 TeleportToAlly(enemy);
                 yield return new WaitForSecondsRealtime(1);
+
+
+                int atkspeed = 3;
+                while (state_moving)
+                {
+                    yield return null;
+                }
+                state_moving = true;
+                animator.currState = VampireBossAnimator.AnimationState.MeleeIn;
+                yield return new WaitForSecondsRealtime(0.5f);
+
+                animator.currState = VampireBossAnimator.AnimationState.MeleeInProgress;
+                // Moving is here
+                Vector2 initialPos = transform.position;
+                while (Vector2.Distance(transform.position, enemy.activeTile.transform.position) > 0.001f)
+                {
+                    var step = atkspeed * Time.deltaTime;
+                    var zIndex = enemy.activeTile.transform.position.z;
+                    transform.position = Vector2.MoveTowards(transform.position,
+                        enemy.activeTile.transform.position, step);
+                    transform.position = new Vector3(transform.position.x,
+                       transform.position.y, zIndex);
+                    yield return null;
+                }
+
+                while (Vector2.Distance(transform.position, initialPos) > 0.001f)
+                {
+                    var step = atkspeed * Time.deltaTime;
+                    var zIndex = enemy.activeTile.transform.position.z;
+                    transform.position = Vector2.MoveTowards(transform.position,
+                        initialPos, step);
+                    transform.position = new Vector3(transform.position.x,
+                       transform.position.y, zIndex);
+                    yield return null;
+                }
+                animator.currState = VampireBossAnimator.AnimationState.MeleeOut;
+                //yield return new WaitForSecondsRealtime(0.5f);
+
+                // --------------
                 enemy.TriggerDeath();
+                //yield return new WaitForSeconds(0.8f);
+                state_moving = false;
                 hitpoints += 30;
                 break;
             }
@@ -232,5 +312,10 @@ public class VampireBoss : Enemy
             StartCoroutine(TeleportCoroutine(tile));
             break;
         }
+    }
+
+    public override string ToString()
+    {
+        return "Vampire Boss";
     }
 }

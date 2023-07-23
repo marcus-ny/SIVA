@@ -43,6 +43,18 @@ public class DamageManager : Publisher
         }
     }
     
+    public void HealFromLifesteal(float healAmt)
+    {
+        if (PlayerController.Instance.character.hitpoints + healAmt >= 100)
+        {
+            PlayerController.Instance.character.hitpoints = 100;
+        }
+        else
+        {
+            PlayerController.Instance.character.hitpoints += healAmt;
+        }
+        NotifyObservers(GameEvents.PlayerLifesteal);
+    }
     public void HealPlayer(float healAmt)
     {
         if (PlayerController.Instance.character.hitpoints + healAmt >= 100)

@@ -17,6 +17,7 @@ public enum GameEvents
     NoTarget,
     TargetOFR,
     
+    PlayerLifesteal,
     BossPowerDisabled,
     // For Tutorial
     SuccessfulMove,

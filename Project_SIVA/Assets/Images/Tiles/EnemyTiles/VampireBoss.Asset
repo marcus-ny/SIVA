@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f81dc2f6bc3418696acd3bba5e718b, type: 3}
   m_Name: VampireBoss
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 9b7c5207113d6684c8b17d91f291a71c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e0ae0f3ba67179f428ccae9e51f6df77, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

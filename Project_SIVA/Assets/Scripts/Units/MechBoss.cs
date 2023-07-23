@@ -11,13 +11,25 @@ public class MechBoss : Enemy, IObserver
     private void Start()
     {
         maxAP = 4;
-        hitpoints = maxHp = 350;
+        hitpoints = maxHp = 300;
         previousLightSpot = new();
         actionsPerformed = 0;
         disabled = false;
         turnsSinceDisabled = 0;
         mechAnimator = GetComponent<MechAnimator>();
         BattleSimulator.Instance.AddObserver(this);
+    }
+
+    private void Update()
+    {
+        if (player == null)
+        {
+            player = EnemyManager.Instance.playerController.character;
+        }
+        if (hitpoints <= 0)
+        {
+            TriggerDeath();
+        }
     }
     public override void Action()
     {
@@ -29,9 +41,10 @@ public class MechBoss : Enemy, IObserver
     {
         if (disabled)
         {
-            hitpoints -= damage * 1.5f;
+            hitpoints -= (damage * 1.5f);
         } else
         {
+            hitpoints -= 1;
            // Raise a dialogue saying player can't hit the boss
         }
     }
@@ -157,4 +170,16 @@ public class MechBoss : Enemy, IObserver
         }
     }
 
+    public override void TriggerDeath()
+    {
+        Debug.Log("Boss died");
+        BattleSimulator.Instance.EnemyLose();
+        EnemyManager.Instance.KillEnemy(activeTile);
+        
+        BattleSimulator.Instance.enemyList.Remove(this);
+        activeTile.isBlocked = false;
+        Destroy(gameObject);
+        
+        
+    }
 }
