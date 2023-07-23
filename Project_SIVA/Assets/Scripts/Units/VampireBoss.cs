@@ -18,7 +18,9 @@ public class VampireBoss : Enemy
             {
                 yield return null;
             }
-            if (weakened) EscapeLight();
+            if (weakened) {
+                EscapeLight();
+            }
             else if (DetectLowAllies())
             {
                 Debug.Log("Boss detects an ally that is close to death");
@@ -73,7 +75,7 @@ public class VampireBoss : Enemy
     {
         if (weakened)
         {
-            hitpoints -= damage;
+            hitpoints -= damage * 2;
         }
         else
         {
@@ -223,7 +225,48 @@ public class VampireBoss : Enemy
             {
                 TeleportToAlly(enemy);
                 yield return new WaitForSecondsRealtime(1);
+
+
+                int atkspeed = 3;
+                while (state_moving)
+                {
+                    yield return null;
+                }
+                state_moving = true;
+                animator.currState = VampireBossAnimator.AnimationState.MeleeIn;
+                yield return new WaitForSecondsRealtime(0.5f);
+
+                animator.currState = VampireBossAnimator.AnimationState.MeleeInProgress;
+                // Moving is here
+                Vector2 initialPos = transform.position;
+                while (Vector2.Distance(transform.position, enemy.activeTile.transform.position) > 0.001f)
+                {
+                    var step = atkspeed * Time.deltaTime;
+                    var zIndex = enemy.activeTile.transform.position.z;
+                    transform.position = Vector2.MoveTowards(transform.position,
+                        enemy.activeTile.transform.position, step);
+                    transform.position = new Vector3(transform.position.x,
+                       transform.position.y, zIndex);
+                    yield return null;
+                }
+
+                while (Vector2.Distance(transform.position, initialPos) > 0.001f)
+                {
+                    var step = atkspeed * Time.deltaTime;
+                    var zIndex = enemy.activeTile.transform.position.z;
+                    transform.position = Vector2.MoveTowards(transform.position,
+                        initialPos, step);
+                    transform.position = new Vector3(transform.position.x,
+                       transform.position.y, zIndex);
+                    yield return null;
+                }
+                animator.currState = VampireBossAnimator.AnimationState.MeleeOut;
+                //yield return new WaitForSecondsRealtime(0.5f);
+
+                // --------------
                 enemy.TriggerDeath();
+                //yield return new WaitForSeconds(0.8f);
+                state_moving = false;
                 hitpoints += 30;
                 break;
             }

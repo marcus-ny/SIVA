@@ -7,6 +7,7 @@ public class Firebolt : MonoBehaviour
     private readonly int SPEED = 2;
     private void Start()
     {
+        transform.position = PlayerController.Instance.character.transform.position;
         StartCoroutine(MoveToTarget());
     }
 

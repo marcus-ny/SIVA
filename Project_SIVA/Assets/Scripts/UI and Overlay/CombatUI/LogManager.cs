@@ -141,6 +141,7 @@ public class LogManager : MonoBehaviour, IObserver
             
                 
         }
+
         if (gameEvent == GameEvents.EnemyHealthAltered)
         {
             Enemy recentTarget = DamageManager.Instance.recentTarget;

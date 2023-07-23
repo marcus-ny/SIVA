@@ -107,8 +107,9 @@ public abstract class Enemy : MonoBehaviour
             //Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
         BattleSimulator.Instance.enemyList.Remove(this);
         activeTile.isBlocked = false;
+        DamageManager.Instance.HealFromLifesteal(5);
         Destroy(gameObject);
-        DamageManager.Instance.HealPlayer(5);
+        
         //Debug.Log(EnemyManager.Instance.enemyMap.Count);
     }
 
@@ -133,7 +134,7 @@ public abstract class Enemy : MonoBehaviour
     // Damage Visuals
     IEnumerator Delay()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(0.2f);
         gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
     }
 
