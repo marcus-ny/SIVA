@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Spotlight_Idle_SE
+  m_Name: BossLeftLightIdle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 74212aeb762cdc14bae08dd8bc336b25, type: 3}
+      value: {fileID: 21300000, guid: a6501e0a337aab245a453875735309e0, type: 3}
     - time: 0.33333334
-      value: {fileID: 21300000, guid: 3fef105f3d27b6d42a1622fd1665c8fa, type: 3}
+      value: {fileID: 21300000, guid: 6f263d2439332344a8ad6574feea8c3f, type: 3}
     - time: 0.6666667
-      value: {fileID: 21300000, guid: d67bd3c9707051f40b5688d86411f197, type: 3}
+      value: {fileID: 21300000, guid: 1fc683a914972a047a3d34945c0da778, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,9 +44,9 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 74212aeb762cdc14bae08dd8bc336b25, type: 3}
-    - {fileID: 21300000, guid: 3fef105f3d27b6d42a1622fd1665c8fa, type: 3}
-    - {fileID: 21300000, guid: d67bd3c9707051f40b5688d86411f197, type: 3}
+    - {fileID: 21300000, guid: a6501e0a337aab245a453875735309e0, type: 3}
+    - {fileID: 21300000, guid: 6f263d2439332344a8ad6574feea8c3f, type: 3}
+    - {fileID: 21300000, guid: 1fc683a914972a047a3d34945c0da778, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

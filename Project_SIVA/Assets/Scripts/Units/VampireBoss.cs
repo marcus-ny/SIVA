@@ -27,6 +27,7 @@ public class VampireBoss : Enemy
             else
             {
                 Teleport();
+                MeleeAttack();
             }
             actionsPerformed = maxAP;
 
@@ -86,6 +87,32 @@ public class VampireBoss : Enemy
             yield return null;
         }
         state_moving = true;
+        // Moving is here
+        Vector2 initialPos = transform.position;
+        while (Vector2.Distance(transform.position, player.activeTile.transform.position) > 0.001f)
+        {
+            var step = SPEED * Time.deltaTime;
+            var zIndex = player.activeTile.transform.position.z;
+            transform.position = Vector2.MoveTowards(transform.position,
+                player.activeTile.transform.position, step);
+            transform.position = new Vector3(transform.position.x,
+               transform.position.y, zIndex);
+            yield return null;
+        }
+
+        while (Vector2.Distance(transform.position, initialPos) > 0.001f)
+        {
+            var step = SPEED * Time.deltaTime;
+            var zIndex = player.activeTile.transform.position.z;
+            transform.position = Vector2.MoveTowards(transform.position,
+                initialPos, step);
+            transform.position = new Vector3(transform.position.x,
+               transform.position.y, zIndex);
+            yield return null;
+        }
+
+
+        // --------------
         DamageManager.Instance.DealDamageToPlayer(5.0f);
         yield return new WaitForSeconds(0.8f);
         state_moving = false;
@@ -104,7 +131,9 @@ public class VampireBoss : Enemy
         {
             yield return null;
         }
+
         state_moving = true;
+
 
         activeTile.isBlocked = false;
         EnemyManager.Instance.enemyMap.Remove(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
@@ -232,5 +261,10 @@ public class VampireBoss : Enemy
             StartCoroutine(TeleportCoroutine(tile));
             break;
         }
+    }
+
+    public override string ToString()
+    {
+        return "Vampire Boss";
     }
 }

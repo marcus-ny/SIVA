@@ -123,7 +123,8 @@ public class LogManager : MonoBehaviour, IObserver
         {
             float recentDamage = DamageManager.Instance.recentDamage;
             Enemy currentEnemy = BattleSimulator.Instance.GetCurrentEnemy();
-
+           
+            
             switch (currentEnemy.ToString())
             {
                 case "Soldier":
@@ -132,7 +133,12 @@ public class LogManager : MonoBehaviour, IObserver
                 case "Generator":
                     SendMessageToLog("[Donovan] is zapped by the [Generator]; -" + recentDamage + "HP", Message.MessageType.Damage);
                     break;
+                case "Vampire Boss":
+                    SendMessageToLog("[Donovan] is assaulted by enemy [" + currentEnemy.ToString() + "]; -" + recentDamage + "HP", Message.MessageType.Damage);
+                    break;
+                    
             }
+            
                 
         }
         if (gameEvent == GameEvents.EnemyHealthAltered)

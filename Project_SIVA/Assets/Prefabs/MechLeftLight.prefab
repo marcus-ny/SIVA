@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4887124976382752393}
   - component: {fileID: 5122761111869406320}
   - component: {fileID: 2440428002590474522}
+  - component: {fileID: 6851673081832062284}
   m_Layer: 0
   m_Name: MechLeftLight
   m_TagString: Untagged
@@ -106,3 +107,24 @@ MonoBehaviour:
   maxAP: 0
   actionsPerformed: 0
   state_moving: 0
+--- !u!95 &6851673081832062284
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3266953011883624219}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8baf1e1bf54ae774da7926674d38a118, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

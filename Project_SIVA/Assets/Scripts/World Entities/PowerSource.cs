@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerSource : WorldEntity, IInteractable
 {
-    private bool used;
+    public bool used;
 
     private void Start()
     {

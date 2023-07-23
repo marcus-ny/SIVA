@@ -129,6 +129,7 @@ public class BattleSimulator : Publisher, IObserver
         if (bossEnemy.GetType() == typeof(VampireBoss))
         {
             bossEnemy.Action();
+            currentEnemy = bossEnemy;
             yield return new WaitForSecondsRealtime(1.0f);
         }
 
