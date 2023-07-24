@@ -21,9 +21,9 @@ public class VampireBossAnimator : MonoBehaviour
     {
         switch(currState)
         {
-            case AnimationState.Idle:
+            /*case AnimationState.Idle:
                 currAnimation = "BossIdle";
-                break;
+                break;*/
             case AnimationState.MeleeIn:
                 currAnimation = "BossEnterMelee";
                 break;
@@ -39,7 +39,11 @@ public class VampireBossAnimator : MonoBehaviour
             case AnimationState.TeleportOut:
                 currAnimation = "BossExitTeleport";
                 break;
+            default:
+                currAnimation = "BossIdle";
+                break;
         }
         animator.Play(currAnimation);
+        
     }
 }

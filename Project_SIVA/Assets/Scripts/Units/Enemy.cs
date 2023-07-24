@@ -33,7 +33,7 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void TakeDamage(float damage)
     {
-        DamageManager.Instance.RaiseEventEnemyHealthAltered(damage);
+        DamageManager.Instance.RaiseEventEnemyHealthAltered(damage, this);
         hitpoints -= damage;
     }
 

@@ -310,7 +310,9 @@ public class BattleSimulator : Publisher, IObserver
     }
     public void EnemyWin()
     {
+        Debug.Log("Player lost: From BattleSim");
         State = BattleState.ENEMY_WIN;
+        levelComplete = true;
         NotifyObservers(GameEvents.PlayerLose);
     }
 

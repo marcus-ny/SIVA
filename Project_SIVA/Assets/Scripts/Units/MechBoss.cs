@@ -48,7 +48,7 @@ public class MechBoss : Enemy, IObserver
            // Raise a dialogue saying player can't hit the boss
         }
         hitpoints -= damage;
-        DamageManager.Instance.RaiseEventEnemyHealthAltered(damage);
+        DamageManager.Instance.RaiseEventEnemyHealthAltered(damage, this);
     }
 
     IEnumerator TakeTurn()

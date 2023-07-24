@@ -135,9 +135,10 @@ public class DamageManager : Publisher
         
     }
 
-    public void RaiseEventEnemyHealthAltered(float trueDamage)
+    public void RaiseEventEnemyHealthAltered(float trueDamage, Enemy thisTarget)
     {
         recentDamage = trueDamage;
+        recentTarget = thisTarget;
         NotifyObservers(GameEvents.EnemyHealthAltered);
     }
 }
