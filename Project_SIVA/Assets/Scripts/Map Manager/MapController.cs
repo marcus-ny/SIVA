@@ -285,7 +285,7 @@ public class MapController : MonoBehaviour
 		PathFinder pathFinder = new();
 		foreach (OverlayTile tile in map.Values)
         {
-			if (tile.light_level > 0) continue;
+			if (tile.light_level > 0 || tile.isBlocked) continue;
 
 			if (nearest == null)
             {

@@ -67,11 +67,16 @@ public class VampireBoss : Enemy
 
         if (activeTile != null && activeTile.light_level > 0)
         {
-            weakened = true;
+            Weaken();
         }
 
         
         
+    }
+    public void Weaken()
+    {
+        weakened = true;
+        animator.currState = VampireBossAnimator.AnimationState.Weakened;
     }
     public override void TakeDamage(float damage)
     {
