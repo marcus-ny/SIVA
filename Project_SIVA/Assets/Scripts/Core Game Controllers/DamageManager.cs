@@ -96,7 +96,7 @@ public class DamageManager : Publisher
         recentDamage = damage;
         
         target.TakeDamage(damage);
-        NotifyObservers(GameEvents.EnemyHealthAltered);       
+             
     }
     
     public void FriendlyFireToEnemy(float damage, Enemy target)
@@ -133,5 +133,11 @@ public class DamageManager : Publisher
             NotifyObservers(GameEvents.LightDamage);
         }
         
+    }
+
+    public void RaiseEventEnemyHealthAltered(float trueDamage)
+    {
+        recentDamage = trueDamage;
+        NotifyObservers(GameEvents.EnemyHealthAltered);
     }
 }

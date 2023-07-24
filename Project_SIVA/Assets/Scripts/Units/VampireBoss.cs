@@ -75,12 +75,14 @@ public class VampireBoss : Enemy
     {
         if (weakened)
         {
-            hitpoints -= damage * 2;
+            damage = damage * 2;
         }
         else
         {
-            hitpoints -= 1;
+            damage = 1;
         }
+        hitpoints -= damage;
+        DamageManager.Instance.RaiseEventEnemyHealthAltered(damage);
     }
 
     IEnumerator StartMeleeAttack()
