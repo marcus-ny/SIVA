@@ -26,4 +26,37 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Chapter_1_The_Escape/Tutorial_P4.unity
     guid: eca0ad47bbd4a084eb55ab55b5449290
+  - enabled: 1
+    path: Assets/Scenes/Chapter_2/C2_L1.unity
+    guid: b4f905e3a586e744eb82f45fb59d5ed1
+  - enabled: 1
+    path: Assets/Scenes/Chapter_2/C2_L2.unity
+    guid: ac554a71cfc0280449be4b7ebd02cb67
+  - enabled: 1
+    path: Assets/Scenes/Chapter_2/C2_L3.unity
+    guid: e2fe156c39b7627438eae8a72d2b83e8
+  - enabled: 1
+    path: Assets/Scenes/Chapter_2/C2_L4.unity
+    guid: 8cfa0861ad51c0f4692218d24cfcec47
+  - enabled: 1
+    path: Assets/Scenes/Chapter_3/C3_L1.unity
+    guid: ed868fb1b9d8e3e44a1483989271e077
+  - enabled: 1
+    path: Assets/Scenes/Chapter_3/C3_L2.unity
+    guid: 4c2decf92a27a9647901c2742c3708b5
+  - enabled: 1
+    path: Assets/Scenes/Chapter_3/C3_L3.unity
+    guid: ace9c78aaf62e174980ef08eed75eab1
+  - enabled: 1
+    path: Assets/Scenes/Chapter_4/C4_L1.unity
+    guid: cc889766e30d06a4494fa29d01bc1b1b
+  - enabled: 1
+    path: Assets/Scenes/Chapter_4/C4_L2.unity
+    guid: 29e66ec4db67cbf489e940426fbf759d
+  - enabled: 1
+    path: Assets/Scenes/Chapter 5/C5_L1.unity
+    guid: a4585e13c4b69424a8068b11634c9b0f
+  - enabled: 1
+    path: Assets/Scenes/Chapter 5/C5_L2.unity
+    guid: 4a8b7278c0bd5c94c933b9cd6f91a94d
   m_configObjects: {}

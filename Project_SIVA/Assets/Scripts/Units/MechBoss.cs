@@ -41,12 +41,14 @@ public class MechBoss : Enemy, IObserver
     {
         if (disabled)
         {
-            hitpoints -= (damage * 1.5f);
+            damage = (damage * 1.5f);
         } else
         {
-            hitpoints -= 1;
+            damage = 1;
            // Raise a dialogue saying player can't hit the boss
         }
+        hitpoints -= damage;
+        DamageManager.Instance.RaiseEventEnemyHealthAltered(damage, this);
     }
 
     IEnumerator TakeTurn()

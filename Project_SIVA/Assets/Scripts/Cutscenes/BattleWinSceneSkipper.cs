@@ -11,6 +11,9 @@ public class BattleWinSceneSkipper : MonoBehaviour, IObserver
         if (gameEvent == GameEvents.PlayerWin)
         {
             ScenesManager.Instance.LoadNextScene();
+        } else if (gameEvent == GameEvents.PlayerLose)
+        {
+            ScenesManager.Instance.ReloadScene();
         }
     }
 

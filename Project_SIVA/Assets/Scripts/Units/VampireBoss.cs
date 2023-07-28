@@ -67,20 +67,29 @@ public class VampireBoss : Enemy
 
         if (activeTile != null && activeTile.light_level > 0)
         {
-            weakened = true;
+            Weaken();
         }
+
         
+        
+    }
+    public void Weaken()
+    {
+        weakened = true;
+        animator.currState = VampireBossAnimator.AnimationState.Weakened;
     }
     public override void TakeDamage(float damage)
     {
         if (weakened)
         {
-            hitpoints -= damage * 2;
+            damage = damage * 2;
         }
         else
         {
-            hitpoints -= 1;
+            damage = 1;
         }
+        hitpoints -= damage;
+        DamageManager.Instance.RaiseEventEnemyHealthAltered(damage, this);
     }
 
     IEnumerator StartMeleeAttack()
@@ -123,6 +132,8 @@ public class VampireBoss : Enemy
 
         // --------------
         DamageManager.Instance.DealDamageToPlayer(5.0f);
+        yield return new WaitForSecondsRealtime(0.5f);
+        animator.currState = VampireBossAnimator.AnimationState.Idle;
         //yield return new WaitForSeconds(0.8f);
         state_moving = false;
     }
@@ -158,8 +169,9 @@ public class VampireBoss : Enemy
         activeTile.enemy = this;
         activeTile.isBlocked = true;
         EnemyManager.Instance.enemyMap.Add(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y), this);
-        yield return null;
-
+        // yield return null;
+        yield return new WaitForSecondsRealtime(0.5f);
+        animator.currState = VampireBossAnimator.AnimationState.Idle;
         state_moving = false;
 
     }
@@ -192,14 +204,15 @@ public class VampireBoss : Enemy
     {
         OverlayTile destination = MapController.Instance.GetNearestShadowTile(activeTile);
         if (destination == null) return;
-        
+        StartCoroutine(TeleportCoroutine(destination));
+        /*
         path = pathFinder.FindPath(activeTile, destination, new List<OverlayTile>(), 1);
         
         if (path.Count == 0)
         {
             actionsPerformed = maxAP;
         }
-        Coroutine MovingCoroutine = StartCoroutine(MoveAlongPath());
+        Coroutine MovingCoroutine = StartCoroutine(MoveAlongPath());*/
     }
 
     private bool DetectLowAllies()

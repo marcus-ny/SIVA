@@ -58,9 +58,11 @@ public class PlayerController : Publisher
 
     private void Update()
     {
-        if (character != null && character.hitpoints <= 0)
+        if (character != null && character.hitpoints <= 0 && !BattleSimulator.Instance.levelComplete)
         {
+            Debug.Log("Player win: From Player Controller");
             BattleSimulator.Instance.EnemyWin();
+            
         }
 
         if (character == null)

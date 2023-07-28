@@ -109,6 +109,8 @@ public class BattleSimulator : Publisher, IObserver
     IEnumerator EnemyTakeActions()
     {
         yield return new WaitForSecondsRealtime(1.5f);
+        if (enemyList.Count <= 0) BattleSimulator.Instance.EnemyLose();
+            
         Enemy bossEnemy = enemyList[0];
         foreach (Enemy enemy in enemyList)
         {
@@ -308,7 +310,9 @@ public class BattleSimulator : Publisher, IObserver
     }
     public void EnemyWin()
     {
+        Debug.Log("Player lost: From BattleSim");
         State = BattleState.ENEMY_WIN;
+        levelComplete = true;
         NotifyObservers(GameEvents.PlayerLose);
     }
 

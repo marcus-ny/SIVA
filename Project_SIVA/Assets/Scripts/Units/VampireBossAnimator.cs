@@ -7,7 +7,7 @@ public class VampireBossAnimator : MonoBehaviour
     Animator animator;
     string currAnimation;
 
-    public enum AnimationState { Idle, MeleeIn, MeleeInProgress, MeleeOut, TeleportIn, TeleportOut }
+    public enum AnimationState { Idle, Weakened, MeleeIn, MeleeInProgress, MeleeOut, TeleportIn, TeleportOut }
     public AnimationState currState;
     
     void Start()
@@ -21,11 +21,14 @@ public class VampireBossAnimator : MonoBehaviour
     {
         switch(currState)
         {
-            case AnimationState.Idle:
+            /*case AnimationState.Idle:
                 currAnimation = "BossIdle";
-                break;
+                break;*/
             case AnimationState.MeleeIn:
                 currAnimation = "BossEnterMelee";
+                break;
+            case AnimationState.Weakened:
+                currAnimation = "BossWeakenedIdle";
                 break;
             case AnimationState.MeleeInProgress:
                 currAnimation = "BossInMelee";
@@ -39,7 +42,11 @@ public class VampireBossAnimator : MonoBehaviour
             case AnimationState.TeleportOut:
                 currAnimation = "BossExitTeleport";
                 break;
+            default:
+                currAnimation = "BossIdle";
+                break;
         }
         animator.Play(currAnimation);
+        
     }
 }
