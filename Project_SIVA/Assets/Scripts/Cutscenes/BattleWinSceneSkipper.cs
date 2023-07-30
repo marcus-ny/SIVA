@@ -11,21 +11,32 @@ public class BattleWinSceneSkipper : MonoBehaviour, IObserver
         if (gameEvent == GameEvents.PlayerWin)
         {
             StartCoroutine(PassLevel());
+            //PassLevelF();
         } else if (gameEvent == GameEvents.PlayerLose)
         {
             StartCoroutine(FailLevel());
+            //FailLevelF();
         }
     }
 
     IEnumerator PassLevel()
     {
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSecondsRealtime(3);
         ScenesManager.Instance.LoadNextScene();
     }
 
+    public void PassLevelF()
+    {
+        ScenesManager.Instance.LoadNextScene();
+    }
+
+    public void FailLevelF()
+    {
+        ScenesManager.Instance.ReloadScene();
+    }
     IEnumerator FailLevel()
     {
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSecondsRealtime(3);
         ScenesManager.Instance.ReloadScene();
     }
     // Start is called before the first frame update

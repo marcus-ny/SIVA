@@ -8,7 +8,7 @@ namespace DialogueSystem
     public class DialogueHolder : MonoBehaviour, IObserver
     {
         [SerializeField] TurnsManager turnsManager;
-        [SerializeField] GameEvents interestedGameEvent;
+        [SerializeField] GameEvents interestedGameEvent = GameEvents.GameStart;
 
         
         private void Awake()
