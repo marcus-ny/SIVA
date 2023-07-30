@@ -254,7 +254,7 @@ public class PlayerController : Publisher
         List<OverlayTile> aoeRange = new();
         if (MouseController.Instance.GetFocusedOnTile().HasValue)
         {
-            aoeRange = MapController.Instance.GetAoeAttackTiles(MouseController.Instance.mouseOverTile, character.activeTile, 5);
+            aoeRange = MapController.Instance.GetAoeAttackTiles(MouseController.Instance.mouseOverTile, character.activeTile, 3);
 
         }
         if (!MouseController.Instance.GetFocusedOnTile().HasValue || !aoeRange.Contains(MouseController.Instance.mouseOverTile))
@@ -288,7 +288,7 @@ public class PlayerController : Publisher
         }
         if (MouseController.Instance.GetFocusedOnTile().HasValue)
         {
-            aoeRange = MapController.Instance.GetAoeAttackTiles(MouseController.Instance.mouseOverTile, character.activeTile, 5);
+            aoeRange = MapController.Instance.GetAoeAttackTiles(MouseController.Instance.mouseOverTile, character.activeTile, 3);
 
         }
 
