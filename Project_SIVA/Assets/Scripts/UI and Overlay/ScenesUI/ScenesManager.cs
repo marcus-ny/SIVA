@@ -17,7 +17,7 @@ public class ScenesManager : MonoBehaviour, IObserver
     // All new scenes must be added into this enum
     public enum GameScene{
         MainMenu,
-
+        LevelSelector,
         Tutorial_P0,
         Tutorial_Transition_0,
         Tutorial_P1, 
@@ -47,8 +47,8 @@ public class ScenesManager : MonoBehaviour, IObserver
 
     // This method loads a scene specified in the parameter by name
     public void LoadScene(GameScene scene){
-        SceneManager.LoadScene(scene.ToString());
-        cur = scene;
+        string levelName = scene.ToString();
+        StartCoroutine(LoadLevel(levelName));
     }
 
     public int GetActiveScene()
@@ -72,14 +72,6 @@ public class ScenesManager : MonoBehaviour, IObserver
         StartCoroutine(LoadLevel(GameScene.Tutorial_P0.ToString()));
     }
 
-    /*
-    // This method loads the next scene based on the build index
-    public void LoadNextScene(){
-        //!!LoadLevel method does not take in int
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-    */
-
     // This method loads the main menu scene 
     public void LoadMainMenu(){
         //SceneManager.LoadScene(Scene.MainMenu.ToString());
@@ -97,7 +89,6 @@ public class ScenesManager : MonoBehaviour, IObserver
         SceneManager.LoadScene(levelName);
     }
 
-
     public void ReloadScene()
     {
         int curSceneIndex = GetActiveScene();
@@ -106,6 +97,7 @@ public class ScenesManager : MonoBehaviour, IObserver
         Debug.Log(thisScene);
         LoadScene(thisScene);
     }
+
     public void OnNotify(GameEvents gameEvent)
     {
         /*

@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class UIMainMenu : MonoBehaviour
 {
     [SerializeField] Button _newGame;
-    [SerializeField] Button _loadGame;
+    [SerializeField] Button _selectLevel;
     [SerializeField] Button _quitGame;
 
     // This keeps track of when the new game button is clicked
     void Start()
     {
         _newGame.onClick.AddListener(StartGame);
-        _loadGame.onClick.AddListener(LoadGame);
+        _selectLevel.onClick.AddListener(LoadLevelSelector);
         _quitGame.onClick.AddListener(QuitGame);
     }
 
@@ -23,8 +23,8 @@ public class UIMainMenu : MonoBehaviour
         ScenesManager.Instance.LoadNewGame();
     }
 
-    private void LoadGame(){
-        Debug.Log("Go to load save file scene");
+    private void LoadLevelSelector(){
+        ScenesManager.Instance.LoadScene(ScenesManager.GameScene.LevelSelector);
     }
 
     private void QuitGame(){
