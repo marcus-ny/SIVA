@@ -50,7 +50,7 @@ public class BattleSimulator : Publisher, IObserver
     {
         State = BattleState.START;
         EnemyManager.Instance.AddObserver(this);
-        NotifyObservers(GameEvents.GameStart);
+        StartCoroutine(StartGameWDelay());
         
         actionsPerformed = 0;
         if (cutsceneRunner != null)
@@ -59,6 +59,12 @@ public class BattleSimulator : Publisher, IObserver
             cutsceneRunner.RunCutscene();
         }
 
+    }
+
+    IEnumerator StartGameWDelay()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        NotifyObservers(GameEvents.GameStart);
     }
 
     public void OnNotify(GameEvents gameEvent)

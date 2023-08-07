@@ -20,7 +20,7 @@ public class UIMainMenu : MonoBehaviour
     // This method loads a new game 
     private void StartGame(){
         //ScenesManager.Instance.LoadNewGame();
-        ScenesManager.Instance.LoadNextScene();
+        ScenesManager.Instance.LoadNewGame();
     }
 
     private void LoadGame(){

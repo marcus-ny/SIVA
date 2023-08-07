@@ -17,6 +17,7 @@ public class ScenesManager : MonoBehaviour, IObserver
     // All new scenes must be added into this enum
     public enum GameScene{
         MainMenu,
+
         Tutorial_P0,
         Tutorial_Transition_0,
         Tutorial_P1, 
@@ -38,7 +39,10 @@ public class ScenesManager : MonoBehaviour, IObserver
 
     private void Start()
     {
-        BattleSimulator.Instance.AddObserver(this);
+        if (BattleSimulator.Instance != null)
+        {
+            BattleSimulator.Instance.AddObserver(this);
+        }
     }
 
     // This method loads a scene specified in the parameter by name
@@ -65,7 +69,7 @@ public class ScenesManager : MonoBehaviour, IObserver
     }
     // This method loads a new game meaning the level01 scene
     public void LoadNewGame(){
-        StartCoroutine(LoadLevel(GameScene.Tutorial_P1.ToString()));
+        StartCoroutine(LoadLevel(GameScene.Tutorial_P0.ToString()));
     }
 
     /*

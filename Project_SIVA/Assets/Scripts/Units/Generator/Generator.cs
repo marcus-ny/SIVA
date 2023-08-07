@@ -92,8 +92,7 @@ public class Generator : Enemy
     {
         // turns off generator light
         EmitLight(false);
-        EnemyManager.Instance.enemyMap.Remove(new
-            Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
+        EnemyManager.Instance.KillEnemy(activeTile);
         BattleSimulator.Instance.enemyList.Remove(this);
         activeTile.isBlocked = false;
         Destroy(gameObject);
