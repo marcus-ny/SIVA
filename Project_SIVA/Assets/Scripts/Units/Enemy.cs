@@ -114,7 +114,7 @@ public abstract class Enemy : MonoBehaviour
         //Debug.Log(EnemyManager.Instance.enemyMap.Count);
     }
 
-    public void SwitchColor(string _color)
+    public void DisplayDamageVisual(string _color)
     {
         if (_color == "Red")
         {

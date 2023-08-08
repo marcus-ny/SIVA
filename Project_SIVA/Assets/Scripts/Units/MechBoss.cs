@@ -175,7 +175,7 @@ public class MechBoss : Enemy, IObserver
     public override void TriggerDeath()
     {
         Debug.Log("Boss died");
-        BattleSimulator.Instance.EnemyLose();
+        BattleSimulator.Instance.PlayerWin();
         EnemyManager.Instance.KillEnemy(activeTile);
         
         BattleSimulator.Instance.enemyList.Remove(this);

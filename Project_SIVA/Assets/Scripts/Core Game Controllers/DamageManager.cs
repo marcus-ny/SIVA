@@ -55,24 +55,12 @@ public class DamageManager : Publisher
         }
         NotifyObservers(GameEvents.PlayerLifesteal);
     }
-    public void HealPlayer(float healAmt)
-    {
-        if (PlayerController.Instance.character.hitpoints + healAmt >= 100)
-        {
-            PlayerController.Instance.character.hitpoints = 100;
-        }
-        else
-        {
-            PlayerController.Instance.character.hitpoints += healAmt;
-        }
-        NotifyObservers(GameEvents.PlayerHealthAltered);
-        // Add heal animation here
-    }
+    
     public void DealDamageToPlayer(float damage)
     {
         if (playerController.character.activeTile.light_level > 0)
         {
-            damage = damage * 1.5f;
+            damage *= 1.5f;
         }
 
         recentDamage = damage;
@@ -83,11 +71,10 @@ public class DamageManager : Publisher
 
         NotifyObservers(GameEvents.PlayerHealthAltered);
     }
-    // This function is temporarily meant for enemy dealing damage to player
-    // (not implemented yet)
+    
     public void DealDamageToEnemy(float damage, Enemy target)
     {
-        target.SwitchColor("Red");
+        target.DisplayDamageVisual("Red");
         if (PlayerController.Instance.character.activeTile.light_level > 0)
         {
             damage /= 2;
@@ -102,7 +89,7 @@ public class DamageManager : Publisher
     public void FriendlyFireToEnemy(float damage, Enemy target)
     {
         target.TakeDamage(damage);
-        target.SwitchColor("Red");
+        target.DisplayDamageVisual("Red");
         recentTarget = target;
         recentDamage = damage;
         NotifyObservers(GameEvents.EnemyFriendlyFire);
@@ -113,18 +100,13 @@ public class DamageManager : Publisher
         recentTarget = target;
         recentDamage = healAmount;
         target.TakeDamage(-1 * healAmount);
-        target.SwitchColor("Green");
+        target.DisplayDamageVisual("Green");
         NotifyObservers(GameEvents.EnemyHealed);
 
     }
 
-    public void changeColor(EnemyInfo target, Color color)
-    {
-        target.GetComponent<SpriteRenderer>().color = color;
-    }
-
     // This function for tick damage from entering light tile
-    public void tickDamage()
+    public void DealTickDamage()
     {
         if (playerParty[0].activeTile.light_level > 0)
         { 

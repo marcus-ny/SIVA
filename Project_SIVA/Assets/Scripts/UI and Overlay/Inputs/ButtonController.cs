@@ -18,7 +18,7 @@ public class ButtonController : MonoBehaviour
     public void SwitchTurn()
     {
         
-        BattleSimulator.Instance.switchTurns();      
+        BattleSimulator.Instance.SwitchTurns();      
     }
 
     /*
