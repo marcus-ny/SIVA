@@ -7,6 +7,7 @@ public class UILevelSelector : MonoBehaviour
 {
     [SerializeField] Button _return;
     [SerializeField] Button _tutorialButton;
+    [SerializeField] Button _level1Button;
     [SerializeField] Button _level2Button;
     [SerializeField] Button _level3Button;
     [SerializeField] Button _level4Button;
@@ -17,6 +18,7 @@ public class UILevelSelector : MonoBehaviour
     {
         _return.onClick.AddListener(returnToMainMenu);
         _tutorialButton.onClick.AddListener(loadTutorial);
+        _level1Button.onClick.AddListener(loadLevel1);
         _level2Button.onClick.AddListener(loadLevel2);
         _level3Button.onClick.AddListener(loadLevel3);
         _level4Button.onClick.AddListener(loadLevel4);
@@ -33,9 +35,14 @@ public class UILevelSelector : MonoBehaviour
         ScenesManager.Instance.LoadScene(ScenesManager.GameScene.Tutorial_P0);
     }
 
-    private void loadLevel2()
+    private void loadLevel1()
     {
         ScenesManager.Instance.LoadScene(ScenesManager.GameScene.C2_L1);
+    }
+
+    private void loadLevel2()
+    {
+        ScenesManager.Instance.LoadScene(ScenesManager.GameScene.C2_L3);
     }
 
     private void loadLevel3()
