@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class EnemyManager : Publisher
@@ -17,8 +15,6 @@ public class EnemyManager : Publisher
 
     public bool spawnComplete = false;
 
-   
-
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -32,12 +28,7 @@ public class EnemyManager : Publisher
 
         enemySpawns = new();
         enemyMap = new();
-        
-    }
 
-    private void Start()
-    {
-        
     }
 
     private void Update()
@@ -45,7 +36,7 @@ public class EnemyManager : Publisher
         // Enemy spawning (only carried out once)
         if (!spawnComplete && enemySpawns.Count != enemyMap.Count)
         {
-            
+
             foreach (KeyValuePair<Vector2Int, GameObject> spawn in enemySpawns)
             {
                 enemyMap.Add(spawn.Key, Instantiate(spawn.Value, gameObject.transform).GetComponent<Enemy>());
@@ -54,24 +45,18 @@ public class EnemyManager : Publisher
 
                 Enemy curr = enemyMap[spawn.Key];
 
-                curr.PositionEnemyOnTile(tile);               
+                curr.PositionEnemyOnTile(tile);
             }
-            Debug.Log("Enemy map count is : " + enemyMap.Count);
-            
+
             spawnComplete = true;
-            
-        } else if (!spawnComplete && enemySpawns.Count == 0)
+
+        }
+        else if (!spawnComplete && enemySpawns.Count == 0)
         {
             spawnComplete = true;
             NotifyObservers(GameEvents.PlayerWin);
-            
-        }
-        /*
-        if (enemyMap.Count == 0)
-        {
-            BattleSimulator.Instance.EnemyLose();
-        }*/
 
+        }
 
     }
 
@@ -79,12 +64,14 @@ public class EnemyManager : Publisher
     // Returns the ally with the lowest hp ratio
     public Enemy GetLowestHpAlly()
     {
-        Enemy lowest = null; ;
+        Enemy lowest = null;
         foreach (KeyValuePair<Vector2Int, Enemy> enemy in enemyMap)
         {
-            if (lowest == null) {
+            if (lowest == null)
+            {
                 lowest = enemy.Value;
-            } else
+            }
+            else
             {
                 lowest = enemy.Value.hpRatio < lowest.hpRatio ? enemy.Value : lowest;
             }
@@ -109,13 +96,13 @@ public class EnemyManager : Publisher
         List<OverlayTile> locations = new();
         foreach (KeyValuePair<Vector2Int, Enemy> kvp in enemyMap)
         {
-            if(kvp.Value.GetType() == typeof(Mechanic))
+            if (kvp.Value.GetType() == typeof(Mechanic))
             {
                 // Safe to typecast?
                 mechanics.Add((Mechanic)kvp.Value);
             }
         }
-        
+
         return mechanics;
     }
 }

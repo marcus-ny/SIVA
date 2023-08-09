@@ -20,19 +20,25 @@ public class VampireBoss : Enemy
             }
             if (weakened) {
                 EscapeLight();
+                actionsPerformed = maxAP;
             }
             else if (DetectLowAllies())
             {
                 Debug.Log("Boss detects an ally that is close to death");
                 StartCoroutine(KillAlly());
+                actionsPerformed = maxAP;
 
             }
-            else
+            else if (PlayerInAttackRange())
+            {
+                MeleeAttack();
+                actionsPerformed = maxAP;
+            } else
             {
                 Teleport();
-                MeleeAttack();
+                actionsPerformed = maxAP - 1;
             }
-            actionsPerformed = maxAP;
+            
 
         }
     }
@@ -68,6 +74,9 @@ public class VampireBoss : Enemy
         if (activeTile != null && activeTile.light_level > 0)
         {
             Weaken();
+        } else
+        {
+            weakened = false;
         }
 
         
@@ -139,11 +148,13 @@ public class VampireBoss : Enemy
     }
     public void MeleeAttack()
     {
+        StartCoroutine(StartMeleeAttack());       
+    }
+
+    private bool PlayerInAttackRange()
+    {
         List<OverlayTile> attackTiles = MapController.Instance.Get3x3Grid(activeTile);
-        if (attackTiles.Contains(player.activeTile))
-        {
-            StartCoroutine(StartMeleeAttack());
-        }
+        return attackTiles.Contains(player.activeTile);
     }
     protected IEnumerator TeleportCoroutine(OverlayTile destinationTile)
     {
@@ -199,7 +210,6 @@ public class VampireBoss : Enemy
         
         
     }
-
     private void EscapeLight()
     {
         OverlayTile destination = MapController.Instance.GetNearestShadowTile(activeTile);
@@ -329,6 +339,6 @@ public class VampireBoss : Enemy
 
     public override string ToString()
     {
-        return "Vampire Boss";
+        return "Orpheus";
     }
 }

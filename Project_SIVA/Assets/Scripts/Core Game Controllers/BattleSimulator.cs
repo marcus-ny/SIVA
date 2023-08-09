@@ -9,9 +9,9 @@ public class BattleSimulator : Publisher, IObserver
     private static BattleSimulator _instance;
     public static BattleSimulator Instance { get { return _instance; } }
 
-    public BattleState State; // Change to private later
+    public BattleState State;
 
-    public readonly int MAX_ACTIONS = 4; // Constant
+    public readonly int MAX_ACTIONS = 4;
 
     public int actionsPerformed;
 
@@ -45,52 +45,20 @@ public class BattleSimulator : Publisher, IObserver
         enemyList = new();
         levelComplete = false;
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         State = BattleState.START;
         EnemyManager.Instance.AddObserver(this);
-        StartCoroutine(StartGameWDelay());
-        
+        StartCoroutine(AnnounceGameStart());
+
         actionsPerformed = 0;
         if (cutsceneRunner != null)
         {
-            Debug.Log("Triggering cutscene");
             cutsceneRunner.RunCutscene();
         }
 
     }
-
-    IEnumerator StartGameWDelay()
-    {
-        yield return new WaitForSecondsRealtime(1);
-        NotifyObservers(GameEvents.GameStart);
-    }
-
-    public void OnNotify(GameEvents gameEvent)
-    {
-        if (gameEvent == GameEvents.PlayerWin)
-        {
-            Debug.Log("Player has won the game");
-            StartGame();
-            EnemyLose();
-        }
-    }
-    public void StartGame()
-    {
-        Debug.Log("Battle state is " + State);
-        Debug.Log("Level completed: " + levelComplete);
-        if (State == BattleState.START) {
-            State = BattleState.PLAYER_TURN;
-            NotifyObservers(GameEvents.PlayerTurn);
-            Debug.Log("Player turn begin. Event published");
-        } else if (State == BattleState.PLAYER_TURN && levelComplete)
-        {
-            Debug.Log("This part is called");
-            NotifyObservers(GameEvents.PlayerTurn);
-        }
-    }
-
     private void Update()
     {
         if (enemyList.Count != EnemyManager.Instance.transform.childCount)
@@ -100,13 +68,39 @@ public class BattleSimulator : Publisher, IObserver
                 enemyList.Add(EnemyManager.Instance.transform.GetChild(i).GetComponent<Enemy>());
             }
         }
-        // Debug.Log("Enemy list: " + enemyList.Count);
+
         if (State == BattleState.ENEMY_TURN)
         {
             Coroutine EnemyCoroutine = StartCoroutine(EnemyTakeActions());
             State = BattleState.TRANSITION;
         }
-        
+
+    }
+    IEnumerator AnnounceGameStart()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        NotifyObservers(GameEvents.GameStart);
+    }
+
+    public void OnNotify(GameEvents gameEvent)
+    {
+        if (gameEvent == GameEvents.PlayerWin)
+        {
+            StartGame();
+            PlayerWin();
+        }
+    }
+    public void StartGame()
+    {
+        if (State == BattleState.START)
+        {
+            State = BattleState.PLAYER_TURN;
+            NotifyObservers(GameEvents.PlayerTurn);
+        }
+        else if (State == BattleState.PLAYER_TURN && levelComplete)
+        {
+            NotifyObservers(GameEvents.PlayerTurn);
+        }
     }
 
     /*
@@ -115,9 +109,10 @@ public class BattleSimulator : Publisher, IObserver
     IEnumerator EnemyTakeActions()
     {
         yield return new WaitForSecondsRealtime(1.5f);
-        if (enemyList.Count <= 0) BattleSimulator.Instance.EnemyLose();
-            
+        if (enemyList.Count <= 0) BattleSimulator.Instance.PlayerWin();
+
         Enemy bossEnemy = enemyList[0];
+
         foreach (Enemy enemy in enemyList)
         {
             if (enemy.GetType() == typeof(VampireBoss))
@@ -141,28 +136,31 @@ public class BattleSimulator : Publisher, IObserver
             yield return new WaitForSecondsRealtime(1.0f);
         }
 
-        switchTurns();
+        SwitchTurns();
 
     }
-    
-    public void switchTurns()
+    public void SwitchTurns()
     {
-        
-        if(State == BattleState.PLAYER_TURN)
-        {           
+
+        if (State == BattleState.PLAYER_TURN)
+        {
+            // Feal tick damage from standing in light
+            DamageManager.Instance.DealTickDamage();
+
             // Change to EnemyTurn and notify observers
             State = BattleState.ENEMY_TURN;
             NotifyObservers(GameEvents.EnemyTurn);
-            
+
 
             foreach (Enemy enemy in enemyList)
             {
                 // Reset AP
                 enemy.actionsPerformed = 0;
             }
-            // reset
+            // Reset player AP
             actionsPerformed = 0;
-        } else if(State == BattleState.TRANSITION)
+        }
+        else if (State == BattleState.TRANSITION)
         {
             foreach (Enemy enemy in enemyList)
             {
@@ -172,29 +170,26 @@ public class BattleSimulator : Publisher, IObserver
             // Change to PlayerTurn and notify observers
             State = BattleState.PLAYER_TURN;
             NotifyObservers(GameEvents.PlayerTurn);
-            
 
-            // Check for tickDamage
-            DamageManager.Instance.tickDamage();
-
-            // reset
             actionsPerformed = 0;
         }
     }
-
     IEnumerator WaitForInteractInput()
     {
         WorldEntitiesManager.Instance.HightlightAll(true);
+
         while (!Input.GetMouseButtonDown(0))
         {
             player.GetInteractRange();
             yield return null;
         }
+
         if (player.InteractTrigger())
         {
-            
+
             actionsPerformed += 1;
         }
+
         WorldEntitiesManager.Instance.HightlightAll(false);
     }
     public void InteractItem()
@@ -210,7 +205,7 @@ public class BattleSimulator : Publisher, IObserver
     }
     public void MoveUnit()
     {
-        // If a party runs out of action points
+
         if (actionsPerformed == MAX_ACTIONS)
         {
             return;
@@ -219,16 +214,15 @@ public class BattleSimulator : Publisher, IObserver
         if (State == BattleState.PLAYER_TURN)
         {
             StartCoroutine(WaitForPlayerMoveInput());
-            
+
         }
     }
-
     IEnumerator WaitForPlayerMoveInput()
     {
         while (!Input.GetMouseButtonDown(0))
         {
             player.GetMovementRange();
-            yield return null;           
+            yield return null;
         }
         if (player.MoveTrigger())
         {
@@ -250,7 +244,6 @@ public class BattleSimulator : Publisher, IObserver
     }
     IEnumerator WaitForAoeInput()
     {
-        Debug.Log("Coroutine started");
         while (!Input.GetMouseButtonDown(0))
         {
             player.ShowAoeTiles();
@@ -270,7 +263,6 @@ public class BattleSimulator : Publisher, IObserver
 
         if (State == BattleState.PLAYER_TURN)
         {
-            Debug.Log("Deal damage button clicked");
             StartCoroutine(WaitForMeleeInput());
         }
     }
@@ -283,7 +275,6 @@ public class BattleSimulator : Publisher, IObserver
 
         if (State == BattleState.PLAYER_TURN)
         {
-           // Debug.Log("Deal damage button clicked");
             StartCoroutine(WaitForAoeInput());
         }
     }
@@ -297,7 +288,6 @@ public class BattleSimulator : Publisher, IObserver
 
         if (State == BattleState.PLAYER_TURN)
         {
-            // Debug.Log("Deal damage button clicked");
             StartCoroutine(WaitForFireballCast());
         }
     }
@@ -316,24 +306,21 @@ public class BattleSimulator : Publisher, IObserver
     }
     public void EnemyWin()
     {
-        Debug.Log("Player lost: From BattleSim");
         State = BattleState.ENEMY_WIN;
         levelComplete = true;
         NotifyObservers(GameEvents.PlayerLose);
     }
 
-    public void EnemyLose()
+    public void PlayerWin()
     {
-        
+
         {
             State = BattleState.PLAYER_WIN;
             if (levelComplete == false)
             {
                 levelComplete = true;
-                Debug.Log("Notifying observers that player has won");
                 NotifyObservers(GameEvents.PlayerWin);
             }
-                //if (levelComplete == false) NotifyObservers(GameEvents.)
 
             State = BattleState.PLAYER_TURN;
 
@@ -343,8 +330,6 @@ public class BattleSimulator : Publisher, IObserver
 
     public void DisableBoss()
     {
-        Debug.Log("Boss power tripped");
-
         NotifyObservers(GameEvents.BossPowerDisabled);
     }
 }
