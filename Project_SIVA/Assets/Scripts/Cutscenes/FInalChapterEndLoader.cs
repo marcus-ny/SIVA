@@ -13,14 +13,12 @@ public class FInalChapterEndLoader : CutsceneRunner, IObserver
         {
             tile.HideTile();
         }
-
     }
+
     public override void RunCutscene()
     {
-
         StartCoroutine(StartCutscene());
     }
-
 
     IEnumerator StartCutscene()
     {

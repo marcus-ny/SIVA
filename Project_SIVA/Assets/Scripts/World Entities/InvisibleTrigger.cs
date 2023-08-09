@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * No longer used, can be safely deleted
+ */
 public class InvisibleTrigger : WorldEntity
 {
     public bool detected;

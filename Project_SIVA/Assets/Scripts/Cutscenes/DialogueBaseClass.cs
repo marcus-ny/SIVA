@@ -8,13 +8,13 @@ namespace DialogueSystem
 {
     public class DialogueBaseClass : MonoBehaviour
     {
-        public bool finished { get; protected set; }
+        public bool completed
+        { get; protected set; }
 
         protected IEnumerator WriteText(string input, TextMeshProUGUI textHolder, Color textColor, float delay, AudioClip sound)
         {
             if (sound == null)
             {
-                Debug.Log("sound is null");
                 yield break;
             }
             textHolder.color = textColor;
@@ -27,7 +27,7 @@ namespace DialogueSystem
             }
 
             yield return new WaitUntil(() => Input.GetMouseButton(0));
-            finished = true;
+            completed = true;
         }
     }
 }

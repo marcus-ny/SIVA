@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Can this class be incorporated into BattleSimulator and only use the DialogueSkipper for non-
+ * combat levels
+ */
 public class BattleWinSceneSkipper : MonoBehaviour, IObserver
 {
     [SerializeField] TurnsManager turnsManager;
@@ -11,11 +15,9 @@ public class BattleWinSceneSkipper : MonoBehaviour, IObserver
         if (gameEvent == GameEvents.PlayerWin)
         {
             StartCoroutine(PassLevel());
-            //PassLevelF();
         } else if (gameEvent == GameEvents.PlayerLose)
         {
             StartCoroutine(FailLevel());
-            //FailLevelF();
         }
     }
 

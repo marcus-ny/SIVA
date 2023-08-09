@@ -21,7 +21,7 @@ public enum GameEvents
     BossPowerDisabled,
     // For Tutorial
     SuccessfulMove,
-    NearTrigger,
+    
     AttackButtonPressed,
     SuccessfulAttack,
     SuccessfulInteract,

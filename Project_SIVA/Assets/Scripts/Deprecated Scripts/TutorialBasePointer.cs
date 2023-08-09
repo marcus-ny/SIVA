@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Can be safely discarded
+ */
 public class TutorialBasePointer : MonoBehaviour
 {
     // Start is called before the first frame update

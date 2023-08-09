@@ -43,12 +43,7 @@ namespace DialogueSystem
             imageHolder.preserveAspect = true;
         }
 
-        private void Start()
-        {
-            
-        }
-
-        public void playDialogue()
+        public void PlayDialogue()
         {
             lineAppear = WriteText(input, textHolder, textColor, delay, sound);
             StartCoroutine(lineAppear);
@@ -63,9 +58,10 @@ namespace DialogueSystem
                     StopCoroutine(lineAppear);
                     textHolder.text = input;
                 }
-                    
                 else
-                    finished = true;
+                {
+                    completed = true;
+                }
             }
         }
     }
