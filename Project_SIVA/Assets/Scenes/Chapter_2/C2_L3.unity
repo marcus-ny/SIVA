@@ -1317,11 +1317,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5795375861105758170, guid: 5dbe460a3737fe34da9e91dd71269e1b, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.9154376
+      value: 0.9938575
       objectReference: {fileID: 0}
     - target: {fileID: 5795375861105758170, guid: 5dbe460a3737fe34da9e91dd71269e1b, type: 3}
       propertyPath: m_Pivot.y
-      value: 1.8754941
+      value: 2.1724892
       objectReference: {fileID: 0}
     - target: {fileID: 5795375861105758170, guid: 5dbe460a3737fe34da9e91dd71269e1b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1333,11 +1333,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5795375861105758170, guid: 5dbe460a3737fe34da9e91dd71269e1b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 332.35007
+      value: 395.086
       objectReference: {fileID: 0}
     - target: {fileID: 5795375861105758170, guid: 5dbe460a3737fe34da9e91dd71269e1b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 547.4926
+      value: 752.82556
       objectReference: {fileID: 0}
     - target: {fileID: 5795375861229509442, guid: 5dbe460a3737fe34da9e91dd71269e1b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5467,7 +5467,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_HandleRect: {fileID: 446715366}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8685,7 +8685,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e254fbdc8384df243b09ff2ec79429fc, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 61647d531ec3d714d8e134a515d89025, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1
@@ -8784,7 +8784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1625388895}
-  musicStart: {fileID: 8300000, guid: e254fbdc8384df243b09ff2ec79429fc, type: 3}
+  musicStart: {fileID: 8300000, guid: 61647d531ec3d714d8e134a515d89025, type: 3}
 --- !u!1 &1627760174
 GameObject:
   m_ObjectHideFlags: 0
