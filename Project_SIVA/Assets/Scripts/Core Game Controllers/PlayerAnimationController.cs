@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * This script is no longer used. Safe to delete
+ */
 public class PlayerAnimationController : MonoBehaviour
 {
     public PlayerController playerController;

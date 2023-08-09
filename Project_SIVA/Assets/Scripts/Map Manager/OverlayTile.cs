@@ -5,15 +5,11 @@ using static PathArrowGenerator;
 
 public class OverlayTile : MonoBehaviour
 {
-
     // G, H and F are values required for A* pathfinding algorithm
     public int G;
     public int H;
     public int F { get { return G + H; } }
 
-    // Indicator for whether this tile cannot be moved through
-    // Currently have no uses, but will be used in implementing smoother and
-    // more realistic pathfinding later on
     public bool isBlocked;
 
     public Enemy enemy;

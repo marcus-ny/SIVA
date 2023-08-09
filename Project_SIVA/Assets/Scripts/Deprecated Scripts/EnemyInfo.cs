@@ -18,14 +18,15 @@ public class EnemyInfo : MonoBehaviour
         hitpoints = 100;
     }
 
-    IEnumerator delay()
+    IEnumerator Delay()
     { 
         yield return new WaitForSecondsRealtime(0.5f);
         gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
     }
+
     public void SwitchColor()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 1);
-        StartCoroutine("delay");
+        StartCoroutine(Delay());
     }
 }

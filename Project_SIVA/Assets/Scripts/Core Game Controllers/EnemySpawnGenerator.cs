@@ -4,14 +4,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+/*
+ * Handles enemy spawning at the start of the game
+ * Finds placed enemies on the tilemap (in edit mode) and instantiates them at runtime
+ */
 public class EnemySpawnGenerator : MonoBehaviour
 {
-    List<Vector2Int> spawnLocations;
-    // Start is called before the first frame update
     void Start()
     {
-        
-
         var EnemySpawnMap = gameObject.GetComponent<Tilemap>();
 
         BoundsInt bounds = EnemySpawnMap.cellBounds;

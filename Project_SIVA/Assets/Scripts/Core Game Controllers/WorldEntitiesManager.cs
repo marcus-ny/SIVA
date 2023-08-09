@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+/*
+ * A singleton that manages all obstacles on top of the tilemap (obstacles, interactables, etc.)
+ */
 public class WorldEntitiesManager : Publisher
 {
     private static WorldEntitiesManager _instance;
 
     public static WorldEntitiesManager Instance { get { return _instance; } }
 
-    // Array to store location of spawned interactables
-    public GameObject lampPostPrefab;
-
+    // A map keeping track of entity locations in edit mode. WorldEntitiesSpawnManager accesses this
     public Dictionary<Vector2Int, GameObject> entitySpawns;
+
     // Tile coordinates to interactable mapping
     public Dictionary<Vector2Int, WorldEntity> entityMap;
 
+    // An indicator to check whether items have spawned
     private bool spawnComplete;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -50,57 +54,38 @@ public class WorldEntitiesManager : Publisher
         {
             foreach (KeyValuePair<Vector2Int, GameObject> kvp in entitySpawns)
             {
-                // Possible workaround for abstraction:
-                // TryGetComponent() method
-                
                 entityMap.Add(kvp.Key, Instantiate(kvp.Value, transform).GetComponent<WorldEntity>());
 
                 OverlayTile tile = MapController.Instance.map[kvp.Key];
 
                 tile.isBlocked = true;
-                
+
                 PositionOnTile(entityMap[kvp.Key], tile);
             }
 
             spawnComplete = true;
         }
         
-        if (spawnComplete)
-        {
-            foreach (WorldEntity entity in entityMap.Values) 
-            {
-                if (entity.GetType() == typeof(InvisibleTrigger))
-                {
-                    
-                    InvisibleTrigger child = (InvisibleTrigger)entity;
-                    if (child.detected)
-                    {
-                        
-                        NotifyObservers(GameEvents.NearTrigger);
-                    }
-                }
-            }
-        }
     }
     
-    
+    // Interact with the object of type IInteractable if any, on the given tile
     public bool Interact(OverlayTile curr)
     {
         
-        Vector2Int coordinates = new Vector2Int(curr.gridLocation.x, curr.gridLocation.y);
-        if (entityMap[coordinates] is IInteractable)
+        Vector2Int coordinates = new(curr.gridLocation.x, curr.gridLocation.y);
+        if (entityMap[coordinates] is IInteractable interactable)
         {
-            IInteractable interactable = (IInteractable) entityMap[coordinates];
             if (interactable.ReceiveInteraction())
             {
                 return true;
             }
-            
+
         }
         return false;
 
     }
-    // Should I move this somewhere else
+
+    // Place the given interactable on the correct tile position
     private void PositionOnTile(WorldEntity interactable, OverlayTile tile)
     {
         interactable.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);

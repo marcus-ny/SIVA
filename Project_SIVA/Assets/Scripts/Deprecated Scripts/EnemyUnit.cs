@@ -29,13 +29,11 @@ public class EnemyUnit : MonoBehaviour
         pathFinder = new PathFinder();                 
     }
     
-
     void LateUpdate()
     {
         if (enemyInfo != null && enemyInfo.hitpoints <= 0)
         {
             Destroy(transform.GetChild(0).gameObject);
-            //BattleSimulator.Instance.State = BattleState.END;
         }
         if (BattleSimulator.Instance.State == BattleState.ENEMY_TURN)
         {
@@ -45,9 +43,9 @@ public class EnemyUnit : MonoBehaviour
              * spawned in, there will be a debug message and no further
              * functions will be performed
              */
+
             if (target == null)
             {
-                print("Target has no active tile");
                 return;
             }
 
@@ -78,9 +76,7 @@ public class EnemyUnit : MonoBehaviour
                 
                 enemyInfo = Instantiate(enemyPrefab, gameObject.transform).GetComponent<EnemyInfo>();
 
-                PositionEnemyOnTile(curr);
-
-                //error: curr.enemyOnTile = enemyInfo;              
+                PositionEnemyOnTile(curr);             
             }
 
             
@@ -93,57 +89,9 @@ public class EnemyUnit : MonoBehaviour
             }
         }
     }
-
-    /*
-     * Pathfind from current tile --> Player's active tile
-     */
-    public void MoveTrigger()
-    {
-        int i = 0;
-        while (path.Count <= 0 && i < 4)
-        {
-            //path = pathFinder.FindPath(enemyInfo.activeTile,
-                //MapController.Instance.GetNeighborTiles(target.activeTile, new List<OverlayTile>())[i],
-                //new List<OverlayTile>());
-            i++;
-        }
-    }
-
-    /*
-     * Function for enemy to emit light in a 3x3 area.
-     * 
-     * This is meant for a certain type of enemy only. Not every enemy will
-     * emit light.
-     */
-    private void EmitLight(OverlayTile curr, bool trigger)
-    {
-        // Trigger == true --> Emit light
-        // Trigger == false --> Turn off light (meant for moving and dynamic
-        // lighting)
-        
-
-        List<OverlayTile> neighbors = MapController.Instance.Get3x3Grid(curr);
-
-        foreach (var neighbor in neighbors)
-        {
-            if (neighbor.isBlocked || !MapController.Instance.map.ContainsKey(new
-                Vector2Int(neighbor.gridLocation.x , neighbor.gridLocation.y)) ||
-                Mathf.Abs(curr.gridLocation.z - neighbor.gridLocation.z) > 1)
-            {
-                continue;
-            }
-
-            MapController.Instance.map[new Vector2Int(neighbor.gridLocation.x,
-                neighbor.gridLocation.y)].AlterLightLevel(trigger);
-        }
-    }
-
+    
     private void MoveAlongPath()
     {
-        //EmitLight(enemyInfo.activeTile, false);
-
-        //error: enemyInfo.activeTile.enemyOnTile = null;
-
         var step = speed * Time.deltaTime;
         var zIndex = path[0].transform.position.z;
 
@@ -158,10 +106,6 @@ public class EnemyUnit : MonoBehaviour
             PositionEnemyOnTile(path[0]);
             path.RemoveAt(0);
         }
-        //EmitLight(enemyInfo.activeTile, true);
-
-        //error: enemyInfo.activeTile.enemyOnTile = enemyInfo;
-        
     }
 
     private void PositionEnemyOnTile(OverlayTile tile)

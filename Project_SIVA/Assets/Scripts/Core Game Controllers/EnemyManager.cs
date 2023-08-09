@@ -60,8 +60,9 @@ public class EnemyManager : Publisher
 
     }
 
-    // Might use a PQ for this but need a PQ that supports modifying elements and priority
-    // Returns the ally with the lowest hp ratio
+    /*
+     * Returns the enemy with the lowest HP ratio
+     */
     public Enemy GetLowestHpAlly()
     {
         Enemy lowest = null;
@@ -80,6 +81,10 @@ public class EnemyManager : Publisher
         return lowest;
     }
 
+
+    /*
+     * Method for killing an enemy and removing it from the enemy map
+     */
     public void KillEnemy(OverlayTile tile)
     {
         enemyMap.Remove(new
@@ -90,15 +95,18 @@ public class EnemyManager : Publisher
         }
     }
 
+    /*
+     * Method for non-mechanic enemies to find the nearest healer
+     */
     public List<Mechanic> FindMechanicLocations()
     {
         List<Mechanic> mechanics = new();
-        List<OverlayTile> locations = new();
+        
         foreach (KeyValuePair<Vector2Int, Enemy> kvp in enemyMap)
         {
             if (kvp.Value.GetType() == typeof(Mechanic))
             {
-                // Safe to typecast?
+                // Safe to typecast here
                 mechanics.Add((Mechanic)kvp.Value);
             }
         }

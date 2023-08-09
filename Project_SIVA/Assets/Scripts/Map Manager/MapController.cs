@@ -10,6 +10,7 @@ public class MapController : MonoBehaviour
 	private static MapController _instance;
 
 	public bool isCutscene;
+
 	public static MapController Instance { get { return _instance; } }
 
 	public OverlayTile overlayTilePrefab;
@@ -19,6 +20,7 @@ public class MapController : MonoBehaviour
 	public bool generationComplete = false;
 
 	public Dictionary<Vector2Int, OverlayTile> map;
+
 	private void Awake()
 	{
 		if (_instance != null && _instance != this)
@@ -29,16 +31,14 @@ public class MapController : MonoBehaviour
 			_instance = this;
 		}
 	}
-	// Start is called before the first frame update
+	
 	void Start()
 	{
 		map = new Dictionary<Vector2Int, OverlayTile>();
 		var tileMap = gameObject.GetComponent<Tilemap>();
-		//var tileMap = gameObject.GetComponentInChildren<Tilemap>();
 		
 		BoundsInt bounds = tileMap.cellBounds;
-		// Debug.Log("X: " + bounds.min.x + " , " + bounds.max.x + " Y: " + bounds.min.y + " , " + bounds.max.y);
-		// Loop through all tiles within bounds
+		
 		for (int z = bounds.max.z; z >= bounds.min.z; z--)
 		{
 			for (int y = bounds.min.y; y < bounds.max.y; y++)
@@ -88,43 +88,6 @@ public class MapController : MonoBehaviour
 			}
 		}
     }
-	/*
-    public List<OverlayTile> GetNeighborTiles(OverlayTile curr, List<OverlayTile> validTiles, int jumpHeight)
-	{
-		
-		
-		Dictionary<Vector2Int, OverlayTile> searchRange = new();
-
-		if (validTiles.Count > 0)
-		{
-			foreach (var tile in validTiles)
-			{
-				searchRange.Add(new Vector2Int(tile.gridLocation.x, tile.gridLocation.y), tile);
-			}
-		} else
-		{
-			searchRange = map;
-		}
-
-		
-		List<OverlayTile> neighbors = new();
-
-		int[,] directions = { { 0, 1 }, { 1, 0 }, { -1, 0 }, { 0, -1 } };
-
-		for (int i = 0; i < 4; i++)
-		{
-			Vector2Int locationToCheck = new(curr.gridLocation.x + directions[i, 0],
-            curr.gridLocation.y + directions[i, 1]);
-
-			if (searchRange.ContainsKey(locationToCheck) && Mathf.Abs(curr.gridLocation.z - searchRange[locationToCheck].gridLocation.z) <= jumpHeight)
-			{
-				neighbors.Add(searchRange[locationToCheck]);
-			}
-		}
-		
-		return neighbors;
-	}*/
-
 	
 	public List<OverlayTile> Get3x3Grid(OverlayTile curr)
 	{
@@ -189,10 +152,10 @@ public class MapController : MonoBehaviour
 		if (yDiff == 0)
 		{
 			dir = xDiff > 0 ? 1 : 3;
-			// think along NW -> SE
+			
 			for (int mult = 1; mult <= reach; mult++)
 			{
-				Vector2Int locationToCheck = new Vector2Int(reference.gridLocation.x + (directions[dir, 0] * mult),
+				Vector2Int locationToCheck = new(reference.gridLocation.x + (directions[dir, 0] * mult),
 					reference.gridLocation.y + (directions[dir, 1] * mult));
 
 				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
@@ -208,10 +171,10 @@ public class MapController : MonoBehaviour
 		else if (xDiff == 0)
 		{
 			dir = yDiff > 0 ? 0 : 2;
-			// think along NE -> SW
+			
 			for (int mult = 1; mult <= reach; mult++)
 			{
-				Vector2Int locationToCheck = new Vector2Int(reference.gridLocation.x + (directions[dir, 0] * mult),
+				Vector2Int locationToCheck = new(reference.gridLocation.x + (directions[dir, 0] * mult),
 					reference.gridLocation.y + (directions[dir, 1] * mult));
 
 				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
@@ -238,7 +201,7 @@ public class MapController : MonoBehaviour
 		{
 			for (int i = 0; i < 4; i++)
 			{
-				Vector2Int locationToCheck = new Vector2Int(reference.gridLocation.x + (directions[i, 0] * mult),
+				Vector2Int locationToCheck = new(reference.gridLocation.x + (directions[i, 0] * mult),
 					reference.gridLocation.y + (directions[i, 1] * mult));
 
 				if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);
@@ -270,7 +233,7 @@ public class MapController : MonoBehaviour
 		List<OverlayTile> result = new();
 		for (int mult = 1; mult <= range; mult++)
         {
-			Vector2Int locationToCheck = new Vector2Int(reference.gridLocation.x + (directions[dir, 0] * mult),
+			Vector2Int locationToCheck = new(reference.gridLocation.x + (directions[dir, 0] * mult),
 					reference.gridLocation.y + (directions[dir, 1] * mult));
 
 			if (map.ContainsKey(locationToCheck)) result.Add(map[locationToCheck]);

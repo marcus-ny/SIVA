@@ -5,8 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class WorldEntitiesSpawnManager : MonoBehaviour
 {
-    List<Vector2Int> spawnLocations;
-    // Start is called before the first frame update
     void Start()
     {
         var InteractableSpawnMap = gameObject.GetComponent<Tilemap>();
@@ -24,11 +22,9 @@ public class WorldEntitiesSpawnManager : MonoBehaviour
 
                     if (InteractableSpawnMap.HasTile(tileLocation) && !EnemyManager.Instance.enemySpawns.ContainsKey(tileKey))
                     {
-                        if (InteractableSpawnMap.GetTile<InteractableTile>(tileLocation) == null) Debug.Log("Interactable is null here");
                         GameObject prefab = InteractableSpawnMap.GetTile<InteractableTile>(tileLocation).interactable_prefab;
 
                         WorldEntitiesManager.Instance.entitySpawns.Add(tileKey, prefab);
-
                     }
                 }
             }

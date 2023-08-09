@@ -14,13 +14,6 @@ namespace DialogueSystem
         private void Awake()
         {
             Deactivate();
-            
-            //StartCoroutine(dialogueSequence());
-            
-            //StartCoroutine(cleanDialogues());
-            
-            //turnsManager.AddObserver(this);
-            
         }
 
         private void Start()
@@ -29,15 +22,15 @@ namespace DialogueSystem
         }
 
         
-        private IEnumerator dialogueSequence()
+        private IEnumerator DialogueSequence()
         {
             
             for (int i = 0; i < transform.childCount; i++)
             {
                 Deactivate();
                 transform.GetChild(i).gameObject.SetActive(true);
-                transform.GetChild(i).GetComponent<DialogueLine>().playDialogue();
-                yield return new WaitUntil(() => transform.GetChild(i).GetComponent<DialogueLine>().finished);
+                transform.GetChild(i).GetComponent<DialogueLine>().PlayDialogue();
+                yield return new WaitUntil(() => transform.GetChild(i).GetComponent<DialogueLine>().completed);
             }
             
             turnsManager.EndCutscene();
@@ -56,7 +49,6 @@ namespace DialogueSystem
             
             if (gameEvent == interestedGameEvent)
             {
-                Debug.Log("Event used: " + gameEvent);
                 turnsManager.StartCutscene();
                 
                 for (int i = 0; i < transform.parent.childCount; i++)
@@ -65,7 +57,7 @@ namespace DialogueSystem
                 }
 
                 gameObject.SetActive(true);
-                StartCoroutine(dialogueSequence());
+                StartCoroutine(DialogueSequence());
             }
         }
     }
