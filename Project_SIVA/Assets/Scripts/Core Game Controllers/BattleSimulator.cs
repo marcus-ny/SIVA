@@ -135,7 +135,7 @@ public class BattleSimulator : Publisher, IObserver
             currentEnemy = bossEnemy;
             yield return new WaitForSecondsRealtime(1.0f);
         }
-
+        
         SwitchTurns();
 
     }

@@ -19,32 +19,42 @@ public class CameraController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-
-        if (Input.GetKey(KeyCode.A) && transform.position.x > initialX - 5)
+    {   
+        
+        if (BattleSimulator.Instance.State == BattleState.TRANSITION)
         {
-            float moveAmt = cameraSpeed * Time.deltaTime;
-            transform.Translate(new Vector3(-moveAmt, 0, 0));
+            if (BattleSimulator.Instance.GetCurrentEnemy() != null)
+            {
+                Debug.Log("Camera is following " + BattleSimulator.Instance.GetCurrentEnemy().ToString());
+                transform.position = new(BattleSimulator.Instance.GetCurrentEnemy().transform.position.x, BattleSimulator.Instance.GetCurrentEnemy().transform.position.y, transform.position.z);            
+            }
         }
+        else {
+            
+            if (Input.GetKey(KeyCode.A) && transform.position.x > initialX - 5)
+            {
+                float moveAmt = cameraSpeed * Time.deltaTime;
+                transform.Translate(new Vector3(-moveAmt, 0, 0));
+            }
 
-        if (Input.GetKey(KeyCode.D) && transform.position.x < initialX + 5)
-        {
-            float moveAmt = cameraSpeed * Time.deltaTime;
-            transform.Translate(new Vector3(moveAmt, 0, 0));
+            if (Input.GetKey(KeyCode.D) && transform.position.x < initialX + 5)
+            {
+                float moveAmt = cameraSpeed * Time.deltaTime;
+                transform.Translate(new Vector3(moveAmt, 0, 0));
+            }
+
+            if (Input.GetKey(KeyCode.W) && transform.position.y < initialY + 2.5)
+            {
+                float moveAmt = cameraSpeed * Time.deltaTime;
+                transform.Translate(new Vector3(0, moveAmt, 0));
+            }
+
+            if (Input.GetKey(KeyCode.S) && transform.position.y > initialY - 2.5)
+            {
+                float moveAmt = cameraSpeed * Time.deltaTime;
+                transform.Translate(new Vector3(0, -moveAmt, 0));
+            }
         }
-
-        if (Input.GetKey(KeyCode.W) && transform.position.y < initialY + 2.5)
-        {
-            float moveAmt = cameraSpeed * Time.deltaTime;
-            transform.Translate(new Vector3(0, moveAmt, 0));
-        }
-
-        if (Input.GetKey(KeyCode.S) && transform.position.y > initialY - 2.5)
-        {
-            float moveAmt = cameraSpeed * Time.deltaTime;
-            transform.Translate(new Vector3(0, -moveAmt, 0));
-        }
-
         //transform.Translate(new Vector3(xAxisValue, yAxisValue, 0));
     }
 }
