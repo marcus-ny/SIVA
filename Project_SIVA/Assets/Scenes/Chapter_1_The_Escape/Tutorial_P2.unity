@@ -2815,7 +2815,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cdfdd9e6beaf143a54d78e151bd21e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lampPostPrefab: {fileID: 0}
 --- !u!4 &1214566125
 Transform:
   m_ObjectHideFlags: 0
@@ -4248,19 +4247,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 351173012555642193, guid: 5b8364568de064340aee5e4d9d3dde0b, type: 3}
       propertyPath: triggerEvent
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 351173012555642193, guid: 5b8364568de064340aee5e4d9d3dde0b, type: 3}
       propertyPath: completionEvent
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 351173012704501102, guid: 5b8364568de064340aee5e4d9d3dde0b, type: 3}
       propertyPath: triggerEvent
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 351173012704501102, guid: 5b8364568de064340aee5e4d9d3dde0b, type: 3}
       propertyPath: completionEvent
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 351173012704501103, guid: 5b8364568de064340aee5e4d9d3dde0b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4448,7 +4447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 676059943659038992, guid: 5b8364568de064340aee5e4d9d3dde0b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -83.7278
+      value: -83.72781
       objectReference: {fileID: 0}
     - target: {fileID: 676059943688741847, guid: 5b8364568de064340aee5e4d9d3dde0b, type: 3}
       propertyPath: sound
@@ -4508,11 +4507,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6416669922012794739, guid: 5b8364568de064340aee5e4d9d3dde0b, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.9154376
+      value: 0.64405113
       objectReference: {fileID: 0}
     - target: {fileID: 6416669922012794739, guid: 5b8364568de064340aee5e4d9d3dde0b, type: 3}
       propertyPath: m_Pivot.y
-      value: 1.903162
+      value: 1.1027668
       objectReference: {fileID: 0}
     - target: {fileID: 6416669922012794739, guid: 5b8364568de064340aee5e4d9d3dde0b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4524,11 +4523,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6416669922012794739, guid: 5b8364568de064340aee5e4d9d3dde0b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 332.35007
+      value: 115.240906
       objectReference: {fileID: 0}
     - target: {fileID: 6416669922012794739, guid: 5b8364568de064340aee5e4d9d3dde0b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 558.50543
+      value: 239.92134
       objectReference: {fileID: 0}
     - target: {fileID: 6416669923261973887, guid: 5b8364568de064340aee5e4d9d3dde0b, type: 3}
       propertyPath: m_AnchorMax.y
