@@ -2089,8 +2089,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 215651510}
   m_HandleRect: {fileID: 2083862695}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.00000027336418
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6526,7 +6526,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_HandleRect: {fileID: 446715366}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -12985,7 +12985,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1625388894}
   - component: {fileID: 1625388895}
-  - component: {fileID: 1625388896}
   m_Layer: 0
   m_Name: BattleBGM
   m_TagString: Untagged
@@ -13018,7 +13017,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e254fbdc8384df243b09ff2ec79429fc, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1
@@ -13104,20 +13103,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1625388896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625388893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3bd1d5cef7ebcf4a90eded1b741ad6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicSource: {fileID: 1625388895}
-  musicStart: {fileID: 8300000, guid: e254fbdc8384df243b09ff2ec79429fc, type: 3}
 --- !u!1 &1627760174
 GameObject:
   m_ObjectHideFlags: 0
@@ -14465,7 +14450,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -83.72781}
+  m_AnchoredPosition: {x: 0, y: -83.7278}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1844964972
@@ -14845,7 +14830,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 6
+      m_TileSpriteIndex: 7
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -14855,7 +14840,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 3
-      m_TileSpriteIndex: 5
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -14960,12 +14945,12 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: a9d117fb7ba3f5f46bd1132d434a4620, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 6593601470b66024381f6b73f3ebae02, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 5c8dbc13ff995264f8ab1a7fcb080fda, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 18
     m_Data:
