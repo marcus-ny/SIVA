@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class PlayerAnimator : MonoBehaviour
 {
     private static readonly string[] shadow_directions = { "Player_move_NE", "Player_move_SW", "Player_move_NW", "Player_move_SE" };
     private static readonly string[] light_directions = { "Player_light_move_NE", "Player_light_move_SW", "Player_light_move_NW", "Player_light_move_SE" };
-    //private static readonly string[] melee_directions = { "Player_melee_N", }
-    public enum Status { WEAKENING, STRONGER, NIL , MELEEING}
+
+    public enum Status { WEAKENING, STRONGER, NIL, MELEEING }
 
     public Status status;
     private Animator animator;
@@ -17,7 +13,7 @@ public class PlayerAnimator : MonoBehaviour
     private string currAnimation;
 
     private CharacterInfo character;
-    // Start is called before the first frame update
+
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
@@ -40,11 +36,12 @@ public class PlayerAnimator : MonoBehaviour
         else if (status == Status.NIL)
         {
             MoveAnimation();
-        } else if (status == Status.MELEEING)
+        }
+        else if (status == Status.MELEEING)
         {
             MeleeAnimation();
         }
-        
+
         animator.Play(currAnimation);
     }
 
@@ -69,7 +66,8 @@ public class PlayerAnimator : MonoBehaviour
         else if (cur.x - prev.x == 0 && cur.y - prev.y < 0)
         {
             currAnimation = (character.activeTile.light_level > 0) ? light_directions[3] : shadow_directions[3];
-        } else if (cur == prev)
+        }
+        else if (cur == prev)
         {
             currAnimation = (character.activeTile.light_level > 0) ? "Player_weak_still" : "Player_still";
         }
@@ -100,7 +98,7 @@ public class PlayerAnimator : MonoBehaviour
             // SE
             animation = "Player_melee_SE";
         }
-        else if (targetTile.x - playerTile.x > 0 && targetTile.y - playerTile.y > 0) 
+        else if (targetTile.x - playerTile.x > 0 && targetTile.y - playerTile.y > 0)
         {
             // N
             animation = "Player_melee_N";
@@ -125,7 +123,7 @@ public class PlayerAnimator : MonoBehaviour
     }
     void LightToShadowTransition()
     {
-        currAnimation = "Player_light_to_shadow";       
+        currAnimation = "Player_light_to_shadow";
     }
 
     void ShadowToLightTransition()
@@ -133,5 +131,5 @@ public class PlayerAnimator : MonoBehaviour
         currAnimation = "Player_shadow_to_light";
     }
 
-    
+
 }

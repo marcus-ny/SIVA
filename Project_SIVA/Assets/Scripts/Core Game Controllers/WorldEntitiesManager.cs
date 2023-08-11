@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 /*
  * A singleton that manages all obstacles on top of the tilemap (obstacles, interactables, etc.)
@@ -47,7 +45,7 @@ public class WorldEntitiesManager : Publisher
             }
         }
     }
-        
+
     void Update()
     {
         if (!spawnComplete && entityMap.Count != entitySpawns.Count)
@@ -65,13 +63,13 @@ public class WorldEntitiesManager : Publisher
 
             spawnComplete = true;
         }
-        
+
     }
-    
+
     // Interact with the object of type IInteractable if any, on the given tile
     public bool Interact(OverlayTile curr)
     {
-        
+
         Vector2Int coordinates = new(curr.gridLocation.x, curr.gridLocation.y);
         if (entityMap[coordinates] is IInteractable interactable)
         {

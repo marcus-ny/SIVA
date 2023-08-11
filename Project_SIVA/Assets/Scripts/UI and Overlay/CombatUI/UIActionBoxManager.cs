@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -65,17 +64,14 @@ public class UIActionBoxManager : Publisher, IObserver
     {
         if (gameEvent == GameEvents.PlayerWin)
         {
-            Debug.Log("Player has won. Disabling end turn button");
-            endTurnButton.GetComponent<Button>().interactable = false;        
+            endTurnButton.GetComponent<Button>().interactable = false;
         }
         else if (gameEvent == GameEvents.PlayerTurn && !BattleSimulator.Instance.levelComplete)
         {
-            Debug.Log("Setting button to active");
             endTurnButton.GetComponent<Button>().interactable = true;
         }
         else if (gameEvent == GameEvents.EnemyTurn)
         {
-            Debug.Log("Enemy turn starts. Button disabled");
             endTurnButton.GetComponent<Button>().interactable = false;
         }
     }

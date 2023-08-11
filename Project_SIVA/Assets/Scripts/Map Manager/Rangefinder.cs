@@ -1,13 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
-using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class Rangefinder
 {
-   public List<OverlayTile> GetReachableTiles(OverlayTile cur, int range, int jumpHeight)
+    public List<OverlayTile> GetReachableTiles(OverlayTile cur, int range, int jumpHeight)
     {
         PathFinder pathFinder = new();
         int steps = 0;

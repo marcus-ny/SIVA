@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /*
@@ -8,7 +6,7 @@ using UnityEngine;
 public class InvisibleTrigger : WorldEntity
 {
     public bool detected;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +23,8 @@ public class InvisibleTrigger : WorldEntity
         if (PlayerController.Instance.character.activeTile == activeTile)
         {
             detected = true;
-        } else
+        }
+        else
         {
             detected = false;
         }

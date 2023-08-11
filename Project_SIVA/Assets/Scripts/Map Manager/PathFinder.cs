@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -16,14 +14,14 @@ public class PathFinder
 
         openList.Add(start);
 
-        while(openList.Count > 0)
+        while (openList.Count > 0)
         {
             OverlayTile curr = openList.OrderBy(i => i.F).First();
 
             openList.Remove(curr);
             closedList.Add(curr);
 
-            if(curr == end)
+            if (curr == end)
             {
                 return GetFinishedList(start, end);
             }
@@ -42,7 +40,7 @@ public class PathFinder
 
                 neighbor.previous = curr;
 
-                if(!openList.Contains(neighbor))
+                if (!openList.Contains(neighbor))
                 {
                     openList.Add(neighbor);
                 }
@@ -116,7 +114,8 @@ public class PathFinder
                     result.Add(MapController.Instance.map[new Vector2Int(i, start.gridLocation.y)]);
                 }
             }
-        } else
+        }
+        else
         {
             int i = (end.gridLocation.y > start.gridLocation.y) ? start.gridLocation.y : end.gridLocation.y;
             int limit = (end.gridLocation.y > start.gridLocation.y) ? end.gridLocation.y : start.gridLocation.y;

@@ -34,7 +34,7 @@ public class MechBoss : Enemy, IObserver
     public override void Action()
     {
         StartCoroutine(TakeTurn());
-        
+
     }
 
     public override void TakeDamage(float damage)
@@ -42,10 +42,11 @@ public class MechBoss : Enemy, IObserver
         if (disabled)
         {
             damage = (damage * 1.5f);
-        } else
+        }
+        else
         {
             damage = 1;
-           // Raise a dialogue saying player can't hit the boss
+            // Raise a dialogue saying player can't hit the boss
         }
         hitpoints -= damage;
         DamageManager.Instance.RaiseEventEnemyHealthAltered(damage, this);
@@ -126,7 +127,7 @@ public class MechBoss : Enemy, IObserver
     private void MeleeAttack()
     {
         actionsPerformed += 4;
-        
+
         StartCoroutine(PerformMeleeAttack());
     }
 
@@ -177,11 +178,11 @@ public class MechBoss : Enemy, IObserver
         Debug.Log("Boss died");
         BattleSimulator.Instance.PlayerWin();
         EnemyManager.Instance.KillEnemy(activeTile);
-        
+
         BattleSimulator.Instance.enemyList.Remove(this);
         activeTile.isBlocked = false;
         Destroy(gameObject);
-        
-        
+
+
     }
 }

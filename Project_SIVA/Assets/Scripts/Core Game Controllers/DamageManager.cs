@@ -1,9 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using UnityEngine;
 // This one imports priority queue since unity .net version does not support this intrinsically
-using Utils;
 
 public class DamageManager : Publisher
 {
@@ -42,7 +38,7 @@ public class DamageManager : Publisher
             playerParty.Add(playerController.character);
         }
     }
-    
+
     public void HealFromLifesteal(float healAmt)
     {
         if (PlayerController.Instance.character.hitpoints + healAmt >= 100)
@@ -55,7 +51,7 @@ public class DamageManager : Publisher
         }
         NotifyObservers(GameEvents.PlayerLifesteal);
     }
-    
+
     public void DealDamageToPlayer(float damage)
     {
         if (playerController.character.activeTile.light_level > 0)
@@ -71,7 +67,7 @@ public class DamageManager : Publisher
 
         NotifyObservers(GameEvents.PlayerHealthAltered);
     }
-    
+
     public void DealDamageToEnemy(float damage, Enemy target)
     {
         target.DisplayDamageVisual("Red");
@@ -81,11 +77,11 @@ public class DamageManager : Publisher
         }
         recentTarget = target;
         recentDamage = damage;
-        
+
         target.TakeDamage(damage);
-             
+
     }
-    
+
     public void FriendlyFireToEnemy(float damage, Enemy target)
     {
         target.TakeDamage(damage);
@@ -109,12 +105,12 @@ public class DamageManager : Publisher
     public void DealTickDamage()
     {
         if (playerParty[0].activeTile.light_level > 0)
-        { 
+        {
             playerParty[0].hitpoints -= lightDamage;
             playerParty[0].DisplayDamageVisual();
             NotifyObservers(GameEvents.LightDamage);
         }
-        
+
     }
 
     public void RaiseEventEnemyHealthAltered(float trueDamage, Enemy thisTarget)

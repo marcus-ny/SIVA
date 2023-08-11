@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static PathArrowGenerator;
@@ -20,7 +19,7 @@ public class OverlayTile : MonoBehaviour
     public OverlayTile previous;
 
     public Vector3Int gridLocation;
-    public Vector2Int gridLocation2d { get { return new Vector2Int(gridLocation.x, gridLocation.y);  } }
+    public Vector2Int gridLocation2d { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
 
     public List<Sprite> pathDirs;
 
@@ -41,7 +40,8 @@ public class OverlayTile : MonoBehaviour
             if (light_level == 0 && previousLight > 0)
             {
                 PlayerController.Instance.TransitionLTS();
-            } else if (light_level > 0 && previousLight == 0)
+            }
+            else if (light_level > 0 && previousLight == 0)
             {
                 PlayerController.Instance.TransitionSTL();
             }
@@ -54,7 +54,8 @@ public class OverlayTile : MonoBehaviour
         if (light_level > 0)
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-        } else
+        }
+        else
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
         }
@@ -65,7 +66,7 @@ public class OverlayTile : MonoBehaviour
     public void HideTile()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
-        
+
     }
 
     // Show green
@@ -82,11 +83,12 @@ public class OverlayTile : MonoBehaviour
     public void SetPathDir(ArrowDir d)
     {
         var arrow = GetComponentsInChildren<SpriteRenderer>()[1];
-        
+
         if (d == ArrowDir.None)
         {
             arrow.color = new Color(1, 1, 1, 0);
-        } else
+        }
+        else
         {
             arrow.color = new Color(1, 1, 1, 1);
             arrow.sprite = pathDirs[(int)d];

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -27,7 +25,7 @@ public class PlayerSpawnManager : MonoBehaviour
                     {
                         PlayerController.Instance.playerSpawn = tileKey;
                         break;
-                        // Pass this value into the player manager
+
                     }
                 }
             }

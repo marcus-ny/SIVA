@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpotlightAnimator : MonoBehaviour
@@ -23,13 +21,16 @@ public class SpotlightAnimator : MonoBehaviour
         if (cur == Spotlight_SW.Directions.NE)
         {
             animator.Play("Spotlight_Idle_NE");
-        }else if (cur == Spotlight_SW.Directions.NW)
+        }
+        else if (cur == Spotlight_SW.Directions.NW)
         {
             animator.Play("Spotlight_Idle_NW");
-        }else if (cur == Spotlight_SW.Directions.SE)
+        }
+        else if (cur == Spotlight_SW.Directions.SE)
         {
             animator.Play("Spotlight_Idle_SE");
-        }else if (cur == Spotlight_SW.Directions.SW)
+        }
+        else if (cur == Spotlight_SW.Directions.SW)
         {
             animator.Play("Spotlight_Idle_SW");
         }

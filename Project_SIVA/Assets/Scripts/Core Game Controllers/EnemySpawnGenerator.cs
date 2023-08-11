@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -24,12 +21,12 @@ public class EnemySpawnGenerator : MonoBehaviour
                 {
                     var tileLocation = new Vector3Int(x, y, z);
                     var tileKey = new Vector2Int(x, y);
-                    
+
                     if (EnemySpawnMap.HasTile(tileLocation) && !EnemyManager.Instance.enemySpawns.ContainsKey(tileKey))
                     {
                         GameObject prefab = EnemySpawnMap.GetTile<EnemyTile>(tileLocation).enemy_prefab;
                         EnemyManager.Instance.enemySpawns.Add(tileKey, prefab);
-                        
+
                     }
                 }
             }
@@ -38,5 +35,5 @@ public class EnemySpawnGenerator : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-     
+
 }

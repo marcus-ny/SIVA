@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -10,7 +9,7 @@ namespace DialogueSystem
         [SerializeField] TurnsManager turnsManager;
         [SerializeField] GameEvents interestedGameEvent = GameEvents.GameStart;
 
-        
+
         private void Awake()
         {
             Deactivate();
@@ -21,10 +20,10 @@ namespace DialogueSystem
             BattleSimulator.Instance.AddObserver(this);
         }
 
-        
+
         private IEnumerator DialogueSequence()
         {
-            
+
             for (int i = 0; i < transform.childCount; i++)
             {
                 Deactivate();
@@ -32,7 +31,7 @@ namespace DialogueSystem
                 transform.GetChild(i).GetComponent<DialogueLine>().PlayDialogue();
                 yield return new WaitUntil(() => transform.GetChild(i).GetComponent<DialogueLine>().completed);
             }
-            
+
             turnsManager.EndCutscene();
         }
 
@@ -46,11 +45,11 @@ namespace DialogueSystem
 
         public void OnNotify(GameEvents gameEvent)
         {
-            
+
             if (gameEvent == interestedGameEvent)
             {
                 turnsManager.StartCutscene();
-                
+
                 for (int i = 0; i < transform.parent.childCount; i++)
                 {
                     transform.parent.GetChild(i).gameObject.SetActive(false);

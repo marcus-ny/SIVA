@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EdgeScrollController : MonoBehaviour
@@ -21,15 +19,15 @@ public class EdgeScrollController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         //Debug.Log(Screen.width);
-        if (Input.mousePosition.x > Screen.width - edgeSize && !(transform.position.x > initialX + 5) )
+        if (Input.mousePosition.x > Screen.width - edgeSize && !(transform.position.x > initialX + 5))
         {
             float moveAmt = cameraSpeed * Time.deltaTime;
             transform.Translate(new Vector3(moveAmt, 0, 0));
         }
 
-        if (Input.mousePosition.x < edgeSize && !(transform.position.x < initialX - 5) )
+        if (Input.mousePosition.x < edgeSize && !(transform.position.x < initialX - 5))
         {
             float moveAmt = cameraSpeed * Time.deltaTime;
             transform.Translate(new Vector3(-moveAmt, 0, 0));
@@ -41,7 +39,7 @@ public class EdgeScrollController : MonoBehaviour
             transform.Translate(new Vector3(0, moveAmt, 0));
         }
 
-        if (Input.mousePosition.y < edgeSize && !(transform.position.y < initialY - 2.5) )
+        if (Input.mousePosition.y < edgeSize && !(transform.position.y < initialY - 2.5))
         {
             float moveAmt = cameraSpeed * Time.deltaTime;
             transform.Translate(new Vector3(0, -moveAmt, 0));

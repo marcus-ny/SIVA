@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 //using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 public class PopUpManager : MonoBehaviour, IObserver
 {
@@ -18,12 +16,11 @@ public class PopUpManager : MonoBehaviour, IObserver
 
     public void OnNotify(GameEvents gameEvent)
     {
-        if ((gameEvent == GameEvents.EnemyHealthAltered) /*|| (gameEvent == GameEvents.PlayerHealthAltered)*/)
+        if ((gameEvent == GameEvents.EnemyHealthAltered))
         {
-            //Enemy recentTarget = DamageManager.Instance.recentTarget;
+
             float recentDamage = DamageManager.Instance.recentDamage;
-            //PopUpAppear("-" + recentDamage.ToString(), PopUp.PopUpType.Damage, recentTarget);
-            //XXPopUpAppear("-" + recentDamage.ToString(), PopUp.PopUpType.Damage);
+
             PopUpAppear("-" + recentDamage.ToString(), redColor);
         }
         if (gameEvent == GameEvents.EnemyHealed)
@@ -33,33 +30,26 @@ public class PopUpManager : MonoBehaviour, IObserver
         }
     }
 
-    //private void PopUpAppear(string text, PopUp.PopUpType popUpType, Enemy recentTarget)
-    //XXprivate void PopUpAppear(string text, PopUp.PopUpType popUpType)
+
     private void PopUpAppear(string text, Color tempColor)
     {
         Enemy recentTarget = DamageManager.Instance.recentTarget;
-        if(text == null) 
-        { 
-            Debug.Log("string is null"); 
-            return; 
+        if (text == null)
+        {
+            Debug.Log("string is null");
+            return;
         }
-        // Instantiate the pop up
+
         GameObject DamageTextInstance = Instantiate(damageTextPrefab, recentTarget.transform);
         DamageTextInstance.transform.position = recentTarget.transform.position;
-        //Debug.Log(recentTarget.transform.position.ToString());
 
-        // This is a convoluted way to categorize pop up
+
+
         PopUp newPopUp = new PopUp(text, DamageTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>(), PopUp.PopUpType.Damage);
 
         newPopUp.text = text;
         newPopUp.textObject.text = text;
         newPopUp.textObject.color = tempColor;
-        //newPopUp.textObject.color = PopUpColor(popUpType);
-
-        /*
-        DamageTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>().text = text;
-        DamageTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>().color = blackColor;
-        */
     }
 
     Color PopUpColor(PopUp.PopUpType popUpType)

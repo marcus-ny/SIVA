@@ -59,12 +59,10 @@ public class TurnsManager : Publisher, IObserver
         {
             if (gameEvent == GameEvents.PlayerTurn)
             {
-                Debug.Log("OnNotifiedPlayerTurnReceived");
                 PlayerTurn();
             }
             if (gameEvent == GameEvents.EnemyTurn)
             {
-                Debug.Log("OnNotifiedEnemyTurnReceived");
                 EnemyTurn();
             }
             
@@ -84,7 +82,6 @@ public class TurnsManager : Publisher, IObserver
 
     public void StartCutscene()
     {
-        Debug.Log("Cutscene begins, all other UI disabled");
         CutsceneUI.SetActive(true);
         BannerUI.SetActive(false);
         ActionsUI.SetActive(false);

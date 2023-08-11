@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -19,18 +17,18 @@ public class CameraController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-        
+    {
+
         if (BattleSimulator.Instance.State == BattleState.TRANSITION)
         {
             if (BattleSimulator.Instance.GetCurrentEnemy() != null)
             {
-                Debug.Log("Camera is following " + BattleSimulator.Instance.GetCurrentEnemy().ToString());
-                transform.position = new(BattleSimulator.Instance.GetCurrentEnemy().transform.position.x, BattleSimulator.Instance.GetCurrentEnemy().transform.position.y, transform.position.z);            
+                transform.position = new(BattleSimulator.Instance.GetCurrentEnemy().transform.position.x, BattleSimulator.Instance.GetCurrentEnemy().transform.position.y, transform.position.z);
             }
         }
-        else {
-            
+        else
+        {
+
             if (Input.GetKey(KeyCode.A) && transform.position.x > initialX - 5)
             {
                 float moveAmt = cameraSpeed * Time.deltaTime;
@@ -55,6 +53,6 @@ public class CameraController : MonoBehaviour
                 transform.Translate(new Vector3(0, -moveAmt, 0));
             }
         }
-        //transform.Translate(new Vector3(xAxisValue, yAxisValue, 0));
+
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
@@ -44,10 +43,10 @@ public abstract class Enemy : MonoBehaviour
             yield return null;
         }
         state_moving = true;
-        
+
         while (path.Count > 0)
         {
-            
+
             activeTile.isBlocked = false;
             EnemyManager.Instance.enemyMap.Remove(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
             activeTile.enemy = null;
@@ -75,14 +74,14 @@ public abstract class Enemy : MonoBehaviour
             activeTile.isBlocked = true;
             EnemyManager.Instance.enemyMap.Add(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y), this);
             yield return null;
-            
+
         }
-        
+
         if (path.Count == 0)
         {
             prev = cur = activeTile.gridLocation;
         }
-        
+
         state_moving = false;
 
     }
@@ -99,18 +98,18 @@ public abstract class Enemy : MonoBehaviour
         activeTile.enemy = this;
         activeTile.isBlocked = true;
     }
-    
+
     public virtual void TriggerDeath()
     {
-        Debug.Log("Enemy has died");
+
         EnemyManager.Instance.KillEnemy(activeTile);
         //EnemyManager.Instance.enemyMap.Remove(new
-            //Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
+        //Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
         BattleSimulator.Instance.enemyList.Remove(this);
         activeTile.isBlocked = false;
         DamageManager.Instance.HealFromLifesteal(5);
         Destroy(gameObject);
-        
+
         //Debug.Log(EnemyManager.Instance.enemyMap.Count);
     }
 

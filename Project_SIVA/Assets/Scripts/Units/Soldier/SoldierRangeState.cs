@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoldierRangeState : SoldierBaseState
 {
     public override void EnterState(Soldier soldier)
     {
-        Debug.Log("Soldier is now taking range stance");
+
     }
     public override void UpdateState(Soldier soldier)
     {
@@ -23,7 +21,8 @@ public class SoldierRangeState : SoldierBaseState
         {
             soldier.TakePositionForRange();
             soldier.RangeAttack();
-        } else 
+        }
+        else
         {
             soldier.SwitchState(soldier.soldierAggroState);
         }

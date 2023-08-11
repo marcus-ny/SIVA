@@ -20,7 +20,7 @@ public class BossLightRight : Enemy, IObserver
         active = true;
         curPos = 0;
         onReturnTrip = false;
-        
+
         hitpoints = maxHp = 999;
         maxAP = 10;
         EmitDirectionalLight(activeTile, true, 2);
@@ -30,11 +30,13 @@ public class BossLightRight : Enemy, IObserver
         if (active)
         {
             Patrol();
-        } else if (!active && turnsSincedisabled >= 2)
+        }
+        else if (!active && turnsSincedisabled >= 2)
         {
             active = true;
             Patrol();
-        } else
+        }
+        else
         {
             turnsSincedisabled += 1;
         }

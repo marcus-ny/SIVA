@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class Generator : Enemy
 {
@@ -22,7 +20,7 @@ public class Generator : Enemy
         path = new();
         rangeFinder = new Rangefinder();
         range = new();
-        
+
 
         // There should be a more intelligent way to set this variable
         maxAP = 4;
@@ -47,9 +45,9 @@ public class Generator : Enemy
         }
 
         // This part needs to be looked at later
-        
+
         range = rangeFinder.GetReachableTiles(activeTile, 4, 1);
-        
+
     }
     public override string ToString()
     {
@@ -69,7 +67,7 @@ public class Generator : Enemy
     // Trigger = true for ON, false for OFF
     public void EmitLight(bool trigger)
     {
-        
+
         foreach (OverlayTile tile in range)
         {
             tile.AlterLightLevel(trigger);
@@ -96,6 +94,6 @@ public class Generator : Enemy
         BattleSimulator.Instance.enemyList.Remove(this);
         activeTile.isBlocked = false;
         Destroy(gameObject);
-        
+
     }
 }

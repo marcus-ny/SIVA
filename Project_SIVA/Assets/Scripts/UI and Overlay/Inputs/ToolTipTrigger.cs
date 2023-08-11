@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -13,11 +11,7 @@ public class ToolTipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        /*
-        delay = LeanTween.delayedCall(0.5f, () =>
-        {
-            ToolTipSystem.Show(content, header);
-        });*/
+
         ToolTipSystem.Show(content, header);
     }
 

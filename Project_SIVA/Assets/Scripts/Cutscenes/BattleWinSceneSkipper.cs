@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /*
@@ -15,7 +14,8 @@ public class BattleWinSceneSkipper : MonoBehaviour, IObserver
         if (gameEvent == GameEvents.PlayerWin)
         {
             StartCoroutine(PassLevel());
-        } else if (gameEvent == GameEvents.PlayerLose)
+        }
+        else if (gameEvent == GameEvents.PlayerLose)
         {
             StartCoroutine(FailLevel());
         }
@@ -49,7 +49,7 @@ public class BattleWinSceneSkipper : MonoBehaviour, IObserver
 
 
 
-    
 
-    
+
+
 }

@@ -18,13 +18,14 @@ public class VampireBoss : Enemy
             {
                 yield return null;
             }
-            if (weakened) {
+            if (weakened)
+            {
                 EscapeLight();
                 actionsPerformed = maxAP;
             }
             else if (DetectLowAllies())
             {
-                Debug.Log("Boss detects an ally that is close to death");
+
                 StartCoroutine(KillAlly());
                 actionsPerformed = maxAP;
 
@@ -33,12 +34,13 @@ public class VampireBoss : Enemy
             {
                 MeleeAttack();
                 actionsPerformed = maxAP;
-            } else
+            }
+            else
             {
                 Teleport();
                 actionsPerformed = maxAP - 1;
             }
-            
+
 
         }
     }
@@ -65,7 +67,7 @@ public class VampireBoss : Enemy
         {
             player = PlayerController.Instance.character;
         }
-        
+
         if (hitpoints <= 0)
         {
             TriggerDeath();
@@ -74,13 +76,14 @@ public class VampireBoss : Enemy
         if (activeTile != null && activeTile.light_level > 0)
         {
             Weaken();
-        } else
+        }
+        else
         {
             weakened = false;
         }
 
-        
-        
+
+
     }
     public void Weaken()
     {
@@ -148,7 +151,7 @@ public class VampireBoss : Enemy
     }
     public void MeleeAttack()
     {
-        StartCoroutine(StartMeleeAttack());       
+        StartCoroutine(StartMeleeAttack());
     }
 
     private bool PlayerInAttackRange()
@@ -170,7 +173,7 @@ public class VampireBoss : Enemy
         activeTile.isBlocked = false;
         EnemyManager.Instance.enemyMap.Remove(new Vector2Int(activeTile.gridLocation.x, activeTile.gridLocation.y));
         activeTile.enemy = null;
-            // Before
+        // Before
 
         var step = SPEED * Time.deltaTime;
         var zIndex = transform.position.z;
@@ -190,7 +193,7 @@ public class VampireBoss : Enemy
     {
         List<OverlayTile> toFind = GetClosestTileToPlayer();
         //range = rangeFinder.GetReachableTiles(activeTile, 3);
-        
+
         foreach (OverlayTile tile in toFind)
         {
             // If the tile is blocked, can't be teleported to. Skip
@@ -202,13 +205,13 @@ public class VampireBoss : Enemy
                 break;
             }
 
-            
+
             StartCoroutine(TeleportCoroutine(tile));
             break;
         }
-        
-        
-        
+
+
+
     }
     private void EscapeLight()
     {
@@ -305,7 +308,7 @@ public class VampireBoss : Enemy
         }
 
         List<OverlayTile> result = MapController.Instance.Get3x3Grid(player.activeTile);
-        
+
         return result;
     }
 

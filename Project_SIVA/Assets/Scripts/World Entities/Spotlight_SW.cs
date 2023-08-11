@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +16,7 @@ public class Spotlight_SW : WorldEntity, IInteractable
     {
         EmitDirectionalLight(activeTile, true, (int)currDir);
         CheckDir();
-        
+
     }
     public bool ReceiveInteraction()
     {
@@ -34,7 +33,7 @@ public class Spotlight_SW : WorldEntity, IInteractable
     public void Update()
     {
         // Temporary fix, but can be improved later
-        
+
         animator.AnimateSpin(currDir);
 
         if (BattleSimulator.Instance.State != BattleState.PLAYER_TURN)
@@ -44,7 +43,7 @@ public class Spotlight_SW : WorldEntity, IInteractable
                 CheckDir();
             }
         }
-            
+
     }
 
     private void EmitDirectionalLight(OverlayTile cur, bool trigger, int dir)
@@ -53,7 +52,7 @@ public class Spotlight_SW : WorldEntity, IInteractable
         active = trigger;
 
         List<OverlayTile> litUpTiles = MapController.Instance.GetUniDirectional(activeTile, dir, 3);
-        
+
         foreach (OverlayTile tile in litUpTiles)
         {
             tile.AlterLightLevel(trigger);
@@ -72,9 +71,9 @@ public class Spotlight_SW : WorldEntity, IInteractable
 
         if (Mathf.Abs(xDiff) >= Mathf.Abs(yDiff))
         {
-            
+
             // Emit light along X Axis
-            
+
             if (xDiff > 0) // +X
             {
                 // If directional difference is 2, clockwise/anticlockwise does not matter. Spin twice
@@ -96,7 +95,8 @@ public class Spotlight_SW : WorldEntity, IInteractable
                 {
                     RotateCounterClockwise();
                 }
-            } else // -X
+            }
+            else // -X
             {
                 Directions newDir = Directions.SW;
                 int deltaDir = newDir - currDir;
@@ -116,11 +116,12 @@ public class Spotlight_SW : WorldEntity, IInteractable
                     RotateCounterClockwise();
                 }
             }
-        } else if (Mathf.Abs(yDiff) > Mathf.Abs(xDiff))
+        }
+        else if (Mathf.Abs(yDiff) > Mathf.Abs(xDiff))
         {
-            
+
             if (yDiff > 0)
-            {               
+            {
                 Directions newDir = Directions.NW;
                 int deltaDir = newDir - currDir;
 
@@ -138,12 +139,13 @@ public class Spotlight_SW : WorldEntity, IInteractable
                 {
                     RotateCounterClockwise();
                 }
-            } else if (yDiff < 0)
+            }
+            else if (yDiff < 0)
             {
-                
+
                 Directions newDir = Directions.SE;
                 int deltaDir = newDir - currDir;
-                
+
                 if (Mathf.Abs(deltaDir) == 2)
                 {
                     RotateClockwise();
@@ -160,13 +162,13 @@ public class Spotlight_SW : WorldEntity, IInteractable
                 }
             }
         }
-        
+
     }
 
     private void RotateClockwise()
     {
         Directions prevDir = currDir;
-        Directions newDir = (Directions) ((int)(currDir + 1)%4);
+        Directions newDir = (Directions)((int)(currDir + 1) % 4);
         currDir = newDir;
         EmitDirectionalLight(activeTile, false, (int)prevDir);
         EmitDirectionalLight(activeTile, true, (int)newDir);
@@ -176,7 +178,7 @@ public class Spotlight_SW : WorldEntity, IInteractable
     {
         // public enum Directions { NE = 0, SE = 1, SW = 2, NW = 3 }
         Directions prevDir = currDir;
-        
+
         int absoluteDiffDir = (int)currDir - 1;
         while ((int)absoluteDiffDir < 0) absoluteDiffDir += 4;
         Directions newDir = (Directions)(absoluteDiffDir);
@@ -187,6 +189,6 @@ public class Spotlight_SW : WorldEntity, IInteractable
 
     public void Highlight(bool trigger)
     {
-       
+
     }
 }

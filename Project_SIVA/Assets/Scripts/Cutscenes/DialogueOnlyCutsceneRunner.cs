@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class DialogueOnlyCutsceneRunner : CutsceneRunner, IObserver
 {
     [SerializeField] TurnsManager turnsManager;
-    
+
     void Start()
     {
         turnsManager.AddObserver(this);
@@ -17,7 +15,7 @@ public class DialogueOnlyCutsceneRunner : CutsceneRunner, IObserver
 
         StartCoroutine(StartCutscene());
     }
-    
+
     IEnumerator StartCutscene()
     {
         yield return null;

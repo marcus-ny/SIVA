@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PathArrowGenerator
@@ -55,7 +53,7 @@ public class PathArrowGenerator
             if (prevDir.y < nextDir.y)
             {
                 return ArrowDir.LeftBtm;
-            } 
+            }
             else
                 return ArrowDir.RightTop;
         }

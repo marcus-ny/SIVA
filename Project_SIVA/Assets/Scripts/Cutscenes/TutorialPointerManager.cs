@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorialPointerManager : MonoBehaviour, IObserver
@@ -27,19 +26,20 @@ public class TutorialPointerManager : MonoBehaviour, IObserver
         PlayerController.Instance.AddObserver(this);
         WorldEntitiesManager.Instance.AddObserver(this);
         turnsManager.AddObserver(this);
-        actionBoxManager.AddObserver(this);       
+        actionBoxManager.AddObserver(this);
     }
 
     public void OnNotify(GameEvents gameEvent)
     {
         if (completed) return;
-        
+
         if (gameEvent == triggerEvent)
         {
             if (genDelay == GenerationDelay.Instantaneous) ShowTips(true);
             else if (genDelay == GenerationDelay.Delayed) StartCoroutine(ShowTipsIntro(true));
 
-        } else if (gameEvent == completionEvent)
+        }
+        else if (gameEvent == completionEvent)
         {
             ShowTips(false);
             completed = true;
@@ -62,5 +62,5 @@ public class TutorialPointerManager : MonoBehaviour, IObserver
             transform.GetChild(i).gameObject.SetActive(trigger);
         }
     }
-    
+
 }

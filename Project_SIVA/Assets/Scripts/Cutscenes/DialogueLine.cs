@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 namespace DialogueSystem
 {
@@ -16,13 +15,13 @@ namespace DialogueSystem
         [SerializeField] private string input;
         [SerializeField] private Color textColor;
 
-        [Header ("Time Parameter")]
+        [Header("Time Parameter")]
         [SerializeField] private float delay;
 
-        [Header ("Sound Options")]
+        [Header("Sound Options")]
         [SerializeField] private AudioClip sound;
 
-        [Header ("Character Image")]
+        [Header("Character Image")]
         [SerializeField] private Sprite characterSprite;
         [SerializeField] private Image imageHolder;
 

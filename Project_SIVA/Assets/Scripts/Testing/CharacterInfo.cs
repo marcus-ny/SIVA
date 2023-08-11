@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
-using UnityEngine.UIElements;
 
 public class CharacterInfo : MonoBehaviour
 {
@@ -33,11 +29,11 @@ public class CharacterInfo : MonoBehaviour
     }
 
     public void DisplayDamageVisual()
-    {       
-        StartCoroutine("DamageVisual");
+    {
+        StartCoroutine(DamageVisual());
     }
 
-    
-    
+
+
 
 }

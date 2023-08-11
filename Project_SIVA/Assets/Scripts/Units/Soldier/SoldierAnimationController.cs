@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
 
@@ -31,18 +26,20 @@ public class SoldierAnimationController : MonoBehaviour
         if (attackStatus == AttackStatus.NIL)
         {
             MoveAnimation();
-            
-        } else if (attackStatus == AttackStatus.MELEE)
+
+        }
+        else if (attackStatus == AttackStatus.MELEE)
         {
             MeleeAnimation();
-            
-        } else if (attackStatus == AttackStatus.RANGE)
+
+        }
+        else if (attackStatus == AttackStatus.RANGE)
         {
             RangeAnimation();
         }
         animator.Play(currAnimation);
     }
- 
+
     private void MoveAnimation()
     {
         Vector3Int prev = soldier.prev;
@@ -70,7 +67,7 @@ public class SoldierAnimationController : MonoBehaviour
         }
 
     }
-    
+
     private void MeleeAnimation()
     {
         Vector3Int playerLocation = soldier.player.activeTile.gridLocation;
@@ -92,10 +89,12 @@ public class SoldierAnimationController : MonoBehaviour
         else if (playerLocation.x - soldierLocation.x == 0 && playerLocation.y - soldierLocation.y < 0)
         {
             animation = melee_directions[3];
-        } else if (playerLocation.x - soldierLocation.x != 0)
+        }
+        else if (playerLocation.x - soldierLocation.x != 0)
         {
             animation = melee_directions[1];
-        } else if (playerLocation.y - soldierLocation.y != 0)
+        }
+        else if (playerLocation.y - soldierLocation.y != 0)
         {
             animation = melee_directions[0];
         }

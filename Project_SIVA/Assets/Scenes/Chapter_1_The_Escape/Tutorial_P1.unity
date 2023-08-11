@@ -12255,11 +12255,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5795375861105758170, guid: 5dbe460a3737fe34da9e91dd71269e1b, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.64405113
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5795375861105758170, guid: 5dbe460a3737fe34da9e91dd71269e1b, type: 3}
       propertyPath: m_Pivot.y
-      value: 1.1027668
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5795375861105758170, guid: 5dbe460a3737fe34da9e91dd71269e1b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -12271,11 +12271,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5795375861105758170, guid: 5dbe460a3737fe34da9e91dd71269e1b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 115.240906
+      value: -400
       objectReference: {fileID: 0}
     - target: {fileID: 5795375861105758170, guid: 5dbe460a3737fe34da9e91dd71269e1b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 239.92134
+      value: -199.01672
       objectReference: {fileID: 0}
     - target: {fileID: 5795375861229509442, guid: 5dbe460a3737fe34da9e91dd71269e1b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -14267,7 +14267,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 3
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -14370,10 +14370,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 6593601470b66024381f6b73f3ebae02, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 6593601470b66024381f6b73f3ebae02, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: 0756e96de2d5d2d41a3188ada18e7f85, type: 3}
   - m_RefCount: 8
@@ -16172,7 +16172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 990304909024531663, guid: 0ac1807574ec30543a26033992241f52, type: 3}
       propertyPath: triggerEvent
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 990304909024531663, guid: 0ac1807574ec30543a26033992241f52, type: 3}
       propertyPath: turnsManager

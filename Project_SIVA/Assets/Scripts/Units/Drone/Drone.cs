@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 
 public class Drone : Enemy
@@ -70,7 +69,7 @@ public class Drone : Enemy
         return "Drone";
     }
     public void EmitLight(bool trigger)
-    {        
+    {
         List<OverlayTile> lighting = MapController.Instance.Get3x3Grid(activeTile);
         foreach (OverlayTile tile in lighting)
         {
@@ -91,7 +90,7 @@ public class Drone : Enemy
 
     public void Search()
     {
-        
+
         List<OverlayTile> toFind = GetClosestTileToPlayer();
         //range = rangeFinder.GetReachableTiles(activeTile, 3);
         foreach (OverlayTile tile in toFind)
@@ -148,9 +147,7 @@ public class Drone : Enemy
         }
 
         List<OverlayTile> result = pathFinder.GetClosestTilesInRange(player.activeTile, range);
-        //Debug.Log("nearest: " + result.gridLocation);
-        //Debug.Log("Player: " + player.activeTile.gridLocation);
-        //Debug.Log("Is blocked? : " + result.isBlocked);
+
         return result;
     }
 
@@ -162,6 +159,6 @@ public class Drone : Enemy
         BattleSimulator.Instance.enemyList.Remove(this);
         activeTile.isBlocked = false;
         Destroy(gameObject);
-        
+
     }
 }

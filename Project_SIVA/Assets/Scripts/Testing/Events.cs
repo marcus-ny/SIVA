@@ -16,12 +16,12 @@ public enum GameEvents
     NoInteractable,
     NoTarget,
     TargetOFR,
-    
+
     PlayerLifesteal,
     BossPowerDisabled,
     // For Tutorial
     SuccessfulMove,
-    
+
     AttackButtonPressed,
     SuccessfulAttack,
     SuccessfulInteract,

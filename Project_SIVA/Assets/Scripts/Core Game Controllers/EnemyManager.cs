@@ -101,7 +101,7 @@ public class EnemyManager : Publisher
     public List<Mechanic> FindMechanicLocations()
     {
         List<Mechanic> mechanics = new();
-        
+
         foreach (KeyValuePair<Vector2Int, Enemy> kvp in enemyMap)
         {
             if (kvp.Value.GetType() == typeof(Mechanic))

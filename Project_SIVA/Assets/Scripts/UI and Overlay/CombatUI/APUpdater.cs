@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class APUpdater : MonoBehaviour
 {
@@ -12,6 +10,6 @@ public class APUpdater : MonoBehaviour
     {
         int max = BattleSimulator.Instance.MAX_ACTIONS;
         int curr = BattleSimulator.Instance.actionsPerformed;
-        actionPointCounter.text = (max-curr) + "/" + max;
+        actionPointCounter.text = (max - curr) + "/" + max;
     }
 }

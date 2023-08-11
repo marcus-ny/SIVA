@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Door : WorldEntity, ITeleportable
@@ -11,16 +10,16 @@ public class Door : WorldEntity, ITeleportable
         doorAnimator = GetComponent<DoorAnimator>();
         activeTile.isBlocked = false;
     }
-    
+
 
     private void Update()
     {
         if (PlayerController.Instance.character.activeTile == activeTile && BattleSimulator.Instance.levelComplete)
         {
             Teleport();
-        } 
+        }
     }
-    
+
     public void Teleport()
     {
         StartCoroutine(TeleportCoroutine());
@@ -30,6 +29,6 @@ public class Door : WorldEntity, ITeleportable
         doorAnimator.OpenDoor();
         yield return new WaitForSecondsRealtime(1);
         ScenesManager.Instance.LoadNextScene();
-        
+
     }
 }

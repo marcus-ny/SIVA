@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MechanicHealState : MechanicBaseState
 {
     public override void EnterState(Mechanic mechanic)
     {
-        Debug.Log("Mechanic enters heal state");
+
     }
 
     public override void UpdateState(Mechanic mechanic)
     {
         Vector3Int mechanicLocation = mechanic.activeTile.gridLocation;
-        
+
         mechanic.allyLowHp = EnemyManager.Instance.GetLowestHpAlly();
 
         if (mechanic.allyLowHp.hpRatio == 1)
@@ -27,7 +25,8 @@ public class MechanicHealState : MechanicBaseState
         if (inHealRange)
         {
             mechanic.Heal();
-        } else
+        }
+        else
         {
             mechanic.MoveToAlly();
         }
