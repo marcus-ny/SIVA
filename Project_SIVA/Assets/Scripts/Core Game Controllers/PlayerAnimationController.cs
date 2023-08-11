@@ -1,7 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * This script is no longer used. Safe to delete
+ */
 public class PlayerAnimationController : MonoBehaviour
 {
     public PlayerController playerController;
@@ -13,7 +15,7 @@ public class PlayerAnimationController : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void AnimatePlayer() 
+    public void AnimatePlayer()
     {
         List<OverlayTile> path = playerController.path;
 

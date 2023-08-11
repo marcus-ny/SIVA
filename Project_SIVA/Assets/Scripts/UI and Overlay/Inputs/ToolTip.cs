@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 [ExecuteInEditMode()]
@@ -45,7 +43,7 @@ public class ToolTip : MonoBehaviour
 
             layoutElement.enabled = (headerLength > characterWrapLimit || contentLength > characterWrapLimit) ? true : false;
         }
-        
+
         Vector2 position = Input.mousePosition;
 
         float pivotX = position.x / Screen.width;

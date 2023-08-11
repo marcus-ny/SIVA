@@ -1,24 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class UIHealthBar : MonoBehaviour, IObserver
 {
     [SerializeField] Slider _healthSlider;
     [SerializeField] TextMeshProUGUI HPCounter;
 
-    private void Start(){
+    private void Start()
+    {
         DamageManager.Instance.AddObserver(this);
     }
 
-    public void SetMaxHealth(float maxHealth) {
+    public void SetMaxHealth(float maxHealth)
+    {
         _healthSlider.maxValue = maxHealth;
         _healthSlider.value = maxHealth;
     }
 
-    public void SetHealth(float health) {
+    public void SetHealth(float health)
+    {
         _healthSlider.value = health;
     }
 
@@ -26,7 +27,7 @@ public class UIHealthBar : MonoBehaviour, IObserver
     {
         if ((gameEvent == GameEvents.PlayerHealthAltered) || (gameEvent == GameEvents.LightDamage) || (gameEvent == GameEvents.PlayerLifesteal))
         {
-            
+
             SetHealth(PlayerController.Instance.character.hitpoints);
             HPCounter.text = (PlayerController.Instance.character.hitpoints).ToString() + "/" + (_healthSlider.maxValue).ToString();
         }

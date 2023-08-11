@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FInalChapterEndLoader : CutsceneRunner, IObserver
@@ -13,14 +12,12 @@ public class FInalChapterEndLoader : CutsceneRunner, IObserver
         {
             tile.HideTile();
         }
-
     }
+
     public override void RunCutscene()
     {
-
         StartCoroutine(StartCutscene());
     }
-
 
     IEnumerator StartCutscene()
     {

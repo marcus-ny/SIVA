@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 namespace DialogueSystem
 {
@@ -16,13 +15,13 @@ namespace DialogueSystem
         [SerializeField] private string input;
         [SerializeField] private Color textColor;
 
-        [Header ("Time Parameter")]
+        [Header("Time Parameter")]
         [SerializeField] private float delay;
 
-        [Header ("Sound Options")]
+        [Header("Sound Options")]
         [SerializeField] private AudioClip sound;
 
-        [Header ("Character Image")]
+        [Header("Character Image")]
         [SerializeField] private Sprite characterSprite;
         [SerializeField] private Image imageHolder;
 
@@ -43,12 +42,7 @@ namespace DialogueSystem
             imageHolder.preserveAspect = true;
         }
 
-        private void Start()
-        {
-            
-        }
-
-        public void playDialogue()
+        public void PlayDialogue()
         {
             lineAppear = WriteText(input, textHolder, textColor, delay, sound);
             StartCoroutine(lineAppear);
@@ -63,9 +57,10 @@ namespace DialogueSystem
                     StopCoroutine(lineAppear);
                     textHolder.text = input;
                 }
-                    
                 else
-                    finished = true;
+                {
+                    completed = true;
+                }
             }
         }
     }

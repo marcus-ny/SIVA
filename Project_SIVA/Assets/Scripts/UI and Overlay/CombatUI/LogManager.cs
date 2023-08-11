@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 public class LogManager : MonoBehaviour, IObserver
 {
@@ -10,7 +8,7 @@ public class LogManager : MonoBehaviour, IObserver
     public GameObject chatPanel, textObject;
     public Color redColor, greenColor, blackColor, yellowColor;
 
-    [SerializeField] 
+    [SerializeField]
     List<Message> messageList = new List<Message>();
 
     // Start is called before the first frame update
@@ -35,7 +33,7 @@ public class LogManager : MonoBehaviour, IObserver
 
     public void SendMessageToLog(string text, Message.MessageType messageType)
     {
-        if(messageList.Count >= maxMessages)
+        if (messageList.Count >= maxMessages)
         {
             Destroy(messageList[0].textObject.gameObject);
             messageList.Remove(messageList[0]);
@@ -80,7 +78,7 @@ public class LogManager : MonoBehaviour, IObserver
                 color = redColor;
                 break;
         }
-        
+
         return color;
     }
 
@@ -109,7 +107,7 @@ public class LogManager : MonoBehaviour, IObserver
         {
             SendMessageToLog("--No Intractables on Clicked Tile--", Message.MessageType.SystemError);
         }
-        if(gameEvent == GameEvents.TargetOFR)
+        if (gameEvent == GameEvents.TargetOFR)
         {
             SendMessageToLog("--Target Out of Range--", Message.MessageType.SystemError);
         }
@@ -123,8 +121,8 @@ public class LogManager : MonoBehaviour, IObserver
         {
             float recentDamage = DamageManager.Instance.recentDamage;
             Enemy currentEnemy = BattleSimulator.Instance.GetCurrentEnemy();
-           
-            
+
+
             switch (currentEnemy.ToString())
             {
                 case "Soldier":
@@ -136,10 +134,10 @@ public class LogManager : MonoBehaviour, IObserver
                 case "Vampire Boss":
                     SendMessageToLog("[Donovan] is assaulted by enemy [" + currentEnemy.ToString() + "]; -" + recentDamage + "HP", Message.MessageType.Damage);
                     break;
-                    
+
             }
-            
-                
+
+
         }
 
         if (gameEvent == GameEvents.EnemyHealthAltered)

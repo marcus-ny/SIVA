@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoldierRetreatState : SoldierBaseState
 {
     public override void EnterState(Soldier soldier)
     {
-        // Set the weak animation here
-        Debug.Log("Soldier enters retreat state");
+
     }
     public override void UpdateState(Soldier soldier)
     {
@@ -18,7 +15,8 @@ public class SoldierRetreatState : SoldierBaseState
             {
                 soldier.SwitchState(soldier.soldierAggroState);
             }
-        } else
+        }
+        else
         {
             Vector3Int soldierLocation = soldier.activeTile.gridLocation;
             Vector3Int playerLocation = soldier.player.activeTile.gridLocation;
@@ -36,7 +34,7 @@ public class SoldierRetreatState : SoldierBaseState
         }
 
 
-        
-        
+
+
     }
 }

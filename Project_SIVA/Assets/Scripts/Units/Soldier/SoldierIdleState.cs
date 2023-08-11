@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoldierIdleState : SoldierBaseState
@@ -26,10 +24,11 @@ public class SoldierIdleState : SoldierBaseState
         if (inAggroRange)
         {
             soldier.SwitchState(soldier.soldierAggroState);
-        } else
+        }
+        else
         {
             soldier.SwitchState(soldier.soldierRangeState);
         }
     }
-    
+
 }

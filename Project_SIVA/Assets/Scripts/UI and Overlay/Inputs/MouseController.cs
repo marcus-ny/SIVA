@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -10,7 +8,7 @@ public class MouseController : MonoBehaviour
     public static MouseController Instance { get { return _instance; } }
 
     public OverlayTile mouseOverTile;
-    
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -21,13 +19,12 @@ public class MouseController : MonoBehaviour
         {
             _instance = this;
         }
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
         if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN)
         {
             var focusedTileHit = GetFocusedOnTile();
@@ -40,19 +37,19 @@ public class MouseController : MonoBehaviour
                 mouseOverTile = overlayTile;
                 transform.position = overlayTile.transform.position;
 
-               
+
                 gameObject.GetComponent<SpriteRenderer>().sortingOrder =
-                    overlayTile.GetComponent<SpriteRenderer>().sortingOrder;               
-            } else
+                    overlayTile.GetComponent<SpriteRenderer>().sortingOrder;
+            }
+            else
             {
                 transform.position = PlayerController.Instance.character.transform.position;
                 mouseOverTile = PlayerController.Instance.character.activeTile;
             }
-            //Debug.Log("mouse on: " + mouseOverTile.gridLocation);
         }
 
     }
-    
+
     public RaycastHit2D? GetFocusedOnTile()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -62,7 +59,7 @@ public class MouseController : MonoBehaviour
 
         // Mouse click may hit multiple tiles, but we always want to get the top layer
         // Get a list of tiles hit --> sort by descending Z value --> Pick the first one in order
-        if(hits.Length > 0)
+        if (hits.Length > 0)
         {
             return hits.OrderByDescending(i => i.collider.transform.position.z).First();
         }

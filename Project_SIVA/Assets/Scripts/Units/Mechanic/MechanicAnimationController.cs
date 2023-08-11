@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MechanicAnimationController : MonoBehaviour
@@ -27,7 +25,8 @@ public class MechanicAnimationController : MonoBehaviour
         if (status == Status.NIL)
         {
             MoveAnimation();
-        } else if (status == Status.HEALING)
+        }
+        else if (status == Status.HEALING)
         {
             HealAnimation();
         }

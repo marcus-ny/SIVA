@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,17 +16,19 @@ public class UIMainMenu : MonoBehaviour
     }
 
     // This method loads a new game 
-    private void StartGame(){
-        //ScenesManager.Instance.LoadNewGame();
+    private void StartGame()
+    {
         ScenesManager.Instance.LoadNewGame();
     }
 
-    private void LoadLevelSelector(){
+    private void LoadLevelSelector()
+    {
         ScenesManager.Instance.LoadScene(ScenesManager.GameScene.LevelSelector);
     }
 
-    private void QuitGame(){
-        Debug.Log("Quitting Game");
+    private void QuitGame()
+    {
+
         Application.Quit();
     }
 }

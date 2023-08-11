@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class VampireBossAnimator : MonoBehaviour
@@ -9,7 +7,7 @@ public class VampireBossAnimator : MonoBehaviour
 
     public enum AnimationState { Idle, Weakened, MeleeIn, MeleeInProgress, MeleeOut, TeleportIn, TeleportOut }
     public AnimationState currState;
-    
+
     void Start()
     {
         currState = AnimationState.Idle;
@@ -19,11 +17,8 @@ public class VampireBossAnimator : MonoBehaviour
 
     void Update()
     {
-        switch(currState)
+        switch (currState)
         {
-            /*case AnimationState.Idle:
-                currAnimation = "BossIdle";
-                break;*/
             case AnimationState.MeleeIn:
                 currAnimation = "BossEnterMelee";
                 break;
@@ -47,6 +42,6 @@ public class VampireBossAnimator : MonoBehaviour
                 break;
         }
         animator.Play(currAnimation);
-        
+
     }
 }

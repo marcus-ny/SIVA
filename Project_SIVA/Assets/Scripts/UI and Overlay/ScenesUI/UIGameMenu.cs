@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,11 +13,12 @@ public class UIGameMenu : MonoBehaviour
         //pauseMenu = gameObject.GetComponentInParent<Transform>().GetComponentInParent<PauseMenu>();
     }
 
-    private void ExitToMenu(){
+    private void ExitToMenu()
+    {
         // This fixes the issue of the need to escape pause screen to trigger animation
         //pauseMenu.pauseMenuUI.SetActive(false);
         pauseMenu.GameIsPaused = false;
-        Time.timeScale = 1f;        
+        Time.timeScale = 1f;
         ScenesManager.Instance.LoadMainMenu();
     }
 }

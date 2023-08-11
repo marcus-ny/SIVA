@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -10,17 +9,10 @@ namespace DialogueSystem
         [SerializeField] TurnsManager turnsManager;
         [SerializeField] GameEvents interestedGameEvent = GameEvents.GameStart;
 
-        
+
         private void Awake()
         {
             Deactivate();
-            
-            //StartCoroutine(dialogueSequence());
-            
-            //StartCoroutine(cleanDialogues());
-            
-            //turnsManager.AddObserver(this);
-            
         }
 
         private void Start()
@@ -28,18 +20,18 @@ namespace DialogueSystem
             BattleSimulator.Instance.AddObserver(this);
         }
 
-        
-        private IEnumerator dialogueSequence()
+
+        private IEnumerator DialogueSequence()
         {
-            
+
             for (int i = 0; i < transform.childCount; i++)
             {
                 Deactivate();
                 transform.GetChild(i).gameObject.SetActive(true);
-                transform.GetChild(i).GetComponent<DialogueLine>().playDialogue();
-                yield return new WaitUntil(() => transform.GetChild(i).GetComponent<DialogueLine>().finished);
+                transform.GetChild(i).GetComponent<DialogueLine>().PlayDialogue();
+                yield return new WaitUntil(() => transform.GetChild(i).GetComponent<DialogueLine>().completed);
             }
-            
+
             turnsManager.EndCutscene();
         }
 
@@ -53,19 +45,18 @@ namespace DialogueSystem
 
         public void OnNotify(GameEvents gameEvent)
         {
-            
+
             if (gameEvent == interestedGameEvent)
             {
-                Debug.Log("Event used: " + gameEvent);
                 turnsManager.StartCutscene();
-                
+
                 for (int i = 0; i < transform.parent.childCount; i++)
                 {
                     transform.parent.GetChild(i).gameObject.SetActive(false);
                 }
 
                 gameObject.SetActive(true);
-                StartCoroutine(dialogueSequence());
+                StartCoroutine(DialogueSequence());
             }
         }
     }

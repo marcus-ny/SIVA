@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MechAnimator : MonoBehaviour
@@ -22,10 +20,12 @@ public class MechAnimator : MonoBehaviour
         if (currStatus == AnimationStatus.Powered)
         {
             currAnimation = "BossIdle";
-        } else if (currStatus == AnimationStatus.Disabled)
+        }
+        else if (currStatus == AnimationStatus.Disabled)
         {
             currAnimation = "BossPowerDown";
-        } else if (currStatus == AnimationStatus.Attack)
+        }
+        else if (currStatus == AnimationStatus.Attack)
         {
             currAnimation = "BossPunch";
         }

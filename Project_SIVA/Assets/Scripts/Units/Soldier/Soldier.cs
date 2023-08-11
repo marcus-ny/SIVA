@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
-using UnityEngine.Tilemaps;
 
 public class Soldier : Enemy
 {
@@ -28,7 +26,7 @@ public class Soldier : Enemy
         path = new();
         rangeFinder = new Rangefinder();
         range = new();
-        
+
 
         // There should be a more intelligent way to set this variable
         maxAP = 4;
@@ -53,10 +51,10 @@ public class Soldier : Enemy
         }
         range = rangeFinder.GetReachableTiles(activeTile, 3, 1);
     }
-   
+
     public override void Action()
     {
-        StartCoroutine("TakeTurn");       
+        StartCoroutine("TakeTurn");
     }
 
     IEnumerator TakeTurn()
@@ -68,16 +66,16 @@ public class Soldier : Enemy
                 yield return null;
             }
             currentState.UpdateState(this);
-            
+
         }
     }
     IEnumerator StartRangeAttack()
     {
-        while(state_moving)
+        while (state_moving)
         {
             yield return null;
         }
-        
+
         state_moving = true;
         DamageManager.Instance.DealDamageToPlayer(3.0f);
         animationController.attackStatus = SoldierAnimationController.AttackStatus.RANGE;
@@ -91,7 +89,7 @@ public class Soldier : Enemy
     {
         List<OverlayTile> toCheck = pathFinder.GetTilesBetweenInStraightLine(activeTile, player.activeTile);
 
-        foreach(Enemy enemy in EnemyManager.Instance.enemyMap.Values)
+        foreach (Enemy enemy in EnemyManager.Instance.enemyMap.Values)
         {
             if (toCheck.Contains(enemy.activeTile) && enemy != this)
             {
@@ -106,12 +104,12 @@ public class Soldier : Enemy
             actionsPerformed += 2;
             StartCoroutine(StartRangeAttack());
         }
-        
+
     }
 
     IEnumerator StartMeleeAttack()
     {
-        while(state_moving)
+        while (state_moving)
         {
             yield return null;
         }
@@ -124,7 +122,7 @@ public class Soldier : Enemy
     }
 
     public void MeleeAttack()
-    {           
+    {
         actionsPerformed += 2;
         StartCoroutine(StartMeleeAttack());
     }
@@ -134,7 +132,7 @@ public class Soldier : Enemy
         List<OverlayTile> toFind = GetClosestTileToPlayer();
         //range = rangeFinder.GetReachableTiles(activeTile, 3);
         foreach (OverlayTile tile in toFind)
-        {           
+        {
             // If current tile distance to player is equal to enemy's distance to player
             // There is no point moving there and wasting AP, because you're not
             // closing the distance
@@ -144,28 +142,28 @@ public class Soldier : Enemy
             {
                 break;
             }
-                   
+
             path = pathFinder.FindPath(activeTile, tile, range, 1);
 
             if (path.Count > 0)
             {
                 actionsPerformed += 2;
                 break;
-            }            
+            }
         }
         if (path.Count == 0)
         {
             // Skip turn
             actionsPerformed = maxAP;
         }
-        Coroutine MovingCoroutine = StartCoroutine(MoveAlongPath());        
+        Coroutine MovingCoroutine = StartCoroutine(MoveAlongPath());
     }
 
     public void TakePositionForRange()
     {
-        
+
         List<OverlayTile> toFind = GetRangeAttackTiles();
-        
+
         //range = rangeFinder.GetReachableTiles(activeTile, 3);
 
         // If soldier is already in plus shaped tiles
@@ -174,10 +172,10 @@ public class Soldier : Enemy
             return;
         }
         // Find the nearest tile among all the plus shaped tiles
-        
+
         foreach (OverlayTile tile in toFind)
         {
-            
+
 
             path = pathFinder.FindPath(activeTile, tile, range, 1);
 
@@ -200,10 +198,10 @@ public class Soldier : Enemy
     public void RetreatMove()
     {
 
-        List<OverlayTile> toFind = FindNearestMechanicLocation();              
-        
-        
-        
+        List<OverlayTile> toFind = FindNearestMechanicLocation();
+
+
+
         foreach (OverlayTile tile in toFind)
         {
             // If the current tile is indeed the nearest possible, then do nothing
@@ -213,7 +211,7 @@ public class Soldier : Enemy
             }*/
 
             Mechanic mechanic = EnemyManager.Instance.FindMechanicLocations()[0];
-            
+
             if (pathFinder.GetManhattenDistance(activeTile, mechanic.activeTile)
                 == pathFinder.GetManhattenDistance(tile, mechanic.activeTile))
             {
@@ -239,7 +237,9 @@ public class Soldier : Enemy
             if (plusShaped.Contains(activeTile))
             {
                 RangeAttack();
-            } else {
+            }
+            else
+            {
                 actionsPerformed = maxAP;
                 Debug.Log("turn skipped in retreat");
             }
@@ -247,12 +247,12 @@ public class Soldier : Enemy
         Coroutine MovingCoroutine = StartCoroutine(MoveAlongPath());
     }
 
-    
+
     public override string ToString()
     {
         return "Soldier";
     }
-    
+
     // Within its movable range, returns the tile closest to the player
     public List<OverlayTile> GetClosestTileToPlayer()
     {
@@ -260,11 +260,9 @@ public class Soldier : Enemy
         {
             return null;
         }
-        
+
         List<OverlayTile> result = pathFinder.GetClosestTilesInRange(player.activeTile, range);
-        //Debug.Log("nearest: " + result.gridLocation);
-        //Debug.Log("Player: " + player.activeTile.gridLocation);
-        //Debug.Log("Is blocked? : " + result.isBlocked);
+
         return result;
     }
 
@@ -291,13 +289,11 @@ public class Soldier : Enemy
     public List<OverlayTile> FindNearestMechanicLocation()
     {
         List<Mechanic> mechanicsLocations = EnemyManager.Instance.FindMechanicLocations();
-        
-        //List<OverlayTile> nearestTiles = pathFinder.GetClosestTilesInRange(activeTile, mechanicsLocations);
-        //Debug.Log("nearest tiles count: " + nearestTiles.Count);
+
         List<OverlayTile> result = pathFinder.GetClosestTilesInRange(mechanicsLocations[0].activeTile, range);
 
         return result;
     }
 
-    
+
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHealthBar : MonoBehaviour
@@ -15,7 +13,7 @@ public class EnemyHealthBar : MonoBehaviour
     void Update()
     {
         if (GetComponentInParent<Enemy>() != null)
-        {          
+        {
             barSize.x = GetComponentInParent<Enemy>().hpRatio / 2;
             transform.localScale = barSize;
         }

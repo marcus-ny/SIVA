@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelAudioManager : MonoBehaviour, IObserver
@@ -28,7 +27,7 @@ public class LevelAudioManager : MonoBehaviour, IObserver
         // Add this as an observer
         TurnsManager.AddObserver(this);
         BattleSimulator.Instance.AddObserver(this);
-        
+
         // Get animator in child
         //GameObject lobbyBGM = BackgroundAudioSource.transform.Find("LobbyBGM").gameObject;
         //Animator lobbyBGMAnimation = lobbyBGM.GetComponentInChilden<Animator>();
@@ -82,9 +81,9 @@ public class LevelAudioManager : MonoBehaviour, IObserver
     public void ChangeTurn()
     {
         // Start change turn sound effect
-        StartCoroutine(ChangeTurnAnimation()); 
+        StartCoroutine(ChangeTurnAnimation());
     }
-    
+
     IEnumerator BattleBGMAnimation()
     {
         lobbyBGMAnimation.SetTrigger("End");

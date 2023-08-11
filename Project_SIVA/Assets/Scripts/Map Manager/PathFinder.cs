@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -16,21 +14,18 @@ public class PathFinder
 
         openList.Add(start);
 
-        while(openList.Count > 0)
+        while (openList.Count > 0)
         {
             OverlayTile curr = openList.OrderBy(i => i.F).First();
 
             openList.Remove(curr);
             closedList.Add(curr);
 
-            if(curr == end)
+            if (curr == end)
             {
-                // end path
-                return getFinishedList(start, end);
+                return GetFinishedList(start, end);
             }
 
-            // Get neighbor tiles
-            //var neighborTiles = MapController.Instance.GetNeighborTiles(curr, validTilePool, jumpHeight);
             var neighborTiles = GetNeighborTiles(curr, validTilePool, jumpHeight);
 
             foreach (var neighbor in neighborTiles)
@@ -45,7 +40,7 @@ public class PathFinder
 
                 neighbor.previous = curr;
 
-                if(!openList.Contains(neighbor))
+                if (!openList.Contains(neighbor))
                 {
                     openList.Add(neighbor);
                 }
@@ -55,9 +50,9 @@ public class PathFinder
         return new List<OverlayTile>();
     }
 
-    private List<OverlayTile> getFinishedList(OverlayTile start, OverlayTile end)
+    private List<OverlayTile> GetFinishedList(OverlayTile start, OverlayTile end)
     {
-        List<OverlayTile> finishedList = new List<OverlayTile>();
+        List<OverlayTile> finishedList = new();
 
         OverlayTile curr = end;
 
@@ -84,10 +79,6 @@ public class PathFinder
      */
     public List<OverlayTile> GetClosestTilesInRange(OverlayTile target, List<OverlayTile> range)
     {
-        // int lowest = int.MaxValue;
-        // careful
-        // OverlayTile nearest = null;
-
         List<OverlayTile> nearestTiles = new();
         foreach (OverlayTile tile in range)
         {
@@ -97,7 +88,6 @@ public class PathFinder
             }
             else if (target == tile)
             {
-                // If pathfinding breaks, check here
                 nearestTiles.Clear();
                 nearestTiles.Add(tile);
                 return nearestTiles;
@@ -124,7 +114,8 @@ public class PathFinder
                     result.Add(MapController.Instance.map[new Vector2Int(i, start.gridLocation.y)]);
                 }
             }
-        } else
+        }
+        else
         {
             int i = (end.gridLocation.y > start.gridLocation.y) ? start.gridLocation.y : end.gridLocation.y;
             int limit = (end.gridLocation.y > start.gridLocation.y) ? end.gridLocation.y : start.gridLocation.y;
@@ -142,8 +133,6 @@ public class PathFinder
 
     public List<OverlayTile> GetNeighborTiles(OverlayTile curr, List<OverlayTile> validTiles, int jumpHeight)
     {
-
-
         Dictionary<Vector2Int, OverlayTile> searchRange = new();
 
         if (validTiles.Count > 0)
@@ -157,7 +146,6 @@ public class PathFinder
         {
             searchRange = MapController.Instance.map;
         }
-
 
         List<OverlayTile> neighbors = new();
 

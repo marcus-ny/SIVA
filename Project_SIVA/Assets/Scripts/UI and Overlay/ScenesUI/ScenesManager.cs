@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,18 +8,20 @@ public class ScenesManager : MonoBehaviour, IObserver
     public Animator transition;
     public float transitionTime = 1f;
     private GameScene cur;
-    
-    private void Awake(){
+
+    private void Awake()
+    {
         Instance = this;
     }
 
     // All new scenes must be added into this enum
-    public enum GameScene{
+    public enum GameScene
+    {
         MainMenu,
         LevelSelector,
         Tutorial_P0,
         Tutorial_Transition_0,
-        Tutorial_P1, 
+        Tutorial_P1,
         Tutorial_P2,
         Tutorial_P3,
         Tutorial_P4,
@@ -46,7 +47,8 @@ public class ScenesManager : MonoBehaviour, IObserver
     }
 
     // This method loads a scene specified in the parameter by name
-    public void LoadScene(GameScene scene){
+    public void LoadScene(GameScene scene)
+    {
         string levelName = scene.ToString();
         StartCoroutine(LoadLevel(levelName));
     }
@@ -62,23 +64,26 @@ public class ScenesManager : MonoBehaviour, IObserver
     {
         int curSceneIndex = GetActiveScene();
         Debug.Log(curSceneIndex);
-        var nextScene = (GameScene) (curSceneIndex + 1);
+        var nextScene = (GameScene)(curSceneIndex + 1);
         Debug.Log(nextScene);
         LoadScene(nextScene);
 
     }
     // This method loads a new game meaning the level01 scene
-    public void LoadNewGame(){
+    public void LoadNewGame()
+    {
         StartCoroutine(LoadLevel(GameScene.Tutorial_P0.ToString()));
     }
 
     // This method loads the main menu scene 
-    public void LoadMainMenu(){
+    public void LoadMainMenu()
+    {
         //SceneManager.LoadScene(Scene.MainMenu.ToString());
         StartCoroutine(LoadLevel(GameScene.MainMenu.ToString()));
     }
 
-    IEnumerator LoadLevel(string levelName){
+    IEnumerator LoadLevel(string levelName)
+    {
         // Play animation
         transition.SetTrigger("Start");
 
@@ -92,9 +97,9 @@ public class ScenesManager : MonoBehaviour, IObserver
     public void ReloadScene()
     {
         int curSceneIndex = GetActiveScene();
-        
+
         var thisScene = (GameScene)(curSceneIndex);
-        Debug.Log(thisScene);
+
         LoadScene(thisScene);
     }
 

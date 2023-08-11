@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoldierAggroState : SoldierBaseState
@@ -32,18 +30,12 @@ public class SoldierAggroState : SoldierBaseState
             soldier.AggroMove();
         }
 
-
-        // Note to self: Should this be at the top or bottom of the update method
-        // In general, should state changes be accounted for after the actions or before?
-        // If HP is low after carrying out all these actions, change the state in preparation
-        // for the next turn
-        
         if (soldier.hitpoints <= 25)
         {
             soldier.SwitchState(soldier.soldierRetreatState);
         }
-        
 
-        
+
+
     }
 }

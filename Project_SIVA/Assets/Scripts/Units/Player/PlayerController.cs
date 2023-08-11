@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class PlayerController : Publisher
@@ -9,11 +8,11 @@ public class PlayerController : Publisher
 
     public static PlayerController Instance { get { return _instance; } }
 
-    // Manually tie this in unity
+
     public GameObject character_prefab;
 
     public Vector2Int playerSpawn;
-    // Manually tie this in unity
+
     public CharacterInfo character;
 
     public List<OverlayTile> path;
@@ -60,9 +59,7 @@ public class PlayerController : Publisher
     {
         if (character != null && character.hitpoints <= 0 && !BattleSimulator.Instance.levelComplete)
         {
-            Debug.Log("Player win: From Player Controller");
             BattleSimulator.Instance.EnemyWin();
-            
         }
 
         if (character == null)
@@ -75,7 +72,8 @@ public class PlayerController : Publisher
             animationController = character.GetComponent<PlayerAnimator>();
         }
 
-        if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN) {
+        if (BattleSimulator.Instance.State == BattleState.PLAYER_TURN)
+        {
             var tileHit = MouseController.Instance.GetFocusedOnTile();
             OverlayTile overlayTile;
             if (tileHit.HasValue)
@@ -90,7 +88,7 @@ public class PlayerController : Publisher
                 }
             }
         }
-        //Debug.Log("character on: " + character.activeTile.gridLocation);
+
     }
 
     private IEnumerator MoveAlongPath()
@@ -196,7 +194,7 @@ public class PlayerController : Publisher
         yield return new WaitForSecondsRealtime(0.3f);
         DamageManager.Instance.DealDamageToEnemy(30, destinationTile.enemy);
         yield return new WaitForSecondsRealtime(0.7f);
-        
+
         animationController.status = PlayerAnimator.Status.NIL;
         moving = false;
     }
@@ -219,12 +217,10 @@ public class PlayerController : Publisher
         else if (destinationTile.enemy == null)
         {
             NotifyObservers(GameEvents.NoTarget);
-            Debug.Log("No target");
         }
         else if (!inRange)
         {
             NotifyObservers(GameEvents.TargetOFR);
-            Debug.Log("Target out of range");
         }
         return false;
     }
@@ -259,8 +255,7 @@ public class PlayerController : Publisher
         }
         if (!MouseController.Instance.GetFocusedOnTile().HasValue || !aoeRange.Contains(MouseController.Instance.mouseOverTile))
         {
-            NotifyObservers(GameEvents.AOEunsuccessful); ;
-            Debug.Log("AOE not succesful");
+            NotifyObservers(GameEvents.AOEunsuccessful);
             return false;
         }
 
@@ -305,8 +300,7 @@ public class PlayerController : Publisher
             tile.ShowTile();
         }
 
-        //reachableTiles = rangeFinder.GetReachableTiles(character.activeTile, 3);
-        //path = pathFinder.FindPath(character.activeTile, destinationTile, reachableTiles, 1);
+
         path = pathFinder.FindPath(character.activeTile, MouseController.Instance.mouseOverTile, reachableTiles, 1);
 
         if (path.Count == 0) return false;
@@ -319,8 +313,7 @@ public class PlayerController : Publisher
         {
             StartCoroutine(MoveAlongPath());
         }
-        //StartCoroutine(WaitForMovementInput());
-        //Debug.Log("Is this executed early?");
+
         NotifyObservers(GameEvents.SuccessfulMove);
         return true;
     }
@@ -350,15 +343,12 @@ public class PlayerController : Publisher
         }
         else if (!inRange)
         {
-            Debug.Log(destinationTile.gridLocation2d);
             NotifyObservers(GameEvents.InteractableOFR);
-            Debug.Log("Interactable out of range!");
         }
         else
         {
 
             NotifyObservers(GameEvents.NoInteractable);
-            Debug.Log("There is no interactable on this tile");
         }
         return false;
     }
@@ -410,15 +400,15 @@ public class PlayerController : Publisher
             firebolt.transform.position = character.transform.position;
             DamageManager.Instance.DealDamageToEnemy(30, destinationTile.enemy);
             return true;
-        } else
+        }
+        else
         {
-            Debug.Log("Firebolt cannot reach this far");
             return false;
         }
-        
+
     }
 
-    
+
     public void TransitionLTS()
     {
         StartCoroutine(TransitionLTSAnim());

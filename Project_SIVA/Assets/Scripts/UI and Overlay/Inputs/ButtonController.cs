@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
 
 public class ButtonController : MonoBehaviour
 {
     public Canvas UI;
 
-    
+
 
     public bool truesight = false;
 
@@ -17,16 +13,16 @@ public class ButtonController : MonoBehaviour
      */
     public void SwitchTurn()
     {
-        
-        BattleSimulator.Instance.SwitchTurns();      
+
+        BattleSimulator.Instance.SwitchTurns();
     }
 
     /*
      * Function for players to be able to see which tiles are shadow and light
      * tied to the button "Toggle sight"
      */
-    
-    
+
+
 
     /*
      * On clicking "Move" button in the UI
@@ -52,7 +48,7 @@ public class ButtonController : MonoBehaviour
     {
         BattleSimulator.Instance.DealAOEDamage();
     }
-    
+
     // Tied to Interact button in UI
     public void Interact()
     {

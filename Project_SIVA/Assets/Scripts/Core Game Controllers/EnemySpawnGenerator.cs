@@ -1,17 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+/*
+ * Handles enemy spawning at the start of the game
+ * Finds placed enemies on the tilemap (in edit mode) and instantiates them at runtime
+ */
 public class EnemySpawnGenerator : MonoBehaviour
 {
-    List<Vector2Int> spawnLocations;
-    // Start is called before the first frame update
     void Start()
     {
-        
-
         var EnemySpawnMap = gameObject.GetComponent<Tilemap>();
 
         BoundsInt bounds = EnemySpawnMap.cellBounds;
@@ -24,12 +21,12 @@ public class EnemySpawnGenerator : MonoBehaviour
                 {
                     var tileLocation = new Vector3Int(x, y, z);
                     var tileKey = new Vector2Int(x, y);
-                    
+
                     if (EnemySpawnMap.HasTile(tileLocation) && !EnemyManager.Instance.enemySpawns.ContainsKey(tileKey))
                     {
                         GameObject prefab = EnemySpawnMap.GetTile<EnemyTile>(tileLocation).enemy_prefab;
                         EnemyManager.Instance.enemySpawns.Add(tileKey, prefab);
-                        
+
                     }
                 }
             }
@@ -38,5 +35,5 @@ public class EnemySpawnGenerator : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-     
+
 }
