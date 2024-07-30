@@ -14,5 +14,7 @@ Advisor: Ang Jun Yang
 
 ### [Play the game here!](https://marcus-ny.itch.io/siva)
 
+### [Project README here](https://docs.google.com/document/d/139OIcKnb2m7usermeGffzbWsN8Tv0opQ06DnjoZQmDo/edit#heading=h.mngndulema1l)
+
 
 
